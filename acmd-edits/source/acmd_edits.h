@@ -19,7 +19,16 @@ using namespace app::sv_system;
 using namespace app::lua_bind;
 
 ACMD acmd_objs[] = {
-    // Marth
+   
+	//Fox
+	ACMD("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_FOX", "special_lw_start", "game_speciallwstart", [](ACMD* acmd)->void {
+		
+	}),
+	ACMD("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_FOX", "special_air_lw_start", "game_specialairlwstart", [](ACMD* acmd)->void {
+
+	}),
+	//Fox
+	// Marth
     ACMD("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_MARTH", "attack_air_lw", "game_attackairlw", [] (ACMD* acmd)->void {
         acmd->frame(3);
         if (acmd->is_excute()) {
