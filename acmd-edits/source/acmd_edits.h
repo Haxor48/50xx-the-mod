@@ -168,11 +168,14 @@ ACMD acmd_objs[] = {
 //Falco
 	ACMD("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_FALCO", "attack_lw3", "game_attacklw3", [](ACMD* acmd) ->void {
 	if (acmd->is_excute()) {
-		MotionModule::set_rate(acmd->module_accessor, 1.4);
+		MotionModule::set_rate(acmd->module_accessor, 1.4286);
+	}
+    acmd->frame(9);
+    	if (acmd->is_excute()) {
+		MotionModule::set_rate(acmd->module_accessor, 1);
 	}
 	acmd->frame(10);
 	if (acmd->is_excute()) {
-		MotionModule::set_rate(acmd->module_accessor, 1);
 		acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("tail2"), /*Damage*/ 13.0, /*Angle*/ 75, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 2.6, /*X*/ -4.1, /*Y*/ 0.0, /*Z*/ 0.0, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_cutup"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_CUTUP, /*Type*/ ATTACK_REGION_TAIL);
 
 		acmd->ATTACK(/*ID*/ 1, /*Part*/ 0, /*Bone*/ hash40("tail2"), /*Damage*/ 12.0, /*Angle*/ 75, /*KBG*/ 88, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 3.5, /*X*/ 1.9, /*Y*/ 0.0, /*Z*/ 0.0, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_cutup"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_CUTUP, /*Type*/ ATTACK_REGION_TAIL);
@@ -189,16 +192,20 @@ ACMD acmd_objs[] = {
 	}),
 	ACMD("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_FALCO", "attack_air_lw", "game_attackairlw", [](ACMD* acmd) ->void {
 	if (acmd->is_excute()) {
-		MotionModule::set_rate(acmd->module_accessor, 2.8);
+		MotionModule::set_rate(acmd->module_accessor, 2);
 	}
 	acmd->frame(4);
 	if (acmd->is_excute()) {
 
 		WorkModule::on_flag(acmd->module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 	}
+    	acmd->frame(9);
+	if (acmd->is_excute()) {
+        MotionModule::set_rate(acmd->module_accessor, 1);
+	}
 	acmd->frame(10);
 	if (acmd->is_excute()) {
-		MotionModule::set_rate(acmd->module_accessor, 1);
+
 		acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("kneel"), /*Damage*/ 13.0, /*Angle*/ 290, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 4.2, /*X*/ 4.2, /*Y*/ 0.0, /*Z*/ -1.0, /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
 	}
 	acmd->frame(15);
@@ -222,7 +229,7 @@ ACMD acmd_objs[] = {
 	ACMD("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_FALCO", "attack_air_hi", "game_attackairhi", [](ACMD* acmd) ->void {
 	acmd->frame(1);
 	if (acmd->is_excute()) {
-        MotionModule::set_rate(acmd->module_accessor, 1.3);
+        MotionModule::set_rate(acmd->module_accessor, 1.4925);
 	}
 	acmd->frame(4);
 	if (acmd->is_excute()) {
@@ -230,8 +237,6 @@ ACMD acmd_objs[] = {
 		WorkModule::on_flag(acmd->module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 	}
 	acmd->frame(9);
-       
-
 	if (acmd->is_excute()) {
          MotionModule::set_rate(acmd->module_accessor, 1);
 		acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("kneer"), /*Damage*/ 9.0, /*Angle*/ 50, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 38, /*Size*/ 5.0, /*X*/ 6.0, /*Y*/ 0.0, /*Z*/ 0.0, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
@@ -323,7 +328,7 @@ ACMD acmd_objs[] = {
         acmd->wait(4);
         if (acmd->is_excute()) {
             AttackModule::clear_all(acmd->module_accessor);
-            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL);
+            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL, 0);
         }
         acmd->frame(20);
         if (acmd->is_excute()) {
@@ -538,7 +543,7 @@ ACMD acmd_objs[] = {
         }
         acmd->wait(1);
         if (acmd->is_excute()) {
-            AttackModule::clear(acmd->module_accessor, /*ID*/ 1);
+            AttackModule::clear(acmd->module_accessor, /*ID*/ 1, false);
             acmd->wrap(damage, { L2CValue(MA_MSC_DAMAGE_DAMAGE_NO_REACTION), L2CValue(DAMAGE_NO_REACTION_MODE_NORMAL), L2CValue(0) });
             acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("handl"), /*Damage*/ 10.0, /*Angle*/ 85, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 87, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 4, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_fire"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_FIRE, /*Type*/ ATTACK_REGION_PUNCH);
             AttackModule::set_add_reaction_frame(acmd->module_accessor, /*ID*/ 0, /*Frames*/ 3, /*Unk*/ false);
@@ -584,7 +589,7 @@ ACMD acmd_objs[] = {
         acmd->frame(4);
         if (acmd->is_excute()) {
             WorkModule::on_flag(acmd->module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
-            JostleModule::set_status(acmd->module_accessor, false;
+            JostleModule::set_status(acmd->module_accessor, false);
         }
         acmd->frame(16);
         if (acmd->is_excute()) {
@@ -607,7 +612,7 @@ ACMD acmd_objs[] = {
         acmd->frame(9);
         if (acmd->is_excute()) {
             WorkModule::on_flag(acmd->module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
-        }
+      }
         acmd->frame(22);
         if (acmd->is_excute()) {
             HitModule::set_status_joint(acmd->module_accessor, hash40("kneel"), HIT_STATUS_XLU, 0);
@@ -616,7 +621,7 @@ ACMD acmd_objs[] = {
             acmd->ATTACK(/*ID*/ 1, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 6.0, /*Angle*/ 95, /*KBG*/ 90, /*FKB*/ 110, /*BKB*/ 0, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 5.0, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
             acmd->ATTACK(/*ID*/ 2, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 11.0, /*Angle*/ 80, /*KBG*/ 90, /*FKB*/ 20, /*BKB*/ 30, /*Size*/ 4.8, /*X*/ 0.0, /*Y*/ 21.0, /*Z*/ 1.5, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
             acmd->ATTACK(/*ID*/ 3, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 11.0, /*Angle*/ 90, /*KBG*/ 90, /*FKB*/ 20, /*BKB*/ 30, /*Size*/ 4.8, /*X*/ 0.0, /*Y*/ 28.0, /*Z*/ 5.0, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
-            acmd->wrap(as_hash__const, { L2CValue(3), L2CValue(hash40("top")), L2CValue(0), L2CValue(29), L2CValue(7.5) });
+            //acmd->wrap(as_hash__const, { L2CValue(3), L2CValue(hash40("top")), L2CValue(0), L2CValue(29), L2CValue(7.5) });
         }
         acmd->frame(23);
         if (acmd->is_excute()) {
@@ -625,7 +630,7 @@ ACMD acmd_objs[] = {
         acmd->frame(24);
         if (acmd->is_excute()) {
             AttackModule::clear_all(acmd->module_accessor);
-            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL);
+            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL, 0);
         }
         acmd->frame(28);
         if (acmd->is_excute()) {
@@ -637,7 +642,7 @@ ACMD acmd_objs[] = {
         }
         acmd->frame(30);
         if (acmd->is_excute()) {
-            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL);
+            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL, 0);
             AttackModule::clear_all(acmd->module_accessor);
         }
     }),
@@ -1584,4 +1589,32 @@ ACMD acmd_objs[] = {
             AttackModule::clear_all(acmd->module_accessor);
         }
     })
+   /* ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_dash", "game_attackdash", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_s3s", "game_attacks3s", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_lw3", "game_attacklw3", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_hi3", "game_attackhi3", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_air_hi", "game_attackairhi", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_air_f", "game_attackairf", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_air_b", "game_attackairb", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_air_lw", "game_attackairlw", [] (ACMD* acmd) -> void {
+        
+    }),
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_SHEIK", "attack_air_n", "game_attackairn", [] (ACMD* acmd) -> void {
+        
+    }),
+    */
 };
