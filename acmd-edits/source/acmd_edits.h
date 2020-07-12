@@ -323,7 +323,7 @@ ACMD acmd_objs[] = {
         acmd->wait(4);
         if (acmd->is_excute()) {
             AttackModule::clear_all(acmd->module_accessor);
-            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL);
+            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL, 0);
         }
         acmd->frame(20);
         if (acmd->is_excute()) {
@@ -538,7 +538,7 @@ ACMD acmd_objs[] = {
         }
         acmd->wait(1);
         if (acmd->is_excute()) {
-            AttackModule::clear(acmd->module_accessor, /*ID*/ 1);
+            AttackModule::clear(acmd->module_accessor, /*ID*/ 1, false);
             acmd->wrap(damage, { L2CValue(MA_MSC_DAMAGE_DAMAGE_NO_REACTION), L2CValue(DAMAGE_NO_REACTION_MODE_NORMAL), L2CValue(0) });
             acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("handl"), /*Damage*/ 10.0, /*Angle*/ 85, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 87, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 4, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_fire"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_FIRE, /*Type*/ ATTACK_REGION_PUNCH);
             AttackModule::set_add_reaction_frame(acmd->module_accessor, /*ID*/ 0, /*Frames*/ 3, /*Unk*/ false);
@@ -548,6 +548,21 @@ ACMD acmd_objs[] = {
         if (acmd->is_excute()) {
             AttackModule::clear_all(acmd->module_accessor);
             JostleModule::set_status(acmd->module_accessor, true);
+        }
+    }),
+
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_CAPTAIN", "attack_dash", "game_attackdash", [] (ACMD* acmd) -> void {
+        acmd->frame(7);
+        if (acmd->is_excute()) {
+            acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 10.0, /*Angle*/ 72, /*KBG*/ 77, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 6.2, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 12.0, /*X2*/ 0.0, /*Y2*/ 8.0, /*Z2*/ 12.0, /*Hitlag*/ 1.25, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_PUNCH, /*Type*/ ATTACK_REGION_BODY);
+        }
+        acmd->wait(3);
+        if (acmd->is_excute()) {
+            acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 6.0, /*Angle*/ 72, /*KBG*/ 77, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 4.8, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 12.0, /*X2*/ 0.0, /*Y2*/ 6.0, /*Z2*/ 12.0, /*Hitlag*/ 1.25, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_PUNCH, /*Type*/ ATTACK_REGION_BODY);
+        }
+        acmd->wait(7);
+        if (acmd->is_excute()) {
+            AttackModule::clear_all(acmd->module_accessor);
         }
     }),
 
@@ -584,7 +599,7 @@ ACMD acmd_objs[] = {
         acmd->frame(4);
         if (acmd->is_excute()) {
             WorkModule::on_flag(acmd->module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
-            JostleModule::set_status(acmd->module_accessor, false;
+            JostleModule::set_status(acmd->module_accessor, false);
         }
         acmd->frame(16);
         if (acmd->is_excute()) {
@@ -616,7 +631,6 @@ ACMD acmd_objs[] = {
             acmd->ATTACK(/*ID*/ 1, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 6.0, /*Angle*/ 95, /*KBG*/ 90, /*FKB*/ 110, /*BKB*/ 0, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 5.0, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
             acmd->ATTACK(/*ID*/ 2, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 11.0, /*Angle*/ 80, /*KBG*/ 90, /*FKB*/ 20, /*BKB*/ 30, /*Size*/ 4.8, /*X*/ 0.0, /*Y*/ 21.0, /*Z*/ 1.5, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
             acmd->ATTACK(/*ID*/ 3, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 11.0, /*Angle*/ 90, /*KBG*/ 90, /*FKB*/ 20, /*BKB*/ 30, /*Size*/ 4.8, /*X*/ 0.0, /*Y*/ 28.0, /*Z*/ 5.0, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_normal"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_KICK, /*Type*/ ATTACK_REGION_KICK);
-            acmd->wrap(as_hash__const, { L2CValue(3), L2CValue(hash40("top")), L2CValue(0), L2CValue(29), L2CValue(7.5) });
         }
         acmd->frame(23);
         if (acmd->is_excute()) {
@@ -625,7 +639,7 @@ ACMD acmd_objs[] = {
         acmd->frame(24);
         if (acmd->is_excute()) {
             AttackModule::clear_all(acmd->module_accessor);
-            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL);
+            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL, 0);
         }
         acmd->frame(28);
         if (acmd->is_excute()) {
@@ -637,7 +651,7 @@ ACMD acmd_objs[] = {
         }
         acmd->frame(30);
         if (acmd->is_excute()) {
-            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL);
+            HitModule::set_status_all(acmd->module_accessor, HIT_STATUS_NORMAL, 0);
             AttackModule::clear_all(acmd->module_accessor);
         }
     }),
@@ -730,7 +744,8 @@ ACMD acmd_objs[] = {
     ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_CAPTAIN", "special_air_n", "game_specialairn", [] (ACMD* acmd) -> void {
         if (acmd->is_excute()) {
             MotionModule::set_rate(acmd->module_accessor, 2);
-            KineticModule::add_speed(acmd->module_accessor, 0, 0.2, 0.0);
+            Vector3f new_speed = {.x = 0.0, .y = 0.2, .z = 0.0};
+            KineticModule::add_speed(acmd->module_accessor, &new_speed);
         }
         acmd->frame(7);
         if (acmd->is_excute()) {
@@ -1689,6 +1704,52 @@ ACMD acmd_objs[] = {
         acmd->wait(2);
         if (acmd->is_excute()) {
             AttackModule::clear_all(acmd->module_accessor);
+        }
+    }),
+
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_WOLF", "special_air_s_end", "game_specialairsend", [] (ACMD* acmd) -> void {
+        acmd->frame(2);
+        if (acmd->is_excute()) {
+            acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 20.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 5.5, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_A, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_elec"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_MAGIC, /*Type*/ ATTACK_REGION_PUNCH);
+            acmd->ATTACK(/*ID*/ 1, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 17.0, /*Angle*/ 48, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 5.5, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_elec"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_MAGIC, /*Type*/ ATTACK_REGION_PUNCH);
+        }
+        acmd->frame(4);
+        if (acmd->is_excute()) {
+            AttackModule::clear_all(acmd->module_accessor);
+            if (AttackModule::is_infliction(acmd->module_accessor, COLLISION_KIND_MASK_HIT)) {
+                StatusModule::change_status_request_from_script(acmd->module_accessor, FIGHTER_STATUS_KIND_FALL_AERIAL, false);
+            }
+        }
+        acmd->frame(7);
+        if (acmd->is_excute()) {
+            acmd->wrap(notify_event_msc_cmd, { L2CValue(hash40("0x2127e37c07")), L2CValue(GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES) });
+        }
+        acmd->frame(10);
+        if (acmd->is_excute()) {
+            JostleModule::set_status(acmd->module_accessor, true);
+        }
+    }),
+
+    ACMD ("BATTLE_OBJECT_CATEGORY_FIGHTER", "FIGHTER_KIND_WOLF", "special_s_end", "game_specialsend", [] (ACMD* acmd) -> void {
+        acmd->frame(2);
+        if (acmd->is_excute()) {
+            acmd->ATTACK(/*ID*/ 0, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 20.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 5.5, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_A, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_elec"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_L, /*SFXType*/ COLLISION_SOUND_ATTR_MAGIC, /*Type*/ ATTACK_REGION_PUNCH);
+            acmd->ATTACK(/*ID*/ 1, /*Part*/ 0, /*Bone*/ hash40("top"), /*Damage*/ 17.0, /*Angle*/ 48, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 5.5, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang/Rebound*/ ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct/Indirect*/ true, /*Ground/Air*/ COLLISION_SITUATION_MASK_GA, /*Hitbits*/ COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ hash40("collision_attr_elec"), /*SFXLevel*/ ATTACK_SOUND_LEVEL_M, /*SFXType*/ COLLISION_SOUND_ATTR_MAGIC, /*Type*/ ATTACK_REGION_PUNCH);
+        }
+        acmd->frame(4);
+        if (acmd->is_excute()) {
+            AttackModule::clear_all(acmd->module_accessor);
+            if (AttackModule::is_infliction(acmd->module_accessor, COLLISION_KIND_MASK_HIT)) {
+                StatusModule::change_status_request_from_script(acmd->module_accessor, FIGHTER_STATUS_KIND_FALL_AERIAL, false);
+            }
+        }
+        acmd->frame(7);
+        if (acmd->is_excute()) {
+            acmd->wrap(notify_event_msc_cmd, { L2CValue(hash40("0x2127e37c07")), L2CValue(GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES) });
+        }
+        acmd->frame(10);
+        if (acmd->is_excute()) {
+            JostleModule::set_status(acmd->module_accessor, true);
         }
     })
 };
