@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<MotionList ID="0x1dd4c9846b">
+<MotionList ID="0x1d557c83cb">
   <Motion Hash="0x047dee83e5">
     <GameHash>game_wait1</GameHash>
     <Flags>0x0000</Flags>
-    <TransitionFrames>6</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0fa699dbf2</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -17,7 +17,7 @@
   </Motion>
   <Motion Hash="0x06e395aa39">
     <GameHash>game_wait2</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0000</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0f2816dc11</AnimationHash>
@@ -32,7 +32,7 @@
   </Motion>
   <Motion Hash="0x0694929aaf">
     <GameHash>game_wait3</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0000</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0fe4bcdc8f</AnimationHash>
@@ -48,7 +48,7 @@
   <Motion Hash="0x09640bfe6e">
     <GameHash>0x0d58c41d08</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>6</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x12229e5214</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -243,7 +243,7 @@
   <Motion Hash="0x035076a4c0">
     <GameHash>game_run</GameHash>
     <Flags>0x0006</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0d1ba5c0b0</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -303,7 +303,7 @@
   <Motion Hash="0x0ecbdbc635">
     <GameHash>game_turnrunbrake</GameHash>
     <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>10</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x1604392561</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -423,7 +423,7 @@
   <Motion Hash="0x04fb50df0c">
     <GameHash>game_fall</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0e451a233b</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -438,7 +438,7 @@
   <Motion Hash="0x0662f2ec10">
     <GameHash>0x05cdfb47d2</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0f5f4fc105</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -453,7 +453,7 @@
   <Motion Hash="0x06659f2809">
     <GameHash>0x05cdfb47d2</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0fdb05cfff</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -468,7 +468,7 @@
   <Motion Hash="0x0b29e5172c">
     <GameHash>0x0f7d4d16c1</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x14e020fc2b</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -483,7 +483,7 @@
   <Motion Hash="0x0d62c95085">
     <GameHash>0x05cdfb47d2</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x15425debbe</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -498,7 +498,7 @@
   <Motion Hash="0x0d65a4949c">
     <GameHash>0x05cdfb47d2</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x15c617e544</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -513,7 +513,7 @@
   <Motion Hash="0x0c016dd1c6">
     <GameHash>game_fallspecial</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x1585dee12a</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -528,7 +528,7 @@
   <Motion Hash="0x0eb45f04ee">
     <GameHash>0x05cdfb47d2</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x16353f2535</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -543,7 +543,7 @@
   <Motion Hash="0x0eb332c0f7">
     <GameHash>0x05cdfb47d2</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>3</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x16b1752bcf</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -685,6 +685,36 @@
     <ExtraHash Kind="Expression">expression_squatwaititem</ExtraHash>
     <ExtraHash Kind="Sound">0x13124c6740</ExtraHash>
     <ExtraHash Kind="Effect">0x144cadff96</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x07f830710f">
+    <GameHash>0x0b7f85335d</GameHash>
+    <Flags>0x0006</Flags>
+    <TransitionFrames>6</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x1004788b06</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_squatf</ExtraHash>
+    <ExtraHash Kind="Sound">sound_squatf</ExtraHash>
+    <ExtraHash Kind="Effect">effect_squatf</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x07ff5db516">
+    <GameHash>0x0b78e8f744</GameHash>
+    <Flags>0x0006</Flags>
+    <TransitionFrames>6</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x10803285fc</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_squatb</ExtraHash>
+    <ExtraHash Kind="Sound">sound_squatb</ExtraHash>
+    <ExtraHash Kind="Effect">effect_squatb</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
     <CancelFrame>0</CancelFrame>
@@ -887,7 +917,7 @@
   </Motion>
   <Motion Hash="0x0625e8b08e">
     <GameHash>game_escapen</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x113177b6a5</AnimationHash>
@@ -987,7 +1017,7 @@
     <ExtraHash Kind="Effect">effect_attack11</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>23</CancelFrame>
+    <CancelFrame>18</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x09055b74c4">
@@ -1002,7 +1032,7 @@
     <ExtraHash Kind="Effect">effect_attack12</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>26</CancelFrame>
+    <CancelFrame>18</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x1003559f46">
@@ -1022,7 +1052,7 @@
   </Motion>
   <Motion Hash="0x0a5ae1e07e">
     <GameHash>game_attack100</GameHash>
-    <Flags>0x0002</Flags>
+    <Flags>0x0006</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x134decf3a2</AnimationHash>
@@ -1047,7 +1077,7 @@
     <ExtraHash Kind="Effect">effect_attack100end</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>41</CancelFrame>
+    <CancelFrame>36</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0b6c751ced">
@@ -1062,22 +1092,7 @@
     <ExtraHash Kind="Effect">effect_attackdash</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>40</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0cba28ee97">
-    <GameHash>game_attacks3hi</GameHash>
-    <Flags>0x0084</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x144c7f403b</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_attacks3hi</ExtraHash>
-    <ExtraHash Kind="Sound">sound_attacks3hi</ExtraHash>
-    <ExtraHash Kind="Effect">effect_attacks3hi</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>25</CancelFrame>
+    <CancelFrame>36</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0b7dd72b57">
@@ -1092,27 +1107,12 @@
     <ExtraHash Kind="Effect">effect_attacks3</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>25</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0c244b16f0">
-    <GameHash>game_attacks3lw</GameHash>
-    <Flags>0x0084</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x1478a2322e</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_attacks3lw</ExtraHash>
-    <ExtraHash Kind="Sound">sound_attacks3lw</ExtraHash>
-    <ExtraHash Kind="Effect">effect_attacks3lw</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>25</CancelFrame>
+    <CancelFrame>27</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0acbfc42e6">
     <GameHash>game_attackhi3</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x138caf3e29</AnimationHash>
@@ -1122,7 +1122,7 @@
     <ExtraHash Kind="Effect">effect_attackhi3</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>30</CancelFrame>
+    <CancelFrame>36</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0a18b4d5e5">
@@ -1137,7 +1137,7 @@
     <ExtraHash Kind="Effect">effect_attacklw3</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>32</CancelFrame>
+    <CancelFrame>27</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0b78983dd2">
@@ -1152,7 +1152,7 @@
     <ExtraHash Kind="Effect">effect_attacks4</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>49</CancelFrame>
+    <CancelFrame>45</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0ea274b695">
@@ -1182,8 +1182,8 @@
     <ExtraHash Kind="Effect">effect_attackhi4</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>50</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
+    <CancelFrame>53</CancelFrame>
+    <NoStopIntp>True</NoStopIntp>
   </Motion>
   <Motion Hash="0x0f5db36b5c">
     <GameHash>game_attackhi4charge</GameHash>
@@ -1212,7 +1212,7 @@
     <ExtraHash Kind="Effect">effect_attacklw4</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>47</CancelFrame>
+    <CancelFrame>52</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0fee188235">
@@ -1242,7 +1242,7 @@
     <ExtraHash Kind="Effect">effect_attackairn</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>49</CancelFrame>
+    <CancelFrame>50</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0c3495ada5">
@@ -1257,8 +1257,8 @@
     <ExtraHash Kind="Effect">effect_attackairf</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>59</CancelFrame>
-    <NoStopIntp>True</NoStopIntp>
+    <CancelFrame>35</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0c33f869bc">
     <GameHash>game_attackairb</GameHash>
@@ -1287,7 +1287,7 @@
     <ExtraHash Kind="Effect">effect_attackairhi</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>36</CancelFrame>
+    <CancelFrame>44</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0d40042152">
@@ -1302,7 +1302,7 @@
     <ExtraHash Kind="Effect">effect_attackairlw</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>52</CancelFrame>
+    <CancelFrame>55</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0d562c06c5">
@@ -1382,7 +1382,7 @@
   </Motion>
   <Motion Hash="0x0f3a6aace3">
     <GameHash>game_specialnstart</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x170589f10c</AnimationHash>
@@ -1397,7 +1397,7 @@
   </Motion>
   <Motion Hash="0x0eb8131ac9">
     <GameHash>game_specialnloop</GameHash>
-    <Flags>0x0000</Flags>
+    <Flags>0x0006</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x161e132adf</AnimationHash>
@@ -1422,7 +1422,37 @@
     <ExtraHash Kind="Effect">effect_specialnend</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>16</CancelFrame>
+    <CancelFrame>42</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x1012b7fbf8">
+    <GameHash>game_specialncancel</GameHash>
+    <Flags>0x0080</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x18b6e19f04</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x19bef78c4d</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialncancel</ExtraHash>
+    <ExtraHash Kind="Effect">0x1588bff697</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>5</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x11e2130515">
+    <GameHash>game_specialnlanding</GameHash>
+    <Flags>0x0000</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x196e157e67</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x1a59b40261</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialnlanding</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialnlanding</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x1331f32137">
@@ -1442,7 +1472,7 @@
   </Motion>
   <Motion Hash="0x12fa41ef06">
     <GameHash>game_specialairnloop</GameHash>
-    <Flags>0x0000</Flags>
+    <Flags>0x0002</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x19612ba4f0</AnimationHash>
@@ -1467,27 +1497,42 @@
     <ExtraHash Kind="Effect">effect_specialairnend</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>16</CancelFrame>
+    <CancelFrame>36</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
-  <Motion Hash="0x0f3c6351ed">
-    <GameHash>game_specialsstart</GameHash>
+  <Motion Hash="0x14930274b8">
+    <GameHash>game_specialairncancel</GameHash>
     <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x176978b436</AnimationHash>
+    <AnimationHash ID="0">0x1baefd7676</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_specialsstart</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialsstart</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialsstart</ExtraHash>
+    <ExtraHash Kind="Expression">0x1cec6b39bf</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialairncancel</ExtraHash>
+    <ExtraHash Kind="Effect">0x18c1a2d1b1</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
+    <CancelFrame>5</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x195160ca42">
+    <GameHash>0x1a7b8036ea</GameHash>
+    <Flags>0x0080</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x1f7f4494f0</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x2056f59a83</ExtraHash>
+    <ExtraHash Kind="Sound">0x1b0852a297</ExtraHash>
+    <ExtraHash Kind="Effect">0x1c4e3c5cda</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>6</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0976c3b29b">
     <GameHash>game_specials</GameHash>
-    <Flags>0x0084</Flags>
+    <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x12ffe2787d</AnimationHash>
@@ -1498,6 +1543,36 @@
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
     <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x0eb9ce1b65">
+    <GameHash>0x11777cfa47</GameHash>
+    <Flags>0x0002</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x1698668d1d</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_specialshold</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialshold</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialshold</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x0efeda1fad">
+    <GameHash>0x113068fe8f</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x166fa64f21</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x17ee9f0a80</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialsfire</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialsfire</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>38</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0db8bd3614">
@@ -1512,27 +1587,12 @@
     <ExtraHash Kind="Effect">effect_specialsend</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>35</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x1337fadc39">
-    <GameHash>game_specialairsstart</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x1adc295758</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1b8dfb8c3e</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialairsstart</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialairsstart</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
+    <CancelFrame>30</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0d2b3a620b">
     <GameHash>game_specialairs</GameHash>
-    <Flags>0x0084</Flags>
+    <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x15cd2d0efc</AnimationHash>
@@ -1543,6 +1603,36 @@
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
     <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x12fb9ceeaa">
+    <GameHash>0x1472afe8bb</GameHash>
+    <Flags>0x0002</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x19194ad2a0</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x1a2afaec5e</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialairshold</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialairshold</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x12bc88ea62">
+    <GameHash>0x1435bbec73</GameHash>
+    <Flags>0x0080</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x19ee8a109c</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x1a6deee896</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialairsfire</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialairsfire</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>48</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x1158d0953d">
@@ -1557,72 +1647,27 @@
     <ExtraHash Kind="Effect">effect_specialairsend</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>46</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x11bf9ca033">
-    <GameHash>game_specialslanding</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x151d011a2f</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1abe0a269b</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialslanding</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialslanding</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>17</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x16500a0622">
-    <GameHash>0x188f0f2a76</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x1df6f442cf</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1ecbdb4377</ExtraHash>
-    <ExtraHash Kind="Sound">0x19d6799f7e</ExtraHash>
-    <ExtraHash Kind="Effect">0x1afb89297a</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>5</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0f560f55fa">
-    <GameHash>game_specialhihold</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x17051be446</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_specialhihold</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialhihold</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialhihold</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
     <CancelFrame>0</CancelFrame>
-    <NoStopIntp>True</NoStopIntp>
+    <NoStopIntp>False</NoStopIntp>
   </Motion>
-  <Motion Hash="0x1377375397">
-    <GameHash>game_specialhiholdair</GameHash>
+  <Motion Hash="0x105c3c1e76">
+    <GameHash>game_specialhistart</GameHash>
     <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x1afbf46a15</AnimationHash>
+    <AnimationHash ID="0">0x18955c4123</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1b641e0266</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialhiholdair</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialhiholdair</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
+    <ExtraHash Kind="Expression">0x194c5321a6</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialhistart</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialhistart</ExtraHash>
+    <XluStart>14</XluStart>
+    <XluEnd>37</XluEnd>
     <CancelFrame>0</CancelFrame>
-    <NoStopIntp>True</NoStopIntp>
+    <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0a28f17495">
     <GameHash>game_specialhi</GameHash>
-    <Flags>0x0082</Flags>
+    <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x136465487f</AnimationHash>
@@ -1632,49 +1677,34 @@
     <ExtraHash Kind="Effect">effect_specialhi</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>True</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x12cb4acfbc">
-    <GameHash>game_specialhilanding</GameHash>
-    <Flags>0x0084</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x1ab7686553</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1bfc1437f1</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialhilanding</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialhilanding</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>20</CancelFrame>
+    <CancelFrame>41</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
-  <Motion Hash="0x0fb29587f1">
-    <GameHash>game_specialhifall</GameHash>
+  <Motion Hash="0x14dd899136">
+    <GameHash>game_specialairhistart</GameHash>
     <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x179a41e446</AnimationHash>
+    <AnimationHash ID="0">0x1b3376478c</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_specialhifall</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialhifall</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialhifall</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
+    <ExtraHash Kind="Expression">0x1c1ecf9454</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialairhistart</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialairhistart</ExtraHash>
+    <XluStart>19</XluStart>
+    <XluEnd>37</XluEnd>
     <CancelFrame>0</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
-  <Motion Hash="0x10664b364f">
-    <GameHash>game_specialhibound</GameHash>
+  <Motion Hash="0x0ed8a31e01">
+    <GameHash>game_specialairhi</GameHash>
     <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x18973c02e3</AnimationHash>
+    <AnimationHash ID="0">0x1602db22f1</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x197624099f</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialhibound</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialhibound</ExtraHash>
+    <ExtraHash Kind="Expression">expression_specialairhi</ExtraHash>
+    <ExtraHash Kind="Sound">sound_specialairhi</ExtraHash>
+    <ExtraHash Kind="Effect">effect_specialairhi</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
     <CancelFrame>0</CancelFrame>
@@ -1692,7 +1722,7 @@
     <ExtraHash Kind="Effect">effect_speciallw</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>45</CancelFrame>
+    <CancelFrame>0</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0e46c0e666">
@@ -1700,44 +1730,104 @@
     <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x13d71ef129</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_specialairlw</ExtraHash>
-    <ExtraHash Kind="Sound">sound_specialairlw</ExtraHash>
-    <ExtraHash Kind="Effect">effect_specialairlw</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>45</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0c0075b9d2">
-    <GameHash>game_speciallw</GameHash>
-    <Flags>0x0084</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x1653616ba2</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_speciallw</ExtraHash>
-    <ExtraHash Kind="Sound">sound_speciallw</ExtraHash>
-    <ExtraHash Kind="Effect">effect_speciallw</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>45</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x10b83f8ed8">
-    <GameHash>game_specialairlw</GameHash>
-    <Flags>0x0084</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x172e7bae7c</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
     <ExtraHash Kind="Expression">expression_specialairlw</ExtraHash>
     <ExtraHash Kind="Sound">sound_specialairlw</ExtraHash>
     <ExtraHash Kind="Effect">effect_specialairlw</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>45</CancelFrame>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x12a6a3f625">
+    <GameHash>game_speciallwlanding</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x1a4b6dcbc9</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x1bc8c945e4</ExtraHash>
+    <ExtraHash Kind="Sound">sound_speciallwlanding</ExtraHash>
+    <ExtraHash Kind="Effect">effect_speciallwlanding</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>22</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x11b7bf50dd">
+    <GameHash>game_speciallwattack</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x19641282f0</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x1ab60a764a</ExtraHash>
+    <ExtraHash Kind="Sound">sound_speciallwattack</ExtraHash>
+    <ExtraHash Kind="Effect">effect_speciallwattack</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x188a055b18">
+    <GameHash>0x1afcd4cdc5</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x19641282f0</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x20d1a161ac</ExtraHash>
+    <ExtraHash Kind="Sound">0x1b8f0659b8</ExtraHash>
+    <ExtraHash Kind="Effect">0x1cc968a7f5</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x196cc4d0b6">
+    <GameHash>0x1b94d0af49</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x2032b7fe45</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x21a0930319</ExtraHash>
+    <ExtraHash Kind="Sound">0x1cba17705c</ExtraHash>
+    <ExtraHash Kind="Effect">0x1db23c238f</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>36</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x1157e142e9">
+    <GameHash>game_speciallwreturn</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x19277c90b3</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x1a5654647e</ExtraHash>
+    <ExtraHash Kind="Sound">sound_speciallwreturn</ExtraHash>
+    <ExtraHash Kind="Effect">effect_speciallwreturn</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x198352ae8e">
+    <GameHash>0x1bd7bebd0a</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x20a6e90cce</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">0x21e3fd115a</ExtraHash>
+    <ExtraHash Kind="Sound">0x1cf979621f</ExtraHash>
+    <ExtraHash Kind="Effect">0x1df15231cc</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>20</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0b9e61061f">
@@ -1755,31 +1845,76 @@
     <CancelFrame>0</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
-  <Motion Hash="0x0db6c1e009">
-    <GameHash>game_finallockon</GameHash>
-    <Flags>0x0080</Flags>
+  <Motion Hash="0x0a584c4b41">
+    <GameHash>game_finaldash</GameHash>
+    <Flags>0x0002</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x15effd0df6</AnimationHash>
+    <AnimationHash ID="0">0x13bc6e96a9</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_finallockon</ExtraHash>
-    <ExtraHash Kind="Sound">sound_finallockon</ExtraHash>
-    <ExtraHash Kind="Effect">effect_finallockon</ExtraHash>
+    <ExtraHash Kind="Expression">expression_finaldash</ExtraHash>
+    <ExtraHash Kind="Sound">sound_finaldash</ExtraHash>
+    <ExtraHash Kind="Effect">effect_finaldash</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>85</CancelFrame>
+    <CancelFrame>0</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
-  <Motion Hash="0x12035b61d5">
-    <GameHash>game_finalvisualscene</GameHash>
+  <Motion Hash="0x0e2b8caefd">
+    <GameHash>game_finaldashend</GameHash>
     <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x1aa5371515</AnimationHash>
+    <AnimationHash ID="0">0x16b37296e9</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1bbe22c6f7</ExtraHash>
-    <ExtraHash Kind="Sound">sound_finalvisualscene</ExtraHash>
-    <ExtraHash Kind="Effect">effect_finalvisualscene</ExtraHash>
+    <ExtraHash Kind="Expression">expression_finaldashend</ExtraHash>
+    <ExtraHash Kind="Sound">sound_finaldashend</ExtraHash>
+    <ExtraHash Kind="Effect">effect_finaldashend</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>42</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x0974cac6bc">
+    <GameHash>game_finalhit</GameHash>
+    <Flags>0x0080</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x12fc58ad61</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_finalhit</ExtraHash>
+    <ExtraHash Kind="Sound">sound_finalhit</ExtraHash>
+    <ExtraHash Kind="Effect">effect_finalhit</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x0cb7cea62c">
+    <GameHash>game_finalattack</GameHash>
+    <Flags>0x0080</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x15eb60988b</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_finalattack</ExtraHash>
+    <ExtraHash Kind="Sound">sound_finalattack</ExtraHash>
+    <ExtraHash Kind="Effect">effect_finalattack</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x0cd0c7600f">
+    <GameHash>game_finalfinish</GameHash>
+    <Flags>0x0080</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x157965ebe8</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_finalfinish</ExtraHash>
+    <ExtraHash Kind="Sound">sound_finalfinish</ExtraHash>
+    <ExtraHash Kind="Effect">effect_finalfinish</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
     <CancelFrame>0</CancelFrame>
@@ -1797,7 +1932,7 @@
     <ExtraHash Kind="Effect">effect_finalend</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>86</CancelFrame>
+    <CancelFrame>73</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0f9b673ae9">
@@ -1815,19 +1950,19 @@
     <CancelFrame>0</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
-  <Motion Hash="0x11db48dfb3">
-    <GameHash>game_finalairlockon</GameHash>
+  <Motion Hash="0x1200557d50">
+    <GameHash>game_finalairdashend</GameHash>
     <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x18d1b956ce</AnimationHash>
+    <AnimationHash ID="0">0x199b4e6a2c</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x19eec3505c</ExtraHash>
-    <ExtraHash Kind="Sound">sound_finalairlockon</ExtraHash>
-    <ExtraHash Kind="Effect">effect_finalairlockon</ExtraHash>
+    <ExtraHash Kind="Expression">0x1a8cc906ee</ExtraHash>
+    <ExtraHash Kind="Sound">sound_finalairdashend</ExtraHash>
+    <ExtraHash Kind="Effect">effect_finalairdashend</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>85</CancelFrame>
+    <CancelFrame>42</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0df3b40b09">
@@ -1842,7 +1977,7 @@
     <ExtraHash Kind="Effect">effect_finalairend</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>47</CancelFrame>
+    <CancelFrame>73</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x05c56b7b64">
@@ -1857,7 +1992,7 @@
     <ExtraHash Kind="Effect">effect_catch</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>30</CancelFrame>
+    <CancelFrame>32</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0ae4c85cc1">
@@ -1872,7 +2007,7 @@
     <ExtraHash Kind="Effect">effect_catchdash</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>38</CancelFrame>
+    <CancelFrame>40</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0a5f869486">
@@ -1887,7 +2022,7 @@
     <ExtraHash Kind="Effect">effect_catchturn</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>33</CancelFrame>
+    <CancelFrame>35</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0aeaab5d22">
@@ -1908,7 +2043,7 @@
   <Motion Hash="0x0a02480224">
     <GameHash>game_catchwait</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>6</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x135f65062d</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -1932,7 +2067,7 @@
     <ExtraHash Kind="Effect">effect_catchattack</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>7</CancelFrame>
+    <CancelFrame>6</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x097c7ceeb1">
@@ -1962,12 +2097,12 @@
     <ExtraHash Kind="Effect">effect_throwf</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>34</CancelFrame>
-    <NoStopIntp>True</NoStopIntp>
+    <CancelFrame>40</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x074e9acdb1">
     <GameHash>game_throwb</GameHash>
-    <Flags>0x0081</Flags>
+    <Flags>0x0085</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x10af128ea0</AnimationHash>
@@ -1977,12 +2112,12 @@
     <ExtraHash Kind="Effect">effect_throwb</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>42</CancelFrame>
+    <CancelFrame>36</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x08a0abc72c">
     <GameHash>game_throwhi</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x1174761b56</AnimationHash>
@@ -1992,7 +2127,7 @@
     <ExtraHash Kind="Effect">effect_throwhi</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>39</CancelFrame>
+    <CancelFrame>50</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x083ec83f4b">
@@ -2007,7 +2142,7 @@
     <ExtraHash Kind="Effect">effect_throwlw</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>44</CancelFrame>
+    <CancelFrame>54</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0885baf52e">
@@ -3104,7 +3239,7 @@
   </Motion>
   <Motion Hash="0x0bb634be24">
     <GameHash>game_appealhir</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x13722831f1</AnimationHash>
@@ -3119,7 +3254,7 @@
   </Motion>
   <Motion Hash="0x0b4c3b8347">
     <GameHash>game_appealhil</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x13722831f1</AnimationHash>
@@ -3152,7 +3287,7 @@
     <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x12bcd013c8</AnimationHash>
+    <AnimationHash ID="0">0x12d5e130d1</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
     <ExtraHash Kind="Expression">expression_appealsl</ExtraHash>
     <ExtraHash Kind="Sound">sound_appealsl</ExtraHash>
@@ -3164,7 +3299,7 @@
   </Motion>
   <Motion Hash="0x0b2feea709">
     <GameHash>game_appeallwr</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x131fc10868</AnimationHash>
@@ -3179,7 +3314,7 @@
   </Motion>
   <Motion Hash="0x0bd5e19a6a">
     <GameHash>game_appeallwl</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x131fc10868</AnimationHash>
@@ -3194,7 +3329,7 @@
   </Motion>
   <Motion Hash="0x05e54ad4c0">
     <GameHash>game_win1</GameHash>
-    <Flags>0x0280</Flags>
+    <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0e79652858</AnimationHash>
@@ -3209,8 +3344,8 @@
   </Motion>
   <Motion Hash="0x0a3eec3a54">
     <GameHash>game_win1wait</GameHash>
-    <Flags>0x0202</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <Flags>0x0082</Flags>
+    <TransitionFrames>30</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x1206c4a0e2</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -3224,7 +3359,7 @@
   </Motion>
   <Motion Hash="0x057c43857a">
     <GameHash>game_win2</GameHash>
-    <Flags>0x0280</Flags>
+    <Flags>0x0080</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0ef7ea2fbb</AnimationHash>
@@ -3239,8 +3374,8 @@
   </Motion>
   <Motion Hash="0x0ab87848fa">
     <GameHash>game_win2wait</GameHash>
-    <Flags>0x0202</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <Flags>0x0082</Flags>
+    <TransitionFrames>30</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x12715a7212</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -3269,8 +3404,8 @@
   </Motion>
   <Motion Hash="0x0a73249b5f">
     <GameHash>game_win3wait</GameHash>
-    <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <Flags>0x0082</Flags>
+    <TransitionFrames>30</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x12eaff3e7d</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -3284,7 +3419,7 @@
   </Motion>
   <Motion Hash="0x042af5a458">
     <GameHash>game_lose</GameHash>
-    <Flags>0x0002</Flags>
+    <Flags>0x0082</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0e754f438a</AnimationHash>
@@ -3292,152 +3427,6 @@
     <ExtraHash Kind="Expression">expression_lose</ExtraHash>
     <ExtraHash Kind="Sound">0x0a6080dec6</ExtraHash>
     <ExtraHash Kind="Effect">0x0bba9093a1</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0673363627">
-    <GameHash>game_win1a</GameHash>
-    <Flags>0x0280</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x0f810d87f5</AnimationHash>
-    <AnimationUnk ID="0">3</AnimationUnk>
-    <ExtraHash Kind="Expression">0x10f0d95a66</ExtraHash>
-    <ExtraHash Kind="Sound">sound_win1a</ExtraHash>
-    <ExtraHash Kind="Effect">effect_win1a</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0ba29e1480">
-    <GameHash>0x0e839e2194</GameHash>
-    <Flags>0x0282</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>0</AnimationCount>
-    <ExtraHash Kind="Expression">0x14efcf0c16</ExtraHash>
-    <ExtraHash Kind="Sound">0x0f6320342b</ExtraHash>
-    <ExtraHash Kind="Effect">0x1046bd9173</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x06ea3f679d">
-    <GameHash>game_win1b</GameHash>
-    <Flags>0x0280</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x0f0f828016</AnimationHash>
-    <AnimationUnk ID="0">3</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1069d00bdc</ExtraHash>
-    <ExtraHash Kind="Sound">sound_win1b</ExtraHash>
-    <ExtraHash Kind="Effect">effect_win1b</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0b240a662e">
-    <GameHash>0x0ec43e5b44</GameHash>
-    <Flags>0x0282</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>0</AnimationCount>
-    <ExtraHash Kind="Expression">0x14a86f76c6</ExtraHash>
-    <ExtraHash Kind="Sound">0x0f24804efb</ExtraHash>
-    <ExtraHash Kind="Effect">0x10011deba3</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x14c2f12e10">
-    <GameHash>0x15a6915326</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x174a447d70</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1b76a910d5</ExtraHash>
-    <ExtraHash Kind="Sound">0x165a3f080a</ExtraHash>
-    <ExtraHash Kind="Effect">0x17bdae932a</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x1438fe1373">
-    <GameHash>0x15a6915326</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x1723755e69</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1b76a910d5</ExtraHash>
-    <ExtraHash Kind="Sound">0x165a3f080a</ExtraHash>
-    <ExtraHash Kind="Effect">0x17bdae932a</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0e5e20fd94">
-    <GameHash>0x10002eab38</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x123b7036ab</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_smashappeal</ExtraHash>
-    <ExtraHash Kind="Sound">0x110eae1d1a</ExtraHash>
-    <ExtraHash Kind="Effect">0x12da70b8bc</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0ea42fc0f7">
-    <GameHash>0x10002eab38</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x12524115b2</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_smashappeal</ExtraHash>
-    <ExtraHash Kind="Sound">0x110eae1d1a</ExtraHash>
-    <ExtraHash Kind="Effect">0x12da70b8bc</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x1272e2e8e8">
-    <GameHash>0x13bba1ef74</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x15b4295b07</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1986e91b49</ExtraHash>
-    <ExtraHash Kind="Sound">0x14df4ff7ea</ExtraHash>
-    <ExtraHash Kind="Effect">0x15b0a16193</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>0</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x1288edd58b">
-    <GameHash>0x13bba1ef74</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x15dd18781e</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">0x1986e91b49</ExtraHash>
-    <ExtraHash Kind="Sound">0x14df4ff7ea</ExtraHash>
-    <ExtraHash Kind="Effect">0x15b0a16193</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
     <CancelFrame>0</CancelFrame>
@@ -3761,7 +3750,7 @@
   <Motion Hash="0x0b95b751c9">
     <GameHash>0x0ec38852cb</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x133e53e7ec</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -3844,7 +3833,7 @@
     <ExtraHash Kind="Sound">sound_downattacku</ExtraHash>
     <ExtraHash Kind="Effect">effect_downattacku</ExtraHash>
     <XluStart>1</XluStart>
-    <XluEnd>26</XluEnd>
+    <XluEnd>24</XluEnd>
     <CancelFrame>46</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
@@ -3874,8 +3863,23 @@
     <ExtraHash Kind="Sound">sound_downbacku</ExtraHash>
     <ExtraHash Kind="Effect">effect_downbacku</ExtraHash>
     <XluStart>1</XluStart>
-    <XluEnd>21</XluEnd>
+    <XluEnd>23</XluEnd>
     <CancelFrame>36</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x0b76cdf231">
+    <GameHash>0x0d4f6ae338</GameHash>
+    <Flags>0x0080</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x135f33b7df</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_downspot</ExtraHash>
+    <ExtraHash Kind="Sound">sound_downspot</ExtraHash>
+    <ExtraHash Kind="Effect">0x0fd6e1ba80</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>30</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0ca8fd5eb1">
@@ -3896,7 +3900,7 @@
   <Motion Hash="0x0bff07713b">
     <GameHash>game_downwaitd</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x13aed0aa12</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -3979,7 +3983,7 @@
     <ExtraHash Kind="Sound">sound_downattackd</ExtraHash>
     <ExtraHash Kind="Effect">effect_downattackd</ExtraHash>
     <XluStart>1</XluStart>
-    <XluEnd>25</XluEnd>
+    <XluEnd>23</XluEnd>
     <CancelFrame>46</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
@@ -4009,23 +4013,8 @@
     <ExtraHash Kind="Sound">sound_downbackd</ExtraHash>
     <ExtraHash Kind="Effect">effect_downbackd</ExtraHash>
     <XluStart>1</XluStart>
-    <XluEnd>25</XluEnd>
+    <XluEnd>20</XluEnd>
     <CancelFrame>36</CancelFrame>
-    <NoStopIntp>False</NoStopIntp>
-  </Motion>
-  <Motion Hash="0x0b1c7dd2c3">
-    <GameHash>0x0d4f6ae338</GameHash>
-    <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
-    <AnimationCount>1</AnimationCount>
-    <AnimationHash ID="0">0x13cfb0fa21</AnimationHash>
-    <AnimationUnk ID="0">0</AnimationUnk>
-    <ExtraHash Kind="Expression">expression_downspot</ExtraHash>
-    <ExtraHash Kind="Sound">sound_downspot</ExtraHash>
-    <ExtraHash Kind="Effect">0x0fd6e1ba80</ExtraHash>
-    <XluStart>0</XluStart>
-    <XluEnd>0</XluEnd>
-    <CancelFrame>30</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0776effdcf">
@@ -4116,6 +4105,21 @@
     <XluStart>1</XluStart>
     <XluEnd>18</XluEnd>
     <CancelFrame>27</CancelFrame>
+    <NoStopIntp>False</NoStopIntp>
+  </Motion>
+  <Motion Hash="0x0b627a5cb5">
+    <GameHash>game_attachwall</GameHash>
+    <Flags>0x0084</Flags>
+    <TransitionFrames>0</TransitionFrames>
+    <AnimationCount>1</AnimationCount>
+    <AnimationHash ID="0">0x158bf42b01</AnimationHash>
+    <AnimationUnk ID="0">0</AnimationUnk>
+    <ExtraHash Kind="Expression">expression_attachwall</ExtraHash>
+    <ExtraHash Kind="Sound">sound_attachwall</ExtraHash>
+    <ExtraHash Kind="Effect">0x11b0dfafce</ExtraHash>
+    <XluStart>0</XluStart>
+    <XluEnd>0</XluEnd>
+    <CancelFrame>0</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x10743e4673">
@@ -4316,7 +4320,7 @@
   <Motion Hash="0x0c3ce6adce">
     <GameHash>0x10e28493b6</GameHash>
     <Flags>0x0002</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x15530318b6</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -4421,7 +4425,7 @@
   <Motion Hash="0x0a7c8b8f5e">
     <GameHash>game_cliffwait</GameHash>
     <Flags>0x0006</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x13752f95a9</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -4459,7 +4463,7 @@
     <ExtraHash Kind="Sound">sound_cliffattack</ExtraHash>
     <ExtraHash Kind="Effect">effect_cliffattack</ExtraHash>
     <XluStart>1</XluStart>
-    <XluEnd>23</XluEnd>
+    <XluEnd>24</XluEnd>
     <CancelFrame>56</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
@@ -4526,7 +4530,7 @@
   <Motion Hash="0x04fd3943f8">
     <GameHash>game_slip</GameHash>
     <Flags>0x0080</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>12</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x0e829c0310</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
@@ -4675,7 +4679,7 @@
   </Motion>
   <Motion Hash="0x128c67b93f">
     <GameHash>game_itemlightthrowf</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x1532e9af70</AnimationHash>
@@ -4690,7 +4694,7 @@
   </Motion>
   <Motion Hash="0x128b0a7d26">
     <GameHash>game_itemlightthrowb</GameHash>
-    <Flags>0x0081</Flags>
+    <Flags>0x0085</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x15b6a3a18a</AnimationHash>
@@ -4735,7 +4739,7 @@
   </Motion>
   <Motion Hash="0x13455c51bc">
     <GameHash>game_itemlightthrowf4</GameHash>
-    <Flags>0x0080</Flags>
+    <Flags>0x0084</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x1532e9af70</AnimationHash>
@@ -4750,7 +4754,7 @@
   </Motion>
   <Motion Hash="0x13213094b8">
     <GameHash>game_itemlightthrowb4</GameHash>
-    <Flags>0x0081</Flags>
+    <Flags>0x0085</Flags>
     <TransitionFrames>0</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x15b6a3a18a</AnimationHash>
@@ -4961,7 +4965,7 @@
   <Motion Hash="0x0f23bd247d">
     <GameHash>game_itemheavywalk</GameHash>
     <Flags>0x0006</Flags>
-    <TransitionFrames>0</TransitionFrames>
+    <TransitionFrames>6</TransitionFrames>
     <AnimationCount>1</AnimationCount>
     <AnimationHash ID="0">0x13d8fb03db</AnimationHash>
     <AnimationUnk ID="0">0</AnimationUnk>
