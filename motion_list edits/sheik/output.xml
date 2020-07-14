@@ -1302,7 +1302,7 @@
     <ExtraHash Kind="Effect">effect_attackairlw</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>55</CancelFrame>
+    <CancelFrame>43</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0d562c06c5">
