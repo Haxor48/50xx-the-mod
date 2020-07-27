@@ -108,7 +108,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_SPECIAL_LW].contains(&status_kind) {
                 println!("status_works!");
                 if MotionModule::frame(boma) > (5.0) {
-                    prinln!("timer works!");
+                    println!("timer works!");
                     if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_JUMP) {
                         if situation_kind == *SITUATION_KIND_AIR{
                             if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX){
@@ -393,7 +393,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 
         if [*FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) { //edge cancels
             if GroundModule::is_ottotto(boma, 0.76) {
-                GroundModule::set_correct(boma, *GROUND_CORRECT_KIND_AIR);
+                GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
             }
         }
 
