@@ -10,6 +10,8 @@ mod wolf;
 mod greninja;
 mod joker;
 mod roy;
+mod marth;
+mod sheik;
 
 #[skyline::main(name = "acmd_test")]
 pub fn main() {
@@ -22,4 +24,6 @@ pub fn main() {
     greninja::install();
     joker::install();
     roy::install();
+    sheik::install();
+    marth::install();
 }

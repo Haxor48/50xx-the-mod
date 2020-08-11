@@ -3,12 +3,12 @@ use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 
-#[acmd::acmd_func(
+/* #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_JACK, 
     animation = "attack_hi3",
     animcmd = "game_attackhi3")]
-pub fn joker_utilt(fighter: &mut L2CFighterCommon) {
+pub fn joker_utilt(fighter: &mut L2CFighterCommon) { //fuck
     acmd!({
         frame(Frame=1)
         if(is_excute){
@@ -65,7 +65,7 @@ pub fn joker_utilt(fighter: &mut L2CFighterCommon) {
         AttackModule::clear_all()
         }
     });
-}
+}*/
 
 #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -81,7 +81,7 @@ pub fn joker_dtilt(fighter: &mut L2CFighterCommon) {
         frame(Frame=8)
         if(is_excute){
         ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=6.0, Angle=75, KBG=66, FKB=0, BKB=75, Size=2.6, X=-4.0, Y=0.0, Z=1.5, X2=5.0, Y2=0.0, Z2=1.5, Hitlag=0.75, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
+        //AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
         }
        /* if(0x291160(WorkModule::is_flag(FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE), false, true)){
         if(is_excute){
@@ -118,12 +118,12 @@ pub fn joker_dtilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd::acmd_func(
+/* #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_JACK, 
     animation = "attack_air_lw",
     animcmd = "game_attackairlw")]
-pub fn joker_dair(fighter: &mut L2CFighterCommon) {
+pub fn joker_dair(fighter: &mut L2CFighterCommon) { //fuck
     acmd!({
         frame(Frame=4)
         if(is_excute){
@@ -161,7 +161,7 @@ pub fn joker_dair(fighter: &mut L2CFighterCommon) {
         WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         } 
     });
-}
+}*/
 
 #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -216,12 +216,12 @@ pub fn joker_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd::acmd_func(
+/*#[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_JACK, 
     animation = "attack_air_n",
     animcmd = "game_attackairn")]
-pub fn joker_nair(fighter: &mut L2CFighterCommon) {
+pub fn joker_nair(fighter: &mut L2CFighterCommon) { //fuck
     acmd!({
         if(is_excute){
         MotionModule::set_rate(0.65)
@@ -250,7 +250,7 @@ pub fn joker_nair(fighter: &mut L2CFighterCommon) {
         } 
     });
 }
-
+*/
 #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_JACK, 
@@ -288,12 +288,12 @@ pub fn joker_uair(fighter: &mut L2CFighterCommon) {
         }      
     });
 }
-#[acmd::acmd_func(
+/*#[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_JACK, 
     animation = "attack_air_f",
     animcmd = "game_attackairf")]
-pub fn joker_fair(fighter: &mut L2CFighterCommon) {
+pub fn joker_fair(fighter: &mut L2CFighterCommon) { //fuck
     acmd!({
         frame(Frame=4)
         if(is_excute){
@@ -340,10 +340,11 @@ pub fn joker_fair(fighter: &mut L2CFighterCommon) {
         }
                 
     });
-}
+}*/
 
 pub fn install() {
     acmd::add_hooks!(
-    joker_bair, joker_dair, joker_dtilt, joker_nair, joker_utilt, joker_uair, joker_fair
+    joker_bair, /*joker_dair,*/ joker_dtilt, /*joker_nair,*/ /*joker_utilt,*/ joker_uair //, joker_fair
     );
 }
+
