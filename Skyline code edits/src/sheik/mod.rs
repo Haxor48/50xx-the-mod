@@ -41,7 +41,7 @@ pub fn sheik_ftilt(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=4)
         if(is_excute){
-        FighterAreaModuleImpl::enable_fix_jostle_area(3.5, 5)
+        //FighterAreaModuleImpl::enable_fix_jostle_area(3.5, 5)
         }
         frame(Frame=5)
         if(is_excute){
@@ -52,7 +52,7 @@ pub fn sheik_ftilt(fighter: &mut L2CFighterCommon) {
         wait(Frames=4)
         if(is_excute){
         AttackModule::clear_all()
-        FighterAreaModuleImpl::enable_fix_jostle_area(5, 3)
+        //FighterAreaModuleImpl::enable_fix_jostle_area(5, 3)
         } 
     });
 }
@@ -104,7 +104,7 @@ pub fn sheik_dtilt(fighter: &mut L2CFighterCommon) {
         ATTACK(ID=0, Part=0, Bone=hash40("legr"), Damage=5, Angle=70, KBG=100, FKB=0, BKB=45, Size=3.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.4, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         ATTACK(ID=1, Part=0, Bone=hash40("legr"), Damage=5, Angle=90, KBG=100, FKB=0, BKB=45, Size=3.2, X=3.0, Y=-0.6, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.4, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         ATTACK(ID=2, Part=0, Bone=hash40("kneer"), Damage=5, Angle=90, KBG=100, FKB=0, BKB=45, Size=4.2, X=4.0, Y=-0.2, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.4, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
+        //AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -204,7 +204,7 @@ pub fn sheik_fair(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=58)
         if(is_excute){
-        notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        //notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
         }           
     });
 }

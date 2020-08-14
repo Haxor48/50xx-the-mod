@@ -4,7 +4,7 @@ use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_dash",
     animcmd = "game_attackdash")]
@@ -30,7 +30,7 @@ pub fn marth_dashattack(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_11",
     animcmd = "game_attack11")]
@@ -54,7 +54,7 @@ pub fn marth_jab(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_12",
     animcmd = "game_attack12")]
@@ -74,7 +74,7 @@ pub fn marth_jab2(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_lw3",
     animcmd = "game_attacklw3")]
@@ -84,7 +84,7 @@ pub fn marth_dtilt(fighter: &mut L2CFighterCommon) {
         if(is_excute){
         ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=7.0, Angle=30, KBG=40, FKB=0, BKB=40, Size=2.7, X=0.0, Y=2.7, Z=16.700001, X2=0.0, Y2=4.4, Z2=9.2, Hitlag=0.9, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.35, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
         ATTACK(ID=1, Part=0, Bone=hash40("sword1"), Damage=10.0, Angle=30, KBG=40, FKB=0, BKB=50, Size=2.7, X=0.0, Y=0.0, Z=8.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.35, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
-        AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
+        //AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -94,7 +94,7 @@ pub fn marth_dtilt(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_hi3",
     animcmd = "game_attackhi3")]
@@ -111,8 +111,8 @@ pub fn marth_utilt(fighter: &mut L2CFighterCommon) {
         }
         wait(Frames=1)
         if(is_excute){
-        AttackModule::clear(ID=4)
-        AttackModule::clear(ID=5)
+        AttackModule::clear(ID=4, false)
+        AttackModule::clear(ID=5, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -129,7 +129,7 @@ pub fn marth_utilt(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_s3s",
     animcmd = "game_attacks3s")]
@@ -150,7 +150,7 @@ pub fn marth_ftilt(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_s4s",
     animcmd = "game_attacks4s")]
@@ -166,7 +166,7 @@ pub fn marth_fsmash(fighter: &mut L2CFighterCommon) {
         ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=13.0, Angle=361, KBG=75, FKB=0, BKB=48, Size=3.0, X=0.0, Y=1.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.9, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
         ATTACK(ID=2, Part=0, Bone=hash40("bust"), Damage=13.0, Angle=361, KBG=75, FKB=0, BKB=48, Size=2.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.9, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
         ATTACK(ID=3, Part=0, Bone=hash40("sword1"), Damage=18.0, Angle=361, KBG=80, FKB=0, BKB=80, Size=3.5, X=1.0, Y=0.0, Z=7.3, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
-        AttackModule::set_attack_height_all(ATTACK_HEIGHT_HIGH, false)
+        //AttackModule::set_attack_height_all(ATTACK_HEIGHT_HIGH, false)
         }
         frame(Frame=14)
         if(is_excute){
@@ -175,7 +175,7 @@ pub fn marth_fsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_air_f",
     animcmd = "game_attackairf")]
@@ -204,7 +204,7 @@ pub fn marth_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_air_b",
     animcmd = "game_attackairb")]
@@ -233,7 +233,7 @@ pub fn marth_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_air_lw",
     animcmd = "game_attackairlw")]
@@ -264,7 +264,7 @@ pub fn marth_dair(fighter: &mut L2CFighterCommon) {
     });
 }
 #[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_MARTH, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "attack_air_hi",
     animcmd = "game_attackairhi")]

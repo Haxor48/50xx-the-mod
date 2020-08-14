@@ -10,7 +10,7 @@ mod wolf;
 mod greninja;
 mod joker;
 mod roy;
-mod inkling;
+//mod inkling;
 mod marth;
 mod sheik;
 
@@ -27,5 +27,5 @@ pub fn main() {
     roy::install();
     sheik::install();
     marth::install();
-    inkling::install();
+    //inkling::install();
 }
