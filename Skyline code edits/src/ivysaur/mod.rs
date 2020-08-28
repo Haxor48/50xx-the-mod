@@ -1,5 +1,7 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
+
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 
@@ -380,7 +382,7 @@ pub fn ivy_upb_air (fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_VINE, false, 0)
-            //ArticleModule::set_visibility_whole(FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_VINE, false, 0)
+            ArticleModule::set_visibility_whole(FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_VINE, false, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
             WorkModule::on_flag(Flag=FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_HI_SET_MAP_COLL_OFFSET)
         }
         frame(Frame=13)
@@ -440,6 +442,59 @@ pub fn ivy_fair (fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_PFUSHIGISOU, 
+    animation = "catch",
+    animcmd = "game_catch")]
+pub fn ivy_grab (fighter: &mut L2CFighterCommon) {
+    acmd!({
+        FT_MOTION_RATE(FSM=0.93)
+        frame(Frame=12)
+        if(is_excute){
+            GrabModule::set_rebound(CanCatchRebound=true)
+        }
+        frame(Frame=13)
+        if(is_excute){
+            FT_MOTION_RATE(FSM=1.0)
+            CATCH(ID=0, Bone=hash40("top"), Size=3.3, X=0.0, Y=5.0, Z=4.0, X2=0.0, Y2=5.0, Z2=19.700001, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+            CATCH(ID=1, Bone=hash40("top"), Size=1.65, X=0.0, Y=5.0, Z=2.35, X2=0.0, Y2=5.0, Z2=21.35, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
+        }
+        //smash::lua2cpp::L2CFighterAnimcmdGameCommon::game_CaptureCutCommon()
+        wait(Frames=2)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
+            GrabModule::set_rebound(CanCatchRebound=false)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_PFUSHIGISOU, 
+    animation = "throw_lw",
+    animcmd = "game_throwlw")]
+pub fn ivy_dthrow (fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=7.0, Angle=80, KBG=127, FKB=0, BKB=58, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=18)
+        if(is_excute){
+            FT_CATCH_STOP(7, 1)
+            CHECK_FINISH_CAMERA(9, 0)
+            //FighterCutInManager::set_throw_finish_zoom_rate(2)
+            //FighterCutInManager::set_throw_finish_offset(0, 5, 0)
+        }
+        frame(Frame=19)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         ivy_bair,
@@ -455,6 +510,8 @@ pub fn install() {
         ivy_fsmash_mid,
         ivy_upb,
         ivy_upb_air,
-        ivy_fair
+        ivy_fair,
+        ivy_grab,
+        ivy_dthrow
     );
 }
