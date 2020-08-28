@@ -1,5 +1,6 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 
@@ -406,7 +407,6 @@ pub fn falcon_sideb_hit(fighter: &mut L2CFighterCommon) {
     animation = "special_air_s_end",
     animcmd = "game_specialairsend")]
 pub fn falcon_sideb_air_hit(fighter: &mut L2CFighterCommon) {
-    //let speed_added = smash::phx::Vector3f {x: -1.5, y: 2.5, z: 0.0};
     acmd!({
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.4)
@@ -422,7 +422,10 @@ pub fn falcon_sideb_air_hit(fighter: &mut L2CFighterCommon) {
         }
         wait(Frames=1)
         if(is_excute){
-            //KineticModule::add_speed(&speed_added)
+            rust {
+                let speed_added = smash::phx::Vector3f {x: -1.5, y: 2.5, z: 0.0};
+                KineticModule::add_speed(module_accessor, &speed_added);
+            }
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=10.0, Angle=60, KBG=80, FKB=0, BKB=60, Size=4.0, X=0.0, Y=8.0, Z=5.5, X2=0.0, Y2=1.0, Z2=3.0, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
         }
         frame(Frame=4)
@@ -501,13 +504,15 @@ pub fn falcon_punch_turn(fighter: &mut L2CFighterCommon) {
     animation = "special_air_n",
     animcmd = "game_specialairn")]
 pub fn falcon_punch_air(fighter: &mut L2CFighterCommon) {
-    //let speed_added = smash::phx::Vector3f {x: 0.0, y: 0.2, z: 0.0};
     acmd!({
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.5)
-        //if(is_excute){
-            //KineticModule::add_speed(&speed_added)
-        //}
+        if(is_excute){
+            rust {
+                let speed_added = smash::phx::Vector3f {x: 0.0, y: 0.2, z: 0.0};
+                KineticModule::add_speed(module_accessor, &speed_added);
+            }
+        }
         frame(Frame=15)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_CAPTAIN_STATUS_WORK_ID_FLAG_FALCON_PUNCH_TURN)
@@ -647,6 +652,134 @@ pub fn falcon_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CAPTAIN, 
+    animation = "throw_f",
+    animcmd = "game_throwf")]
+pub fn falcon_fthrow(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=45, KBG=105, FKB=0, BKB=45, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=11)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("arml"), Damage=5.0, Angle=80, KBG=100, FKB=0, BKB=70, Size=4.8, X=4.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            AttackModule::set_catch_only_all(true, false)
+            CHECK_FINISH_CAMERA(18, 8)
+        }
+        frame(Frame=13)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CAPTAIN, 
+    animation = "throw_hi",
+    animcmd = "game_throwhi")]
+pub fn falcon_uthrow(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=84, KBG=100, FKB=0, BKB=68, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=12)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("arml"), Damage=3.0, Angle=85, KBG=105, FKB=0, BKB=70, Size=4.5, X=4.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            AttackModule::set_catch_only_all(true, false)
+            CHECK_FINISH_CAMERA(8, 32)
+        }
+        frame(Frame=14)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CAPTAIN, 
+    animation = "catch",
+    animcmd = "game_catch")]
+pub fn falcon_grab(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=5)
+        if(is_excute){
+            GrabModule::set_rebound(CanCatchRebound=true)
+        }
+        frame(Frame=6)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=3.3, X=0.0, Y=8.0, Z=4.0, X2=0.0, Y2=8.0, Z2=11.35, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+            CATCH(ID=1, Bone=hash40("top"), Size=1.65, X=0.0, Y=8.0, Z=2.35, X2=0.0, Y2=8.0, Z2=12.95, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
+        }
+        //smash::lua2cpp::L2CFighterAnimcmdGameCommon::game_CaptureCutCommon()
+        wait(Frames=2)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
+            GrabModule::set_rebound(CanCatchRebound=false)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CAPTAIN, 
+    animation = "catch_dash",
+    animcmd = "game_catchdash")]
+pub fn falcon_dashgrab(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=8)
+        if(is_excute){
+            GrabModule::set_rebound(CanCatchRebound=true)
+        }
+        frame(Frame=9)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=2.6, X=0.0, Y=8.0, Z=4.0, X2=0.0, Y2=8.0, Z2=13.6, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+            CATCH(ID=1, Bone=hash40("top"), Size=1.3, X=0.0, Y=8.0, Z=2.7, X2=0.0, Y2=8.0, Z2=14.9, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
+        }
+        //smash::lua2cpp::L2CFighterAnimcmdGameCommon::game_CaptureCutCommon()
+        wait(Frames=2)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
+            GrabModule::set_rebound(CanCatchRebound=false)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CAPTAIN, 
+    animation = "catch_turn",
+    animcmd = "game_catchturn")]
+pub fn falcon_pivotgrab(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=9)
+        if(is_excute){
+            GrabModule::set_rebound(CanCatchRebound=true)
+        }
+        frame(Frame=10)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=3.3, X=0.0, Y=8.0, Z=-4.0, X2=0.0, Y2=8.0, Z2=-18.200001, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+            CATCH(ID=1, Bone=hash40("top"), Size=1.65, X=0.0, Y=8.0, Z=-2.35, X2=0.0, Y2=8.0, Z2=-19.85, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
+        }
+        //smash::lua2cpp::L2CFighterAnimcmdGameCommon::game_CaptureCutCommon()
+        wait(Frames=2)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
+            GrabModule::set_rebound(CanCatchRebound=false)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         falcon_dair,
@@ -668,6 +801,11 @@ pub fn install() {
         falcon_punch_air,
         falcon_punch_air_turn,
         falcon_bair,
-        falcon_nair
+        falcon_nair,
+        falcon_fthrow,
+        falcon_uthrow,
+        falcon_grab,
+        falcon_dashgrab,
+        falcon_pivotgrab
     );
 }
