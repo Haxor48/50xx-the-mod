@@ -254,13 +254,13 @@ pub fn cloud_aerial_upb(fighter: &mut L2CFighterCommon) {
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
         }
-        frame(Frame=23)
+        frame(Frame=25)
         FT_MOTION_RATE(FSM=0.8)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_CLOUD_STATUS_SPECIAL_HI_FLAG_IS_ENABLE_CONTROL)
             WorkModule::on_flag(Flag=FIGHTER_CLOUD_STATUS_SPECIAL_HI_FLAG_FALL)
         }
-        frame(Frame=30)
+        frame(Frame=27)
         if(is_excute){
             WorkModule::off_flag(Flag=FIGHTER_CLOUD_STATUS_SPECIAL_HI_FLAG_SHIFT)
         }
@@ -339,24 +339,6 @@ pub fn cloud_dtilt(fighter: &mut L2CFighterCommon) {
             AttackModule::clear_all()
             HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
-    });
-}
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_CLOUD, 
-    animation = "special_hi2_landing",
-    animcmd = "game_specialhi2landing")]
-pub fn cloud_landing_upb(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=1)
-    if(is_excute){
-        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.5, Angle=64, KBG=128, FKB=0, BKB=64, Size=3.0, X=0.0, Y=13.0, Z=0.0, X2=0.0, Y2=4.0, Z2=0.0, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CLOUD_HIT, Type=ATTACK_REGION_SWORD)
-    }
-    wait(Frames=2)
-    if(is_excute){
-        AttackModule::clear_all()
-    }
     });
 }
 
@@ -647,6 +629,58 @@ pub fn cloud_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CLOUD, 
+    animation = "catch",
+    animcmd = "game_catch")]
+pub fn cloud_grab(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=8)
+        if(is_excute){
+            GrabModule::set_rebound(CanCatchRebound=true)
+        }
+        frame(Frame=9)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=3.3, X=0.0, Y=6.6, Z=4.0, X2=0.0, Y2=6.6, Z2=10.7, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+            CATCH(ID=1, Bone=hash40("top"), Size=1.65, X=0.0, Y=6.6, Z=2.35, X2=0.0, Y2=6.6, Z2=12.35, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
+        }
+        //smash::lua2cpp::L2CFighterAnimcmdGameCommon::game_CaptureCutCommon()
+        wait(Frames=2)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
+            GrabModule::set_rebound(CanCatchRebound=false)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CLOUD, 
+    animation = "catch_dash",
+    animcmd = "game_catchdash")]
+pub fn cloud_dashgrab(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=11)
+        if(is_excute){
+            GrabModule::set_rebound(CanCatchRebound=true)
+        }
+        frame(Frame=12)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=2.6, X=0.0, Y=6.6, Z=4.0, X2=0.0, Y2=6.6, Z2=12.4, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+            CATCH(ID=1, Bone=hash40("top"), Size=1.3, X=0.0, Y=6.6, Z=2.7, X2=0.0, Y2=6.6, Z2=13.7, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
+        }
+        //smash::lua2cpp::L2CFighterAnimcmdGameCommon::game_CaptureCutCommon()
+        wait(Frames=2)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
+            GrabModule::set_rebound(CanCatchRebound=false)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         cloud_nair,
@@ -658,12 +692,13 @@ pub fn install() {
         cloud_utilt,
         cloud_dtilt,
         cloud_dair,
-        cloud_landing_upb,
         cloud_limit_crosslash,
         cloud_limit_crosslash_air,
         cloud_fsmash,
         cloud_usmash,
         cloud_dsmash,
-        cloud_fair
+        cloud_fair,
+        cloud_grab,
+        cloud_dashgrab
     );
 }
