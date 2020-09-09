@@ -112,7 +112,10 @@ pub fn falco_bair(fighter: &mut L2CFighterCommon) {
 pub fn falco_dtilt(fighter: &mut L2CFighterCommon) {
     acmd!({
     frame(Frame=1)
-    FT_MOTION_RATE(FSM=0.6)
+    if(is_excute)
+    {
+        FT_MOTION_RATE(FSM=0.6)
+    }
     frame(Frame=10)
     if(is_excute){
     FT_MOTION_RATE(FSM=1)
