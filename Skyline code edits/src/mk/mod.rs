@@ -3,6 +3,9 @@ use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use crate::FIGHTER_CUTIN_MANAGER_ADDR;
+use skyline::nn::ro::LookupSymbol;
+use smash::app;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -478,7 +481,10 @@ pub fn mk_uthrow(fighter: &mut L2CFighterCommon) {
         frame(Frame=45)
         if(is_excute){
             CHECK_FINISH_CAMERA(3, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
+            rust {
+                let fighter_cutin_manager = *(FIGHTER_CUTIN_MANAGER_ADDR as *mut *mut app::FighterCutInManager);
+                FighterCutInManager::set_throw_finish_zoom_rate(fighter_cutin_manager, 1.5);
+            }
         }
         frame(Frame=46)
         if(is_excute){

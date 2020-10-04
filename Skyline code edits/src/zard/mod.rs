@@ -3,6 +3,7 @@ use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smash::phx::*;
 use smash::lua2cpp::L2CFighterCommon;
+use smash::lua2cpp::L2CFighterBase;
 use acmd::{acmd, acmd_func};
 
 #[acmd_func(
@@ -429,11 +430,11 @@ pub fn zard_usmash (fighter: &mut L2CFighterCommon) {
             ATTACK(ID=2, Part=0, Bone=hash40("wingl2"), Damage=5.0, Angle=368, KBG=110, FKB=0, BKB=0, Size=5.0, X=3.5, Y=-1.5, Z=4.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
             ATTACK(ID=3, Part=0, Bone=hash40("wingl4"), Damage=5.0, Angle=280, KBG=110, FKB=32, BKB=0, Size=4.2, X=7.0, Y=0.0, Z=2.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
             AttackModule::clear(ID=0, false)
-            rust {
-                let temp = smash::phx::Vector2f{x = 0.0, y = 18.0};
-                AttackModule::set_vec_target_pos(module_accessor, 1, hash40("top"), temp1, 8, false);
-                AttackModule::set_vec_target_pos(module_accessor, 2, hash40("top"), temp1, 8, false);
-            }
+            /*rust {
+                let temp = smash::phx::Vector2f{x: 0.0, y: 18.0};
+                AttackModule::set_vec_target_pos(module_accessor, 1, Hash40{hash: hash40("top")}, temp, 8, false);
+                AttackModule::set_vec_target_pos(module_accessor, 2, Hash40{hash: hash40("top")}, temp, 8, false);
+            } */
         }
         frame(Frame=8)
         if(is_excute){
@@ -443,10 +444,10 @@ pub fn zard_usmash (fighter: &mut L2CFighterCommon) {
         if(is_excute){
             ATTACK(ID=3, Part=0, Bone=hash40("wingl4"), Damage=5.0, Angle=340, KBG=110, FKB=60, BKB=0, Size=4.2, X=7.0, Y=0.0, Z=2.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
             ATTACK(ID=0, Part=0, Bone=hash40("wingl4"), Damage=5.0, Angle=368, KBG=110, FKB=0, BKB=0, Size=4.2, X=7.0, Y=0.0, Z=2.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
-            rust {
-                let temp = smash::phx::Vector2f{x = 0.0, y = 18.0};
-                AttackModule::set_vec_target_pos(module_accessor, 0, hash40("top"), temp1, 8, false);
-            }
+            /*rust {
+                let temp = smash::phx::Vector2f{x: 0.0, y: 18.0};
+                AttackModule::set_vec_target_pos(module_accessor, 0, Hash40{hash: hash40("top")}, temp, 8, false);
+            } */
         }
         frame(Frame=11)
         if(is_excute){
@@ -613,6 +614,42 @@ pub fn zard_pivotgrab (fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
+    battle_object_kind = WEAPON_KIND_PLIZARDON_EXPLOSION, 
+    animation = "start",
+    animcmd = "game_start")]
+pub fn zard_sideb_hit(fighter: &mut L2CFighterBase) {
+    acmd!({
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=18.0, Angle=361, KBG=83, FKB=0, BKB=70, Size=11.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_BOMB)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=18.0, Angle=361, KBG=83, FKB=0, BKB=70, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=0.0, Y2=0.0, Z2=-10.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_BOMB)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
+    battle_object_kind = WEAPON_KIND_PLIZARDON_BREATH, 
+    animation = "move",
+    animcmd = "game_move")]
+pub fn zard_flamethrower(fighter: &mut L2CFighterBase) {
+    acmd!({
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=18.0, Angle=45, KBG=70, FKB=0, BKB=75, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_LIZARDON_FIRE, Type=ATTACK_REGION_NONE)
+            AttackModule::enable_safe_pos()
+        }
+        wait(Frames=4)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=17.2, Angle=58, KBG=70, FKB=0, BKB=75, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_LIZARDON_FIRE, Type=ATTACK_REGION_NONE)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=16.7, Angle=58, KBG=70, FKB=0, BKB=75, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_LIZARDON_FIRE, Type=ATTACK_REGION_NONE)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         zard_fair,
@@ -632,6 +669,8 @@ pub fn install() {
         zard_bair,
         zard_grab,
         zard_dashgrab,
-        zard_pivotgrab
+        zard_pivotgrab,
+        zard_sideb_hit,
+        zard_flamethrower
     );
 }

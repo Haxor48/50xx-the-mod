@@ -371,7 +371,7 @@ pub fn falcon_sideb_start(fighter: &mut L2CFighterCommon) {
 pub fn falcon_sideb_hit(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=1)
-        FT_MOTION_RATE(FSM=0.4)
+        FT_MOTION_RATE(FSM=0.5)
         if(is_excute){
         JostleModule::set_status(false)
         sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 10)
@@ -409,7 +409,7 @@ pub fn falcon_sideb_hit(fighter: &mut L2CFighterCommon) {
 pub fn falcon_sideb_air_hit(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=1)
-        FT_MOTION_RATE(FSM=0.4)
+        FT_MOTION_RATE(FSM=0.5)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_NONE)
         }
@@ -780,6 +780,92 @@ pub fn falcon_pivotgrab(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CAPTAIN, 
+    animation = "special_hi",
+    animcmd = "game_specialhi")]
+pub fn falcon_upb(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=13)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_REVERSE_LR)
+            CATCH(ID=0, Bone=hash40("top"), Size=5.0, X=0.0, Y=13.0, Z=7.0, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+            CATCH(ID=1, Bone=hash40("top"), Size=5.5, X=0.0, Y=8.8, Z=13.7, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=6.0, Angle=0, KBG=50, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_THROW)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=5.0, X=0.0, Y=15.0, Z=6.0, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+            CATCH(ID=1, Bone=hash40("top"), Size=5.0, X=0.0, Y=11.0, Z=6.0, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+        }
+        frame(Frame=19)
+        if(is_excute){
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+        }
+        frame(Frame=31)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            AttackModule::clear_all()
+        }
+        frame(Frame=36)
+        if(is_excute){
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        }
+        frame(Frame=50)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_CAPTAIN_STATUS_SPECIAL_HI_FLAG_IS_CHECK_DIVE)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CAPTAIN, 
+    animation = "special_air_hi",
+    animcmd = "game_specialairhi")]
+pub fn falcon_upb_air(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=13)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_REVERSE_LR)
+            CATCH(ID=0, Bone=hash40("top"), Size=5.0, X=0.0, Y=13.0, Z=7.0, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+            CATCH(ID=1, Bone=hash40("top"), Size=5.5, X=0.0, Y=8.8, Z=13.7, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=6.0, Angle=0, KBG=50, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_THROW)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=5.0, X=0.0, Y=15.0, Z=6.0, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+            CATCH(ID=1, Bone=hash40("top"), Size=5.0, X=0.0, Y=11.0, Z=6.0, Status=FIGHTER_STATUS_KIND_CLUNG_CAPTAIN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+        }
+        frame(Frame=19)
+        if(is_excute){
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+        }
+        frame(Frame=31)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+            AttackModule::clear_all()
+        }
+        frame(Frame=36)
+        if(is_excute){
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        }
+        frame(Frame=50)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_CAPTAIN_STATUS_SPECIAL_HI_FLAG_IS_CHECK_DIVE)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         falcon_dair,
@@ -806,6 +892,8 @@ pub fn install() {
         falcon_uthrow,
         falcon_grab,
         falcon_dashgrab,
-        falcon_pivotgrab
+        falcon_pivotgrab,
+        falcon_upb,
+        falcon_upb_air
     );
 }

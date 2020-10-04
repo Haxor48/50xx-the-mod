@@ -347,4 +347,3 @@ pub fn install() {
     joker_bair, /*joker_dair,*/ joker_dtilt, /*joker_nair,*/ /*joker_utilt,*/ joker_uair //, joker_fair
     );
 }
-
