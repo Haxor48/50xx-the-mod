@@ -252,7 +252,7 @@ pub fn pichu_neutralb_grnd (fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=18)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, 0, false)
+            ArticleModule::generate_article(FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0)
         }
         if(is_excute){
             FT_ADD_DAMAGE(SelfDamage=0.6)
@@ -269,7 +269,7 @@ pub fn pichu_neutralb_air (fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=18)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, 0, false)
+            ArticleModule::generate_article(FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0)
         }
         if(is_excute){
             FT_ADD_DAMAGE(SelfDamage=0.6)
