@@ -588,8 +588,10 @@ pub fn ivy_sideb (fighter: &mut L2CFighterCommon) {
         FT_MOTION_RATE(FSM=1)
         frame(Frame=22)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0)
             rust {
+                if !ArticleModule::is_exist(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER) {
+                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                }
                 if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
                     println!("leaf storm!");
                     AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
@@ -755,8 +757,8 @@ pub fn install() {
         ivy_dthrow,
         ivy_sideb,
         ivy_sideb_air,
-        ivy_neutralb,
-        ivy_neutralb_air,
+        //ivy_neutralb,
+        //ivy_neutralb_air,
         ivy_seed,
         ivy_seed_horny
     );
