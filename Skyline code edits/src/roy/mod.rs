@@ -15,7 +15,7 @@ pub fn roy_dtilt(fighter: &mut L2CFighterCommon) {
         if(is_excute){
         ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=80, KBG=40, FKB=0, BKB=90, Size=2.7, X=0.0, Y=3.5, Z=13.0, X2=0.0, Y2=4.1, Z2=9.2, Hitlag=1.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.35, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
         ATTACK(ID=1, Part=0, Bone=hash40("sword1"), Damage=6.5, Angle=80, KBG=40, FKB=0, BKB=70, Size=2.7, X=0.0, Y=0.0, Z=6.7, X2=0.0, Y2=0.0, Z2=4.7, Hitlag=0.9, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.35, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_SWORD)
-        AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
+        //AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -273,6 +273,6 @@ pub fn roy_utilt(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     acmd::add_hooks!(
-        
+     roy_bair, roy_dtilt, roy_fair, roy_ftilt, roy_jab, roy_nair, roy_uair, roy_utilt, roy_warioware, roy_wariowareair   
     );
 }
