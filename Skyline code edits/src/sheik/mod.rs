@@ -160,7 +160,7 @@ pub fn sheik_upair(fighter: &mut L2CFighterCommon) {
         frame(Frame=16)
         if(is_excute){
         AttackModule::clear_all()
-        FT_MOTION_RATE(FSM=0.2)
+        FT_MOTION_RATE(FSM=0.4)
         }
         frame(Frame=23)
         if(is_excute){
