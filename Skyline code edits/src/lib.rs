@@ -22,6 +22,7 @@ mod marth;
 mod sheik;
 mod ness;
 mod pichu;
+mod roy;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -44,5 +45,5 @@ pub fn main() {
     sheik::install();
     ness::install();
     pichu::install();
-    roY::install();
+    roy::install();
 }
