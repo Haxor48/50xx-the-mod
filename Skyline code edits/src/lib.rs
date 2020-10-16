@@ -44,4 +44,5 @@ pub fn main() {
     sheik::install();
     ness::install();
     pichu::install();
+    roY::install();
 }
