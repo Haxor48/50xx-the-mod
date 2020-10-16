@@ -208,6 +208,31 @@ pub fn ness_dsmash_hit(fighter: &mut L2CFighterBase) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
+    battle_object_kind = WEAPON_KIND_NESS_YOYO_HEAD, 
+    animation = "attack_hi3",
+    animcmd = "game_attackhi3")]
+pub fn ness_utilt(fighter: &mut L2CFighterBase) {
+    acmd!({
+        FT_MOTION_RATE(FSM=0.57)
+        frame(Frame=7)
+        FT_MOTION_RATE(FSM=1)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=9.0, Angle=96, KBG=113, FKB=0, BKB=54, Size=6.5, X=0.0, Y=17.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PSI)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=7.0, Angle=96, KBG=113, FKB=0, BKB=54, Size=4.0, X=0.0, Y=9.0, Z=1.5, X2=0.0, Y2=9.0, Z2=-1.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PSI)
+        }
+        frame(Frame=9)
+        if(is_excute){
+            AttackModule::clear(ID=1, false)
+        }
+        frame(Frame=11)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         ness_ftilt_med,
@@ -220,5 +245,6 @@ pub fn install() {
         ness_dsmash_charge,
         ness_dsmash_hit,
         ness_upsmash_hit,
+        ness_utilt
     );
 }

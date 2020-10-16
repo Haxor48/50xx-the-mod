@@ -68,8 +68,8 @@ pub fn pichu_fair(fighter: &mut L2CFighterCommon) {
         }
         for(3 Iterations){
             if(is_excute){
-                ATTACK(ID=0, Part=0, Bone=hash40("neck"), Damage=3.5, Angle=366, KBG=100, FKB=20, BKB=0, Size=6.8, X=2.2, Y=0.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_HEAD)
-                ATTACK(ID=1, Part=0, Bone=hash40("hip"), Damage=3.5, Angle=366, KBG=100, FKB=20, BKB=0, Size=5.6, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_HEAD)
+                ATTACK(ID=0, Part=0, Bone=hash40("neck"), Damage=3.5, Angle=366, KBG=100, FKB=0, BKB=20, Size=6.8, X=2.2, Y=0.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_HEAD)
+                ATTACK(ID=1, Part=0, Bone=hash40("hip"), Damage=3.5, Angle=366, KBG=100, FKB=0, BKB=20, Size=5.6, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_HEAD)
             }
             wait(Frames=3)
             if(is_excute){
@@ -252,7 +252,11 @@ pub fn pichu_neutralb_grnd (fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=18)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0)
+            rust {
+                if !ArticleModule::is_exist(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA) {
+                    ArticleModule::generate_article(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0);
+                }
+            }
         }
         if(is_excute){
             FT_ADD_DAMAGE(SelfDamage=0.6)
@@ -269,7 +273,11 @@ pub fn pichu_neutralb_air (fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=18)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0)
+            rust {
+                if !ArticleModule::is_exist(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA) {
+                    ArticleModule::generate_article(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0);
+                }
+            }
         }
         if(is_excute){
             FT_ADD_DAMAGE(SelfDamage=0.6)
@@ -306,6 +314,26 @@ pub fn pichu_sideb (fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_PICHU, 
+    animation = "attack_hi3",
+    animcmd = "game_attackhi3")]
+pub fn pichu_utilt (fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=7)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("tail1"), Damage=5.0, Angle=95, KBG=105, FKB=0, BKB=46, Size=2.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+            ATTACK(ID=1, Part=0, Bone=hash40("tail2"), Damage=5.0, Angle=95, KBG=105, FKB=0, BKB=46, Size=2.8, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+            ATTACK(ID=2, Part=0, Bone=hash40("tail3"), Damage=5.0, Angle=95, KBG=105, FKB=0, BKB=46, Size=3.6, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+        }
+        frame(Frame=15)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         pichu_ftilt,
@@ -320,5 +348,6 @@ pub fn install() {
         pichu_neutralb_air,
         pichu_neutralb_grnd,
         pichu_sideb,
+        pichu_utilt
     );
 }
