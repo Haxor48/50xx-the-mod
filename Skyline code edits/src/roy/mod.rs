@@ -320,6 +320,6 @@ pub fn roy_fsmash(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     acmd::add_hooks!(
-     roy_bair, roy_dtilt, roy_fair, roy_ftilt, roy_jab, roy_nair, roy_uair, roy_utilt, roy_warioware, roy_wariowareair   
+     roy_bair, roy_dtilt, roy_fair, roy_ftilt, roy_jab, roy_nair, roy_uair, roy_utilt, roy_warioware, roy_wariowareair, roy_dashattack, roy_fsmash
     );
 }
