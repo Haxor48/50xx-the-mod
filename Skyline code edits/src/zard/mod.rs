@@ -666,7 +666,7 @@ pub fn install() {
         zard_fsmash,
         zard_usmash,
         zard_dsmash,
-        zard_bair,
+        //zard_bair,
         zard_grab,
         zard_dashgrab,
         zard_pivotgrab,

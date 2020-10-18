@@ -388,9 +388,9 @@ pub unsafe fn jumpCancelMove(boma: &mut smash::app::BattleObjectModuleAccessor, 
     }
 }
 
-pub unsafe fn perfectPivots(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, stick_value_x: f32) { //Perfect Pivots
-    if status_kind == *FIGHTER_STATUS_KIND_TURN_DASH {
-        if MotionModule::frame(boma) < (2.0) && stick_value_x < 0.5 && stick_value_x > -0.5 {
+pub unsafe fn perfectPivots(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, stick_value_x: f32) { //Perfect Pivots and microdashes
+    if [*FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_DASH].contains(&status_kind) {
+        if MotionModule::frame(boma) < (3.0) && stick_value_x < 0.5 && stick_value_x > -0.5 {
             StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
         }
     }
@@ -420,6 +420,11 @@ pub unsafe fn tauntSliding(boma: &mut smash::app::BattleObjectModuleAccessor, st
             let speed_vector = smash::phx::Vector3f { x: x_vel, y: 0.0, z: 0.0 };
             CancelModule::enable_cancel(boma);
             KineticModule::add_speed(boma, &speed_vector);
+        }
+    }
+    else if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
+        if MotionModule::frame(boma) > 4.0 {
+            CancelModule::enable_cancel(boma);
         }
     }
 }
@@ -616,7 +621,7 @@ pub unsafe fn pteStuff(boma: &mut smash::app::BattleObjectModuleAccessor, fighte
                 let rng2 = smash::app::sv_math::randf(0, 6.0);
                 let speed_vector = smash::phx::Vector3f { x: (rng1 - 3.0), y: (rng2 - 3.0), z: 0.0 };
                 KineticModule::add_speed(boma, &speed_vector);
-                MotionModule::set_rate(boma, -1.0);
+                //MotionModule::set_rate(boma, -1.0);
             }
         }
     }
@@ -1023,7 +1028,9 @@ pub unsafe fn grabIsAerial(boma: &mut smash::app::BattleObjectModuleAccessor, si
 
 pub unsafe fn deleteExtraBanan(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32) { //Banana deletes on hit
     if status_kind == *FIGHTER_STATUS_KIND_SLIP {
-        ItemModule::remove_item(boma, *ITEM_KIND_BANANA);
+        if ArticleModule::is_exist(boma, *ITEM_KIND_BANANA) {
+            ItemModule::remove_item(boma, *ITEM_KIND_BANANA);
+        }
     }
 }
 
@@ -1270,15 +1277,17 @@ pub unsafe fn airDodgeCancels (boma: &mut smash::app::BattleObjectModuleAccessor
     }
 }
 
-pub unsafe fn hitfalling (boma: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32) {
+pub unsafe fn hitfalling (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32) {
     if situation_kind == *SITUATION_KIND_AIR {
-        for i in 5..1 {
-            HITFALLBUFFER[i][get_player_number(boma)] = HITFALLBUFFER[i-1][get_player_number(boma)];
-        }
-        HITFALLBUFFER[0][get_player_number(boma)] = AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT);
-        if stick_y_flick_check(boma, -0.3) && (HITFALLBUFFER[5][get_player_number(boma)] || HITFALLBUFFER[4][get_player_number(boma)] || HITFALLBUFFER[3][get_player_number(boma)] ||
-            HITFALLBUFFER[2][get_player_number(boma)] || HITFALLBUFFER[1][get_player_number(boma)] || HITFALLBUFFER[0][get_player_number(boma)]) {
-                WorkModule::on_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+        if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
+            for i in 5..1 {
+                HITFALLBUFFER[i][get_player_number(boma)] = HITFALLBUFFER[i-1][get_player_number(boma)];
+            }
+            HITFALLBUFFER[0][get_player_number(boma)] = AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT);
+            if stick_y_flick_check(boma, -0.3) && (HITFALLBUFFER[5][get_player_number(boma)] || HITFALLBUFFER[4][get_player_number(boma)] || HITFALLBUFFER[3][get_player_number(boma)] ||
+                HITFALLBUFFER[2][get_player_number(boma)] || HITFALLBUFFER[1][get_player_number(boma)] || HITFALLBUFFER[0][get_player_number(boma)]) {
+                    WorkModule::on_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+            }
         }
     }
 }
@@ -1304,13 +1313,13 @@ pub unsafe fn fastfallShit (boma: &mut smash::app::BattleObjectModuleAccessor, s
 
 pub unsafe fn pkFlashCancels (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32) {
     if fighter_kind == *FIGHTER_KIND_NESS {
-        if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD].contains(&status_kind) {
-            if MotionModule::frame(boma) > 8.0 {
+        if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_END].contains(&status_kind) {
+            if MotionModule::frame(boma) > 4.0 {
                 CancelModule::enable_cancel(boma);
             }
         }
         else {
-            if MotionModule::frame(boma) > MotionModule::end_frame(boma) - 10.0 {
+            if MotionModule::frame(boma) > MotionModule::end_frame(boma) - 6.0 {
                 if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 {
                     CancelModule::enable_cancel(boma);
                 }
@@ -1390,6 +1399,26 @@ pub unsafe fn ptSwaps (boma: &mut smash::app::BattleObjectModuleAccessor, fighte
     }
 }
 
+pub unsafe fn driftDi (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, stick_value_x: f32) {
+    if [*FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY].contains(&status_kind) {
+        let speed_vector = smash::phx::Vector3f { x: KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) * stick_value_x * 0.2, y: 0.0, z:0.0 };
+        KineticModule::add_speed(boma, &speed_vector);
+    }
+}
+
+pub unsafe fn grenShurikenFix (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32) {
+    if fighter_kind == *FIGHTER_KIND_GEKKOUGA {
+        if status_kind == *FIGHTER_GEKKOUGA_STATUS_KIND_SPECIAL_N_SHOT {
+            if situation_kind == *SITUATION_KIND_AIR {
+                if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > WorkModule::get_param_float(boma, 0, hash40("air_speed_y_stable")) {
+                    let speed_vector = smash::phx::Vector3f {x: 0.0, y: WorkModule::get_param_float(boma, 0, hash40("air_speed_y_stable")), z: 0.0 };
+                    KineticModule::add_speed(boma, &speed_vector);
+                }
+            }
+        }
+    }
+}
+
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -1463,7 +1492,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         setStatuses(boma, status_kind);
         meleeSmashStick(boma, status_kind);
         grabIsAerial(boma, situation_kind);
-        //deleteExtraBanan(boma, status_kind);
+        deleteExtraBanan(boma, status_kind);
         meleeECBs(boma, status_kind, situation_kind, fighter_kind);
         setGrndVelo(boma, status_kind);
         lagCanceled(boma, status_kind);
@@ -1474,13 +1503,15 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         deathStuff(boma);
         squirtleSideB(boma, fighter_kind, motion_kind);
         airDodgeCancels(boma, status_kind, fighter_kind, cat1);
-        hitfalling(boma, situation_kind);
+        hitfalling(boma, status_kind, situation_kind);
         fastfallShit(boma, status_kind, situation_kind, fighter_kind);
         pkFlashCancels(boma, status_kind, fighter_kind, cat1);
         quickAttackCancels(boma, status_kind, situation_kind, fighter_kind, stick_value_y);
         moonwalking(boma, status_kind, stick_value_x, stick_value_y);
         upbCancels(boma, status_kind, fighter_kind);
         ptSwaps(boma, fighter_kind, cat1, cat2);
+        driftDi(boma, status_kind, stick_value_x);
+        grenShurikenFix(boma, status_kind, situation_kind, fighter_kind);
 
         LookupSymbol(
             &mut FIGHTER_CUTIN_MANAGER_ADDR,

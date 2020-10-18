@@ -2,6 +2,7 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use smash::app::lua_bind::*;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -700,7 +701,9 @@ pub fn cloud_finishingTouch_grnd(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=20)
         if(is_excute){
-            AttackModule::set_target_category(ID=0, Hitbits=COLLISION_CATEGORY_MASK_NO_IF)
+            rust {
+                AttackModule::set_target_category(module_accessor, 0, *COLLISION_CATEGORY_MASK_NO_IF as u32);
+            }
             AttackModule::set_size(ID=0, Size=0.1)
         }
         frame(Frame=27)
@@ -734,7 +737,9 @@ pub fn cloud_finishingTouch_air(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=18)
         if(is_excute){
-            AttackModule::set_target_category(ID=0, Hitbits=COLLISION_CATEGORY_MASK_NO_IF)
+            rust {
+                AttackModule::set_target_category(module_accessor, 0, *COLLISION_CATEGORY_MASK_NO_IF as u32);
+            }
             AttackModule::set_size(ID=0, Size=0.1)
         }
         frame(Frame=19)
@@ -743,7 +748,9 @@ pub fn cloud_finishingTouch_air(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=20)
         if(is_excute){
-            AttackModule::set_target_category(ID=0, Hitbits=COLLISION_CATEGORY_MASK_NO_IF)
+            rust {
+                AttackModule::set_target_category(module_accessor, 0, *COLLISION_CATEGORY_MASK_NO_IF as u32);
+            }
             AttackModule::set_size(ID=0, Size=0.1)
         }
         frame(Frame=27)
