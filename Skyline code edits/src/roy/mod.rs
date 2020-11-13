@@ -276,7 +276,7 @@ pub fn roy_utilt(fighter: &mut L2CFighterCommon) {
     battle_object_kind = FIGHTER_KIND_ROY, 
     animation = "attack_air_lw",
     animcmd = "game_attackairlw")]
-pub fn roy_dtilt(fighter: &mut L2CFighterCommon) {
+pub fn roy_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=3)
         if(is_excute){
@@ -348,6 +348,6 @@ pub fn roy_fsmash(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     acmd::add_hooks!(
-     roy_bair, roy_dtilt, roy_fair, roy_ftilt, roy_jab, roy_nair, roy_uair, roy_utilt, roy_warioware, roy_wariowareair, roy_dashattack, roy_fsmash
+     roy_bair, roy_dtilt, roy_fair, roy_ftilt, roy_jab, roy_nair, roy_uair, roy_utilt, roy_warioware, roy_wariowareair, roy_dashattack, roy_fsmash, roy_dair
     );
 }
