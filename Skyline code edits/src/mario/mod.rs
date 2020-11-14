@@ -7,6 +7,7 @@ use smash::app::lua_bind::*;
 use crate::FIGHTER_CUTIN_MANAGER_ADDR;
 use skyline::nn::ro::LookupSymbol;
 use smash::phx::Vector3f;
+use smash::app;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -571,7 +572,7 @@ pub fn mario_dthrow(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=18)
         if(is_excute){
-            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkMoudle::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
         }
     });
 }
