@@ -1,7 +1,9 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use smash::phx::*;
 
 #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -292,37 +294,6 @@ pub fn marth_uair(fighter: &mut L2CFighterCommon) {
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "special_s3_lw",
-    animcmd = "game_specialairs4s")]
-pub fn marth_sideb3g(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=1)
-        if(is_excute){
-        WorkModule::on_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_INPUT_CHECK)
-        }
-        frame(Frame=5)
-        if(is_excute){
-        as_hash__const(hash40("sword1"), ATTACK_DIRECTION_Z)
-        AttackModule::set_attack_reference_joint_id()
-        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=4.8, X=0.0, Y=5.6, Z=14.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=CCOLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
-        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=3.0, X=0.0, Y=4.0, Z=19.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
-        }
-        frame(Frame=8)
-        if(is_excute){
-        AttackModule::clear_all()
-        WorkModule::on_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_MOTION_CHANGE_ENABLE)
-        }
-        frame(Frame=24)
-        if(is_excute){
-        WorkModule::off_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_INPUT_CHECK)
-        }
-        
-    });
-}
-
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_MARTH, 
-    animation = "special_s3_lw",
     animcmd = "game_specials3lw")]
 pub fn marth_sideb3g(fighter: &mut L2CFighterCommon) {
     acmd!({
@@ -332,19 +303,16 @@ pub fn marth_sideb3g(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=5)
         if(is_excute){
-        as_hash__const(hash40("sword1"), ATTACK_DIRECTION_Z)
-        AttackModule::set_attack_reference_joint_id()
-        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=4.8, X=0.0, Y=5.6, Z=14.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=CCOLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
+            rust {
+                AttackModule::set_attack_reference_joint_id(module_accessor, Hash40{hash: hash40("sword1")}, smash::cpp::root::app::AttackDirectionAxis{_address: *ATTACK_DIRECTION_X as u8}, smash::cpp::root::app::AttackDirectionAxis{_address: *ATTACK_DIRECTION_Y as u8}, smash::cpp::root::app::AttackDirectionAxis{_address: *ATTACK_DIRECTION_Z as u8});
+            }
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=4.8, X=0.0, Y=5.6, Z=14.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
         ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=3.0, X=0.0, Y=4.0, Z=19.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
         }
         frame(Frame=8)
         if(is_excute){
         AttackModule::clear_all()
         WorkModule::on_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_MOTION_CHANGE_ENABLE)
-        }
-        frame(Frame=24)
-        if(is_excute){
-        WorkModule::off_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_INPUT_CHECK)
         }
         
     });
@@ -363,19 +331,16 @@ pub fn marth_sideb3a(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=5)
         if(is_excute){
-        as_hash__const(hash40("sword1"), ATTACK_DIRECTION_Z)
-        AttackModule::set_attack_reference_joint_id()
-        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=4.8, X=0.0, Y=5.6, Z=14.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=CCOLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
+            rust {
+                AttackModule::set_attack_reference_joint_id(module_accessor, Hash40{hash: hash40("sword1")}, smash::cpp::root::app::AttackDirectionAxis{_address: *ATTACK_DIRECTION_X as u8}, smash::cpp::root::app::AttackDirectionAxis{_address: *ATTACK_DIRECTION_Y as u8}, smash::cpp::root::app::AttackDirectionAxis{_address: *ATTACK_DIRECTION_Z as u8});
+            }
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=4.8, X=0.0, Y=5.6, Z=14.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
         ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=270, KBG=50, FKB=0, BKB=107, Size=3.0, X=0.0, Y=4.0, Z=19.0, X2=0.0, Y2=7.0, Z2=10.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MARTH_SWORD, Type=ATTACK_REGION_SWORD)
         }
         frame(Frame=8)
         if(is_excute){
         AttackModule::clear_all()
         WorkModule::on_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_MOTION_CHANGE_ENABLE)
-        }
-        frame(Frame=24)
-        if(is_excute){
-        WorkModule::off_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_INPUT_CHECK)
         }
         
     });

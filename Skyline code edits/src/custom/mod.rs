@@ -212,9 +212,8 @@ pub unsafe fn can_entry_cliff_hook(boma: &mut smash::app::BattleObjectModuleAcce
         }
     }
     if status_kind != *FIGHTER_STATUS_KIND_FALL_AERIAL && status_kind != *FIGHTER_STATUS_KIND_JUMP_AERIAL && status_kind != *FIGHTER_STATUS_KIND_FALL && 
-    status_kind != *FIGHTER_STATUS_KIND_FLY && (status_kind != *FIGHTER_STATUS_KIND_AIR_LASSO || (abs(PostureModule::pos_x(boma) - GroundModule::hang_cliff_pos_3f(boma).x) < 0.2 && abs(PostureModule::pos_y(boma)) < 0.2)) && ((fighter_kind != *FIGHTER_KIND_PFUSHIGISOU && fighter_kind != *FIGHTER_KIND_MASTER &&
-    fighter_kind != *FIGHTER_KIND_TANTAN) || (status_kind != *FIGHTER_STATUS_KIND_SPECIAL_HI || (abs(PostureModule::pos_x(boma) - GroundModule::hang_cliff_pos_3f(boma).x) < 0.2 && abs(PostureModule::pos_y(boma)) < 0.2))) && (fighter_kind != *FIGHTER_KIND_JACK && (status_kind == *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI2_RUSH ||
-    status_kind != *FIGHTER_STATUS_KIND_SPECIAL_HI || (abs(PostureModule::pos_x(boma) - GroundModule::hang_cliff_pos_3f(boma).x) < 0.2 && abs(PostureModule::pos_y(boma)) < 0.2))) { //Edgehog/trump
+    status_kind != *FIGHTER_STATUS_KIND_FLY && status_kind != *FIGHTER_STATUS_KIND_AIR_LASSO && ![*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_MASTER, *FIGHTER_KIND_TANTAN].contains(&fighter_kind) && (fighter_kind != *FIGHTER_KIND_JACK ||  
+        ![*FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_CUT, *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_THROW, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind)) { //Edgehog/trump
         for i in 0..9 {
             i as usize;
             if i == entry_id || LEDGE_POS[i].x == 0.0 {
@@ -813,7 +812,7 @@ pub unsafe fn noSpecialFall(boma: &mut smash::app::BattleObjectModuleAccessor, s
             }
         }
         if NOSPECIALFALL[get_player_number(boma)] {
-            if status_kind == *FIGHTER_STATUS_KIND_FALL || MotionModule::frame(boma) > 44.0 || CancelModule::is_enable_cancel(boma) {
+            if status_kind == *FIGHTER_STATUS_KIND_FALL || MotionModule::frame(boma) > 22.0 || CancelModule::is_enable_cancel(boma) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
                 NOSPECIALFALL[get_player_number(boma)] = false;
             }
