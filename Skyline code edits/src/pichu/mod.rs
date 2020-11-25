@@ -3,6 +3,8 @@ use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::*;
+use crate::custom::CANPROJECTILE;
+use crate::custom::get_player_number;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -254,12 +256,9 @@ pub fn pichu_neutralb_grnd (fighter: &mut L2CFighterCommon) {
         frame(Frame=18)
         if(is_excute){
             rust {
-                if !ArticleModule::is_exist(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA) {
-                    println!("tjolt Situation: {}, Past Situation: {}, Air: {}, Ground: {}", StatusModule::situation_kind(module_accessor), StatusModule::prev_situation_kind(module_accessor), *SITUATION_KIND_AIR, *SITUATION_KIND_GROUND);
+                if CANPROJECTILE[get_player_number(module_accessor)] {
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0);
-                }
-                else {
-                    println!("already exists! Situation: {}, Past Situation: {}, Air: {}, Ground: {}", StatusModule::situation_kind(module_accessor), StatusModule::prev_situation_kind(module_accessor), *SITUATION_KIND_AIR, *SITUATION_KIND_GROUND);
+                    CANPROJECTILE[get_player_number(module_accessor)] = false;
                 }
             }
         }
@@ -279,11 +278,10 @@ pub fn pichu_neutralb_air (fighter: &mut L2CFighterCommon) {
         frame(Frame=18)
         if(is_excute){
             rust {
-                if !ArticleModule::is_exist(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA) {
-                    println!("tjolt");
+                if CANPROJECTILE[get_player_number(module_accessor)] {
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0);
+                    CANPROJECTILE[get_player_number(module_accessor)] = false;
                 }
-                println!("already exists")
             }
         }
         if(is_excute){

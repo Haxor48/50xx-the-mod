@@ -42,6 +42,7 @@ static mut HITFALLBUFFER: [[bool; 6]; 9] = [[false; 6]; 9];
 static mut CANMOONWALK: [bool; 9] = [false; 9];
 static mut DOUBLESWAP: [bool; 9] = [false; 9];
 static mut REGAINUPB: [bool; 9] = [false; 9];
+pub static mut CANPROJECTILE: [bool; 9] = [true; 9];
 //pub static mut COMMON_PARAMS: *mut CommonParams = 0 as *mut _;
 
 pub unsafe fn get_player_number(boma: &mut smash::app::BattleObjectModuleAccessor) -> usize {
@@ -204,9 +205,9 @@ pub unsafe fn can_entry_cliff_hook(boma: &mut smash::app::BattleObjectModuleAcce
     let fighter_kind = get_kind(boma);
     let motion_kind = MotionModule::motion_kind(boma);
     if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > 0.0 { //Melee style sweetspots
-        if ![*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_TANTAN, *FIGHTER_KIND_MASTER].contains(&fighter_kind) || status_kind != *FIGHTER_STATUS_KIND_AIR_LASSO || 
-        (fighter_kind == *FIGHTER_KIND_JACK && ![*FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_CUT, *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_THROW, *FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind)) ||
-        (fighter_kind == *FIGHTER_KIND_SHIZUE && ![*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_START, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_THROW].contains(&status_kind))  {
+        if ![*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_TANTAN, *FIGHTER_KIND_MASTER].contains(&fighter_kind) && status_kind != *FIGHTER_STATUS_KIND_AIR_LASSO && status_kind != 248 &&
+        (fighter_kind != *FIGHTER_KIND_JACK || ![*FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_CUT, *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_THROW, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind)) &&
+        (fighter_kind != *FIGHTER_KIND_SHIZUE || ![*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_START, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_THROW].contains(&status_kind))  {
             return 0 as u64;
         }
     }
@@ -221,7 +222,6 @@ pub unsafe fn can_entry_cliff_hook(boma: &mut smash::app::BattleObjectModuleAcce
             }
 
             if pos.x == LEDGE_POS[i].x && pos.y == LEDGE_POS[i].y {
-                println!("hogged");
                 return 0 as u64;
             }
         }
@@ -533,7 +533,7 @@ pub unsafe fn jabCancels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
         ([*FIGHTER_KIND_METAKNIGHT, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_SNAKE].contains(&fighter_kind) && motion_kind == hash40("attack_s3s")) ||
         (fighter_kind == *FIGHTER_KIND_METAKNIGHT && motion_kind == hash40("attack_s3_s2")) || 
         ([*FIGHTER_KIND_MARTH, *FIGHTER_KIND_CHROM, *FIGHTER_KIND_ROY].contains(&fighter_kind) && [hash40("special_s1"), hash40("special_s2"), hash40("special_s2_hi"), hash40("special_s2_lw"), hash40("special_s3"), hash40("special_s3_hi"), hash40("special_s3_lw")].contains(&motion_kind)) {
-        if MotionModule::end_frame(boma) - MotionModule::frame(boma) > (7.0) {
+        if MotionModule::frame(boma) > (10.0) {
             if stick_value_y <= -0.66 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SQUAT_F, true);
             }
@@ -1359,7 +1359,7 @@ pub unsafe fn moonwalking (boma: &mut smash::app::BattleObjectModuleAccessor, st
 
 pub unsafe fn upbCancels (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32) {
     if fighter_kind == *FIGHTER_KIND_CHROM {
-        if [*FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) && MotionModule::frame(boma) > 5.0 {
+        if [*FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) && MotionModule::frame(boma) > 11.0 {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
             }
@@ -1506,6 +1506,21 @@ pub unsafe fn bReverses (boma: &mut smash::app::BattleObjectModuleAccessor, moti
     }
 }
 
+pub unsafe fn fixProjectiles (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32) {
+    if !CANPROJECTILE[get_player_number(boma)] {
+        if fighter_kind == *FIGHTER_KIND_PFUSHIGISOU {
+            if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_S {
+                CANPROJECTILE[get_player_number(boma)] = true;
+            }
+        }
+        else if fighter_kind == *FIGHTER_KIND_PICHU {
+            if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_N {
+                CANPROJECTILE[get_player_number(boma)] = true;
+            }
+        }
+    }
+}
+
 /* pub unsafe fn dashgrabSlide (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32) {
     if status_kind == *FIGHTER_STATUS_KIND_CATCH_DASH {
         if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_DASH {
@@ -1548,9 +1563,6 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
             }
         } */
 
-        if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_CATCH_ATTACK {
-            println!("Status: {}, Grab wait: {}, Grab cut: {}, Grab pull: {}", status_kind, *FIGHTER_STATUS_KIND_CATCH_WAIT, *FIGHTER_STATUS_KIND_CATCH_CUT, *FIGHTER_STATUS_KIND_CATCH_PULL);
-        }
         //let mut globals = *fighter.globals_mut();
 
         GLOBALFRAMECOUNT += 1; //Increase the frame counter by 1 each frame
@@ -1620,6 +1632,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         grenShurikenFix(boma, status_kind, situation_kind, fighter_kind);
         animPortFix(boma, fighter_kind, motion_kind);
         bReverses(boma, motion_kind, fighter_kind);
+        fixProjectiles(boma, status_kind, fighter_kind);
         //dashgrabSlide(boma, status_kind);
 
         LookupSymbol(

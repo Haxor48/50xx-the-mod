@@ -7,6 +7,7 @@ use smash::lua2cpp::L2CFighterBase;
 use acmd::{acmd, acmd_func};
 use smash::app::sv_battle_object;
 use crate::custom::AMOUNTSOLAR;
+use crate::custom::CANPROJECTILE;
 use crate::custom::get_player_number;
 use crate::FIGHTER_CUTIN_MANAGER_ADDR;
 use skyline::nn::ro::LookupSymbol;
@@ -589,16 +590,17 @@ pub fn ivy_sideb (fighter: &mut L2CFighterCommon) {
         frame(Frame=22)
         if(is_excute){
             rust {
-                if !ArticleModule::is_exist(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER) {
+                if CANPROJECTILE[get_player_number(module_accessor)] {
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                }
-                if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
-                    println!("leaf storm!");
-                    AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
-                    println!("meter used");
-                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                    CANPROJECTILE[get_player_number(module_accessor)] = false;
+                    if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
+                        println!("leaf storm!");
+                        AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
+                        println!("meter used");
+                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                    }
                 }
             }
         }
@@ -622,15 +624,18 @@ pub fn ivy_sideb_air (fighter: &mut L2CFighterCommon) {
         FT_MOTION_RATE(FSM=1)
         frame(Frame=22)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0)
             rust {
-                if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
-                    println!("leaf storm!");
-                    AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
-                    println!("meter used");
+                if CANPROJECTILE[get_player_number(module_accessor)] {
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                    CANPROJECTILE[get_player_number(module_accessor)] = false;
+                    if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
+                        println!("leaf storm!");
+                        AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
+                        println!("meter used");
+                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                    }
                 }
             }
         }
