@@ -419,7 +419,7 @@ pub fn falcon_sideb_air_hit(fighter: &mut L2CFighterCommon) {
 pub fn falcon_punch(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=1)
-        FT_MOTION_RATE(FSM=0.5)
+        FT_MOTION_RATE(FSM=0.60)
         frame(Frame=15)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_CAPTAIN_STATUS_WORK_ID_FLAG_FALCON_PUNCH_TURN)
@@ -433,6 +433,7 @@ pub fn falcon_punch(fighter: &mut L2CFighterCommon) {
             ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=17.0, Angle=361, KBG=109, FKB=0, BKB=53, Size=4.0, X=4.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
         }
         wait(Frames=5)
+        FT_MOTION_RATE(FSM=1.2)
         if(is_excute){
             AttackModule::clear_all()
         }
@@ -447,7 +448,7 @@ pub fn falcon_punch(fighter: &mut L2CFighterCommon) {
 pub fn falcon_punch_turn(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=1)
-        FT_MOTION_RATE(FSM=0.5)
+        FT_MOTION_RATE(FSM=0.60)
         frame(Frame=21)
         if(is_excute){
             REVERSE_LR()
@@ -461,6 +462,7 @@ pub fn falcon_punch_turn(fighter: &mut L2CFighterCommon) {
             ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=18.0, Angle=361, KBG=109, FKB=0, BKB=53, Size=4.0, X=4.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
         }
         wait(Frames=5)
+        FT_MOTION_RATE(FSM=1.2)
         if(is_excute){
             AttackModule::clear_all()
         }
@@ -475,7 +477,7 @@ pub fn falcon_punch_turn(fighter: &mut L2CFighterCommon) {
 pub fn falcon_punch_air(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=1)
-        FT_MOTION_RATE(FSM=0.5)
+        FT_MOTION_RATE(FSM=0.60)
         if(is_excute){
             rust {
                 let speed_added = smash::phx::Vector3f {x: 0.0, y: 0.2, z: 0.0};
@@ -500,6 +502,7 @@ pub fn falcon_punch_air(fighter: &mut L2CFighterCommon) {
             ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=15.0, Angle=361, KBG=109, FKB=0, BKB=53, Size=4.6, X=4.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
         }
         wait(Frames=5)
+        FT_MOTION_RATE(FSM=1.2)
         if(is_excute){
             AttackModule::clear_all()
         }
@@ -518,7 +521,7 @@ pub fn falcon_punch_air(fighter: &mut L2CFighterCommon) {
 pub fn falcon_punch_air_turn(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=1)
-        FT_MOTION_RATE(FSM=0.5)
+        FT_MOTION_RATE(FSM=0.60)
         frame(Frame=21)
         if(is_excute){
             REVERSE_LR()
@@ -537,6 +540,7 @@ pub fn falcon_punch_air_turn(fighter: &mut L2CFighterCommon) {
             ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=17.0, Angle=361, KBG=109, FKB=0, BKB=53, Size=4.6, X=4.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
         }
         wait(Frames=5)
+        FT_MOTION_RATE(FSM=1.2)
         if(is_excute){
             AttackModule::clear_all()
         }

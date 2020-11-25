@@ -40,4 +40,5 @@ pub fn fox_bair(fighter: &mut L2CFighterCommon) {
 pub fn install() {
     acmd::add_hooks!(
        fox_bair 
+    )
 }
