@@ -390,6 +390,15 @@ pub unsafe fn jumpCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
             }
         }
     }
+    if fighter_kind == *FIGHTER_KIND_IKE {
+        [*FIGHTER_IKE_STATUS_KIND_SPECIAL_S_DASH, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_END, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_ATTACK].contains(&status_kind) {
+            if situation_kind == *SITUATION_KIND_GROUND {
+                ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || (ControlModule::is_enable_flick_jump(boma) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP)) {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);   
+                }
+            }
+        }
+    }
 }
 
 pub unsafe fn landCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32) { //Land Cancels
@@ -657,7 +666,7 @@ pub unsafe fn edgeCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
     *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_LIGHT, *FIGHTER_STATUS_KIND_APPEAL, 
     *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) {
         if GroundModule::is_ottotto(boma, 0.76) {
-            GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+            GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
         }
     }
     //Character specific edge cancels
@@ -666,12 +675,12 @@ pub unsafe fn edgeCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S { //Side b's
                 if [*FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_INKLING, *FIGHTER_KIND_BAYONETTA, *FIGHTER_KIND_DIDDY, *FIGHTER_KIND_SHIZUE, *FIGHTER_KIND_MARTH].contains(&fighter_kind) {
                     if GroundModule::is_ottotto(boma, 0.76) {
-                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
                     }
                 }
                 if fighter_kind == *FIGHTER_KIND_JACK {
                     if GroundModule::is_ottotto(boma, 0.76) {
-                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
                         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
                     }
                 }
@@ -679,28 +688,28 @@ pub unsafe fn edgeCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
             if fighter_kind == *FIGHTER_KIND_JACK { // Joker gun edge cancels
                 if [*FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_LANDING, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_BARRAGE_END].contains(&status_kind) {
                     if GroundModule::is_ottotto(boma, 0.76) {
-                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
                     }
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI { //Up specials
                 if [*FIGHTER_KIND_CLOUD, *FIGHTER_KIND_PIKACHU, *FIGHTER_KIND_GEKKOUGA, *FIGHTER_KIND_INKLING].contains(&fighter_kind) {
                     if GroundModule::is_ottotto(boma, 0.76) {
-                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
                     }
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N { //Neutral Specials
                 if [*FIGHTER_KIND_JACK, *FIGHTER_KIND_MARTH, *FIGHTER_KIND_PLIZARDON].contains(&fighter_kind) {
                     if GroundModule::is_ottotto(boma, 0.76) {
-                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
                     }
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW { //Down Special edgecancels
                 if [*FIGHTER_KIND_CAPTAIN].contains(&fighter_kind) {
                     if GroundModule::is_ottotto(boma, 0.76) {
-                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                        GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind{_address: *GROUND_CORRECT_KIND_AIR as u8});
                         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
                     }
                 }
@@ -1357,8 +1366,8 @@ pub unsafe fn moonwalking (boma: &mut smash::app::BattleObjectModuleAccessor, st
 }
 
 pub unsafe fn upbCancels (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32) {
-    if fighter_kind == *FIGHTER_KIND_CHROM {
-        if [*FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) && MotionModule::frame(boma) > 11.0 {
+    if [*FIGHTER_KIND_CHROM, *FIGHTER_KIND_IKE].contains(&fighter_kind) {
+        if [*FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) && MotionModule::frame(boma) > 16.0 {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
             }
@@ -1520,6 +1529,46 @@ pub unsafe fn fixProjectiles (boma: &mut smash::app::BattleObjectModuleAccessor,
     }
 }
 
+pub unsafe fn magicSeries (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32) {
+    if fighter_kind == *FIGHTER_KIND_KEN {
+        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+            if [*FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_ATTACK_DASH, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_LOOP, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_END, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_COMMAND].contains(&status_kind) {
+                if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 ||
+                (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_JUMP) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 ||
+                ((cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 && ![*FIGHTER_RYU_STATUS_KIND_SPECIAL_S_LOOP, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_END, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_COMMAND].contains(&status_kind)) || 
+                (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
+                    CancelModule::enable_cancel(boma);
+                }
+            }
+            if [*FIGHTER_RYU_STATUS_KIND_ATTACK_COMMAND1, *FIGHTER_RYU_STATUS_KIND_ATTACK_COMMAND2, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3].contains(&status_kind) {
+                if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_JUMP) != 0 ||
+                (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
+                    CancelModule::enable_cancel(boma);
+                }
+            }
+            if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
+                (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 ||
+                (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_JUMP) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 ||
+                ((cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
+                    CancelModule::enable_cancel(boma);
+                }
+            }
+            if [*FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) {
+                (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 ||
+                (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 ||
+                ((cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
+                    CancelModule::enable_cancel(boma);
+                }
+            }
+            if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_LW4].contains(&status_kind) {
+                if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
+                    CancelModule::enable_cancel(boma);
+                }
+            }
+        }
+    }
+}
+
 /* pub unsafe fn dashgrabSlide (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32) {
     if status_kind == *FIGHTER_STATUS_KIND_CATCH_DASH {
         if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_DASH {
@@ -1632,6 +1681,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         animPortFix(boma, fighter_kind, motion_kind);
         bReverses(boma, motion_kind, fighter_kind);
         fixProjectiles(boma, status_kind, fighter_kind);
+        magicSeries(boma, status_kind, fighter_kind, cat1);
         //dashgrabSlide(boma, status_kind);
 
         LookupSymbol(
