@@ -82,7 +82,7 @@ pub fn isabelle_nair(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=59)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_SHIZUE_GENERATE_ARTICLE_POMPON, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
+            ArticleModule::remove_exist(FIGHTER_SHIZUE_GENERATE_ARTICLE_POMPON, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -123,7 +123,7 @@ pub fn isabelle_uair(fighter: &mut L2CFighterCommon) {
         FT_MOTION_RATE(FSM=0.842)
         frame(Frame=54)
         if(is_excute){
-            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
+            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -143,10 +143,10 @@ pub fn isabelle_dtilt(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=9)
         if(is_excute){
-            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_WEEDS, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
+            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_WEEDS, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.5, Angle=70, KBG=92, FKB=0, BKB=43, Size=5.0, X=0.0, Y=3.0, Z=3.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=9.5, Angle=65, KBG=90, FKB=0, BKB=40, Size=6.0, X=0.0, Y=3.0, Z=10.0, X2=0.0, Y2=3.0, Z2=2.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight{_address: *ATTACK_HEIGHT_LOW as u8}, false)
+            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -189,7 +189,7 @@ pub fn isabelle_utilt(fighter: &mut L2CFighterCommon) {
         FT_MOTION_RATE(FSM=0.842)
         frame(Frame=54)
         if(is_excute){
-            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
+            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -213,7 +213,7 @@ pub fn isabelle_da(fighter: &mut L2CFighterCommon) {
         frame(Frame=9)
         FT_MOTION_RATE(FSM=1)
         if(is_excute){
-            ArticleModule::shoot(FIGHTER_SHIZUE_GENERATE_ARTICLE_POT, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8}, false)
+            ArticleModule::shoot(FIGHTER_SHIZUE_GENERATE_ARTICLE_POT, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false)
             //ATTACK(ID=0, Part=0, Bone=hash40("handl"), Damage=10.0, Angle=80, KBG=100, FKB=0, BKB=35, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             //ATTACK(ID=1, Part=0, Bone=hash40("bust"), Damage=10.0, Angle=70, KBG=100, FKB=0, BKB=35, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_BODY)
         }
@@ -262,7 +262,7 @@ pub fn isabelle_fsmash(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=50)
         if(is_excute){
-            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_CRACKER, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
+            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_CRACKER, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -293,7 +293,7 @@ pub fn isabelle_dsmash(fighter: &mut L2CFighterCommon) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=28, KBG=100, FKB=0, BKB=35, Size=4.0, X=0.0, Y=3.6, Z=12.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_WATER)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=28, KBG=100, FKB=0, BKB=35, Size=3.3, X=0.0, Y=3.6, Z=7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_WATER)
-            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight{_address: *ATTACK_HEIGHT_LOW as u8}, false)
+            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -303,7 +303,7 @@ pub fn isabelle_dsmash(fighter: &mut L2CFighterCommon) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.5, Angle=28, KBG=100, FKB=0, BKB=40, Size=4.0, X=0.0, Y=3.6, Z=-12.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_WATER)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=8.5, Angle=28, KBG=100, FKB=0, BKB=40, Size=3.3, X=0.0, Y=3.6, Z=-7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_WATER)
-            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight{_address: *ATTACK_HEIGHT_LOW as u8}, false)
+            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -311,7 +311,7 @@ pub fn isabelle_dsmash(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=56)
         if(is_excute){
-            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_BUCKET, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
+            ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_BUCKET, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -471,7 +471,7 @@ pub fn isabelle_grab(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=43)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET, smash::cpp::root::app::ArticleOperationTarget{_address: *ARTICLE_OPE_TARGET_ALL as u8})
+            ArticleModule::remove_exist(FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
