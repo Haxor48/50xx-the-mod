@@ -691,6 +691,25 @@ pub fn ken_dtilt_strong(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_KEN, 
+    animation = "special_lw",
+    animcmd = "game_speciallw")]
+pub fn ken_downb_grnd(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=3)
+        if (is_excute) {
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage4.0, Angle=80, KBG=22, FKB=0, BKB=82, Size=5.3, X=0.0, Y=9.0, Z=8.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KEN_PUNCH, Type=ATTACK_REGION_PUNCH)
+        }
+        rust {
+            //let stick_x = ControlModule::get_stick_x(module_accessor);
+            let speed_vector = {x: 0.0, y: 2.0, z:0.0 };
+            KineticModule::add_speed(module_accessor, &speed_vector);
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         ken_uair,
@@ -706,6 +725,7 @@ pub fn install() {
         ken_da,
         ken_utilt_strong,
         ken_dsmash,
-        ken_dtilt_strong
+        ken_dtilt_strong,
+        ken_downb_grnd
     );
 }
