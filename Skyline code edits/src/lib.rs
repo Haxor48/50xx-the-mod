@@ -28,6 +28,8 @@ mod inkling;
 mod roy;
 mod fox;
 mod chrom;
+mod ike;
+mod ken;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -54,4 +56,6 @@ pub fn main() {
     roy::install();
     fox::install();
     chrom::install();
+    ike::install();
+    ken::install();
 }

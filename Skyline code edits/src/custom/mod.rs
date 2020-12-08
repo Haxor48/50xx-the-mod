@@ -1238,9 +1238,14 @@ pub unsafe fn calcMomentum(boma: &mut smash::app::BattleObjectModuleAccessor) ->
     let stick_x = ControlModule::get_stick_x(boma);
     let x_vel = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     let jump_speed_x_max = WorkModule::get_param_float(boma, hash40("jump_speed_x_max"), 0);
-
     let calcJumpSpeed = (jump_speed_x * stick_x) + (jump_speed_x_mul * x_vel);
-    let jumpSpeedClamped = returnLarge(calcJumpSpeed, jump_speed_x_max);
+    let mut jumpSpeedClamped = 0.0;
+    if x_vel < 0.0 {
+        jumpSpeedClamped = returnLarge(calcJumpSpeed, -1.0 * jump_speed_x_max);
+    }
+    else {
+        jumpSpeedClamped = returnSmall(calcJumpSpeed, jump_speed_x_max);
+    }
     jumpSpeedClamped
 }
 
@@ -1615,12 +1620,12 @@ pub unsafe fn bReverses (boma: &mut smash::app::BattleObjectModuleAccessor, moti
 pub unsafe fn fixProjectiles (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32) {
     if !CANPROJECTILE[get_player_number(boma)] {
         if fighter_kind == *FIGHTER_KIND_PFUSHIGISOU {
-            if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_S || MotionModule::frame(boma) < 3.0 {
+            if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_S {
                 CANPROJECTILE[get_player_number(boma)] = true;
             }
         }
         else if fighter_kind == *FIGHTER_KIND_PICHU {
-            if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_N || MotionModule::frame(boma) < 3.0 {
+            if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_N {
                 CANPROJECTILE[get_player_number(boma)] = true;
             }
         }
