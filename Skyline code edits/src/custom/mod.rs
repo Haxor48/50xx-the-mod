@@ -2,6 +2,7 @@
 #![allow(unused_imports)]
 
 use smash::lib::{L2CValue, L2CAgent};
+use skyline::nro::{self, NroInfo};
 use smash::app::lua_bind::*;
 use smash::hash40;
 use smash::app::utility::get_kind;
@@ -354,7 +355,7 @@ pub unsafe fn status_jump_sub_hook(fighter: &mut L2CFighterCommon, param_2: L2CV
 }
 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_sub_attack_air_common)]
-pub unsafe fn status_attack_air_hook(fighter: &mut L2CFighterCommon, param_1: L2CValue){
+pub unsafe fn status_attack_air_hook(fighter: &mut L2CFighterCommon, param_1: L2CValue) {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     let mut l2c_agent = L2CAgent::new(fighter.lua_state_agent);
     let is_speed_backward = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) * PostureModule::lr(boma) < 0.0;
@@ -1846,6 +1847,18 @@ pub fn once_per_weapon_frame(fighter_base : &mut L2CFighterBase) {
     }
 }
 
+fn nro_main(nro: &NroInfo) {
+    match nro.name {
+        "common" => {
+            skyline::install_hooks!(
+                status_jump_sub_hook,
+                status_attack_air_hook
+            );
+        }
+        _ => (),
+    }
+}
+
 pub fn install() {
     acmd::add_custom_hooks!(once_per_fighter_frame);
     acmd::add_custom_weapon_hooks!(once_per_weapon_frame);
@@ -1859,9 +1872,6 @@ pub fn install() {
     skyline::install_hook!(is_valid_just_shield_reflector_hook);
     skyline::install_hook!(change_status_request_from_script_hook);
     skyline::install_hook!(get_int_hook);
-    skyline::install_hook!(status_jump_sub_hook);
-    skyline::install_hook!(status_attack_air_hook);
     skyline::install_hook!(change_kinetic_hook);
-    //skyline::install_hook!(float_param_accessor_hook);
-    //add_hook(params_main).unwrap();
+    nro::add_hook(nro_main).unwrap();
 }

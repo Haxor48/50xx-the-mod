@@ -268,7 +268,7 @@ pub fn falco_shineg(fighter: &mut L2CFighterCommon) {
         if(is_excute){
         ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=1.5, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
         }
-        frame(Frame=4)
+        frame(Frame=7)
         if(is_excute){
         AttackModule::clear_all()
         }    
@@ -285,7 +285,7 @@ pub fn falco_shinea(fighter: &mut L2CFighterCommon) {
         if(is_excute){
         ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=1.5, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
         }
-        frame(Frame=4)
+        frame(Frame=7)
         if(is_excute){
         AttackModule::clear_all()
         }  

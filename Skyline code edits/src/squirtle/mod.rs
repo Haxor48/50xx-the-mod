@@ -471,6 +471,34 @@ pub fn squirtle_grab (fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_PZENIGAME, 
+    animation = "special_s",
+    animcmd = "game_specials")]
+pub fn squirtle_sideb_grnd (fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            JostleModule::set_status(false)
+            ATTACK(ID=0, Part=0, Bone=hash40("bust"), Damage=4.0, Angle=45, KBG=60, FKB=0, BKB=75, Size=2.5, X=0.0, Y=0.0, Z=0.0, X2=0.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=60, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ZENIGAME_SHELLHIT, Type=ATTACK_REGION_BODY)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_PZENIGAME, 
+    animation = "special_air_s",
+    animcmd = "game_specialairs")]
+pub fn squirtle_sideb_air (fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            JostleModule::set_status(false)
+            ATTACK(ID=0, Part=0, Bone=hash40("bust"), Damage=4.0, Angle=45, KBG=60, FKB=0, BKB=75, Size=2.5, X=0.0, Y=0.0, Z=0.0, X2=0.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=60, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ZENIGAME_SHELLHIT, Type=ATTACK_REGION_BODY)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         squirtle_fair,
@@ -480,12 +508,14 @@ pub fn install() {
         squirtle_dtilt,
         squirtle_upb_grnd,
         squirtle_upb_air,
-        squirtle_usmash,
+        //squirtle_usmash,
         squirtle_dsmash,
         squirtle_fsmash_hi,
         squirtle_fsmash_mid,
         squirtle_fsmash_lw,
         squirtle_fthrow,
-        squirtle_grab
+        squirtle_grab,
+        squirtle_sideb_air,
+        squirtle_sideb_grnd
     );
 }
