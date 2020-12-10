@@ -261,8 +261,6 @@ pub fn pichu_neutralb_grnd (fighter: &mut L2CFighterCommon) {
                     CANPROJECTILE[get_player_number(module_accessor)] = false;
                 }
             }
-        }
-        if(is_excute){
             FT_ADD_DAMAGE(SelfDamage=0.6)
         }
     });
@@ -283,8 +281,6 @@ pub fn pichu_neutralb_air (fighter: &mut L2CFighterCommon) {
                     CANPROJECTILE[get_player_number(module_accessor)] = false;
                 }
             }
-        }
-        if(is_excute){
             FT_ADD_DAMAGE(SelfDamage=0.6)
         }
     });

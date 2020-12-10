@@ -631,8 +631,7 @@ pub unsafe fn jabCancels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
     if (![*FIGHTER_KIND_CHROM, *FIGHTER_KIND_ROY, *FIGHTER_KIND_GANON, *FIGHTER_KIND_SHIZUE, *FIGHTER_KIND_PIKACHU, *FIGHTER_KIND_PICHU, *FIGHTER_KIND_METAKNIGHT].contains(&fighter_kind) && motion_kind == hash40("attack_11")) ||
         (![*FIGHTER_KIND_DONKEY, *FIGHTER_KIND_MARTH, *FIGHTER_KIND_LUCINA, *FIGHTER_KIND_KOOPA, *FIGHTER_KIND_DAISY, *FIGHTER_KIND_PEACH, *FIGHTER_KIND_SAMUS, *FIGHTER_KIND_SAMUSD, *FIGHTER_KIND_PURIN, *FIGHTER_KIND_NANA, *FIGHTER_KIND_POPO, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_PIKMIN].contains(&fighter_kind) && motion_kind == hash40("attack_12")) || 
         ([*FIGHTER_KIND_METAKNIGHT, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_SNAKE].contains(&fighter_kind) && motion_kind == hash40("attack_s3s")) ||
-        (fighter_kind == *FIGHTER_KIND_METAKNIGHT && motion_kind == hash40("attack_s3_s2")) || 
-        ([*FIGHTER_KIND_MARTH, *FIGHTER_KIND_CHROM, *FIGHTER_KIND_ROY].contains(&fighter_kind) && [hash40("special_s1"), hash40("special_s2"), hash40("special_s2_hi"), hash40("special_s2_lw"), hash40("special_s3"), hash40("special_s3_hi"), hash40("special_s3_lw")].contains(&motion_kind)) {
+        (fighter_kind == *FIGHTER_KIND_METAKNIGHT && motion_kind == hash40("attack_s3_s2")) {
         if MotionModule::frame(boma) > (10.0) {
             if stick_value_y <= -0.66 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SQUAT_F, true);
@@ -958,49 +957,13 @@ pub unsafe fn wiggleHitstun(boma: &mut smash::app::BattleObjectModuleAccessor, s
     }
 }
 
-pub unsafe fn shortens(boma: &mut smash::app::BattleObjectModuleAccessor, fighter_kind: i32, motion_kind: u64) { //Shortens
-    if fighter_kind == *FIGHTER_KIND_FALCO {
-        if motion_kind == hash40("special_air_s") {
-            if MotionModule::frame(boma) > 2.0 && MotionModule::frame(boma) < 6.0 {
-                if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_s_end")}, 0.0, 1.0, false, 0.0, false, false);
-                }
-            }
+pub unsafe fn shortens(boma: &mut smash::app::BattleObjectModuleAccessor, fighter_kind: i32, cat1: i32) { //Shortens
+    if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+        if fighter_kind == *FIGHTER_KIND_FOX || fighter_kind == *FIGHTER_KIND_WOLF {
+            WorkModule::on_flag(boma, *FIGHTER_FOX_ILLUSION_STATUS_WORK_ID_FLAG_RUSH_FORCE_END);
         }
-        if motion_kind == hash40("special_s") {
-            if MotionModule::frame(boma) > 2.0 && MotionModule::frame(boma) < 6.0 {
-                if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_s_end")}, 0.0, 1.0, false, 0.0, false, false);
-                }
-            }
-        }
-    }
-    if fighter_kind == *FIGHTER_KIND_FOX {
-        if motion_kind == hash40("special_air_s") {
-            if MotionModule::frame(boma) > 0.0 && MotionModule::frame(boma) < 4.0 {
-                if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_s_end")}, 0.0, 1.0, false, 0.0, false, false);
-                }
-            }
-        }
-        if motion_kind == hash40("special_s") {
-            if MotionModule::frame(boma) > 0.0 && MotionModule::frame(boma) < 4.0 {
-                if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_s_end")}, 0.0, 1.0, false, 0.0, false, false);
-                }
-            }
-        }
-    }
-    if fighter_kind == *FIGHTER_KIND_WOLF {
-        if motion_kind == hash40("special_air_s") {
-            if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_s_end")}, 0.0, 1.0, false, 0.0, false, false);
-            }
-        }
-        if motion_kind == hash40("special_s") {
-            if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                MotionModule::change_motion(boma, Hash40{hash: hash40("special_s_end")}, 0.0, 1.0, false, 0.0, false, false);
-            }
+        else if fighter_kind == *FIGHTER_KIND_FALCO {
+            WorkModule::on_flag(boma, *FIGHTER_FALCO_ILLUSION_STATUS_WORK_ID_FLAG_RUSH_FORCE_END);
         }
     }
 }
@@ -1074,7 +1037,7 @@ pub unsafe fn ivyHeals(boma: &mut smash::app::BattleObjectModuleAccessor, status
             let pos = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let rot = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let idk = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
-            EffectModule::req_on_joint(boma, Hash40{hash: hash40("pfushigisou_tmuchi_flash")}, Hash40{hash: hash40("flower")}, &pos, &rot, 1.5, &idk, &idk, false, 0, 0, 0);
+            EffectModule::req_on_joint(boma, Hash40{hash: hash40("pfushigisou_tmuchi_flash")}, Hash40{hash: hash40("flower")}, &pos, &rot, 1.0, &idk, &idk, false, 0, 1, 0);
         }
         else if AMOUNTSOLAR[get_player_number(boma)] == 0 {
             EffectModule::kill_kind(boma, Hash40{hash: hash40("pfushigisou_tmuchi_flash")}, false, false);
@@ -1083,7 +1046,7 @@ pub unsafe fn ivyHeals(boma: &mut smash::app::BattleObjectModuleAccessor, status
             let pos = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let rot = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let idk = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
-            EffectModule::req_on_joint(boma, Hash40{hash: hash40("pfushigisou_tmuchi_flash")}, Hash40{hash: hash40("flower")}, &pos, &rot, (0.0075 * AMOUNTSOLAR[get_player_number(boma)] as f32), &idk, &idk, false, 0, 0, 0);
+            EffectModule::req_on_joint(boma, Hash40{hash: hash40("pfushigisou_tmuchi_flash")}, Hash40{hash: hash40("flower")}, &pos, &rot, (0.005 * AMOUNTSOLAR[get_player_number(boma)] as f32), &idk, &idk, false, 0, 1, 0);
         }
         if MotionModule::frame(boma) < 2.0 || (![hash40("attack_air_lw"), hash40("attack_air_hi")].contains(&motion_kind) && ![*FIGHTER_STATUS_KIND_CATCH_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_HI4].contains(&status_kind)) {
             CANHEAL[get_player_number(boma)] = true;
@@ -1340,7 +1303,7 @@ pub unsafe fn regainAirDodge(boma: &mut smash::app::BattleObjectModuleAccessor, 
 }
 
 pub unsafe fn deathStuff (boma: &mut smash::app::BattleObjectModuleAccessor) {
-    if DamageModule::damage(boma, 0) >= 200.0 {
+    if DamageModule::damage(boma, 0) >= 225.0 {
         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DEAD, true);
         DamageModule::add_damage(boma, -1.0 * DamageModule::damage(boma, 0), 0);
     }
@@ -1541,7 +1504,7 @@ pub unsafe fn animPortFix (boma: &mut smash::app::BattleObjectModuleAccessor, fi
         }
     }
     else if fighter_kind == *FIGHTER_KIND_CAPTAIN {
-        if [hash40("attack_hi3"), hash40("attack_s4_charge"), hash40("attack_s4_s"), hash40("attack_s4_hi"), hash40("attack_s4_lw")].contains(&motion_kind) {
+        if [hash40("attack_hi3"), hash40("catch_dash")].contains(&motion_kind) {
             if MotionModule::frame(boma) == MotionModule::end_frame(boma) - 2.0 {
                 MotionModule::change_motion(boma, Hash40{hash: hash40("wait")}, 0.0, 1.0, false, 0.0, false, false);
             }
@@ -1730,12 +1693,6 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 
         GLOBALFRAMECOUNT += 1; //Increase the frame counter by 1 each frame
 
-        if fighter_kind == *FIGHTER_KIND_CHROM || fighter_kind == *FIGHTER_KIND_IKE {
-            if status_kind == *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3 {
-                println!("Frame: {}", MotionModule::frame(boma));
-            }
-        }
-
         //edit damage ratio for ffas
         /*let mut hitbox_params: [smash::lib::L2CValue; 36] = [smash::lib::L2CValue::new_void(); 36];
         if FighterManager::entry_count(blanklol) > 1 && !smash::app::smashball::is_training_mode() {
@@ -1773,7 +1730,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         noSpecialFall(boma, status_kind, situation_kind, fighter_kind);  
         regainDJ(boma, status_kind, fighter_kind, situation_kind);
         wiggleHitstun(boma, status_kind, cat1);
-        shortens(boma, fighter_kind, motion_kind);
+        shortens(boma, fighter_kind, cat1);
         ivyHeals(boma, status_kind, fighter_kind, motion_kind);
         setStatuses(boma, status_kind);
         meleeSmashStick(boma, status_kind);
