@@ -209,13 +209,15 @@ pub unsafe fn can_entry_cliff_hook(boma: &mut smash::app::BattleObjectModuleAcce
     if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > 0.0 { //Melee style sweetspots
         if ![*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_TANTAN, *FIGHTER_KIND_MASTER].contains(&fighter_kind) && status_kind != *FIGHTER_STATUS_KIND_AIR_LASSO && status_kind != 248 &&
         (fighter_kind != *FIGHTER_KIND_JACK || ![*FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_CUT, *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_THROW, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind)) &&
-        (fighter_kind != *FIGHTER_KIND_SHIZUE || ![*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_START, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_THROW].contains(&status_kind))  {
+        (fighter_kind != *FIGHTER_KIND_SHIZUE || ![*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_START, *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_S_THROW].contains(&status_kind)) ||
+        (![*FIGHTER_KIND_SIMON, *FIGHTER_KIND_RICHTER].contains(&fighter_kind) || status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR)  {
             return 0 as u64;
         }
     }
     if status_kind != *FIGHTER_STATUS_KIND_FALL_AERIAL && status_kind != *FIGHTER_STATUS_KIND_JUMP_AERIAL && status_kind != *FIGHTER_STATUS_KIND_FALL && 
     status_kind != *FIGHTER_STATUS_KIND_FLY && status_kind != *FIGHTER_STATUS_KIND_AIR_LASSO && ![*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_MASTER, *FIGHTER_KIND_TANTAN].contains(&fighter_kind) && (fighter_kind != *FIGHTER_KIND_JACK ||  
-        ![*FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_CUT, *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_THROW, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind)) { //Edgehog/trump
+        ![*FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_CUT, *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_THROW, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind)) ||
+        (![*FIGHTER_KIND_SIMON, *FIGHTER_KIND_RICHTER].contains(&fighter_kind) || status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR) { //Edgehog/trump
         for i in 0..9 {
             i as usize;
             if i == entry_id || LEDGE_POS[i].x == 0.0 {
@@ -1000,7 +1002,7 @@ pub unsafe fn ivyHeals(boma: &mut smash::app::BattleObjectModuleAccessor, status
             }
         }
         if status_kind == *FIGHTER_STATUS_KIND_CATCH_ATTACK {
-            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
                 if CANHEAL[get_player_number(boma)] {
                     DamageModule::add_damage(boma, -1.0, 0);
                     CANHEAL[get_player_number(boma)] = false;
@@ -1421,10 +1423,12 @@ pub unsafe fn moonwalking (boma: &mut smash::app::BattleObjectModuleAccessor, st
             CANMOONWALK[get_player_number(boma)] = false;
         }
         else if (PostureModule::lr(boma) < 0.0 && stick_value_x > 0.5) || (PostureModule::lr(boma) > 0.0 && stick_value_x < -0.5) {
-            let reverse_mul = Vector3f{x: -2.0, y: 1.0, z: 1.0};
-            KineticModule::mul_speed(boma, &reverse_mul, *FIGHTER_KINETIC_ENERGY_ID_NONE);
-            MotionModule::update_trans_move_speed(boma);
-            KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH);
+            if CANMOONWALK[get_player_number(boma)] {
+                let reverse_mul = Vector3f{x: -3.0, y: 0.0, z: 0.0};
+                KineticModule::mul_speed(boma, &reverse_mul, *FIGHTER_KINETIC_ENERGY_ID_NONE);
+                MotionModule::update_trans_move_speed(boma);
+                KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH);
+            }
         }
     }
     else {
@@ -1433,8 +1437,8 @@ pub unsafe fn moonwalking (boma: &mut smash::app::BattleObjectModuleAccessor, st
 }
 
 pub unsafe fn upbCancels (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32) {
-    if [*FIGHTER_KIND_CHROM, *FIGHTER_KIND_IKE].contains(&fighter_kind) {
-        if [*FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) && MotionModule::frame(boma) > 26.0 {
+    if (fighter_kind == *FIGHTER_KIND_CHROM && status_kind == *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3)  || (fighter_kind == *FIGHTER_KIND_IKE && status_kind == *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_2) {
+        if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) <= 0.0 {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
             }
@@ -1518,7 +1522,7 @@ pub unsafe fn animPortFix (boma: &mut smash::app::BattleObjectModuleAccessor, fi
         }
     }
     else if fighter_kind == *FIGHTER_KIND_FALCO {
-        if [hash40("attack_hi3"), hash40("attack_hi4"), hash40("escape_n")].contains(&motion_kind) {
+        if [hash40("attack_hi4"), hash40("escape_n")].contains(&motion_kind) {
             if MotionModule::frame(boma) == MotionModule::end_frame(boma) - 2.0 {
                 MotionModule::change_motion(boma, Hash40{hash: hash40("wait")}, 0.0, 1.0, false, 0.0, false, false);
             }

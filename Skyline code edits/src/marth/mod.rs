@@ -312,7 +312,6 @@ pub fn marth_sideb3g(fighter: &mut L2CFighterCommon) {
         frame(Frame=8)
         if(is_excute){
         AttackModule::clear_all()
-        WorkModule::on_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_MOTION_CHANGE_ENABLE)
         }
         
     });
@@ -340,14 +339,82 @@ pub fn marth_sideb3a(fighter: &mut L2CFighterCommon) {
         frame(Frame=8)
         if(is_excute){
         AttackModule::clear_all()
-        WorkModule::on_flag(Flag=FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_MOTION_CHANGE_ENABLE)
         }
         
     });
 }
 
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_MARTH, 
+    animation = "throw_f",
+    animcmd = "game_throwf")]
+pub fn marth_fthrow(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=50, KBG=45, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=14)
+        if(is_excute){
+            FT_CATCH_STOP(4, 1)
+            CHECK_FINISH_CAMERA(15, 2)
+        }
+        frame(Frame=15)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_MARTH, 
+    animation = "throw_hi",
+    animcmd = "game_throwhi")]
+pub fn marth_uthrow(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=5.0, Angle=87, KBG=130, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=12)
+        if(is_excute){
+            CHECK_FINISH_CAMERA(1, 21)
+        }
+        frame(Frame=13)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_MARTH, 
+    animation = "throw_lw",
+    animcmd = "game_throwlw")]
+pub fn marth_dthrow(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=130, KBG=50, FKB=0, BKB=65, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=15)
+        if(is_excute){
+            FT_CATCH_STOP(5, 1)
+            CHECK_FINISH_CAMERA(1, 0)
+        }
+        frame(Frame=16)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
-        marth_bair, marth_dair, marth_dashattack, marth_fair, marth_fsmash, marth_ftilt, marth_utilt, marth_jab, marth_uair, marth_dtilt, marth_jab2, marth_sideb3a, marth_sideb3g
+        marth_bair, marth_dair, marth_dashattack, marth_fair, marth_fsmash, marth_ftilt, marth_utilt, marth_jab, marth_uair, marth_dtilt, marth_jab2, marth_sideb3a, marth_sideb3g, marth_fthrow,
+        marth_uthrow, marth_dthrow
     );
 }

@@ -257,11 +257,13 @@ pub fn pichu_neutralb_grnd (fighter: &mut L2CFighterCommon) {
         if(is_excute){
             rust {
                 if CANPROJECTILE[get_player_number(module_accessor)] {
+                    acmd! ({
+                        FT_ADD_DAMAGE(SelfDamage=0.6)
+                    });
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0);
                     CANPROJECTILE[get_player_number(module_accessor)] = false;
                 }
             }
-            FT_ADD_DAMAGE(SelfDamage=0.6)
         }
     });
 }
@@ -277,11 +279,13 @@ pub fn pichu_neutralb_air (fighter: &mut L2CFighterCommon) {
         if(is_excute){
             rust {
                 if CANPROJECTILE[get_player_number(module_accessor)] {
+                    acmd! ({
+                        FT_ADD_DAMAGE(SelfDamage=0.6)
+                    });
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKIDAMA, false, 0);
                     CANPROJECTILE[get_player_number(module_accessor)] = false;
                 }
             }
-            FT_ADD_DAMAGE(SelfDamage=0.6)
         }
     });
 }
