@@ -192,7 +192,7 @@ pub fn falco_dtilt(fighter: &mut L2CFighterCommon) {
     frame(Frame=13)
     if(is_excute){
     AttackModule::clear_all()
-    FT_MOTION_RATE(FSM=1)
+    FT_MOTION_RATE(FSM=0.9)
     }
     });
 }
