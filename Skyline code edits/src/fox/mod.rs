@@ -319,6 +319,46 @@ pub fn fox_landing_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FOX, 
+    animation = "attack_air_b",
+    animcmd = "effect_attackairb")]
+pub fn fox_effect_bair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=3)
+        if(is_excute){
+            EFFECT_FOLLOW(0x10001e43ad, hash40("top"), 2.0, 8.0, -3.5, 23, 120, 220, 0.899999976, true)
+        }
+        frame(Frame=4)
+        if(is_excute){
+            EFFECT_ALPHA(0x1156ac182a, hash40("top"), 0, 6.5, -12, 0, 0, 0, 1.35000002, 0, 0, 0, 0, 0, 0, true, 0.600000024)
+            LAST_EFFECT_SET_RATE(1.29999995)
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FOX, 
+    animation = "catch_attack",
+    animcmd = "effect_catchattack")]
+pub fn fox_effect_pummel(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute) {
+            EFFECT_FOLLOW(0x0dfde1fae8, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW(0x0b798b178e, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW(0x0ce4eda5b2, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW(0x0dcd56f064, hash40("reflector"), 1.20000005, 0, -0.5, 0, 0, 0, 1.5, true)
+        }
+        frame(Frame=4)
+        if(is_excute) {
+            EFFECT_FOLLOW(0x0b798b178e, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW(0x0dcd56f064, hash40("reflector"), 1.20000005, 0, -0.5, 0, 0, 0, 1.5, true)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
        fox_bair,
@@ -333,6 +373,8 @@ pub fn install() {
        fox_utilt,
        fox_usmash,
        fox_uair,
-       fox_landing_fair
+       fox_landing_fair,
+       fox_effect_bair,
+       fox_effect_pummel
     );
 }

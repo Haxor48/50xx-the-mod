@@ -464,6 +464,90 @@ pub fn wolf_shine_air_hit(fighter: &mut L2CFighterCommon) {
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_WOLF, 
+    animation = "special_lw_start_l",
+    animcmd = "game_speciallwstartl")]
+pub fn wolf_shine_start_l(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        FT_MOTION_RATE(FSM=0.75)
+        frame(Frame=4)
+        FT_MOTION_RATE(FSM=0.5)
+        frame(Frame=5)
+        if(is_excute){
+            FT_MOTION_RATE(FSM=1.0)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=72, KBG=110, FKB=0, BKB=80, Size=9.0, X=0.0, Y=7.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_ENERGY)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_WOLF, 
+    animation = "special_lw_hit_l",
+    animcmd = "game_speciallwhitl")]
+pub fn wolf_shine_hit_l(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=2)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=72, KBG=110, FKB=0, BKB=80, Size=6.0, X=0.0, Y=6.5, Z=7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_ENERGY)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=72, KBG=110, FKB=0, BKB=80, Size=6.0, X=0.0, Y=6.5, Z=-7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_ENERGY)
+        }
+        frame(Frame=4)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_WOLF, 
+    animation = "special_lw_start_l",
+    animcmd = "game_speciallwstartl")]
+pub fn wolf_shine_air_start_l(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        FT_MOTION_RATE(FSM=0.75)
+        frame(Frame=4)
+        FT_MOTION_RATE(FSM=0.5)
+        frame(Frame=5)
+        if(is_excute){
+            FT_MOTION_RATE(FSM=1.0)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=72, KBG=110, FKB=0, BKB=80, Size=9.0, X=0.0, Y=7.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_ENERGY)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_WOLF, 
+    animation = "special_lw_hit_l",
+    animcmd = "game_speciallwhitl")]
+pub fn wolf_shine_air_hit_l(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=2)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=72, KBG=110, FKB=0, BKB=80, Size=6.0, X=0.0, Y=6.5, Z=7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_ENERGY)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=72, KBG=110, FKB=0, BKB=80, Size=6.0, X=0.0, Y=6.5, Z=-7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_ENERGY)
+        }
+        frame(Frame=4)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_WOLF, 
     animation = "catch",
     animcmd = "game_catch")]
 pub fn wolf_grab(fighter: &mut L2CFighterCommon) {
@@ -541,6 +625,32 @@ pub fn wolf_pivotgrab(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_WOLF, 
+    animation = "catch_attack",
+    animcmd = "effect_attack")]
+pub fn wolf_effect_pummel(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            EffectModule::preset_limit_num(2)
+            EFFECT_FOLLOW(0x0e90b0e171, hash40("reflector"), -0.5, 0, 0, 0, 0, 0, 1, true)
+            EffectModule::preset_limit_num(2)
+            EFFECT_FLW_POS(0x0ccd731413, hash40("top"), 0, 6.5, 0, 0, 0, 0, 1, true)
+            FLASH(1, 0.600000024, 0.800000012, 0.699999988)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            FLASH_FRM(3, 1, 0, 0.200000003, 0)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            COL_NORMAL()
+        }
+        wait(Frames=1)
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         wolf_da,
@@ -562,6 +672,11 @@ pub fn install() {
         wolf_shine_air_hit,
         wolf_grab,
         wolf_dashgrab,
-        wolf_pivotgrab
+        wolf_pivotgrab,
+        wolf_shine_air_hit_l,
+        wolf_shine_air_start_l,
+        wolf_shine_start_l,
+        wolf_shine_hit_l,
+        wolf_effect_pummel
     );
 }

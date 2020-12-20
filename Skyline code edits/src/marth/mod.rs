@@ -352,12 +352,12 @@ pub fn marth_sideb3a(fighter: &mut L2CFighterCommon) {
 pub fn marth_fthrow(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_excute){
-            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=50, KBG=45, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=50, KBG=45, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
         }
         frame(Frame=14)
         if(is_excute){
-            FT_CATCH_STOP(4, 1)
+            //FT_CATCH_STOP(4, 1)
             CHECK_FINISH_CAMERA(15, 2)
         }
         frame(Frame=15)
@@ -402,7 +402,7 @@ pub fn marth_dthrow(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=15)
         if(is_excute){
-            FT_CATCH_STOP(5, 1)
+            //FT_CATCH_STOP(5, 1)
             CHECK_FINISH_CAMERA(1, 0)
         }
         frame(Frame=16)
@@ -412,9 +412,28 @@ pub fn marth_dthrow(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_MARTH, 
+    animation = "attack_air_lw",
+    animcmd = "effect_attackairlw")]
+pub fn marth_effect_dair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=4)
+        if(is_excute){
+            //AFTER_IMAGE4_ON_arg29(0x106d6577e4, 0x10f46c265e, 8, hash40("sword1"), 0, 0, 0.5, hash40("sword1"), -9.99999975e-06, -1.99999995e-05, 12.6000004, true, 0x10fef5ab02, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, ITEM_KIND_JIRO, 0, ITEM_INSTANCE_WORK_FLAG_GROUND_DAMAGE, 101, ITEM_INSTANCE_WORK_INT_VALUE_7, 1.39999998, 0.200000003)
+            EFFECT_FOLLOW(0x106d6577e4, hash40("sword1"), 0, 0, 0.5 , 0, 0, 0, 1.4, true)
+        }
+        frame(Frame=14)
+        if(is_excute){
+            AFTER_IMAGE_OFF(6)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         marth_bair, marth_dair, marth_dashattack, marth_fair, marth_fsmash, marth_ftilt, marth_utilt, marth_jab, marth_uair, marth_dtilt, marth_jab2, marth_sideb3a, marth_sideb3g, marth_fthrow,
-        marth_uthrow, marth_dthrow
+        marth_uthrow, marth_dthrow, marth_effect_dair
     );
 }

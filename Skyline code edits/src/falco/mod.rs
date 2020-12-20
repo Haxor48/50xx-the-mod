@@ -242,6 +242,7 @@ pub fn falco_utilt(fighter: &mut L2CFighterCommon) {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=1.2)
         frame(Frame=5)
+        FT_MOTION_RATE(FSM=0.8)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.5, Angle=110, KBG=100, FKB=92, BKB=0, Size=6.0, X=0.0, Y=9.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=3.5, Angle=110, KBG=100, FKB=70, BKB=0, Size=6.0, X=0.0, Y=9.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
@@ -258,11 +259,11 @@ pub fn falco_utilt(fighter: &mut L2CFighterCommon) {
             AttackModule::clear_all()
         }
         frame(Frame=12)
-        FT_MOTION_RATE(FSM=1.2)
+        FT_MOTION_RATE(FSM=0.8)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("shoulderl"), Damage=4.0, Angle=97, KBG=150, FKB=0, BKB=45, Size=4.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=4.0, Angle=97, KBG=150, FKB=0, BKB=45, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=2, Part=0, Bone=hash40("arml"), Damage=4.0, Angle=97, KBG=150, FKB=0, BKB=45, Size=5.0, X=6.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=0, Part=0, Bone=hash40("shoulderl"), Damage=4.0, Angle=97, KBG=145, FKB=0, BKB=50, Size=4.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=4.0, Angle=97, KBG=145, FKB=0, BKB=50, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=2, Part=0, Bone=hash40("arml"), Damage=4.0, Angle=97, KBG=145, FKB=0, BKB=50, Size=5.0, X=6.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
         }
         frame(Frame=17)
         FT_MOTION_RATE(FSM=1.0)
@@ -356,7 +357,60 @@ pub fn falco_shinear(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FALCO, 
+    animation = "attack_air_n",
+    animcmd = "effect_attackairn")]
+pub fn falco_effect_nair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=3)
+        if(is_excute){
+            EFFECT(0x1441eaf0b3, hash40("top"), 0, 5.5, -4, 0, 0, 0, 0.899999976, 0, 0, 0, 0, 0, 0, true)
+            LAST_PARTICLE_SET_COLOR(0.699999988, 0.400000006, 1.60000002)
+            LAST_EFFECT_SET_RATE(1.5)
+        }
+        frame(Frame=4)
+        if(is_excute){
+            EFFECT_FOLLOW_ALPHA(0x1156ac182a, hash40("top"), 0, 4.80000019, 8, 0, 0, 0, 1, true, 0.5)
+            LAST_EFFECT_SET_RATE(1.29999995)
+        }
+        frame(Frame=6)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x1441eaf0b3, true, true)
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FALCO, 
+    animation = "catch_attack",
+    animcmd = "effect_catchattack")]
+pub fn falco_effect_pummel(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            LANDING_EFFECT(0x0d0679b24d, hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT_FLW_POS(0x0ecca63d69, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+            EffectModule::preset_limit_num(2)
+            EFFECT_FOLLOW(0x0fdc7fb0a0, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+            FLASH(1, 1, 1, 0.626999974)
+        }
+        frame(Frame=5)
+        if(is_excute){
+            COL_NORMAL()
+        }
+        frame(Frame=8)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x0ecca63d69, false, false)
+            EFFECT_OFF_KIND(0x0d30ab52b6, false, false)
+            EFFECT_OFF_KIND(0x0fdc7fb0a0, true, false)
+            EFFECT_FLW_POS(0x09d58cb98f, hash40("reflector"), 1.39999998, -0.600000024, -0.5, 0, 0, 0, 0.5, true)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
-        falco_dair, falco_bair, falco_dtilt, falco_uair, falco_utilt, falco_upsmash, falco_fairland, falco_shinea, falco_shineg, falco_nair, falco_shinegr, falco_shinear);
+        falco_dair, falco_bair, falco_dtilt, falco_uair, falco_utilt, falco_upsmash, falco_fairland, falco_shinea, falco_shineg, falco_nair, falco_shinegr, falco_shinear, falco_effect_nair, falco_effect_pummel);
 }
