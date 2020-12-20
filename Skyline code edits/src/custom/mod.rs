@@ -274,28 +274,32 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
     original!()(boma, flag)
 }
 
-#[skyline::hook(replace = smash::app::lua_bind::CancelModule::is_enable_cancel)]
+/* #[skyline::hook(replace = smash::app::lua_bind::CancelModule::is_enable_cancel)]
 
 pub unsafe fn is_enable_cancel_hook (boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
     let motion_kind = MotionModule::motion_kind(boma);
-    if LAGCANCELED[get_player_number(boma)] {
-        if MotionModule::frame(boma) >= (FighterMotionModuleImpl::get_cancel_frame(boma, Hash40{hash: motion_kind}, false) as f32 / 1.25) {
-            return true;
+    let status_kind = StatusModule::status_kind(boma);
+    if [*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_ATTACK_DASH, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_HI4, 
+    *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW3].contains(&status_kind) {
+        if LAGCANCELED[get_player_number(boma)] {
+            if MotionModule::frame(boma) >= (FighterMotionModuleImpl::get_cancel_frame(boma, Hash40{hash: motion_kind}, false) as f32 / 1.1) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         else {
-            return false;
-        }
-    }
-    else {
-        if MotionModule::frame(boma) >= (FighterMotionModuleImpl::get_cancel_frame(boma, Hash40{hash: motion_kind}, false) as f32 * 1.25) {
-            return true;
-        }
-        else {
-            return false;
+            if MotionModule::frame(boma) >= (FighterMotionModuleImpl::get_cancel_frame(boma, Hash40{hash: motion_kind}, false) as f32 * 1.1) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
     original!()(boma)
-}
+} */
 
 #[skyline::hook(replace = smash::app::lua_bind::ControlModule::check_button_on)]
 
@@ -769,7 +773,7 @@ pub unsafe fn djcs (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::
             }
         }
     }
-    if [*FIGHTER_KIND_PEACH, *FIGHTER_KIND_YOSHI].contains(&fighter_kind) {
+    if [*FIGHTER_KIND_PEACH, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_BAYONETTA, *FIGHTER_KIND_GEKKOUGA].contains(&fighter_kind) {
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
             if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
                 if MotionModule::frame(boma) < (7.0) {
@@ -1141,9 +1145,7 @@ pub unsafe fn grabIsAerial(boma: &mut smash::app::BattleObjectModuleAccessor, si
 
 pub unsafe fn deleteExtraBanan(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32) { //Banana deletes on hit
     if status_kind == *FIGHTER_STATUS_KIND_SLIP {
-        if ArticleModule::is_exist(boma, *ITEM_KIND_BANANA) {
-            ItemModule::remove_item(boma, *ITEM_KIND_BANANA);
-        }
+        ItemModule::remove_item(boma, *ITEM_KIND_BANANA);
     }
 }
 
@@ -1255,17 +1257,17 @@ pub unsafe fn calcMomentum(boma: &mut smash::app::BattleObjectModuleAccessor) ->
 }
 
 pub unsafe fn lagCanceled(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32) {
-    //if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR].contains(&status_kind) {
+    if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR].contains(&status_kind) {
         if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
             LAGCANCELED[get_player_number(boma)] = true;
         }
-    /* }
+    }
     else {
         LAGCANCELED[get_player_number(boma)] = false;
-    } */
-    if MotionModule::frame(boma) < 2.0 {
-        LAGCANCELED[get_player_number(boma)] = false;
     }
+    /* if MotionModule::frame(boma) < 2.0 {
+        LAGCANCELED[get_player_number(boma)] = false;
+    } */
 }
 
 pub unsafe fn removeSHMacro(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32) {
@@ -1290,7 +1292,7 @@ pub unsafe fn removeSHMacro(boma: &mut smash::app::BattleObjectModuleAccessor, s
     }
 }
 
-pub unsafe fn fixExtraJumps (boma: &mut smash::app::BattleObjectModuleAccessor, motion_kind: u64, fighter_kind: i32) {
+pub unsafe fn fixExtraJumps (boma: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, motion_kind: u64, fighter_kind: i32) {
     if [*FIGHTER_KIND_RIDLEY, *FIGHTER_KIND_PIT].contains(&fighter_kind) {
         if motion_kind == hash40("jump_aerial_f3") {
             MotionModule::change_motion(boma, Hash40{hash: hash40("jump_aerial_f2")}, 0.0, 1.0, false, 0.0, false, false);
@@ -1298,11 +1300,21 @@ pub unsafe fn fixExtraJumps (boma: &mut smash::app::BattleObjectModuleAccessor, 
     }
     if fighter_kind == *FIGHTER_KIND_GEKKOUGA {
         if motion_kind == 0 {
-            if PostureModule::lr(boma) < 0.0 {
-                MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_l")}, 0.0, 1.0, false, 0.0, false, false);
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                if situation_kind == *SITUATION_KIND_AIR {
+                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_n_max_start")}, 0.0, 1.0, false, 0.0, false, false);
+                }
+                else if situation_kind == *SITUATION_KIND_GROUND {
+                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_n_max_shot")}, 0.0, 1.0, false, 0.0, false, false);
+                }
             }
             else {
-                MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_r")}, 0.0, 1.0, false, 0.0, false, false);
+                if PostureModule::lr(boma) < 0.0 {
+                    MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_l")}, 0.0, 1.0, false, 0.0, false, false);
+                }
+                else {
+                    MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_r")}, 0.0, 1.0, false, 0.0, false, false);
+                }
             }
         }
     }
@@ -1572,7 +1584,7 @@ pub unsafe fn animPortFix (boma: &mut smash::app::BattleObjectModuleAccessor, fi
     }
     else if fighter_kind == *FIGHTER_KIND_CHROM {
         if motion_kind == hash40("attack_hi4") {
-            if MotionModule::frame(boma) == MotionModule::end_frame(boma) - 2.0 {
+            if MotionModule::frame(boma) == MotionModule::end_frame(boma) - 5.0 {
                 MotionModule::change_motion(boma, Hash40{hash: hash40("wait")}, 0.0, 1.0, false, 0.0, false, false);
             }
         }
@@ -1810,11 +1822,11 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         setStatuses(boma, status_kind);
         meleeSmashStick(boma, status_kind);
         grabIsAerial(boma, situation_kind);
-        deleteExtraBanan(boma, status_kind);
+        //deleteExtraBanan(boma, status_kind);
         meleeECBs(boma, status_kind, situation_kind, fighter_kind);
         lagCanceled(boma, status_kind);
         removeSHMacro(boma, status_kind);
-        fixExtraJumps(boma, motion_kind, fighter_kind);
+        fixExtraJumps(boma, situation_kind, motion_kind, fighter_kind);
         disableStuff(boma, status_kind, fighter_kind);
         regainAirDodge(boma, status_kind, situation_kind);
         deathStuff(boma);
@@ -1824,7 +1836,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         fastfallShit(boma, status_kind, situation_kind, fighter_kind);
         pkFlashCancels(boma, status_kind, fighter_kind, cat1);
         quickAttackCancels(boma, status_kind, situation_kind, fighter_kind, stick_value_y);
-        moonwalking(boma, status_kind, stick_value_x, stick_value_y);
+        //moonwalking(boma, status_kind, stick_value_x, stick_value_y);
         upbCancels(boma, status_kind, fighter_kind, cat1);
         ptSwaps(boma, fighter_kind, cat1, cat2);
         driftDi(boma, status_kind, stick_value_x);
@@ -1908,6 +1920,5 @@ pub fn install() {
     skyline::install_hook!(change_status_request_from_script_hook);
     skyline::install_hook!(get_int_hook);
     skyline::install_hook!(change_kinetic_hook);
-    skyline::install_hook!(is_enable_cancel_hook);
     nro::add_hook(nro_main).unwrap();
 }
