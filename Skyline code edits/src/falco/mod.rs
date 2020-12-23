@@ -151,14 +151,11 @@ pub fn falco_fair(fighter: &mut L2CFighterCommon) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=367, KBG=100, FKB=60, BKB=0, Size=4.0, X=0.0, Y=5.5, Z=12.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_HEAD)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.0, Angle=367, KBG=100, FKB=60, BKB=0, Size=4.5, X=0.0, Y=5.5, Z=8.0, X2=0.0, Y2=5.5, Z2=8.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_HEAD)
-            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=1.0, Angle=367, KBG=100, FKB=60, BKB=0, Size=5.0, X=0.0, Y=5.5, Z=4.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
-            ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=1.0, Angle=367, KBG=100, FKB=60, BKB=0, Size=4.0, X=0.0, Y=5.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
         }
         frame(Frame=34)
         if(is_excute){
             AttackModule::clear_all()
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=361, KBG=125, FKB=0, BKB=55, Size=5.0, X=0.0, Y=5.5, Z=12.0, X2=0.0, Y2=5.5, Z2=8.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.0, Angle=361, KBG=125, FKB=0, BKB=55, Size=4.5, X=0.0, Y=5.5, Z=4.0, X2=0.0, Y2=5.5, Z2=8.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
         }
         wait(Frames=2)
         if(is_excute){
@@ -244,13 +241,13 @@ pub fn falco_utilt(fighter: &mut L2CFighterCommon) {
         frame(Frame=5)
         FT_MOTION_RATE(FSM=0.8)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.5, Angle=110, KBG=100, FKB=92, BKB=0, Size=6.0, X=0.0, Y=9.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=3.5, Angle=110, KBG=100, FKB=70, BKB=0, Size=6.0, X=0.0, Y=9.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.5, Angle=110, KBG=100, FKB=102, BKB=0, Size=6.0, X=0.0, Y=9.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=3.5, Angle=110, KBG=100, FKB=80, BKB=0, Size=6.0, X=0.0, Y=9.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
         }
         frame(Frame=6)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("shoulderr"), Damage=3.5, Angle=100, KBG=100, FKB=40, BKB=0, Size=4.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=3.5, Angle=100, KBG=100, FKB=40, BKB=0, Size=4.0, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=0, Part=0, Bone=hash40("shoulderr"), Damage=3.5, Angle=100, KBG=100, FKB=50, BKB=0, Size=4.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=3.5, Angle=100, KBG=100, FKB=50, BKB=0, Size=4.0, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=2.7, Angle=270, KBG=100, FKB=15, BKB=0, Size=5.0, X=5.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
         }
         frame(Frame=10)
@@ -292,7 +289,7 @@ pub fn falco_shineg(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=3)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
             AttackModule::enable_safe_pos()
         }
         frame(Frame=4)
@@ -310,7 +307,7 @@ pub fn falco_shinea(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=3)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
             AttackModule::enable_safe_pos()
         }
         frame(Frame=4)
@@ -329,7 +326,7 @@ pub fn falco_shinegr(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=3)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
             AttackModule::enable_safe_pos()
         }
         frame(Frame=4)
@@ -347,7 +344,7 @@ pub fn falco_shinear(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=3)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
             AttackModule::enable_safe_pos()
         }
         frame(Frame=4)
@@ -364,20 +361,20 @@ pub fn falco_shinear(fighter: &mut L2CFighterCommon) {
     animcmd = "effect_attackairn")]
 pub fn falco_effect_nair(fighter: &mut L2CFighterCommon) {
     acmd!({
-        frame(Frame=3)
+        frame(3)
         if(is_excute){
-            EFFECT(0x1441eaf0b3, hash40("top"), 0, 5.5, -4, 0, 0, 0, 0.899999976, 0, 0, 0, 0, 0, 0, true)
+            EFFECT(0x1441eaf0b3_u64, hash40("top"), 0, 5.5, -4, 0, 0, 0, 0.899999976, 0, 0, 0, 0, 0, 0, true)
             LAST_PARTICLE_SET_COLOR(0.699999988, 0.400000006, 1.60000002)
             LAST_EFFECT_SET_RATE(1.5)
         }
-        frame(Frame=4)
+        frame(4)
         if(is_excute){
-            EFFECT_FOLLOW_ALPHA(0x1156ac182a, hash40("top"), 0, 4.80000019, 8, 0, 0, 0, 1, true, 0.5)
+            EFFECT_FOLLOW_ALPHA(0x1156ac182a_u64, hash40("top"), 0, 4.80000019, 8, 0, 0, 0, 1, true, 0.5)
             LAST_EFFECT_SET_RATE(1.29999995)
         }
-        frame(Frame=6)
+        frame(6)
         if(is_excute){
-            EFFECT_OFF_KIND(0x1441eaf0b3, true, true)
+            EFFECT_OFF_KIND(0x1441eaf0b3_u64, true, true)
         }
     });
 }
@@ -390,11 +387,11 @@ pub fn falco_effect_nair(fighter: &mut L2CFighterCommon) {
 pub fn falco_effect_pummel(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_excute){
-            LANDING_EFFECT(0x0d0679b24d, hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
-            EFFECT_FLW_POS(0x0ecca63d69, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+            LANDING_EFFECT(0x0d0679b24d_u64, hash40("top"), 0.0, 0.0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT_FLW_POS(0x0ecca63d69_u64, hash40("reflector"), 1.4, -0.6, 0.0, 0, 0, 0, 1.0, true)
             EffectModule::preset_limit_num(2)
-            EFFECT_FOLLOW(0x0fdc7fb0a0, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
-            FLASH(1, 1, 1, 0.626999974)
+            EFFECT_FOLLOW(0x0fdc7fb0a0_u64, hash40("reflector"), 1.4, -0.6, 0.0, 0, 0, 0, 1.0, true)
+            FLASH(1, 1.0, 1.0, 0.627)
         }
         frame(Frame=5)
         if(is_excute){
@@ -402,15 +399,34 @@ pub fn falco_effect_pummel(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=8)
         if(is_excute){
-            EFFECT_OFF_KIND(0x0ecca63d69, false, false)
-            EFFECT_OFF_KIND(0x0d30ab52b6, false, false)
-            EFFECT_OFF_KIND(0x0fdc7fb0a0, true, false)
-            EFFECT_FLW_POS(0x09d58cb98f, hash40("reflector"), 1.39999998, -0.600000024, -0.5, 0, 0, 0, 0.5, true)
+            EFFECT_OFF_KIND(0x0ecca63d69_u64, false, false)
+            EFFECT_OFF_KIND(0x0d30ab52b6_u64, false, false)
+            EFFECT_OFF_KIND(0x0fdc7fb0a0_u64, true, false)
+            EFFECT_FLW_POS(0x09d58cb98f_u64, hash40("reflector"), 1.4, -0.6, -0.5, 0, 0, 0, 0.5, true)
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FALCO, 
+    animation = "catch_attack",
+    animcmd = "game_catchattack")]
+pub fn falco_pummel(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.3, Angle=361, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=7.5, Z=7.5, X2=0.0, Y2=7.5, Z2=10.5, Hitlag=2.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
+            AttackModule::set_catch_only_all(true, false)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            AttackModule::clear_all()
         }
     });
 }
 
 pub fn install() {
     acmd::add_hooks!(
-        falco_dair, falco_bair, falco_dtilt, falco_uair, falco_utilt, falco_upsmash, falco_fairland, falco_shinea, falco_shineg, falco_nair, falco_shinegr, falco_shinear, falco_effect_nair, falco_effect_pummel);
+        falco_dair, falco_bair, falco_dtilt, falco_uair, falco_utilt, falco_upsmash, falco_fairland, falco_shinea, falco_shineg, falco_nair, falco_shinegr, falco_shinear, falco_effect_nair, falco_effect_pummel, falco_pummel);
 }

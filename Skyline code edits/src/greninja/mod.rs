@@ -272,6 +272,9 @@ pub fn greninja_dair(fighter: &mut L2CFighterCommon) {
             SET_SPEED_EX(0, -5, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
             WorkModule::off_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.0, Angle=270, KBG=95, FKB=0, BKB=20, Size=4.3, X=0.0, Y=0.1, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        }
+        frame(Frame=20)
+        if (is_execute) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.0, Angle=60, KBG=95, FKB=0, BKB=35, Size=5.2, X=0.0, Y=0.1, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         }
         frame(Frame=46)
@@ -558,6 +561,48 @@ pub fn greninja_pivotgrab(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_GEKKOUGA, 
+    animation = "special_n_max_shot",
+    animcmd = "game_specialnmaxshot")]
+pub fn greninja_shuriken_shot_max_grnd(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        if (is_execute) {
+            ArticleModule::generate_article(FIGHTER_GEKKOUGA_GENERATE_ARTICLE_SHURIKEN, false, 0)
+        }
+        frame(Frame=6)
+        if (is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_GEKKOUGA_STATUS_SPECIAL_N_WORK_FLAG_SHURIKEN_SHOOT)
+            rust {
+                println!("Shoot");
+            }
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_GEKKOUGA, 
+    animation = "special_air_n_max_shot",
+    animcmd = "game_specialairnmaxshot")]
+pub fn greninja_shuriken_shot_max_air(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        if (is_execute) {
+            ArticleModule::generate_article(FIGHTER_GEKKOUGA_GENERATE_ARTICLE_SHURIKEN, false, 0)
+        }
+        frame(Frame=6)
+        if (is_excute) {
+            WorkModule::on_flag(Flag=FIGHTER_GEKKOUGA_STATUS_SPECIAL_N_WORK_FLAG_SHURIKEN_SHOOT)
+            rust {
+                println!("shoot");
+            }
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         greninja_uair,
@@ -578,6 +623,8 @@ pub fn install() {
         shuriken_air_charge,
         greninja_dthrow,
         greninja_bthrow,
-        greninja_pivotgrab
+        greninja_pivotgrab,
+        greninja_shuriken_shot_max_air,
+        greninja_shuriken_shot_max_grnd
     );
 }

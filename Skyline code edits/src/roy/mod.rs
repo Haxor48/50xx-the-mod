@@ -353,24 +353,11 @@ pub fn roy_fsmash(fighter: &mut L2CFighterCommon) {
     animcmd = "effect_attackairlw")]
 pub fn roy_effect_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
-        frame(Frame=4)
+        frame(4)
         if(is_excute){
-            EFFECT(hash40("sys_smash_flash"), hash40("sword1"), 0.0, 0.0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
-            AFTER_IMAGE4_ON_arg29(0x0e4d7b4c4b, 0x0ed4721df1, 20, hash40("sword1"), 0.0, 0.0, -0.800000012, hash40("sword1"), -9.99999975e-06, -1.99999995e-05, 14.5, true, 0x09e9785222, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, ITEM_KIND_JIRO, 0, ITEM_INSTANCE_WORK_FLAG_GROUND_DAMAGE, 101, ITEM_INSTANCE_WORK_INT_VALUE_7, 1.5, 0.200000003)
-            EFFECT_FOLLOW(0x0fe12deba1, hash40("sword1"), 0.0, 0.0, 10.5500002, 0, 0, 0, 1.04999995, true)
-            LAST_EFFECT_SET_ALPHA(0.600000024)
-            LAST_EFFECT_SET_RATE(1.10000002)
-            EFFECT_FOLLOW(0x08195da748, hash40("sword1"), 0.0, 0.0, 0.0, 0, 0, 0, 0.800000012, true)
-            LAST_EFFECT_SET_RATE(1.29999995)
+            AFTER_IMAGE4_ON_arg29(0x0e4d7b4c4b_u64, 0x0ed4721df1_u64, 7, hash40("sword1"), 0, 0, -0.800000012, hash40("sword1"), -9.99999975e-06, -1.99999995e-05, 14.5, true, 0x09e9785222_u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EF_FLIP_ZX, 0, EFFECT_AXIS_X, 101, TRAIL_BLEND_ALPHA, 1.29999995, 0.200000003)
         }
-        frame(Frame=11)
-        if(is_excute){
-            EFFECT_OFF_KIND(0x0fe12deba1, false, true)
-            EFFECT_OFF_KIND(0x08195da748, false, false)
-            EFFECT_FOLLOW_RND(0x0f148c99da, hash40("sword1"), 0.0, 0.0, 7.0, 0, 0, 0, 0.899999976, 1, 1, 1, 0, 0, 0, true)
-            LAST_EFFECT_SET_RATE(1.10000002)
-        }
-        frame(Frame=17)
+        frame(17)
         if(is_excute){
             AFTER_IMAGE_OFF(2)
         }

@@ -443,20 +443,20 @@ pub fn chrom_effect_usmash(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(Frame=9)
         if(is_excute){
-            EFFECT(hash40("sys_smash_flash"), hash40("sword1"), 0, 12, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT(hash40("sys_smash_flash"), hash40("sword1"), 0.0, 12.0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=24)
         if(is_excute){
-            AFTER_IMAGE4_ON_arg29(0x10996c48b7, 0x100065190d, 5, hash40("sword1"), 0, 1, 0, hash40("sword1"), 0, 16.2000008, 0, true, 0x0bfc61fb00, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, ITEM_KIND_JIRO, 0, ITEM_INSTANCE_WORK_FLAG_GROUND_DAMAGE, 101, ITEM_INSTANCE_WORK_INT_VALUE_7, 1.39999998, 0.100000001)
+            AFTER_IMAGE4_ON_arg29(0x10996c48b7_u64, 0x100065190d_u64, 4, hash40("sword1"), 0, 0, 1.64999998, hash40("sword1"), -9.99999975e-06, -1.99999995e-05, 12.3999996, true, 0x0bfc61fb00_u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EF_FLIP_ZX, 0, EFFECT_AXIS_X, 101, TRAIL_BLEND_ALPHA, 1.20000005, 0.200000003)
         }
         frame(Frame=29)
         if(is_excute){
-            LANDING_EFFECT(0x1255c42543, hash40("top"), -3, 0, -9, 0, 30, 0, 0.800000012, 0, 0, 0, 0, 0, 0, true)
+            LANDING_EFFECT(0x1255c42543_u64, hash40("top"), -3.0, 0.0, -9.0, 0, 30, 0, 0.8, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=30)
         if(is_excute){
             AFTER_IMAGE_OFF(3)
-            FOOT_EFFECT(0x0d0679b24d, hash40("top"), -2.5, 0, -7, 0, 30, 0, 0.600000024, 0, 0, 0, 0, 0, 0, true)
+            FOOT_EFFECT(0x0d0679b24d_u64, hash40("top"), -2.5, 0.0, -7.0, 0, 30, 0, 0.6, 0, 0, 0, 0, 0, 0, true)
         }
     });
 }
