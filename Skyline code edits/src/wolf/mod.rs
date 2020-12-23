@@ -629,25 +629,44 @@ pub fn wolf_pivotgrab(fighter: &mut L2CFighterCommon) {
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_WOLF, 
     animation = "catch_attack",
-    animcmd = "effect_attack")]
+    animcmd = "effect_catchattack")]
 pub fn wolf_effect_pummel(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_excute){
             EffectModule::preset_limit_num(2)
-            EFFECT_FOLLOW(0x0e90b0e171, hash40("reflector"), -0.5, 0, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW(0x0e90b0e171_u64, hash40("reflector"), -0.5, 0.0, 0.0, 0, 0, 0, 1, true)
             EffectModule::preset_limit_num(2)
-            EFFECT_FLW_POS(0x0ccd731413, hash40("top"), 0, 6.5, 0, 0, 0, 0, 1, true)
-            FLASH(1, 0.600000024, 0.800000012, 0.699999988)
+            EFFECT_FLW_POS(0x0ccd731413_u64, hash40("top"), 0.0, 6.5, 0.0, 0, 0, 0, 1, true)
+            FLASH(1, 0.6, 0.8, 0.7)
         }
         wait(Frames=1)
         if(is_excute){
-            FLASH_FRM(3, 1, 0, 0.200000003, 0)
+            FLASH_FRM(3, 1, 0, 0.2, 0)
         }
         wait(Frames=3)
         if(is_excute){
             COL_NORMAL()
         }
         wait(Frames=1)
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_WOLF, 
+    animation = "catch_attack",
+    animcmd = "game_catchattack")]
+pub fn wolf_pummel(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.3, Angle=361, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=8.0, Z=6.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_ENERGY)
+            AttackModule::set_catch_only_all(true, false)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
     });
 }
 
@@ -677,6 +696,7 @@ pub fn install() {
         wolf_shine_air_start_l,
         wolf_shine_start_l,
         wolf_shine_hit_l,
-        wolf_effect_pummel
+        wolf_effect_pummel,
+        wolf_pummel
     );
 }

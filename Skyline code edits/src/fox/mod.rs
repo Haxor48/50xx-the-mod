@@ -326,13 +326,13 @@ pub fn fox_landing_fair(fighter: &mut L2CFighterCommon) {
     animcmd = "effect_attackairb")]
 pub fn fox_effect_bair(fighter: &mut L2CFighterCommon) {
     acmd!({
-        frame(Frame=3)
+        frame(3)
         if(is_excute){
-            EFFECT_FOLLOW(0x10001e43ad, hash40("top"), 2.0, 8.0, -3.5, 23, 120, 220, 0.899999976, true)
+            EFFECT_FOLLOW(0x10001e43ad_u64, hash40("top"), 2, 8, -3.5, 23, 120, 220, 0.899999976, true)
         }
-        frame(Frame=4)
+        frame(4)
         if(is_excute){
-            EFFECT_ALPHA(0x1156ac182a, hash40("top"), 0, 6.5, -12, 0, 0, 0, 1.35000002, 0, 0, 0, 0, 0, 0, true, 0.600000024)
+            EFFECT_ALPHA(0x1156ac182a_u64, hash40("top"), 0, 6.5, -12, 0, 0, 0, 1.35000002, 0, 0, 0, 0, 0, 0, true, 0.600000024)
             LAST_EFFECT_SET_RATE(1.29999995)
         }
     });
@@ -346,15 +346,34 @@ pub fn fox_effect_bair(fighter: &mut L2CFighterCommon) {
 pub fn fox_effect_pummel(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_excute) {
-            EFFECT_FOLLOW(0x0dfde1fae8, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
-            EFFECT_FOLLOW(0x0b798b178e, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
-            EFFECT_FOLLOW(0x0ce4eda5b2, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
-            EFFECT_FOLLOW(0x0dcd56f064, hash40("reflector"), 1.20000005, 0, -0.5, 0, 0, 0, 1.5, true)
+            EFFECT_FOLLOW(0x0dfde1fae8_u64, hash40("top"), 0.0, 6.0, 0.0, 0, 0, 0, 1.0, true)
+            EFFECT_FOLLOW(0x0b798b178e_u64, hash40("top"), 0.0, 6.0, 0.0, 0, 0, 0, 1.0, true)
+            EFFECT_FOLLOW(0x0ce4eda5b2_u64, hash40("top"), 0.0, 6.0, 0.0, 0, 0, 0, 1.0, true)
+            EFFECT_FOLLOW(0x0dcd56f064_u64, hash40("reflector"), 1.2, 0.0, -0.5, 0, 0, 0, 1.5, true)
         }
-        frame(Frame=4)
+        /* frame(Frame=4)
         if(is_excute) {
-            EFFECT_FOLLOW(0x0b798b178e, hash40("top"), 0, 6, 0, 0, 0, 0, 1, true)
-            EFFECT_FOLLOW(0x0dcd56f064, hash40("reflector"), 1.20000005, 0, -0.5, 0, 0, 0, 1.5, true)
+            EFFECT_FOLLOW(0x0b798b178e_u64, hash40("top"), 0.0, 6.0, 0.0, 0, 0, 0, 1.0, true)
+            EFFECT_FOLLOW(0x0dcd56f064_u64, hash40("reflector"), 1.2, 0.0, -0.5, 0, 0, 0, 1.5, true)
+        } */
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FOX, 
+    animation = "catch_attack",
+    animcmd = "game_catchattack")]
+pub fn fox_pummel(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=361, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=6.0, Z=6.5, X2=0.0, Y2=6.0, Z2=9.5, Hitlag=1.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
+            AttackModule::set_catch_only_all(true, false)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            AttackModule::clear_all()
         }
     });
 }
@@ -375,6 +394,7 @@ pub fn install() {
        fox_uair,
        fox_landing_fair,
        fox_effect_bair,
-       fox_effect_pummel
+       fox_effect_pummel,
+       fox_pummel
     );
 }

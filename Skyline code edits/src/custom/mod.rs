@@ -47,6 +47,7 @@ pub static mut CANPROJECTILE: [bool; 9] = [true; 9];
 static mut CURRENTMOMENTUM: [f32; 9] = [0.0; 9];
 static mut ISAUTOTURNAROUND: [bool; 9] = [true; 9];
 static mut RISING: [[bool; 10]; 9] = [[false; 10]; 9];
+static mut REVERSED: [i32; 9] = [0; 9];
 //pub static mut COMMON_PARAMS: *mut CommonParams = 0 as *mut _;
 
 pub unsafe fn get_player_number(boma: &mut smash::app::BattleObjectModuleAccessor) -> usize {
@@ -336,7 +337,7 @@ pub unsafe fn get_int_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
     original!()(boma, instance)
 }
 
-#[skyline::hook(replace = smash::app::lua_bind::StatusModule::change_status_request_from_script)]
+ /* #[skyline::hook(replace = smash::app::lua_bind::StatusModule::change_status_request_from_script)]
 
 pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::BattleObjectModuleAccessor, status: i32, unk: bool) -> u64 {
     let fighter_kind = get_kind(boma);
@@ -348,7 +349,7 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
             return 0;
         }
     }
-    if [*FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_PFUSHIGISOU].contains(&fighter_kind) {
+    /* if [*FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_PFUSHIGISOU].contains(&fighter_kind) {
         if status == *FIGHTER_STATUS_KIND_SPECIAL_LW {
             if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
                 if situation_kind == *SITUATION_KIND_AIR {
@@ -372,9 +373,9 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
                 }
             }
         }
-    }
+    } */
     original!()(boma, status, unk)
-}
+} */
 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_Jump_sub)]
 pub unsafe fn status_jump_sub_hook(fighter: &mut L2CFighterCommon, param_2: L2CValue, param_3: L2CValue) -> L2CValue {
@@ -633,7 +634,7 @@ pub unsafe fn ditcit (boma: &mut smash::app::BattleObjectModuleAccessor, status_
 
 pub unsafe fn shieldStops(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, cat1: i32) { //Shield Stop
     if status_kind == *FIGHTER_STATUS_KIND_DASH || status_kind == *FIGHTER_STATUS_KIND_TURN_DASH {
-        if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 {
+        if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 || ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_GUARD) {
             StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD_ON, true);
         }
     }
@@ -664,7 +665,7 @@ pub unsafe fn shieldDrops(boma: &mut smash::app::BattleObjectModuleAccessor, sta
 }
 
 pub unsafe fn jabCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, motion_kind: u64, fighter_kind: i32, cat1: i32, stick_value_x: f32, stick_value_y: f32) { //Jab Cancels
-    if (![*FIGHTER_KIND_CHROM, *FIGHTER_KIND_ROY, *FIGHTER_KIND_GANON, *FIGHTER_KIND_SHIZUE, *FIGHTER_KIND_PIKACHU, *FIGHTER_KIND_PICHU, *FIGHTER_KIND_METAKNIGHT].contains(&fighter_kind) && motion_kind == hash40("attack_11")) ||
+    if (![*FIGHTER_KIND_CHROM, *FIGHTER_KIND_ROY, *FIGHTER_KIND_GANON, *FIGHTER_KIND_SHIZUE, *FIGHTER_KIND_PIKACHU, *FIGHTER_KIND_PICHU, *FIGHTER_KIND_METAKNIGHT, *FIGHTER_KIND_PICKEL].contains(&fighter_kind) && motion_kind == hash40("attack_11")) ||
         (![*FIGHTER_KIND_DONKEY, *FIGHTER_KIND_MARTH, *FIGHTER_KIND_LUCINA, *FIGHTER_KIND_KOOPA, *FIGHTER_KIND_DAISY, *FIGHTER_KIND_PEACH, *FIGHTER_KIND_SAMUS, *FIGHTER_KIND_SAMUSD, *FIGHTER_KIND_PURIN, *FIGHTER_KIND_NANA, *FIGHTER_KIND_POPO, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_PIKMIN].contains(&fighter_kind) && motion_kind == hash40("attack_12")) || 
         ([*FIGHTER_KIND_METAKNIGHT, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_SNAKE].contains(&fighter_kind) && motion_kind == hash40("attack_s3s")) ||
         (fighter_kind == *FIGHTER_KIND_METAKNIGHT && motion_kind == hash40("attack_s3_s2")) {
@@ -773,7 +774,7 @@ pub unsafe fn djcs (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::
             }
         }
     }
-    if [*FIGHTER_KIND_PEACH, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_BAYONETTA, *FIGHTER_KIND_GEKKOUGA].contains(&fighter_kind) {
+    if [*FIGHTER_KIND_PEACH, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_SAMUSD].contains(&fighter_kind) {
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
             if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
                 if MotionModule::frame(boma) < (7.0) {
@@ -789,14 +790,29 @@ pub unsafe fn djcs (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::
     }
 }
 
-pub unsafe fn edgeCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, situation_kind: i32) { //Edge cancels
+pub unsafe fn edgeCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, situation_kind: i32, stick_value_x: f32) { //Edge cancels
+    let mut frame = 0.0;
+    if status_kind == *FIGHTER_STATUS_KIND_ESCAPE_AIR && (KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) * PostureModule::lr(boma)) < 0.0 && MotionModule::frame(boma) < 2.0 {
+        REVERSED[get_player_number(boma)] = 1;
+    }
     if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_TURN_RUN,  
     *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL, *FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, 
     *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_LIGHT, *FIGHTER_STATUS_KIND_APPEAL, 
-    *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) {
+    *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) && situation_kind == *SITUATION_KIND_GROUND {
         if GroundModule::is_ottotto(boma, 0.76) {
             GroundModule::set_correct(boma, smash::cpp::root::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         }
+        else if REVERSED[get_player_number(boma)] == 1 {
+            PostureModule::reverse_lr(boma);
+            REVERSED[get_player_number(boma)] = 2;
+            println!("Flip!");
+            frame = MotionModule::frame(boma);
+        }
+    }
+    if ![22, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) && REVERSED[get_player_number(boma)] == 2 && frame != MotionModule::frame(boma) {
+        PostureModule::reverse_lr(boma);
+        REVERSED[get_player_number(boma)] = 0;
+        println!("Flipped, status: {}, wavedash: {}", status_kind, *FIGHTER_STATUS_KIND_ESCAPE_AIR);
     }
     //Character specific edge cancels
     if situation_kind == *SITUATION_KIND_GROUND {
@@ -1082,16 +1098,16 @@ pub unsafe fn ivyHeals(boma: &mut smash::app::BattleObjectModuleAccessor, status
             let pos = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let rot = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let idk = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
-            EffectModule::req_on_joint(boma, Hash40{hash: 0x16f1e4733f}, Hash40{hash: hash40("flower")}, &pos, &rot, 1.0, &idk, &idk, false, 0, 1, 0);
+            EffectModule::req_on_joint(boma, Hash40{hash: 0x0d0da6e3c0}, Hash40{hash: hash40("flower")}, &pos, &rot, 1.0, &idk, &idk, false, 0, 1, 0);
         }
         else if AMOUNTSOLAR[get_player_number(boma)] == 0 {
-            EffectModule::kill_kind(boma, Hash40{hash: 0x16f1e4733f}, false, false);
+            EffectModule::kill_kind(boma, Hash40{hash: 0x0d0da6e3c0}, false, false);
         }
         else {
             let pos = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let rot = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
             let idk = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
-            EffectModule::req_on_joint(boma, Hash40{hash: 0x16f1e4733f}, Hash40{hash: hash40("flower")}, &pos, &rot, (0.005 * AMOUNTSOLAR[get_player_number(boma)] as f32), &idk, &idk, false, 0, 1, 0);
+            EffectModule::req_on_joint(boma, Hash40{hash: 0x0d0da6e3c0}, Hash40{hash: hash40("flower")}, &pos, &rot, (0.005 * AMOUNTSOLAR[get_player_number(boma)] as f32), &idk, &idk, false, 0, 1, 0);
         }
         if MotionModule::frame(boma) < 2.0 || (![hash40("attack_air_lw"), hash40("attack_air_hi")].contains(&motion_kind) && ![*FIGHTER_STATUS_KIND_CATCH_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_HI4].contains(&status_kind)) {
             CANHEAL[get_player_number(boma)] = true;
@@ -1131,10 +1147,10 @@ pub unsafe fn meleeSmashStick(boma: &mut smash::app::BattleObjectModuleAccessor,
     }
 }
 
-pub unsafe fn grabIsAerial(boma: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32) { //Grab will now do aerials in the air
+pub unsafe fn grabIsAerial(boma: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, cat1: i32) { //Grab will now do aerials in the air
     if situation_kind == *SITUATION_KIND_AIR { 
         if !ItemModule::is_have_item(boma, 0) {
-            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) {
+            if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_CATCH) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_CATCH) != 0 {
                 if WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_AIR) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
                 }
@@ -1171,7 +1187,7 @@ pub unsafe fn meleeECBs(boma: &mut smash::app::BattleObjectModuleAccessor, statu
             
         if  [*FIGHTER_KIND_MARIO, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_LUIGI, *FIGHTER_KIND_MARIOD, *FIGHTER_KIND_YOUNGLINK, *FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_DIDDY, 
             *FIGHTER_KIND_DEDEDE, *FIGHTER_KIND_ROCKMAN, *FIGHTER_KIND_GEKKOUGA, *FIGHTER_KIND_PACMAN, *FIGHTER_KIND_KOOPAJR, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_MIIFIGHTER, 
-            *FIGHTER_KIND_MIISWORDSMAN, *FIGHTER_KIND_MIIGUNNER, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_BUDDY].contains(&fighter_kind) {
+            *FIGHTER_KIND_MIISWORDSMAN, *FIGHTER_KIND_MIIGUNNER, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_BUDDY, *FIGHTER_KIND_PICKEL].contains(&fighter_kind) {
                 max_offset = 3.5;
             }
             
@@ -1184,7 +1200,7 @@ pub unsafe fn meleeECBs(boma: &mut smash::app::BattleObjectModuleAccessor, statu
             *FIGHTER_KIND_SHEIK, *FIGHTER_KIND_ZELDA, *FIGHTER_KIND_MARTH, *FIGHTER_KIND_LUCINA, *FIGHTER_KIND_GANON, *FIGHTER_KIND_ROY, *FIGHTER_KIND_CHROM, 
             *FIGHTER_KIND_SZEROSUIT, *FIGHTER_KIND_SNAKE, *FIGHTER_KIND_IKE, *FIGHTER_KIND_WIIFIT, *FIGHTER_KIND_ROSETTA, *FIGHTER_KIND_PALUTENA, 
             *FIGHTER_KIND_REFLET, *FIGHTER_KIND_SHULK, *FIGHTER_KIND_RYU, *FIGHTER_KIND_KEN, *FIGHTER_KIND_CLOUD, *FIGHTER_KIND_KAMUI, *FIGHTER_KIND_BAYONETTA, 
-            *FIGHTER_KIND_RIDLEY, *FIGHTER_KIND_SIMON, *FIGHTER_KIND_RICHTER, *FIGHTER_KIND_JACK, *FIGHTER_KIND_BRAVE, *FIGHTER_KIND_DOLLY, *FIGHTER_KIND_MASTER].contains(&fighter_kind) {
+            *FIGHTER_KIND_RIDLEY, *FIGHTER_KIND_SIMON, *FIGHTER_KIND_RICHTER, *FIGHTER_KIND_JACK, *FIGHTER_KIND_BRAVE, *FIGHTER_KIND_DOLLY, *FIGHTER_KIND_MASTER, *FIGHTER_KIND_EDGE].contains(&fighter_kind) {
                 max_offset = 5.0;
             }
             
@@ -1294,27 +1310,25 @@ pub unsafe fn removeSHMacro(boma: &mut smash::app::BattleObjectModuleAccessor, s
 
 pub unsafe fn fixExtraJumps (boma: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, motion_kind: u64, fighter_kind: i32) {
     if [*FIGHTER_KIND_RIDLEY, *FIGHTER_KIND_PIT].contains(&fighter_kind) {
-        if motion_kind == hash40("jump_aerial_f3") {
+        if [hash40("jump_aerial_f3"), hash40("jump_aerial_f4")].contains(&motion_kind) {
             MotionModule::change_motion(boma, Hash40{hash: hash40("jump_aerial_f2")}, 0.0, 1.0, false, 0.0, false, false);
         }
     }
     if fighter_kind == *FIGHTER_KIND_GEKKOUGA {
         if motion_kind == 0 {
-            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                if situation_kind == *SITUATION_KIND_AIR {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_n_max_start")}, 0.0, 1.0, false, 0.0, false, false);
-                }
-                else if situation_kind == *SITUATION_KIND_GROUND {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("special_n_max_shot")}, 0.0, 1.0, false, 0.0, false, false);
-                }
+            if PostureModule::lr(boma) < 0.0 {
+                MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_l")}, 0.0, 1.0, false, 0.0, false, false);
             }
             else {
-                if PostureModule::lr(boma) < 0.0 {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_l")}, 0.0, 1.0, false, 0.0, false, false);
-                }
-                else {
-                    MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_r")}, 0.0, 1.0, false, 0.0, false, false);
-                }
+                MotionModule::change_motion(boma, Hash40{hash: hash40("appeal_lw_r")}, 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        else if [82155291285, 67420653553, 100249898067].contains(&motion_kind) {
+            if situation_kind == *SITUATION_KIND_AIR {
+                MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_n_max_shot")}, 0.0, 1.0, false, 0.0, false, false);
+            }
+            else if situation_kind == *SITUATION_KIND_GROUND {
+                MotionModule::change_motion(boma, Hash40{hash: hash40("special_n_max_shot")}, 0.0, 1.0, false, 0.0, false, false);
             }
         }
     }
@@ -1365,10 +1379,15 @@ pub unsafe fn deathStuff (boma: &mut smash::app::BattleObjectModuleAccessor) {
     }
 }
 
-pub unsafe fn squirtleSideB (boma: &mut smash::app::BattleObjectModuleAccessor, fighter_kind: i32, motion_kind: u64) {
+pub unsafe fn squirtleSideB (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, motion_kind: u64, cat1: i32) {
     if fighter_kind == *FIGHTER_KIND_PZENIGAME {
         if motion_kind == hash40("special_air_s_hit") {
             StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
+        }
+        if status_kind == *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_S_LOOP {
+            if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_S_END, true);
+            }
         }
     }
 }
@@ -1492,8 +1511,9 @@ pub unsafe fn moonwalking (boma: &mut smash::app::BattleObjectModuleAccessor, st
 
 pub unsafe fn upbCancels (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32) {
     if (fighter_kind == *FIGHTER_KIND_CHROM && status_kind == *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3)  || (fighter_kind == *FIGHTER_KIND_IKE && status_kind == *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_2) {
-        if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < 0.0  && MotionModule::frame(boma) > 13.0 {
+        if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) <= 0.0 && MotionModule::frame(boma) > 22.0 {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 {
+                println!("Frame: {}", MotionModule::frame(boma));
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
             }
         }
@@ -1810,7 +1830,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         jabCancels(boma, status_kind, motion_kind, fighter_kind, cat1, stick_value_x, stick_value_y);
         pteStuff(boma, fighter_kind, status_kind, situation_kind, motion_kind, cat1, stick_value_x);
         djcs(lua_state, &mut l2c_agent, boma, status_kind, fighter_kind, kinetic_type);
-        edgeCancels(boma, status_kind, fighter_kind, situation_kind);
+        edgeCancels(boma, status_kind, fighter_kind, situation_kind, stick_value_x);
         airDodgeZair(boma, status_kind, situation_kind, fighter_kind, cat2, cat3, stick_value_x);
         wallJumpSpecial(boma, status_kind, situation_kind, fighter_kind, cat1);
         sm4shJabLocks(boma, status_kind);
@@ -1821,7 +1841,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         ivyHeals(boma, status_kind, fighter_kind, motion_kind);
         setStatuses(boma, status_kind);
         meleeSmashStick(boma, status_kind);
-        grabIsAerial(boma, situation_kind);
+        grabIsAerial(boma, situation_kind, cat1);
         //deleteExtraBanan(boma, status_kind);
         meleeECBs(boma, status_kind, situation_kind, fighter_kind);
         lagCanceled(boma, status_kind);
@@ -1830,7 +1850,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         disableStuff(boma, status_kind, fighter_kind);
         regainAirDodge(boma, status_kind, situation_kind);
         deathStuff(boma);
-        squirtleSideB(boma, fighter_kind, motion_kind);
+        squirtleSideB(boma, status_kind, fighter_kind, motion_kind, cat1);
         airDodgeCancels(boma, status_kind, situation_kind, fighter_kind, cat1);
         hitfalling(boma, status_kind, situation_kind);
         fastfallShit(boma, status_kind, situation_kind, fighter_kind);
@@ -1838,7 +1858,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         quickAttackCancels(boma, status_kind, situation_kind, fighter_kind, stick_value_y);
         //moonwalking(boma, status_kind, stick_value_x, stick_value_y);
         upbCancels(boma, status_kind, fighter_kind, cat1);
-        ptSwaps(boma, fighter_kind, cat1, cat2);
+        //ptSwaps(boma, fighter_kind, cat1, cat2);
         driftDi(boma, status_kind, stick_value_x);
         grenShurikenFix(boma, status_kind, situation_kind, fighter_kind);
         animPortFix(boma, fighter_kind, motion_kind);
@@ -1917,7 +1937,6 @@ pub fn install() {
     skyline::install_hook!(check_button_on_hook);
     skyline::install_hook!(check_button_off_hook);
     skyline::install_hook!(is_valid_just_shield_reflector_hook);
-    skyline::install_hook!(change_status_request_from_script_hook);
     skyline::install_hook!(get_int_hook);
     skyline::install_hook!(change_kinetic_hook);
     nro::add_hook(nro_main).unwrap();
