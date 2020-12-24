@@ -1122,7 +1122,7 @@
     <ExtraHash Kind="Effect">effect_attackhi3</ExtraHash>
     <XluStart>0</XluStart>
     <XluEnd>0</XluEnd>
-    <CancelFrame>30</CancelFrame>
+    <CancelFrame>23</CancelFrame>
     <NoStopIntp>False</NoStopIntp>
   </Motion>
   <Motion Hash="0x0a18b4d5e5">

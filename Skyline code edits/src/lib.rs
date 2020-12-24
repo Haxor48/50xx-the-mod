@@ -2,6 +2,8 @@
 #![feature(proc_macro_hygiene)]
 
 pub static mut FIGHTER_CUTIN_MANAGER_ADDR: usize = 0;
+use smash::app::utility::get_kind;
+use smash::lib::lua_const::*;
 
 mod mario;
 mod falco;
@@ -22,7 +24,12 @@ mod marth;
 mod sheik;
 mod ness;
 mod pichu;
+mod inkling;
 mod roy;
+mod fox;
+mod chrom;
+mod ike;
+mod ken;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -45,5 +52,10 @@ pub fn main() {
     sheik::install();
     ness::install();
     pichu::install();
+    inkling::install();
     roy::install();
+    fox::install();
+    chrom::install();
+    ike::install();
+    ken::install();
 }
