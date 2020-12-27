@@ -447,7 +447,7 @@ pub fn chrom_effect_usmash(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=24)
         if(is_excute){
-            AFTER_IMAGE4_ON_arg29(0x10996c48b7_u64, 0x100065190d_u64, 4, hash40("sword1"), 0, 0, 1.64999998, hash40("sword1"), -9.99999975e-06, -1.99999995e-05, 12.3999996, true, 0x0bfc61fb00_u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EF_FLIP_ZX, 0, EFFECT_AXIS_X, 101, TRAIL_BLEND_ALPHA, 1.20000005, 0.200000003)
+            AFTER_IMAGE4_ON_arg29(0x10996c48b7_u64, 0x100065190d_u64, 4, hash40("sword1"), 0, 0, 1.64999998, hash40("sword1"), 0.0, 0.0, 12.3999996, true, 0x0bfc61fb00_u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.20000005, 0.200000003)
         }
         frame(Frame=29)
         if(is_excute){
