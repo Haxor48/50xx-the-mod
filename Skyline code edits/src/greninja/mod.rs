@@ -8,6 +8,8 @@ use crate::FIGHTER_CUTIN_MANAGER_ADDR;
 use skyline::nn::ro::LookupSymbol;
 use smash::phx::Vector3f;
 use smash::app;
+use crate::custom::CANPROJECTILE;
+use crate::custom::get_player_number;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -568,15 +570,19 @@ pub fn greninja_pivotgrab(fighter: &mut L2CFighterCommon) {
     animcmd = "game_specialnmaxshot")]
 pub fn greninja_shuriken_shot_max_grnd(fighter: &mut L2CFighterCommon) {
     acmd!({
-        frame(Frame=1)
         if (is_execute) {
-            ArticleModule::generate_article(FIGHTER_GEKKOUGA_GENERATE_ARTICLE_SHURIKEN, false, 0)
+            rust {
+                if CANPROJECTILE[get_player_number(module_accessor)] {
+                    ArticleModule::generate_article(module_accessor, *FIGHTER_GEKKOUGA_GENERATE_ARTICLE_SHURIKEN, false, 0);
+                }
+            }
         }
         frame(Frame=6)
         if (is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_GEKKOUGA_STATUS_SPECIAL_N_WORK_FLAG_SHURIKEN_SHOOT)
             rust {
-                println!("Shoot");
+                if CANPROJECTILE[get_player_number(module_accessor)] {
+                    WorkModule::on_flag(module_accessor, *FIGHTER_GEKKOUGA_STATUS_SPECIAL_N_WORK_FLAG_SHURIKEN_SHOOT);
+                }
             }
         }
     });
@@ -589,15 +595,20 @@ pub fn greninja_shuriken_shot_max_grnd(fighter: &mut L2CFighterCommon) {
     animcmd = "game_specialairnmaxshot")]
 pub fn greninja_shuriken_shot_max_air(fighter: &mut L2CFighterCommon) {
     acmd!({
-        frame(Frame=1)
         if (is_execute) {
-            ArticleModule::generate_article(FIGHTER_GEKKOUGA_GENERATE_ARTICLE_SHURIKEN, false, 0)
+            rust {
+                if CANPROJECTILE[get_player_number(module_accessor)] {
+                    ArticleModule::generate_article(module_accessor, *FIGHTER_GEKKOUGA_GENERATE_ARTICLE_SHURIKEN, false, 0);
+                }
+            }
         }
         frame(Frame=6)
-        if (is_excute) {
-            WorkModule::on_flag(Flag=FIGHTER_GEKKOUGA_STATUS_SPECIAL_N_WORK_FLAG_SHURIKEN_SHOOT)
+        if (is_excute){
             rust {
-                println!("shoot");
+                if CANPROJECTILE[get_player_number(module_accessor)] {
+                    WorkModule::on_flag(module_accessor, *FIGHTER_GEKKOUGA_STATUS_SPECIAL_N_WORK_FLAG_SHURIKEN_SHOOT);
+                    CANPROJECTILE[get_player_number(module_accessor)] = false;
+                }
             }
         }
     });

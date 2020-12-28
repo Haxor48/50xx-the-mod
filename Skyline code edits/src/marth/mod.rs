@@ -421,11 +421,11 @@ pub fn marth_effect_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(4)
         if (is_excute){
-            AFTER_IMAGE4_ON_arg29(0x106d6577e4_u64, 0x10f46c265e_u64, 10, hash40("sword1"), 0, 0, 0.5, hash40("sword1"), -9.99999975e-06, -1.99999995e-05, 12.6000004, true, 0x10fef5ab02_u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, EF_FLIP_ZX, 0, EFFECT_AXIS_X, 101, TRAIL_BLEND_ALPHA, 1.39999998, 0.200000003)
+            AFTER_IMAGE4_ON_arg29(0x106d6577e4 as u64, 0x10f46c265e as u64, 8, hash40("sword1"), 0, 0, 0.5, hash40("sword1"), 0.0, 0.0, 12.6000004, true, 0x10fef5ab02 as u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.4, 0.2)
         }
         frame(14)
         if (is_excute){
-            AFTER_IMAGE_OFF(3)
+            AFTER_IMAGE_OFF(6.0)
         }
     });
 }

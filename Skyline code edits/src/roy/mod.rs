@@ -355,11 +355,11 @@ pub fn roy_effect_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
         frame(4)
         if(is_excute){
-            AFTER_IMAGE4_ON_arg29(0x0e4d7b4c4b_u64, 0x0ed4721df1_u64, 7, hash40("sword1"), 0, 0, -0.800000012, hash40("sword1"), -9.99999975e-06, -1.99999995e-05, 14.5, true, 0x09e9785222_u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EF_FLIP_ZX, 0, EFFECT_AXIS_X, 101, TRAIL_BLEND_ALPHA, 1.29999995, 0.200000003)
+            AFTER_IMAGE4_ON_arg29(0x0e4d7b4c4b as u64, 0x0ed4721df1 as u64, 20, hash40("sword1"), 0, 0, -0.8, hash40("sword1"), 0.0, 0.0, 14.5, true, 0x09e9785222 as u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.5, 0.2)
         }
         frame(17)
         if(is_excute){
-            AFTER_IMAGE_OFF(2)
+            AFTER_IMAGE_OFF(2.0)
         }
     });
 }
