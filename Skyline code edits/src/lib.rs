@@ -30,6 +30,10 @@ mod fox;
 mod chrom;
 mod ike;
 mod ken;
+mod mewtwo;
+mod incin;
+mod byleth;
+mod dk;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -58,4 +62,7 @@ pub fn main() {
     chrom::install();
     ike::install();
     ken::install();
+    mewtwo::install();
+    incin::install();
+    dk::install();
 }

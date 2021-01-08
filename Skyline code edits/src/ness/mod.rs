@@ -3,6 +3,7 @@ use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
 use acmd::{acmd, acmd_func};
+use smash::app::lua_bind::*;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -100,7 +101,7 @@ pub fn ness_pkfire_air(fighter: &mut L2CFighterBase) {
 pub fn ness_pkflash(fighter: &mut L2CFighterBase) {
     acmd!({
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=30, KBG=65, FKB=0, BKB=40, Size=10.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PSI)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=30, KBG=85, FKB=0, BKB=50, Size=10.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PSI)
         }
         frame(Frame=5)
         if(is_excute){
@@ -233,6 +234,28 @@ pub fn ness_utilt(fighter: &mut L2CFighterBase) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
+    battle_object_kind = WEAPON_KIND_NESS_PK_FLASH, 
+    animation = "bang",
+    animcmd = "effect_bang")]
+pub fn ness_effect_pkflash(fighter: &mut L2CFighterBase) {
+    acmd!({
+        if(is_excute){
+            EFFECT(0x12fa32a3ef as u64, hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+        }
+        /*rust {
+            if WorkModule::is_flag(module_accessor, *WEAPON_NESS_PK_FLASH_INSTANCE_WORK_ID_INT_FRAME) {
+                acmd! ({
+                    if(is_excute){
+                        EFFECT(0x12fa32a3ef as u64, hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+                    }
+                });
+            }
+        } */
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         ness_ftilt_med,
@@ -245,6 +268,7 @@ pub fn install() {
         ness_dsmash_charge,
         ness_dsmash_hit,
         ness_upsmash_hit,
-        ness_utilt
+        ness_utilt,
+        ness_effect_pkflash
     );
 }
