@@ -611,11 +611,27 @@ pub unsafe fn jumpCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
             }
         }
     }
+    if fighter_kind == *FIGHTER_KIND_EDGE {
+        if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_HI_RUSH {
+            if situation_kind == *SITUATION_KIND_GROUND {
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || (ControlModule::is_enable_flick_jump(boma) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP)) {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);   
+                }
+            }
+        }
+    }
 }
 
 pub unsafe fn landCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32) { //Land Cancels
     if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO].contains(&fighter_kind) {
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
+            if StatusModule::prev_situation_kind(boma) == *SITUATION_KIND_AIR && situation_kind == *SITUATION_KIND_GROUND {
+                CancelModule::enable_cancel(boma);
+            }
+        }
+    }
+    if fighter_kind == *FIGHTER_KIND_EDGE {
+        if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_S_SHOOT {
             if StatusModule::prev_situation_kind(boma) == *SITUATION_KIND_AIR && situation_kind == *SITUATION_KIND_GROUND {
                 CancelModule::enable_cancel(boma);
             }
@@ -1541,6 +1557,13 @@ pub unsafe fn fastfallShit (boma: &mut smash::app::BattleObjectModuleAccessor, s
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             if [*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_NESS, *FIGHTER_KIND_JACK].contains(&fighter_kind) {
+                if stick_y_flick_check(boma, -0.3) && KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) <= 0.0 {
+                    WorkModule::on_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+                }
+            }
+        }
+        if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_S_SHOOT {
+            if fighter_kind == *FIGHTER_KIND_EDGE {
                 if stick_y_flick_check(boma, -0.3) && KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) <= 0.0 {
                     WorkModule::on_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
                 }
