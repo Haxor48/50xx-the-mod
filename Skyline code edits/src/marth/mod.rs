@@ -347,6 +347,54 @@ pub fn marth_sideb3a(fighter: &mut L2CFighterCommon) {
 #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MARTH, 
+    animation = "special_air_s3_lw",
+    animcmd = "effect_specialairs3lw")]
+pub fn marth_effect_sideb3a(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=13)
+        if(is_excute){
+            EFFECT_FOLLOW(0x11f2f83bf9_u64, hash40("haver"), -9.99999975e-06, 0, 0, 0, 0, 0, 1, true)
+        }
+        frame(Frame=14)
+        if(is_excute){
+            LANDING_EFFECT(hash40("sys_h_smoke_a"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT_FOLLOW(0x0c0d80924d_u64, hash40("top"), -9.99999975e-06, 0, 0, 0, 0, 0, 1, true)
+            EffectModule::set_disable_render_offset_last()
+        }
+       frame(Frame=16)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x11f2f83bf9_u64, false, true)
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_MARTH, 
+    animation = "special_s3_lw",
+    animcmd = "effect_specials3lw")]
+pub fn marth_effect_sideb3g(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=13)
+        if(is_excute){
+            EFFECT_FOLLOW(0x11f2f83bf9_u64, hash40("haver"), -9.99999975e-06, 0, 0, 0, 0, 0, 1, true)
+        }
+        frame(Frame=14)
+        if(is_excute){
+            LANDING_EFFECT(hash40("sys_h_smoke_a"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT_FOLLOW(0x0c0d80924d_u64, hash40("top"), -9.99999975e-06, 0, 0, 0, 0, 0, 1, true)
+            EffectModule::set_disable_render_offset_last()
+        }
+       frame(Frame=16)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x11f2f83bf9_u64, false, true)
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_MARTH, 
     animation = "throw_f",
     animcmd = "game_throwf")]
 pub fn marth_fthrow(fighter: &mut L2CFighterCommon) {
@@ -433,6 +481,6 @@ pub fn marth_effect_dair(fighter: &mut L2CFighterCommon) {
 pub fn install() {
     acmd::add_hooks!(
         marth_bair, marth_dair, marth_dashattack, marth_fair, marth_fsmash, marth_ftilt, marth_utilt, marth_jab, marth_uair, marth_dtilt, marth_jab2, marth_sideb3a, marth_sideb3g, marth_fthrow,
-        marth_uthrow, marth_dthrow, marth_effect_dair
+        marth_uthrow, marth_dthrow, marth_effect_dair, marth_effect_sideb3a, marth_effect_sideb3g
     );
 }

@@ -90,11 +90,11 @@ pub fn dk_sideb_air(fighter: &mut L2CFighterCommon) {
     acmd! ({
         frame(Frame=5)
         if(is_excute){
-            damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_ALWAYS, 0)
+            sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_ALWAYS, 0)
         }
         frame(Frame=15)
         if(is_excute){
-            damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_NORMAL, 0)
+            sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_NORMAL, 0)
         }
         frame(Frame=20)
         if(is_excute){
