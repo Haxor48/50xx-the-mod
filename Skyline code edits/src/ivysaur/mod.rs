@@ -592,7 +592,8 @@ pub fn ivy_sideb (fighter: &mut L2CFighterCommon) {
             rust {
                 if CANPROJECTILE[get_player_number(module_accessor)] {
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                    CANPROJECTILE[get_player_number(module_accessor)] = false;
+                    println!("razor leaf");
+                    //CANPROJECTILE[get_player_number(module_accessor)] = false;
                     if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
                         println!("leaf storm!");
                         AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
@@ -601,6 +602,9 @@ pub fn ivy_sideb (fighter: &mut L2CFighterCommon) {
                         ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
                         ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
                     }
+                }
+                else {
+                    println!("no leaf");
                 }
             }
         }
@@ -625,17 +629,15 @@ pub fn ivy_sideb_air (fighter: &mut L2CFighterCommon) {
         frame(Frame=22)
         if(is_excute){
             rust {
-                if CANPROJECTILE[get_player_number(module_accessor)] {
+                ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                CANPROJECTILE[get_player_number(module_accessor)] = false;
+                if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
+                    println!("leaf storm!");
+                    AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
+                    println!("meter used");
                     ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                    CANPROJECTILE[get_player_number(module_accessor)] = false;
-                    if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
-                        println!("leaf storm!");
-                        AMOUNTSOLAR[get_player_number(module_accessor)] = 30;
-                        println!("meter used");
-                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                        ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
-                    }
+                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
+                    ArticleModule::generate_article(module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_LEAFCUTTER, false, 0);
                 }
             }
         }

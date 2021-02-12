@@ -35,6 +35,7 @@ mod incin;
 mod byleth;
 mod dk;
 mod sephiroth;
+mod ganon;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -67,4 +68,5 @@ pub fn main() {
     incin::install();
     dk::install();
     sephiroth::install();
+    ganon::install();
 }

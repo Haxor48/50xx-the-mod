@@ -1,6 +1,7 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
+use smash::lua2cpp::L2CFighterBase;
 use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::*;
 use crate::custom::CANPROJECTILE;
@@ -342,6 +343,17 @@ pub fn sephiroth_neutralb2_air(fighter: &mut L2CFighterCommon) {
         });
     }
 }
+
+/* #[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
+    battle_object_kind = FIGHTER_KIND_EDGE_FLASH, 
+    animation = "attack",
+    animcmd = "game_attack")]
+pub fn sephiroth_sideb(fighter: &mut L2CFighterBase) {
+    acmd!({
+        
+    });
+} */
 
 pub fn install() {
     acmd::add_hooks!(
