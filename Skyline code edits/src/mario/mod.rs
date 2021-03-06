@@ -596,6 +596,26 @@ pub fn mario_landing_dair(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_MARIO, 
+    animation = "attack_air_f",
+    animcmd = "effect_attackairf")]
+pub fn mario_effect_fair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=4)
+        if(is_excute){
+            EFFECT(hash40("sys_smash_flash"), hash40("handr"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT_FOLLOW(0x0fe12deba1_u64, hash40("handr"), 0, 0, 0, 0, 0, 0, 1.04999995, true)
+        }
+        frame(Frame=17)
+        if(is_excute){
+            EFFECT_FOLLOW_FLIP(0x10001e43ad_u64, 0x10001e43ad_u64, hash40("top"), 0, 7, -1, -3, -11, -113, 1.10000002, true, EffectScreenBlendType::BLEND)
+            LAST_EFFECT_SET_RATE(0.800000012)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         mario_fair,
@@ -613,6 +633,7 @@ pub fn install() {
         mario_upB_grnd,
         mario_upB_air,
         mario_dthrow,
-        mario_landing_dair
+        mario_landing_dair,
+        mario_effect_fair
     );
 }

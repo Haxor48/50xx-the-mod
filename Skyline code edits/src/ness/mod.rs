@@ -152,11 +152,10 @@ pub fn ness_upsmash_hit(fighter: &mut L2CFighterBase) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("attach"), Damage=13.0, Angle=80, KBG=89, FKB=0, BKB=70, Size=4.7, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
         }
-        frame(Frame=34)
+        frame(Frame=37)
         if(is_excute){
             AttackModule::clear_all()
         }
-        frame(Frame=37)
     });
 }
 
@@ -210,11 +209,11 @@ pub fn ness_dsmash_hit(fighter: &mut L2CFighterBase) {
 }
 
 #[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_NESS_YOYO_HEAD, 
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_NESS, 
     animation = "attack_hi3",
     animcmd = "game_attackhi3")]
-pub fn ness_utilt(fighter: &mut L2CFighterBase) {
+pub fn ness_utilt(fighter: &mut L2CFighterCommon) {
     acmd!({
         FT_MOTION_RATE(FSM=0.57)
         frame(Frame=7)

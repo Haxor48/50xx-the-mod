@@ -7,7 +7,6 @@ use smash::phx::*;
 use crate::custom::GLOBALFRAMECOUNT;
 use crate::custom::LASTBARREL;
 use crate::custom::CANBARREL;
-use crate::custom::AUTOCARGO;
 use crate::custom::get_player_number;
 use crate::custom::CANPROJECTILE;
 
@@ -334,6 +333,113 @@ pub fn dk_dair(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_DONKEY, 
+    animation = "special_n",
+    animcmd = "game_specialn")]
+pub fn dk_neutralb_grnd(fighter: &mut L2CFighterCommon) {
+    acmd! ({
+        FT_MOTION_RATE(FSM=0.5)
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL, false, 0)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=366, KBG=70, FKB=0, BKB=45, Size=15.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+        }
+        wait(Frames=6)
+        FT_MOTION_RATE(FSM=0.25)
+        if(is_excute){
+            AttackModule::clear_all();
+        }
+        frame(Frame=52)
+        FT_MOTION_RATE(FSM=0.5)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=366, KBG=70, FKB=0, BKB=45, Size=15.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+        }
+        wait(Frames=6)
+        if(is_excute){
+            AttackModule::clear_all();
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_DONKEY, 
+    animation = "special_air_n",
+    animcmd = "game_specialairn")]
+pub fn dk_neutralb_air(fighter: &mut L2CFighterCommon) {
+    acmd! ({
+        FT_MOTION_RATE(FSM=0.5)
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL, false, 0)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=366, KBG=70, FKB=0, BKB=45, Size=15.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+        }
+        wait(Frames=6)
+        FT_MOTION_RATE(FSM=0.25)
+        if(is_excute){
+            AttackModule::clear_all();
+        }
+        frame(Frame=52)
+        FT_MOTION_RATE(FSM=0.5)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=366, KBG=70, FKB=0, BKB=45, Size=15.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+        }
+        wait(Frames=6)
+        if(is_excute){
+            AttackModule::clear_all();
+        }
+        rust {
+            MotionModule::change_motion(module_accessor, Hash40{hash: hash40("attack_air_f")}, 0.0, 1.0, false, 0.0, false, false);
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_DONKEY, 
+    animation = "ladder_catch_end_r",
+    animcmd = "game_laddercatchendr")]
+pub fn dk_clap(fighter: &mut L2CFighterCommon) {
+    acmd! ({
+        frame(Frame=5)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=361, KBG=80, FKB=0, BKB=35, Size=15.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+            rust {
+                AttackModule::add_power(module_accessor, 0, WorkModule::get_float(module_accessor, *FIGHTER_DONKEY_STATUS_SPECIAL_N_WORK_INT_POWER_ADD), false);
+            }
+        }
+        wait(Frames=3)
+        if(is_excute){
+            AttackModule::clear_all();
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_DONKEY, 
+    animation = "ladder_catch_air_r",
+    animcmd = "game_laddercatchairr")]
+pub fn dk_clap_max(fighter: &mut L2CFighterCommon) {
+    acmd! ({
+        frame(Frame=5)
+        if(is_excute){
+            WorkModule::set_int(3, FIGHTER_DONKEY_STATUS_SPECIAL_N_WORK_INT_IGNORE_CRITICAL_ATTACK_ID)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=22.0, Angle=361, KBG=80, FKB=0, BKB=45, Size=15.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            AttackModule::clear_all();
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         dk_nair,
@@ -347,6 +453,10 @@ pub fn install() {
         dk_bair,
         dk_fair,
         dk_uair,
-        dk_dair
+        dk_dair,
+        dk_neutralb_air,
+        dk_neutralb_grnd,
+        dk_clap,
+        dk_clap_max
     );
 }
