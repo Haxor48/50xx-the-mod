@@ -452,9 +452,9 @@ pub fn install() {
         corrin_usmash,
         corrin_dsmash,
         corrin_landing_dair,
-        corrin_fsmash,
+        //corrin_fsmash,
         corrin_effect_dair,
-        corrin_sideb_air,
-        corrin_sideb_grnd
+        //corrin_sideb_air,
+        //corrin_sideb_grnd
     );
 }

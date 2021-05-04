@@ -454,9 +454,9 @@ pub fn install() {
         dk_fair,
         dk_uair,
         dk_dair,
-        dk_neutralb_air,
+        /*dk_neutralb_air,
         dk_neutralb_grnd,
         dk_clap,
-        dk_clap_max
+        dk_clap_max */
     );
 }

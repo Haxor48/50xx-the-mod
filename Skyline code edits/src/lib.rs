@@ -37,6 +37,8 @@ mod dk;
 mod sephiroth;
 mod ganon;
 mod corrin;
+mod zss;
+mod snake;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -71,4 +73,6 @@ pub fn main() {
     sephiroth::install();
     ganon::install();
     corrin::install();
+    zss::install();
+    snake::install();
 }

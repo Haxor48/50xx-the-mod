@@ -749,7 +749,7 @@ pub fn install() {
         ivy_bair,
         ivy_dair,
         ivy_uair,
-        ivy_dtilt,
+        //ivy_dtilt,
         ivy_ftilt,
         ivy_jab2,
         ivy_usmash,

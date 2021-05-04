@@ -362,6 +362,62 @@ pub fn falco_shinear(fighter: &mut L2CFighterCommon) {
 #[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_FALCO, 
+    animation = "attack_s4_s",
+    animcmd = "game_attacks4s")]
+pub fn falco_fsmash(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=5)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=11.0, Angle=361, KBG=30, FKB=0, BKB=35, Size=8.0, X=1.5, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_paralyze"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
+            AttackModule::enable_safe_pos()
+        }
+        frame(Frame=15)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FALCO, 
+    animation = "attack_s4_s",
+    animcmd = "effect_attacks4s")]
+pub fn falco_effect_fsmash(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            LANDING_EFFECT(0x0d0679b24d as u64, hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT_FLW_POS(0x0ecca63d69 as u64, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+            EffectModule::preset_limit_num(2)
+            EFFECT_FOLLOW(0x0fdc7fb0a0 as u64, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+            FLASH(1, 1, 1, 0.626999974)
+        }
+        frame(Frame=3)
+        if(is_excute){
+            FLASH(0, 1, 1, 0.430999994)
+            FLASH_FRM(20, 0, 0.70599997, 0.39199999, 0)
+        }
+        frame(Frame=4)
+        if(is_excute){
+            EFFECT_FLW_POS(0x0fecc8ba2c as u64, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+        }
+        frame(Frame=23)
+        if(is_excute){
+            COL_NORMAL()
+        }
+        frame(Frame=32)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x0ecca63d69 as u64, false, false)
+            EFFECT_OFF_KIND(0x0d30ab52b6 as u64, false, false)
+            EFFECT_OFF_KIND(0x0fdc7fb0a0 as u64, true, false)
+            EFFECT_FLW_POS(0x09d58cb98f as u64, hash40("reflector"), 1.39999998, -0.600000024, -0.5, 0, 0, 0, 0.5, true)
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_FALCO, 
     animation = "attack_air_n",
     animcmd = "effect_attackairn")]
 pub fn falco_effect_nair(fighter: &mut L2CFighterCommon) {
@@ -433,5 +489,6 @@ pub fn falco_pummel(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     acmd::add_hooks!(
-        falco_dair, falco_bair, falco_dtilt, falco_uair, /*falco_utilt, */falco_upsmash, falco_fairland, falco_shinea, falco_shineg, falco_nair, falco_shinegr, falco_shinear, falco_effect_nair, falco_effect_pummel, falco_pummel);
+        falco_dair, falco_bair, falco_dtilt, falco_uair, /*falco_utilt, */falco_upsmash, falco_fairland, falco_shinea, falco_shineg, falco_nair, falco_shinegr, 
+        falco_shinear, falco_effect_nair, falco_effect_pummel, falco_pummel, falco_fsmash, falco_effect_fsmash);
 }
