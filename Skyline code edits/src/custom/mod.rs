@@ -914,7 +914,7 @@ pub unsafe fn jabCancels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
     }
     if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_100 {
-            if MotionModule::frame(boma) > (25.0) {
+            if MotionModule::frame(boma) > (15.0) {
                 if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_LW4, true);
                 }
