@@ -359,7 +359,8 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
         if [*FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_N, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW, 
         *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_S].contains(&flag) {
             if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
-                if !CancelModule::is_enable_cancel(boma) {
+                if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > 0.0 || KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < WorkModule::get_param_float(boma, hash40("dive_speed_y"), 0) ||
+                abs(KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)) > WorkModule::get_param_float(boma, hash40("air_speed_x_stable"), 0) {
                     return false;
                 }
             }
@@ -554,7 +555,8 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
     if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
         if [*FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR].contains(&status_kind) {
             if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status) {
-                if !CancelModule::is_enable_cancel(boma) {
+                if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > 0.0 || KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < WorkModule::get_param_float(boma, hash40("dive_speed_y"), 0) ||
+                abs(KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)) > WorkModule::get_param_float(boma, hash40("air_speed_x_stable"), 0) {
                     return 0;
                 }
             }
@@ -781,7 +783,7 @@ pub unsafe fn dacus(boma: &mut smash::app::BattleObjectModuleAccessor, status_ki
 pub unsafe fn jumpCancelMove(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, cat1: i32, stick_value_y: f32) { //Jump cancel grab, usmash, etc.
     if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
         if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_CATCH) {
-            if KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > WorkModule::get_param_float(boma, hash40("walk_speed_max"), hash40("fighter_param")) {
+            if KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > WorkModule::get_param_float(boma, hash40("walk_speed_max"), 0) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
             }
             else {
@@ -2309,16 +2311,12 @@ pub unsafe fn zssDair(lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash
                     CancelModule::enable_cancel(boma);
                 }
                 if WorkModule::is_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
-                    l2c_agent.clear_lua_stack();
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_num(-1.0 * WorkModule::get_param_float(boma, 0, hash40("dive_speed_y"))));
-                    smash::app::sv_kinetic_energy::set_speed(lua_state);
+                    let speed_vector = smash::phx::Vector3f { x: 0.0, y: -1.0 * WorkModule::get_param_float(boma, 0, hash40("dive_speed_y")), z: 0.0 };
+                    KineticModule::add_speed(boma, &speed_vector);
                 }
                 else {
-                    l2c_agent.clear_lua_stack();
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_num(-1.0 * WorkModule::get_param_float(boma, 0, hash40("air_speed_y_stable"))));
-                    smash::app::sv_kinetic_energy::set_speed(lua_state);
+                    let speed_vector = smash::phx::Vector3f { x: 0.0, y: -1.0 * WorkModule::get_param_float(boma, 0, hash40("air_speed_y_stable""dive_speed_y")), z: 0.0 };
+                    KineticModule::add_speed(boma, &speed_vector);
                 }
             }
         }
@@ -2344,9 +2342,7 @@ pub unsafe fn docFixes(boma: &mut smash::app::BattleObjectModuleAccessor, fighte
 pub unsafe fn fireFox(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32) {
     if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
         if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_BOUND, *FIGHTER_FALCO_STATUS_KIND_SPECIAL_HI_BOUND, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_HI_BOUND].contains(&status_kind) {
-            if GroundModule::can_entry_cliff(boma) == 0 {
-                GroundModule::entry_cliff(boma);
-            }
+            GroundModule::entry_cliff(boma);
             if CANAIRDODGE[get_player_number(boma)] {
                 if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_GUARD) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
