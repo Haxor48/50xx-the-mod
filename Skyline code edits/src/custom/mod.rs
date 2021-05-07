@@ -58,6 +58,7 @@ static mut FLOATSTART: [i32; 9] = [0; 9];
 static mut LASTFOXFRAME: [i32; 9] = [0; 9];
 static mut LASTFRAME: i32 = 0;
 pub static mut ZSSDAIR: [bool; 9] = [false; 9];
+pub static mut OPPDASHSPEED: f32 = 0.0;
 //pub static mut COMMON_PARAMS: *mut CommonParams = 0 as *mut _;
 
 pub unsafe fn get_player_number(boma: &mut smash::app::BattleObjectModuleAccessor) -> usize {
@@ -139,7 +140,6 @@ fn params_main(params_info: &ParamsInfo<'_>) {
         }
     }
 }
-
 pub unsafe fn editParams (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32) {
     if COMMON_PARAMS != *mut smash::params::common::CommonParams(0) {
         let common = *COMMON_PARAMS;
@@ -225,16 +225,13 @@ pub unsafe fn float_param_accessor_hook(boma: u64, param_type: u64, param_hash: 
 pub unsafe fn get_param_int_hook(x0: u64, param_type: u64, param_hash: u64) -> i32 {
     let mut boma = *((x0 as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor;
     let fighter_kind = get_kind(&mut *boma);
-
     original!()(x0, param_type, param_hash)
 }
-
 #[skyline::hook(offset=INT_OFFSET + 0x20)]
 pub unsafe fn get_param_int64_hook(x0: u64, param_type: u64, param_hash: u64) -> u64 {
     let mut boma = *((x0 as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor;
     let fighter_kind = get_kind(&mut *boma);
     let status_kind = StatusModule::status_kind(&mut *boma);
-
     if param_hash == hash40("common") {
         if param_type == hash40("capture_cut_frame") {
             if status_kind == *FIGHTER_STATUS_KIND_THROW {
@@ -732,6 +729,13 @@ pub unsafe fn jumpCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
         }
     }
     if fighter_kind == *FIGHTER_KIND_EDGE {
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                if MotionModule::frame(boma) < 29.0 {
+                    MotionModule::set_frame(boma, 29.0, false);
+                }
+            }
+        }
         if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_HI_RUSH {
             if situation_kind == *SITUATION_KIND_GROUND {
                 if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || (ControlModule::is_enable_flick_jump(boma) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP)) {
@@ -2337,6 +2341,21 @@ pub unsafe fn docFixes(boma: &mut smash::app::BattleObjectModuleAccessor, fighte
     }
 }
 
+pub unsafe fn fireFox(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32) {
+    if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
+        if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_BOUND, *FIGHTER_FALCO_STATUS_KIND_SPECIAL_HI_BOUND, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_HI_BOUND].contains(&status_kind) {
+            if GroundModule::can_entry_cliff(boma) == 0 {
+                GroundModule::entry_cliff(boma);
+            }
+            if CANAIRDODGE[get_player_number(boma)] {
+                if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
+                }
+            }
+        }
+    }
+}
+
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -2370,14 +2389,6 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 
         //let mut globals = *fighter.globals_mut();
 
-        if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
-            if [*FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR].contains(&status_kind) {
-                println!("Can airdodge: {}, Can aerial: {}, Can jump: {}, Can cancel: {}, Can special: {}", WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_AIR),
-                WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_AIR), WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL),
-                CancelModule::is_enable_cancel(boma), WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW));
-            }
-        }
-
         if [*FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PFUSHIGISOU].contains(&fighter_kind) {
             if CancelModule::is_enable_cancel(boma) {
                 WorkModule::enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW);
@@ -2385,6 +2396,16 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
                 println!("Status: {}", status_kind);
             }
+        }
+
+        if fighter_kind == *FIGHTER_KIND_PICHU {
+            if ArticleModule::is_exist(boma, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKI) {
+                println!("pichu grounded neutralb");
+            }
+        }
+
+        if OPPDASHSPEED > WorkModule::get_param_float(boma, 0, hash40("run_speed_max")) && fighter_kind != *FIGHTER_KIND_PIKACHU {
+            OPPDASHSPEED = WorkModule::get_param_float(boma, 0, hash40("run_speed_max"));
         }
 
         if get_player_number(boma) == 0 {
@@ -2474,6 +2495,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         sephirothEdits(boma, fighter_kind, motion_kind);
         zssDair(lua_state, &mut l2c_agent, boma, motion_kind, fighter_kind, cat1);
         docFixes(boma, fighter_kind, motion_kind);
+        fireFox(boma, status_kind, fighter_kind);
         //nessEffects(boma);
         //editParams(boma, status_kind, fighter_kind);
         //dashgrabSlide(boma, status_kind);
