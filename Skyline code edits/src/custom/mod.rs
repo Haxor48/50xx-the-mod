@@ -555,13 +555,34 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
     if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
         if [*FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR].contains(&status_kind) {
             if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status) {
-                if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > 0.0 || KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < WorkModule::get_param_float(boma, hash40("dive_speed_y"), 0) ||
+                if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > 0.0 || KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < -1.0 * WorkModule::get_param_float(boma, hash40("dive_speed_y"), 0) ||
                 abs(KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)) > WorkModule::get_param_float(boma, hash40("air_speed_x_stable"), 0) {
                     return 0;
                 }
             }
         }
     }
+
+    /*if [*FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PFUSHIGISOU].contains(&fighter_kind) {
+        if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
+            if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_R) != 0 || (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_L) != 0 {
+                if fighter_kind == *FIGHTER_KIND_PZENIGAME {
+                    original!()(boma, *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_LW_OUT, unk);
+                }
+                else if fighter_kind == *FIGHTER_KIND_PFUSHIGISOU {
+                    original!()(boma, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_LW_OUT, unk);
+                }
+                else if fighter_kind == *FIGHTER_KIND_PLIZARDON {
+                    original!()(boma, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_LW_OUT, unk);
+                }
+            }
+        }
+        else if [*FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_LW_OUT].contains(&status_kind) {
+            if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
+                original!()(boma, *FIGHTER_STATUS_KIND_APPEAL, unk);
+            }
+        }
+    } */
     /*if fighter_kind == *FIGHTER_KIND_MARIO {
         if alt(boma, 4) || alt(boma, 5) {
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
@@ -1660,13 +1681,8 @@ pub unsafe fn squirtleSideB (boma: &mut smash::app::BattleObjectModuleAccessor, 
             StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
         }*/
         if status_kind == *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_S_HIT {
-            if StatusModule::prev_situation_kind(boma) == *SITUATION_KIND_GROUND {
-                StatusModule::set_situation_kind(boma, smash::cpp::root::app::SituationKind(*SITUATION_KIND_GROUND), false);
-                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
-            }
-            else if StatusModule::prev_situation_kind(boma) == *SITUATION_KIND_AIR {
-                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
-            }
+            StatusModule::set_situation_kind(boma, smash::cpp::root::app::SituationKind(*SITUATION_KIND_GROUND), false);
+            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
         }
         if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
             StatusModule::set_situation_kind(boma, smash::cpp::root::app::SituationKind(*SITUATION_KIND_GROUND), false);
@@ -1677,7 +1693,7 @@ pub unsafe fn squirtleSideB (boma: &mut smash::app::BattleObjectModuleAccessor, 
             }
         }
         if status_kind == *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_S_LOOP {
-            if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+            if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 || ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_S_END, true);
             }
         }
@@ -1824,13 +1840,29 @@ pub unsafe fn upbCancels (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut s
 pub unsafe fn ptSwaps (boma: &mut smash::app::BattleObjectModuleAccessor, fighter_kind: i32, cat1: i32, cat2: i32) {
     if [*FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_PLIZARDON].contains(&fighter_kind) {
         if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_L) != 0 {
-            if WorkModule::is_enable_transition_term(boma, *FIGHTER_POKEMON_STATUS_TRANSITION_TERM_ID_PRE_START) {
-                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+            if CancelModule::is_enable_cancel(boma) {
+                if fighter_kind == *FIGHTER_KIND_PZENIGAME {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_LW_OUT, true);
+                }
+                else if fighter_kind == *FIGHTER_KIND_PFUSHIGISOU {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_LW_OUT, true);
+                }
+                else if fighter_kind == *FIGHTER_KIND_PLIZARDON {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_LW_OUT, true);
+                }
             }
         }
         else if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_R) != 0 {
-            if WorkModule::is_enable_transition_term(boma, *FIGHTER_POKEMON_STATUS_TRANSITION_TERM_ID_PRE_START) {
-                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+            if CancelModule::is_enable_cancel(boma) {
+                if fighter_kind == *FIGHTER_KIND_PZENIGAME {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_LW_OUT, true);
+                }
+                else if fighter_kind == *FIGHTER_KIND_PFUSHIGISOU {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_LW_OUT, true);
+                }
+                else if fighter_kind == *FIGHTER_KIND_PLIZARDON {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_LW_OUT, true);
+                }
                 DOUBLESWAP[get_player_number(boma)] = true;
             }
         }
@@ -2315,7 +2347,7 @@ pub unsafe fn zssDair(lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash
                     KineticModule::add_speed(boma, &speed_vector);
                 }
                 else {
-                    let speed_vector = smash::phx::Vector3f { x: 0.0, y: -1.0 * WorkModule::get_param_float(boma, 0, hash40("air_speed_y_stable""dive_speed_y")), z: 0.0 };
+                    let speed_vector = smash::phx::Vector3f { x: 0.0, y: -1.0 * WorkModule::get_param_float(boma, 0, hash40("air_speed_y_stable")), z: 0.0 };
                     KineticModule::add_speed(boma, &speed_vector);
                 }
             }
@@ -2347,6 +2379,28 @@ pub unsafe fn fireFox(boma: &mut smash::app::BattleObjectModuleAccessor, status_
                 if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_GUARD) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
                 }
+            }
+        }
+    }
+}
+pub unsafe fn snakeC4Thing(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, motion_kind: u64) {
+    if fighter_kind == *FIGHTER_KIND_SNAKE {
+        if motion_kind == hash40("special_lw_blast") && MotionModule::frame(boma) < 2.0 {
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                ArticleModule::remove_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+                MotionModule::change_motion(boma, Hash40{hash: hash40("special_lw_start")}, 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        else if motion_kind == hash40("special_lw_squat_blast") && MotionModule::frame(boma) < 2.0 {
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                ArticleModule::remove_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+                MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_lw_start")}, 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        else if motion_kind == hash40("special_air_lw_blast") && MotionModule::frame(boma) < 2.0 {
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                ArticleModule::remove_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+                MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_lw_start")}, 0.0, 1.0, false, 0.0, false, false);
             }
         }
     }
@@ -2469,7 +2523,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         quickAttackCancels(boma, status_kind, situation_kind, fighter_kind, stick_value_y);
         //moonwalking(boma, status_kind, stick_value_x);
         upbCancels(lua_state, &mut l2c_agent, boma, status_kind, fighter_kind, cat1);
-        ptSwaps(boma, fighter_kind, cat1, cat2);
+        //ptSwaps(boma, fighter_kind, cat1, cat2);
         driftDi(boma, status_kind, stick_value_x);
         grenShurikenFix(boma, status_kind, situation_kind, fighter_kind);
         animPortFix(lua_state, &mut l2c_agent,boma, fighter_kind, motion_kind, stick_value_y);
@@ -2492,6 +2546,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         zssDair(lua_state, &mut l2c_agent, boma, motion_kind, fighter_kind, cat1);
         docFixes(boma, fighter_kind, motion_kind);
         fireFox(boma, status_kind, fighter_kind);
+        snakeC4Thing(boma, status_kind, fighter_kind, motion_kind);
         //nessEffects(boma);
         //editParams(boma, status_kind, fighter_kind);
         //dashgrabSlide(boma, status_kind);

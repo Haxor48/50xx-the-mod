@@ -251,7 +251,7 @@ pub fn ganon_effect_bair(fighter: &mut L2CFighterCommon) {
             LAST_EFFECT_SET_OFFSET_TO_CAMERA_FLAT(0.479999989)
             EFFECT_FOLLOW(0x1150d2f689_u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
             EFFECT_FOLLOW(0x11a9ed31d7_u64, hash40("haver"), 0, 1.5, 0, 0, 0, 0, 1, true)
-            //AFTER_IMAGE4_ON_arg29(0x10dd44e2a9, 0x10444db313, 4, haver, 0, 1.5, -1.20000005, haver, 0, 20.5, -1.20000005, True, null, haver, 0, 0, 0, 0, 0, 0, 1, 0, FIGHTER_ROY_STATUS_FINAL_FLAG_REMOVE_FINAL_AURA, 0, FIGHTER_SONIC_INSTANCE_WORK_FLAG_DISABLE_RUN_TRACE, 101, FIGHTER_STATUS_WIN_WORK_INT_EFFECT_HANDLE, 1.39999998, 0.100000001)
+            //AFTER_IMAGE4_ON_arg29(0x10dd44e2a9 as u64, 0x10444db313 as u64, 4, hash40("haver"), 0, 1.5, -1.20000005, hash40("haver"), 0, 20.5, -1.20000005, true, hash40("null"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE 1.39999998, 0.100000001)
         }
         frame(Frame=14)
         if(is_excute){
@@ -532,6 +532,66 @@ pub fn ganon_effect_bthrow(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_GANON, 
+    animation = "attack_air_n",
+    animcmd = "game_attackairn")]
+pub fn ganon_nair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        frame(Frame=1)
+        FT_MOTION_RATE(FSM=0.5)
+        frame(Frame=3)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+        frame(Frame=12)
+        FT_MOTION_RATE(FSM=1)
+        frame(Frame=15)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.5, Angle=361, KBG=72, FKB=0, BKB=51, Size=12.5, X=0.0, Y=10.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_MAGIC)
+        }
+        wait(Frames=2)
+        if(is_excute){
+        AttackModule::clear_all()
+        }
+        frame(Frame=36)
+        if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_GANON, 
+    animation = "attack_air_n",
+    animcmd = "effect_attackairn")]
+pub fn ganon_effect_nair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            EFFECT_FOLLOW(0x16714f8181 as u64, hash40("handr"), 2.5, 1, 0, 0, 0, 0, 1, true)
+            EffectModule__enable_sync_init_pos_last()
+        }
+        frame(Frame=15)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x16714f8181 as u64, false, true)
+            EFFECT_FOLLOW_NO_STOP(0x1202649b6a as u64, hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
+            EFFECT_FLW_POS(0x11066210d7 as u64, hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW_NO_STOP(0x1a43a1bf11 as u64, hash40("handr"), 3.5, 1, 0, 0, 0, 0, 1, true)
+            EffectModule__enable_sync_init_pos_last()
+        }
+        frame(Frame=16)
+        if(is_excute){
+            EFFECT_DETACH_KIND(0x1a43a1bf11 as u64, -1)
+        }
+        frame(Frame=17)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x1202649b6a as u64, false, false)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
         ganon_fair,
@@ -551,6 +611,8 @@ pub fn install() {
         ganon_uair,
         ganon_effect_uair,
         ganon_bthrow,
-        ganon_effect_bthrow
+        ganon_effect_bthrow,
+        ganon_nair,
+        ganon_effect_nair
     );
 }

@@ -22,7 +22,9 @@ pub fn sephiroth_fair(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=12)
         if(is_excute){
-            WorkModule::on_flag(Flag=*FIGHTER_EDGE_STATUS_ATTACK_AIR_F_WORK_FLAG_PIERCE_GROUND)
+            rust {
+                WorkModule::on_flag(module_accessor, *FIGHTER_EDGE_STATUS_ATTACK_AIR_F_WORK_FLAG_PIERCE_GROUND);
+            }
         }
         frame(Frame=13)
         if(is_excute){
