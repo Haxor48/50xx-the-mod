@@ -563,7 +563,7 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
         }
     }
 
-    /*if [*FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PFUSHIGISOU].contains(&fighter_kind) {
+    if [*FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PFUSHIGISOU].contains(&fighter_kind) {
         if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
             if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_R) != 0 || (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_L) != 0 {
                 if fighter_kind == *FIGHTER_KIND_PZENIGAME {
@@ -582,7 +582,7 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
                 original!()(boma, *FIGHTER_STATUS_KIND_APPEAL, unk);
             }
         }
-    } */
+    }
     /*if fighter_kind == *FIGHTER_KIND_MARIO {
         if alt(boma, 4) || alt(boma, 5) {
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
@@ -2523,7 +2523,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         quickAttackCancels(boma, status_kind, situation_kind, fighter_kind, stick_value_y);
         //moonwalking(boma, status_kind, stick_value_x);
         upbCancels(lua_state, &mut l2c_agent, boma, status_kind, fighter_kind, cat1);
-        //ptSwaps(boma, fighter_kind, cat1, cat2);
+        ptSwaps(boma, fighter_kind, cat1, cat2);
         driftDi(boma, status_kind, stick_value_x);
         grenShurikenFix(boma, status_kind, situation_kind, fighter_kind);
         animPortFix(lua_state, &mut l2c_agent,boma, fighter_kind, motion_kind, stick_value_y);

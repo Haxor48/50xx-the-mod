@@ -1,12 +1,10 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
-use smash::lua2cpp::L2CFighterBase;
 use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::*;
 use crate::custom::CANPROJECTILE;
 use crate::custom::get_player_number;
-use crate::custom::OPPDASHSPEED;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -403,22 +401,6 @@ pub fn pichu_usmash (fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_PICHU_DENGEKIDAMA, 
-    animation = "regular",
-    animcmd = "game_regular")]
-pub fn pichu_electroball (fighter: &mut L2CFighterBase) {
-    acmd!({
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.1, Angle=361, KBG=30, FKB=0, BKB=50, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-4.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
-            rust {
-                AttackModule::add_power(module_accessor, 0, 10.0 * (1.98 / OPPDASHSPEED), false);
-            }
-        }
-    });
-}
-
 pub fn install() {
     acmd::add_hooks!(
         pichu_ftilt,
@@ -435,7 +417,6 @@ pub fn install() {
         pichu_sideb,
         pichu_utilt,
         pichu_fsmash,
-        pichu_usmash,
-        //pichu_electroball
+        pichu_usmash
     );
 }

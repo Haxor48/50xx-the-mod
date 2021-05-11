@@ -479,7 +479,7 @@ pub fn dk_upb_air(fighter: &mut L2CFighterCommon) {
             }
         }
         if(is_excute){
-            HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
+            HitModule::set_status_all(HIT_STATUS_NORMAL)
         }
         frame(Frame=60)
         if(is_excute){
@@ -522,7 +522,7 @@ pub fn dk_dtilt(fighter: &mut L2CFighterCommon) {
         frame(Frame=8)
         if(is_excute){
             AttackModule::clear_all()
-            HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
+            HitModule::set_status_all(HIT_STATUS_NORMAL)
         }
     });
 }

@@ -353,17 +353,6 @@ pub fn corrin_landing_dair(fighter: &mut L2CFighterCommon) {
 }
 
 #[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KAMUI, 
-    animation = "landing_air_lw",
-    animcmd = "effect_landingairlw")]
-pub fn corrin_effect_landing_dair(fighter: &mut L2CFighterCommon) {
-    acmd!({
-
-    });
-}
-
-#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
     battle_object_kind = WEAPON_KIND_KAMUI_SPEARHAND, 
     animation = "attack_s4s",
@@ -466,7 +455,6 @@ pub fn install() {
         //corrin_fsmash,
         corrin_effect_dair,
         //corrin_sideb_air,
-        //corrin_sideb_grnd,
-        corrin_effect_landing_dair
+        //corrin_sideb_grnd
     );
 }

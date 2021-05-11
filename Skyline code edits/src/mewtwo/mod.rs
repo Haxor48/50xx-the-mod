@@ -361,6 +361,6 @@ pub fn install() {
         mewtwo_fsmash_mid,
         mewtwo_fsmash_hi,
         mewtwo_fsmash_lw,
-        //mewtwo_disable
+        mewtwo_disable
     );
 }
