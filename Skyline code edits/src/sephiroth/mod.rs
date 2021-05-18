@@ -22,7 +22,9 @@ pub fn sephiroth_fair(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=12)
         if(is_excute){
-            WorkModule::on_flag(Flag=59344)
+            rust {
+                WorkModule::on_flag(module_accessor, *FIGHTER_EDGE_STATUS_ATTACK_AIR_F_WORK_FLAG_PIERCE_GROUND);
+            }
         }
         frame(Frame=13)
         if(is_excute){
@@ -33,7 +35,7 @@ pub fn sephiroth_fair(fighter: &mut L2CFighterCommon) {
         }
         frame(Frame=14)
         if(is_excute){
-            WorkModule::off_flag(Flag=59344)
+            WorkModule::off_flag(Flag=*FIGHTER_EDGE_STATUS_ATTACK_AIR_F_WORK_FLAG_PIERCE_GROUND)
         }
         frame(Frame=15)
         if(is_excute){
@@ -344,16 +346,85 @@ pub fn sephiroth_neutralb2_air(fighter: &mut L2CFighterCommon) {
     }
 }
 
-/* #[acmd_func(
+#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = FIGHTER_KIND_EDGE_FLASH, 
+    battle_object_kind = WEAPON_KIND_EDGE_FLASH, 
     animation = "attack",
     animcmd = "game_attack")]
 pub fn sephiroth_sideb(fighter: &mut L2CFighterBase) {
+        if WorkModule::is_flag(module_accessor, 57256) {
+            acmd!({
+                if(is_excute){
+                    ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=366, KBG=65, FKB=60, BKB=40, Size=9.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=-1.0, Rehit=5, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x1aa2fd0729, SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+                }
+                frame(Frame=15)
+                if(is_excute){
+                    AttackModule::clear_all()
+                    ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=361, KBG=75, FKB=0, BKB=66, Size=11.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-2, Trip=-1.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x1aa2fd0729, SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+                }
+            });
+        }
+        else {
+            acmd!({
+                if(is_excute){
+                    ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=366, KBG=65, FKB=60, BKB=40, Size=16.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=-1, Trip=-1.0, Rehit=5, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x1aa2fd0729, SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+                    ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.0, Angle=366, KBG=65, FKB=60, BKB=40, Size=22.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=-2, Trip=-1.0, Rehit=5, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x1aa2fd0729, SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+                    sv_module_access::attack(MA_MSC_CMD_ATTACK_SET_LERP, 0, 1)
+                    WorkModule::get_float(57264)
+                    ATK_LERP_RATIO(711941444)
+                }
+                frame(Frame=15)
+                if(is_excute){
+                    AttackModule::clear_all()
+                    ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.5, Angle=361, KBG=70, FKB=0, BKB=80, Size=18.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-3, Trip=-1.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x1aa2fd0729, SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+                    ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=18.0, Angle=361, KBG=83, FKB=0, BKB=83, Size=24.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-9, Trip=-1.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x1aa2fd0729, SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+                    sv_module_access::attack(MA_MSC_CMD_ATTACK_SET_LERP, 0, 1)
+                    WorkModule::get_float(57264)
+                    ATK_LERP_RATIO(711941444)
+                }
+            });
+        }
+        acmd!({
+            frame(Frame=16)
+            if(is_excute){
+                sv_battle_object::notify_event_msc_cmd(0x199c462b5d)
+            }
+        });
+    }
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_EDGE, 
+    animation = "attack_air_n",
+    animcmd = "game_attackairn")]
+pub fn sephiroth_nair(fighter: &mut L2CFighterCommon) {
     acmd!({
-        
+        frame(Frame=1)
+        FT_MOTION_RATE(FSM=0.5)
+        frame(Frame=3)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+        frame(Frame=12)
+        FT_MOTION_RATE(FSM=1)
+        frame(Frame=15)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.5, Angle=60, KBG=72, FKB=0, BKB=64, Size=12.5, X=0.0, Y=10.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_MAGIC)
+        }
+        wait(Frames=2)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.5, Angle=60, KBG=72, FKB=0, BKB=64, Size=12.5, X=0.0, Y=10.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_MAGIC)
+        }
+        wait(Frames=7)
+        if(is_excute){
+            AttackModule::clear_all();
+        }
+        frame(Frame=36)
+        if(is_excute){
+        WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
     });
-} */
+}
 
 pub fn install() {
     acmd::add_hooks!(
@@ -366,6 +437,8 @@ pub fn install() {
         sephiroth_neutralb1_grnd,
         sephiroth_neutralb1_air,
         sephiroth_neutralb2_air,
-        sephiroth_neutralb2_grnd
+        sephiroth_neutralb2_grnd,
+        sephiroth_sideb,
+        sephiroth_nair
     );
 }
