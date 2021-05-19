@@ -469,9 +469,91 @@ pub fn sheik_usmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_SHEIK, 
+    animation = "ladder_catch_r",
+    animcmd = "game_laddercatchr")]
+pub fn impa_bair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        FT_MOTION_RATE(FSM=0.5)
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_SHEIK_GENERATE_ARTICLE_KNIFE, false, 0)
+        }
+        frame(Frame=4)
+        if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+        frame(Frame=19)
+        FT_MOTION_RATE(FSM=1.0)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.5, Angle=361, KBG=90, FKB=0, BKB=37, Size=12.0, X=0.0, Y=8.0, Z=5.0, X2=0.0, Y2=8.0, Z2=15.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        }
+        wait(Frames=2)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=43)
+        if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+    });
+}
+
+#[acmd::acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_SHEIK, 
+    animation = "ladder_catch_l",
+    animcmd = "game_laddercatchl")]
+pub fn impa_dair(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_SHEIK_GENERATE_ARTICLE_KNIFE, false, 0)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_LANDING_CLEAR_SPEED)
+            WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK)
+            SET_SPEED_EX(0, 1, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+            WorkModule::off_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK)
+            KineticModule::suspend_energy(FIGHTER_KINETIC_ENERGY_ID_CONTROL)
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(1, 4, 8, 3)
+        }
+        frame(Frame=5)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+        FT_MOTION_RATE(FSM=1.2)
+        frame(Frame=15)
+        FT_MOTION_RATE(FSM=1)
+        frame(Frame=16)
+        if(is_excute){
+            FighterAreaModuleImpl::enable_fix_jostle_area(2, 4)
+        }
+        frame(Frame=17)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK)
+            SET_SPEED_EX(0, -4.2, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+            WorkModule::off_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.5, Angle=262, KBG=100, FKB=90, BKB=0, Size=12.0, X=0.0, Y=8.0, Z=5.0, X2=0.0, Y2=8.0, Z2=15.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        }
+        frame(Frame=38)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=45)
+        if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE)
+            KineticModule::resume_energy(FIGHTER_KINETIC_ENERGY_ID_CONTROL)
+        }
+       frame(Frame=53)
+        if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+    });
+}
+
 pub fn install() {
     acmd::add_hooks!(
 sheik_bair, sheik_dair, sheik_dashattack, sheik_dsmash, sheik_dtilt, sheik_fair, sheik_ftilt, sheik_landingdair, sheik_upair, sheik_utilt, sheik_dthrow,
-sheik_bthrow, sheik_uthrow, sheik_nair, sheik_usmash
+sheik_bthrow, sheik_uthrow, sheik_nair, sheik_usmash, impa_bair
     );
 }
