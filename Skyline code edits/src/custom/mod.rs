@@ -484,7 +484,7 @@ unsafe fn correct_hook(boma: &mut BattleObjectModuleAccessor, kind: GroundCorrec
 
     if category == *BATTLE_OBJECT_CATEGORY_FIGHTER {
         if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_DASH,
-        *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL].contains(&status_kind) {
+        *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, *FIGHTER_STATUS_KIND_WAIT].contains(&status_kind) {
             return original!()(boma, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
         }
         if situation_kind == *SITUATION_KIND_GROUND {
@@ -538,6 +538,8 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
     let cat1 = ControlModule::get_command_flag_cat(boma, 0);
     let cat2 = ControlModule::get_command_flag_cat(boma, 1);
     let status_kind = StatusModule::status_kind(boma);
+    let stick_value_x = ControlModule::get_stick_x(boma);
+    let stick_value_y = ControlModule::get_stick_y(boma);
     if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
         if status == 475 {
             return 0;
@@ -559,6 +561,37 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
                 abs(KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)) > WorkModule::get_param_float(boma, hash40("air_speed_x_stable"), 0) {
                     return 0;
                 }
+            }
+        }
+    }
+
+    if situation_kind == *SITUATION_KIND_AIR && status == *FIGHTER_STATUS_KIND_ESCAPE_AIR { 
+        if ![*FIGHTER_KIND_SAMUSD, *FIGHTER_KIND_LUCAS, *FIGHTER_KIND_LUIGI, *FIGHTER_KIND_SAMUS, *FIGHTER_KIND_YOUNGLINK, *FIGHTER_KIND_TOONLINK, 
+        *FIGHTER_KIND_SZEROSUIT].contains(&fighter_kind) {
+            if !ItemModule::is_have_item(boma, 0) {
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_CATCH) != 0 {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
+                    if stick_value_x * PostureModule::lr(boma) > 0.4 {
+                        MotionModule::change_motion(boma, Hash40{hash: hash40("attack_air_f")}, 0.0, 1.0, false, 0.0, false, false);
+                    }
+                    else if stick_value_x * PostureModule::lr(boma) < -0.4 {
+                        MotionModule::change_motion(boma, Hash40{hash: hash40("attack_air_b")}, 0.0, 1.0, false, 0.0, false, false);
+                    }
+                    else if stick_value_y > 0.4 {
+                        MotionModule::change_motion(boma, Hash40{hash: hash40("attack_air_hi")}, 0.0, 1.0, false, 0.0, false, false);
+                    }
+                    else if stick_value_y < -0.4 {
+                        MotionModule::change_motion(boma, Hash40{hash: hash40("attack_air_lw")}, 0.0, 1.0, false, 0.0, false, false);
+                    }
+                }
+            }
+        }
+    }
+
+    if fighter_kind == *FIGHTER_KIND_SNAKE {
+        if status == *FIGHTER_SNAKE_STATUS_KIND_SPECIAL_LW_EXPLODING {
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                original!()(boma, *FIGHTER_SNAKE_STATUS_KIND_SPECIAL_LW_PRODUCE, unk);
             }
         }
     }
@@ -890,7 +923,7 @@ pub unsafe fn dashPlatformDrop(boma: &mut smash::app::BattleObjectModuleAccessor
     if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_TURN_RUN, 
     *FIGHTER_STATUS_KIND_ESCAPE_AIR, 22].contains(&status_kind) {
         if situation_kind == SITUATION_KIND_GROUND {
-            if stick_value_y <= -0.7 {
+            if stick_value_y <= -0.8 {
                 if GroundModule::is_passable_ground(boma) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
                 }
@@ -899,7 +932,7 @@ pub unsafe fn dashPlatformDrop(boma: &mut smash::app::BattleObjectModuleAccessor
     }
     if status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR {
         if LAGCANCELED[get_player_number(boma)] {
-            if stick_value_y <= -0.7 {
+            if stick_value_y <= -0.8 {
                 if GroundModule::is_passable_ground(boma) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
                 }
@@ -2385,22 +2418,41 @@ pub unsafe fn fireFox(boma: &mut smash::app::BattleObjectModuleAccessor, status_
 }
 pub unsafe fn snakeC4Thing(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, motion_kind: u64) {
     if fighter_kind == *FIGHTER_KIND_SNAKE {
-        if motion_kind == hash40("special_lw_blast") && MotionModule::frame(boma) < 2.0 {
-            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
-                ArticleModule::remove_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-                MotionModule::change_motion(boma, Hash40{hash: hash40("special_lw_start")}, 0.0, 1.0, false, 0.0, false, false);
+        if ArticleModule::is_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4) {
+            let c4pos = ArticleModule::get_joint_pos(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, Hash40{hash: hash40("trans")}, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+            if ArticleModule::is_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE) {
+                let temp = ArticleModule::get_joint_pos(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, Hash40{hash: hash40("trans")}, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+                if abs(c4pos.x - temp.x) <= 7.0 {
+                    if !WorkModule::is_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP) {
+                        WorkModule::on_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP)
+                    }
+                }
             }
-        }
-        else if motion_kind == hash40("special_lw_squat_blast") && MotionModule::frame(boma) < 2.0 {
-            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
-                ArticleModule::remove_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-                MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_lw_start")}, 0.0, 1.0, false, 0.0, false, false);
+            if ArticleModule::is_exist(boma, *WEAPON_SNAKE_TRENCHMORTAR_GENERATE_ARTICLE_BULLET) {
+                let temp = ArticleModule::get_joint_pos(boma, *WEAPON_SNAKE_TRENCHMORTAR_GENERATE_ARTICLE_BULLET, Hash40{hash: hash40("trans")}, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+                if abs(c4pos.x - temp.x) <= 7.0 {
+                    ArticleModule::change_motion(boma, *WEAPON_SNAKE_TRENCHMORTAR_GENERATE_ARTICLE_BULLET, Hash40{hash: hash40("impact")}, false, 0.0);
+                    if !WorkModule::is_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP) {
+                        WorkModule::on_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP)
+                    }
+                }
             }
-        }
-        else if motion_kind == hash40("special_air_lw_blast") && MotionModule::frame(boma) < 2.0 {
-            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
-                ArticleModule::remove_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-                MotionModule::change_motion(boma, Hash40{hash: hash40("special_air_lw_start")}, 0.0, 1.0, false, 0.0, false, false);
+            if ArticleModule::is_exist(boma, *WEAPON_SNAKE_NIKITA_GENERATE_ARTICLE_MISSILE) {
+                let temp = ArticleModule::get_joint_pos(boma, *WEAPON_SNAKE_NIKITA_GENERATE_ARTICLE_MISSILE, Hash40{hash: hash40("trans")}, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+                if abs(c4pos.x - temp.x) <= 7.0 {
+                    ArticleModule::change_motion(boma, *WEAPON_SNAKE_NIKITA_GENERATE_ARTICLE_MISSILE, Hash40{hash: hash40("explosion")}, false, 0.0);
+                    if !WorkModule::is_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP) {
+                        WorkModule::on_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP)
+                    }
+                }
+            }
+            if ArticleModule::is_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7) {
+                let temp = ArticleModule::get_joint_pos(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, Hash40{hash: hash40("trans")}, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+                if abs(c4pos.x - temp.x) <= 7.0 {
+                    if !WorkModule::is_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP) {
+                        WorkModule::on_flag(boma, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP)
+                    }
+                }
             }
         }
     }
@@ -2439,23 +2491,17 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 
         //let mut globals = *fighter.globals_mut();
 
-        if [*FIGHTER_KIND_PLIZARDON, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PFUSHIGISOU].contains(&fighter_kind) {
-            if CancelModule::is_enable_cancel(boma) {
-                WorkModule::enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW);
-            }
-            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                println!("Status: {}", status_kind);
-            }
-        }
-
-        if fighter_kind == *FIGHTER_KIND_PICHU {
-            if ArticleModule::is_exist(boma, *FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKI) {
-                println!("pichu grounded neutralb");
-            }
-        }
-
         if OPPDASHSPEED > WorkModule::get_param_float(boma, 0, hash40("run_speed_max")) && fighter_kind != *FIGHTER_KIND_PIKACHU {
             OPPDASHSPEED = WorkModule::get_param_float(boma, 0, hash40("run_speed_max"));
+        }
+
+        if ArticleModule::is_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4) {
+            let c4pos = ArticleModule::get_joint_pos(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, Hash40{hash: hash40("trans")}, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+            println!("c4 x={}, y={}, z={}", c4pos.x, c4pos.y, c4pos.z);
+        }
+        if ArticleModule::is_exist(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE) {
+            let temp = ArticleModule::get_joint_pos(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, Hash40{hash: hash40("trans")}, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+            println!("grenade x={}, y={}, z={}", temp.x, temp.y, temp.z);
         }
 
         if get_player_number(boma) == 0 {
@@ -2523,7 +2569,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         quickAttackCancels(boma, status_kind, situation_kind, fighter_kind, stick_value_y);
         //moonwalking(boma, status_kind, stick_value_x);
         upbCancels(lua_state, &mut l2c_agent, boma, status_kind, fighter_kind, cat1);
-        ptSwaps(boma, fighter_kind, cat1, cat2);
+        //ptSwaps(boma, fighter_kind, cat1, cat2);
         driftDi(boma, status_kind, stick_value_x);
         grenShurikenFix(boma, status_kind, situation_kind, fighter_kind);
         animPortFix(lua_state, &mut l2c_agent,boma, fighter_kind, motion_kind, stick_value_y);

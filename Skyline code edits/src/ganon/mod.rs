@@ -132,7 +132,7 @@ pub fn ganon_dtilt(fighter: &mut L2CFighterCommon) {
             ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0)
         }
-        frame(Frame=10)
+        frame(Frame=7)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=10.0, Angle=280, KBG=50, FKB=0, BKB=85, Size=4.0, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=10.0, Angle=280, KBG=50, FKB=0, BKB=85, Size=4.0, X=0.0, Y=14.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
@@ -315,7 +315,11 @@ pub fn ganon_ftilt(fighter: &mut L2CFighterCommon) {
             ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0)
         }
-        frame(Frame=12)
+        FT_MOTION_RATE(FSM=0.77)
+        frame(Frame=13)
+        FT_MOTION_RATE(FSM=0.8)
+        frame(Frame=14)
+        FT_MOTION_RATE(FSM=1)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=14.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=4.0, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=14.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=4.0, X=0.0, Y=14.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
@@ -567,7 +571,7 @@ pub fn ganon_effect_nair(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_excute){
             EFFECT_FOLLOW(0x16714f8181 as u64, hash40("handr"), 2.5, 1, 0, 0, 0, 0, 1, true)
-            EffectModule__enable_sync_init_pos_last()
+            EffectModule::enable_sync_init_pos_last()
         }
         frame(Frame=15)
         if(is_excute){
@@ -575,7 +579,7 @@ pub fn ganon_effect_nair(fighter: &mut L2CFighterCommon) {
             EFFECT_FOLLOW_NO_STOP(0x1202649b6a as u64, hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
             EFFECT_FLW_POS(0x11066210d7 as u64, hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
             EFFECT_FOLLOW_NO_STOP(0x1a43a1bf11 as u64, hash40("handr"), 3.5, 1, 0, 0, 0, 0, 1, true)
-            EffectModule__enable_sync_init_pos_last()
+            EffectModule::enable_sync_init_pos_last()
         }
         frame(Frame=16)
         if(is_excute){
@@ -612,11 +616,3 @@ pub fn install() {
         ganon_effect_nair
     );
 }
-
-// _____  ______ ______ ______  _   _ _    _ _______ _____ 
-//|  __ \|  ____|  ____|___  / | \ | | |  | |__   __/ ____|
-//| |  | | |__  | |__     / /  |  \| | |  | |  | | | (___  
-//| |  | |  __| |  __|   / /   | . ` | |  | |  | |  \___ \ 
-//| |__| | |____| |____ / /__  | |\  | |__| |  | |  ____) |
-//|_____/|______|______/_____| |_| \_|\____/   |_| |_____/ 
-                                                         

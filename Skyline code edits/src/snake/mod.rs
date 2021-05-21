@@ -274,7 +274,7 @@ pub fn snake_grenade_grnd(fighter: &mut L2CFighterCommon) { //This move called m
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, false, 0)
             ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false, 0)
-            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false)
+            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             CORRECT(GROUND_CORRECT_KIND_GROUND_CLIFF_STOP)
         }
         frame(Frame=3)
@@ -283,7 +283,7 @@ pub fn snake_grenade_grnd(fighter: &mut L2CFighterCommon) { //This move called m
         }
         frame(Frame=9)
         if(is_excute){
-            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, true)
+            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, true, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
         frame(Frame=16)
         FT_MOTION_RATE(FSM=0.5)
@@ -303,7 +303,7 @@ pub fn snake_grenade_air(fighter: &mut L2CFighterCommon) { //This move called me
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, false, 0)
             ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false, 0)
-            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false)
+            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             CORRECT(GROUND_CORRECT_KIND_GROUND_CLIFF_STOP)
         }
         frame(Frame=3)
@@ -312,7 +312,7 @@ pub fn snake_grenade_air(fighter: &mut L2CFighterCommon) { //This move called me
         }
         frame(Frame=9)
         if(is_excute){
-            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, true)
+            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, true, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
         frame(Frame=16)
         FT_MOTION_RATE(FSM=0.5)

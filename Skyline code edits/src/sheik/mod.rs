@@ -500,7 +500,7 @@ pub fn impa_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd::acmd_func(
+/*#[acmd::acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_SHEIK, 
     animation = "ladder_catch_l",
@@ -515,7 +515,7 @@ pub fn impa_dair(fighter: &mut L2CFighterCommon) {
             WorkModule::off_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK)
             KineticModule::suspend_energy(FIGHTER_KINETIC_ENERGY_ID_CONTROL)
             WorkModule::on_flag(Flag=FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE)
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(1, 4, 8, 3)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(1.0, 4.0, 8.0, 3.0)
         }
         frame(Frame=5)
         if(is_excute){
@@ -526,7 +526,7 @@ pub fn impa_dair(fighter: &mut L2CFighterCommon) {
         FT_MOTION_RATE(FSM=1)
         frame(Frame=16)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(2, 4)
+            FighterAreaModuleImpl::enable_fix_jostle_area(2.0, 4.0)
         }
         frame(Frame=17)
         if(is_excute){
@@ -549,11 +549,11 @@ pub fn impa_dair(fighter: &mut L2CFighterCommon) {
             WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         }
     });
-}
+} */
 
 pub fn install() {
     acmd::add_hooks!(
 sheik_bair, sheik_dair, sheik_dashattack, sheik_dsmash, sheik_dtilt, sheik_fair, sheik_ftilt, sheik_landingdair, sheik_upair, sheik_utilt, sheik_dthrow,
-sheik_bthrow, sheik_uthrow, sheik_nair, sheik_usmash, impa_bair
+sheik_bthrow, sheik_uthrow, sheik_nair, sheik_usmash//, impa_bair, impa_dair
     );
 }

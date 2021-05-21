@@ -422,12 +422,10 @@ pub fn chrom_usmash(fighter: &mut L2CFighterCommon) {
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
         frame(Frame=13)
-        if(is_excute){
-            ATTACK(ID=1, Part=0, Bone=hash40("sword1"), Damage=15.0, Angle=89, KBG=100, FKB=0, BKB=45, Size=4.9, X=0.0, Y=0.0, Z=5.8, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CHROM_HIT, Type=ATTACK_REGION_SWORD)
-        }
         for(4 Iterations){
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("armr"), Damage=2.0, Angle=98, KBG=100, FKB=85, BKB=0, Size=5.4, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CHROM_HIT, Type=ATTACK_REGION_SWORD)
+                ATTACK(ID=1, Part=0, Bone=hash40("sword1"), Damage=15.0, Angle=89, KBG=100, FKB=0, BKB=45, Size=4.9, X=0.0, Y=0.0, Z=5.8, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CHROM_HIT, Type=ATTACK_REGION_SWORD)
                 AttackModule::set_no_damage_fly_smoke_all(true, false)
             }
             wait(Frames=1)
@@ -587,6 +585,66 @@ pub fn chrom_effect_ftilt(fighter: &mut L2CFighterCommon) {
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_CHROM, 
+    animation = "ladder_catch_end_l",
+    animcmd = "effect_laddercatchendl")]
+pub fn chrom_effect_ftilt_hi(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            EFFECT_FOLLOW(0x1262af4ad5_u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
+        }
+        frame(Frame=7)
+        if(is_excute){
+            EFFECT_FOLLOW(0x13852aea9d_u64, hash40("top"), 0, 7.5, 15, 0, 0, 0, 0.899999976, true)
+            EFFECT(0x1441eaf0b3_u64, hash40("top"), 0, 7.5, 6, 0, 0, 0, 1.20000005, 0, 0, 0, 0, 0, 0, true)
+            LAST_EFFECT_SET_COLOR(0.263999999, 0.469999999, 1.29999995)
+            LAST_EFFECT_SET_RATE(0.699999988)
+        }
+        frame(Frame=8)
+        if(is_excute){
+            LANDING_EFFECT(0x0d0679b24d_u64, hash40("top"), 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT(0x0c47781d45_u64, hash40("sword1"), 0, 0, 10, 0, 0, 0, 0.600000024, 0, 0, 0, 0, 0, 0, true)
+            LAST_EFFECT_SET_RATE(1.5)
+        }
+        frame(Frame=15)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x1262af4ad5_u64, false, true)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CHROM, 
+    animation = "ladder_catch_end_r",
+    animcmd = "effect_laddercatchendr")]
+pub fn chrom_effect_ftilt_lw(fighter: &mut L2CFighterCommon) {
+    acmd!({
+        if(is_excute){
+            EFFECT_FOLLOW(0x1262af4ad5_u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
+        }
+        frame(Frame=7)
+        if(is_excute){
+            EFFECT_FOLLOW(0x13852aea9d_u64, hash40("top"), 0, 7.5, 15, 0, 0, 0, 0.899999976, true)
+            EFFECT(0x1441eaf0b3_u64, hash40("top"), 0, 7.5, 6, 0, 0, 0, 1.20000005, 0, 0, 0, 0, 0, 0, true)
+            LAST_EFFECT_SET_COLOR(0.263999999, 0.469999999, 1.29999995)
+            LAST_EFFECT_SET_RATE(0.699999988)
+        }
+        frame(Frame=8)
+        if(is_excute){
+            LANDING_EFFECT(0x0d0679b24d_u64, hash40("top"), 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT(0x0c47781d45_u64, hash40("sword1"), 0, 0, 10, 0, 0, 0, 0.600000024, 0, 0, 0, 0, 0, 0, true)
+            LAST_EFFECT_SET_RATE(1.5)
+        }
+        frame(Frame=15)
+        if(is_excute){
+            EFFECT_OFF_KIND(0x1262af4ad5_u64, false, true)
+        }
+    });
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_CHROM, 
     animation = "special_air_s1",
     animcmd = "game_specialairs1")]
 pub fn chrom_sideb1_air(fighter: &mut L2CFighterCommon) {
@@ -681,6 +739,8 @@ pub fn install() {
         chrom_ftilt_lw,
         //chrom_sideb1_air,
         chrom_sideb2_hi_air,
-        chrom_sideb2_lw_air
+        chrom_sideb2_lw_air,
+        chrom_effect_ftilt_hi,
+        chrom_effect_ftilt_lw
     );
 }

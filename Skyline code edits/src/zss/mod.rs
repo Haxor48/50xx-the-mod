@@ -105,8 +105,8 @@ pub fn zss_nair(fighter: &mut L2CFighterCommon) {
 pub fn zss_zair(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, false, 0)
-            ArticleModule::set_visibility_whole(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+            ArticleModule::generate_article(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, 0)
+            ArticleModule::set_visibility_whole(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             WorkModule::on_flag(Flag=FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK)
         }
         wait(Frames=5)
@@ -394,6 +394,30 @@ pub fn zss_dair(fighter: &mut L2CFighterCommon) {
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_SZEROSUIT, 
+    animation = "attack_air_lw",
+    animcmd = "effect_attackairlw")]
+pub fn zss_effect_dair(fighter: &mut L2CFighterCommon) {
+    if !ZSSDAIR[get_player_number(module_accessor)] {
+        acmd!({
+            frame(Frame=3)
+            if(is_excute){
+                EFFECT_FOLLOW(0x130c853eee as u64, hash40("toer"), 0, -0.699999988, 0, 0, 0, 0, 0.600000024, true)
+            }
+            frame(Frame=14)
+            if(is_excute){
+                EFFECT_FOLLOW(0x1538ae1eec as u64, hash40("toel"), -0.5, 0.300000012, 0, 0, 0, -45, 0.600000024, true)
+            }
+            frame(Frame=16)
+            if(is_excute){
+                EFFECT_FOLLOW(0x102513c95d as u64, hash40("top"), 0, 0, 0, 80, 0, 0, 0.899999976, true)
+            }
+        });
+    }
+}
+
+#[acmd_func(
+    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
+    battle_object_kind = FIGHTER_KIND_SZEROSUIT, 
     animation = "attack_dash",
     animcmd = "game_attackdash")]
 pub fn zss_da(fighter: &mut L2CFighterCommon) {
@@ -467,19 +491,21 @@ pub fn zss_fair(fighter: &mut L2CFighterCommon) {
     animation = "landing_air_lw",
     animcmd = "game_landingairlw")]
 pub fn zss_landing_dair(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        if(is_excute){
-            SET_SPEED_EX(0, 0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
-        }
-        frame(Frame=1)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.5, Angle=80, KBG=110, FKB=0, BKB=70, Size=9.0, X=0.0, Y=7.0, Z=1.0, X2=0.0, Y2=7.0, Z2=-1.5, Hitlag=0.3, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        }
-        frame(Frame=3)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-    });
+    if !ZSSDAIR[get_player_number(module_accessor)] {
+        acmd!({
+            if(is_excute){
+                SET_SPEED_EX(0, 0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+            }
+            frame(Frame=1)
+            if(is_excute){
+                ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.5, Angle=80, KBG=110, FKB=0, BKB=70, Size=9.0, X=0.0, Y=7.0, Z=1.0, X2=0.0, Y2=7.0, Z2=-1.5, Hitlag=0.3, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            }
+            frame(Frame=3)
+            if(is_excute){
+                AttackModule::clear_all()
+            }
+        });
+    }
 }
 
 pub fn install() {
@@ -496,6 +522,7 @@ pub fn install() {
         zss_dair,
         zss_da,
         zss_fair,
-        zss_landing_dair
+        zss_landing_dair,
+        zss_effect_dair
     );
 }
