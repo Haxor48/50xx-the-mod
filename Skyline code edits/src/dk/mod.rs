@@ -10,13 +10,10 @@ use crate::custom::CANBARREL;
 use crate::custom::get_player_number;
 use crate::custom::CANPROJECTILE;
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn dk_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "donkey", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn dk_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=10)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -43,13 +40,10 @@ pub fn dk_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_dash",
-    animcmd = "game_attackdash")]
-pub fn dk_da(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "donkey", scripts = ["game_attackdash"], category = ACMD_GAME)]
+fn dk_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=9)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=57, KBG=46, FKB=0, BKB=85, Size=8.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.25, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
@@ -65,12 +59,9 @@ pub fn dk_da(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "special_s",
-    animcmd = "game_specials")]
-pub fn dk_sideb_grnd(fighter: &mut L2CFighterCommon) {
+#[acmd_script(agent = "donkey", scripts = ["game_specials"], category = ACMD_GAME)]
+fn dk_sideb_grnd(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
     if CANBARREL[get_player_number(module_accessor)] && CANPROJECTILE[get_player_number(module_accessor)] {
         LASTBARREL[get_player_number(module_accessor)] = GLOBALFRAMECOUNT;
         CANBARREL[get_player_number(module_accessor)] = false;
@@ -80,13 +71,10 @@ pub fn dk_sideb_grnd(fighter: &mut L2CFighterCommon) {
     }
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "special_air_s",
-    animcmd = "game_specialairs")]
-pub fn dk_sideb_air(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_specialairs"], category = ACMD_GAME)]
+fn dk_sideb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
             sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_ALWAYS, 0)
@@ -108,19 +96,19 @@ pub fn dk_sideb_air(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn dk_utilt(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attackhi3"], category = ACMD_GAME)]
+fn dk_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
             HIT_NODE(hash40("armr"), HIT_STATUS_XLU)
             ATTACK(ID=0, Part=0, Bone=hash40("shoulderr"), Damage=9.0, Angle=100, KBG=105, FKB=0, BKB=55, Size=4.8, X=2.7, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=9.5, Angle=100, KBG=110, FKB=0, BKB=55, Size=4.0, X=3.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=2, Part=0, Bone=hash40("handr"), Damage=10.0, Angle=100, KBG=115, FKB=0, BKB=55, Size=5.3, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=8.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=1, Frames=8.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=2, Frames=8.0, Unk=false)
         }
         frame(Frame=12)
         if(is_excute){
@@ -130,13 +118,10 @@ pub fn dk_utilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_s3_hi",
-    animcmd = "game_attacks3hi")]
-pub fn dk_ftilt_hi(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attacks3hi"], category = ACMD_GAME)]
+fn dk_ftilt_hi(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.91)
         frame(Frame=6)
@@ -159,13 +144,10 @@ pub fn dk_ftilt_hi(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_s3_s",
-    animcmd = "game_attacks3s")]
-pub fn dk_ftilt_mid(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attacks3s"], category = ACMD_GAME)]
+fn dk_ftilt_mid(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.9)
         frame(Frame=6)
@@ -187,13 +169,10 @@ pub fn dk_ftilt_mid(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_s3_lw",
-    animcmd = "game_attacks3lw")]
-pub fn dk_ftilt_lw(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attacks3lw"], category = ACMD_GAME)]
+fn dk_ftilt_lw(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.91)
         frame(Frame=6)
@@ -216,13 +195,10 @@ pub fn dk_ftilt_lw(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_air_b",
-    animcmd = "game_attackairb")]
-pub fn dk_bair(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attackairb"], category = ACMD_GAME)]
+fn dk_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=7)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -247,13 +223,10 @@ pub fn dk_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn dk_fair(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn dk_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         }
@@ -278,13 +251,10 @@ pub fn dk_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_air_hi",
-    animcmd = "game_attackairhi")]
-pub fn dk_uair(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attackairhi"], category = ACMD_GAME)]
+fn dk_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
             HIT_NODE(hash40("head"), HIT_STATUS_XLU)
@@ -306,13 +276,10 @@ pub fn dk_uair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_air_lw",
-    animcmd = "game_attackairlw")]
-pub fn dk_dair(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attackairlw"], category = ACMD_GAME)]
+fn dk_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=3)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -333,7 +300,7 @@ pub fn dk_dair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_DONKEY, 
     animation = "special_n",
@@ -438,15 +405,12 @@ pub fn dk_clap_max(fighter: &mut L2CFighterCommon) {
             AttackModule::clear_all();
         }
     });
-}
+} */
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "special_air_hi",
-    animcmd = "game_specialairhi")]
-pub fn dk_upb_air(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_specialairhi"], category = ACMD_GAME)]
+fn dk_upb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_DONKEY_STATUS_SPECIAL_HI_FLAG_GROUND_MOT_FRAME)
         }
@@ -461,12 +425,10 @@ pub fn dk_upb_air(fighter: &mut L2CFighterCommon) {
             AttackModule::clear_all()
         }
         frame(Frame=12)
-        if(is_excute){
-            HIT_NODE(hash40("armr"), HIT_STATUS_XLU)
-            HIT_NODE(hash40("arml"), HIT_STATUS_XLU)
-        }
         for(12 Iterations){
             if(is_excute){
+                HIT_NODE(hash40("armr"), HIT_STATUS_XLU)
+                HIT_NODE(hash40("arml"), HIT_STATUS_XLU)
                 ATTACK(ID=0, Part=0, Bone=hash40("arml"), Damage=1.0, Angle=367, KBG=20, FKB=0, BKB=55, Size=5.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_BODY)
                 ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=1.0, Angle=367, KBG=20, FKB=0, BKB=55, Size=5.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_BODY)
                 ATTACK(ID=2, Part=0, Bone=hash40("arml"), Damage=1.0, Angle=367, KBG=20, FKB=0, BKB=55, Size=3.7, X=-4.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_BODY)
@@ -479,7 +441,7 @@ pub fn dk_upb_air(fighter: &mut L2CFighterCommon) {
             }
         }
         if(is_excute){
-            HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
+            HitModule::set_status_all(HIT_STATUS_NORMAL)
         }
         frame(Frame=60)
         if(is_excute){
@@ -497,13 +459,10 @@ pub fn dk_upb_air(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_DONKEY, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn dk_dtilt(fighter: &mut L2CFighterCommon) {
-    acmd! ({
+#[acmd_script(agent = "donkey", scripts = ["game_attacklw3"], category = ACMD_GAME)]
+fn dk_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
             HIT_NODE(hash40("arml"), HIT_STATUS_XLU)
@@ -522,7 +481,7 @@ pub fn dk_dtilt(fighter: &mut L2CFighterCommon) {
         frame(Frame=8)
         if(is_excute){
             AttackModule::clear_all()
-            HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
+            HitModule::set_status_all(HIT_STATUS_NORMAL)
         }
     });
 }
