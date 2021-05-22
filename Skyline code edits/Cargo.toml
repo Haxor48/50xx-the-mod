@@ -12,8 +12,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
-skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash.git" }
-acmd = { git = "https://github.com/ultimate-research/skyline-acmd.git" }
+skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash", features = ["weak_l2cvalue"] }
+smashline = { git = "https://github.com/blu-dev/smashline" }
 
 [profile.dev]
 panic = "abort"
