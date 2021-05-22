@@ -6,13 +6,10 @@ use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
 use acmd::{acmd, acmd_func};
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "attack_air_lw",
-    animcmd = "game_attackairlw")]
-pub fn isabelle_dair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_attackairlw"], category = ACMD_GAME)]
+fn isabelle_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.769)
         frame(Frame=14)
@@ -36,13 +33,10 @@ pub fn isabelle_dair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn isabelle_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn isabelle_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_SHIZUE_INSTANCE_WORK_ID_FLAG_POMPON_LEFT)
             ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_POMPON, false, 0)
@@ -87,13 +81,10 @@ pub fn isabelle_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "attack_air_hi",
-    animcmd = "game_attackairhi")]
-pub fn isabelle_uair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_attackairhi"], category = ACMD_GAME)]
+fn isabelle_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM, false, 0)
@@ -117,7 +108,7 @@ pub fn isabelle_uair(fighter: &mut L2CFighterCommon) {
             AttackModule::clear_all()
         }
         frame(Frame=32)
-        if (is_excute) {
+        if(is_excute) {
             WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         }
         FT_MOTION_RATE(FSM=0.842)
@@ -128,13 +119,10 @@ pub fn isabelle_uair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "attack_lw3",
-    animcmd = "game_attacklw3")]
-pub fn isabelle_dtilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_attacklw3"], category = ACMD_GAME)]
+fn isabelle_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             rust {
                 FighterAreaModuleImpl::enable_fix_jostle_area(module_accessor, 2.0, 4.0);
@@ -144,8 +132,8 @@ pub fn isabelle_dtilt(fighter: &mut L2CFighterCommon) {
         frame(Frame=9)
         if(is_excute){
             ArticleModule::remove(FIGHTER_SHIZUE_GENERATE_ARTICLE_WEEDS, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.5, Angle=70, KBG=92, FKB=0, BKB=43, Size=5.0, X=0.0, Y=3.0, Z=3.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=9.5, Angle=65, KBG=90, FKB=0, BKB=40, Size=6.0, X=0.0, Y=3.0, Z=10.0, X2=0.0, Y2=3.0, Z2=2.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.5, Angle=80, KBG=92, FKB=0, BKB=43, Size=5.0, X=0.0, Y=3.0, Z=3.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=9.5, Angle=75, KBG=90, FKB=0, BKB=40, Size=6.0, X=0.0, Y=3.0, Z=10.0, X2=0.0, Y2=3.0, Z2=2.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
             AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
         }
         wait(Frames=2)
@@ -157,17 +145,14 @@ pub fn isabelle_dtilt(fighter: &mut L2CFighterCommon) {
             rust {
                 FighterAreaModuleImpl::enable_fix_jostle_area(module_accessor, 3.8, 3.0);
             }
-        } 
+        }
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn isabelle_utilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_attackhi3"], category = ACMD_GAME)]
+fn isabelle_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM, false, 0)
@@ -194,7 +179,7 @@ pub fn isabelle_utilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_SHIZUE, 
     animation = "attack_dash",
@@ -222,15 +207,12 @@ pub fn isabelle_da(fighter: &mut L2CFighterCommon) {
             AttackModule::clear_all();
         }
     });
-}
+}*/
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "attack_s4_s",
-    animcmd = "game_attacks4s")]
-pub fn isabelle_fsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_attacks4s"], category = ACMD_GAME)]
+fn isabelle_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_CRACKER, false, 0)
             rust {
@@ -267,13 +249,10 @@ pub fn isabelle_fsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "attack_lw4",
-    animcmd = "game_attacklw4")]
-pub fn isabelle_dsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_attacklw4"], category = ACMD_GAME)]
+fn isabelle_dsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_BUCKET, false, 0)
             rust {
@@ -316,7 +295,7 @@ pub fn isabelle_dsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
     battle_object_kind = WEAPON_KIND_SHIZUE_TRAFFICSIGN, 
     animation = "attack",
@@ -342,15 +321,12 @@ pub fn isabelle_usmash_end(fighter: &mut L2CFighterBase) {
             AttackModule::clear_all()
         }
     });
-}
+}*/
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_SHIZUE_BULLET, 
-    animation = "shoot_f",
-    animcmd = "game_shootf")]
-pub fn isabelle_fair(fighter: &mut L2CFighterBase) {
-    acmd!({
+#[acmd_script(agent = "shizue_bullet", scripts = ["game_shootf"], category = ACMD_GAME)]
+fn isabelle_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.5, Angle=361, KBG=110, FKB=0, BKB=40, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-3.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
             AttackModule::enable_safe_pos()
@@ -366,13 +342,10 @@ pub fn isabelle_fair(fighter: &mut L2CFighterBase) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "special_air_hi",
-    animcmd = "game_specialairhi")]
-pub fn isabelle_upb_air(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_specialairhi"], category = ACMD_GAME)]
+fn isabelle_upb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_SWING, false, 0)
             rust {
@@ -392,13 +365,10 @@ pub fn isabelle_upb_air(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "special_hi",
-    animcmd = "game_specialhi")]
-pub fn isabelle_upb_grnd(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_specialhi"], category = ACMD_GAME)]
+fn isabelle_upb_grnd(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_SWING, false, 0)
             rust {
@@ -421,13 +391,10 @@ pub fn isabelle_upb_grnd(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_SHIZUE_CLAYROCKET, 
-    animation = "ready",
-    animcmd = "game_ready")]
-pub fn isabelle_downb_wait(fighter: &mut L2CFighterBase) {
-    acmd!({
+#[acmd_script(agent = "shizue_clayrocket", scripts = ["game_ready"], category = ACMD_GAME)]
+fn isabelle_downb_wait(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         wait(Frames=20)
         if(is_execute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.0, Angle=30, KBG=90, FKB=0, BKB=0, Size=3.0, X=0.0, Y=6.0, Z=0.0, X2=0.0, Y2=12.0, Z2=0.0, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_paralyze"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_OBJECT)
@@ -435,13 +402,10 @@ pub fn isabelle_downb_wait(fighter: &mut L2CFighterBase) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "catch",
-    animcmd = "game_catch")]
-pub fn isabelle_grab(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_catch"], category = ACMD_GAME)]
+fn isabelle_grab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=12)
         if(is_excute){
             GrabModule::set_rebound(CanCatchRebound=true)
@@ -476,13 +440,10 @@ pub fn isabelle_grab(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "catch_dash",
-    animcmd = "game_catchdash")]
-pub fn isabelle_dashgrab(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_catchdash"], category = ACMD_GAME)]
+fn isabelle_dashgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.933)
         frame(Frame=13)
@@ -516,13 +477,10 @@ pub fn isabelle_dashgrab(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_SHIZUE, 
-    animation = "catch_turn",
-    animcmd = "game_catchturn")]
-pub fn isabelle_pivotgrab(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "shizue", scripts = ["game_catchturn"], category = ACMD_GAME)]
+fn isabelle_pivotgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=15)
         if(is_excute){
             GrabModule::set_rebound(CanCatchRebound=true)
@@ -553,8 +511,9 @@ pub fn isabelle_pivotgrab(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[installer]
 pub fn install() {
-    acmd::add_hooks!(
+    install_acmd_scripts!(
         isabelle_dair,
         isabelle_nair,
         isabelle_uair,

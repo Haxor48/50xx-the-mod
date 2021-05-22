@@ -4,13 +4,10 @@ use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::*;
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_air_hi",
-    animcmd = "game_attackairhi")]
-pub fn ken_uair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackairhi"], category = ACMD_GAME)]
+fn ken_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
             WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL)
@@ -40,13 +37,10 @@ pub fn ken_uair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_air_b",
-    animcmd = "game_attackairb")]
-pub fn ken_bair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackairb"], category = ACMD_GAME)]
+fn ken_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
             WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL)
@@ -76,13 +70,10 @@ pub fn ken_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn ken_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn ken_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
             WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL)
@@ -117,13 +108,10 @@ pub fn ken_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_air_lw",
-    animcmd = "game_attackairlw")]
-pub fn ken_dair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackairlw"], category = ACMD_GAME)]
+fn ken_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
@@ -155,13 +143,10 @@ pub fn ken_dair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn ken_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn ken_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
             WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL)
@@ -196,7 +181,7 @@ pub fn ken_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_KEN, 
     animation = "special_hi",
@@ -370,15 +355,12 @@ pub fn ken_upb_command_grnd(fighter: &mut L2CFighterCommon) {
             AttackModule::clear_all()
         }
     });
-}
+}*/
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_hi4",
-    animcmd = "game_attackhi4")]
-pub fn ken_usmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackhi4"], category = ACMD_GAME)]
+fn ken_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=1.4)
         frame(Frame=7)
@@ -410,13 +392,10 @@ pub fn ken_usmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_s3_s_s",
-    animcmd = "game_attacks3ss")]
-pub fn ken_ftilt_strong(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attacks3ss"], category = ACMD_GAME)]
+fn ken_ftilt_strong(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
         }
@@ -433,13 +412,10 @@ pub fn ken_ftilt_strong(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_s3_s_w",
-    animcmd = "game_attacks3sw")]
-pub fn ken_ftilt_weak(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attacks3sw"], category = ACMD_GAME)]
+fn ken_ftilt_weak(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
         }
@@ -461,17 +437,14 @@ pub fn ken_ftilt_weak(fighter: &mut L2CFighterCommon) {
             WorkModule::off_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
             HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
-        FT_MOTION_RATE(FSM=0.8)            
+        FT_MOTION_RATE(FSM=0.8) 
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_dash",
-    animcmd = "game_attackdash")]
-pub fn ken_da(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackdash"], category = ACMD_GAME)]
+fn ken_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
         }
@@ -491,7 +464,7 @@ pub fn ken_da(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_KEN, 
     animation = "special_s",
@@ -572,15 +545,12 @@ pub fn ken_sideb(fighter: &mut L2CFighterCommon) {
             WorkModule::off_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
         }
     });
-}
+}*/
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_hi3_s",
-    animcmd = "game_attackhi3s")]
-pub fn ken_utilt_strong(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackhi3s"], category = ACMD_GAME)]
+fn ken_utilt_strong(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=1.3)
         if(is_excute){
@@ -624,13 +594,10 @@ pub fn ken_utilt_strong(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_lw4",
-    animcmd = "game_attacklw4")]
-pub fn ken_dsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attacklw4"], category = ACMD_GAME)]
+fn ken_dsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL)
@@ -659,13 +626,10 @@ pub fn ken_dsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_lw3_s",
-    animcmd = "game_attacklw3s")]
-pub fn ken_dtilt_strong(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attacklw3s"], category = ACMD_GAME)]
+fn ken_dtilt_strong(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.82)
         if(is_excute){
@@ -692,7 +656,7 @@ pub fn ken_dtilt_strong(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_KEN, 
     animation = "special_lw",
@@ -709,15 +673,12 @@ pub fn ken_downb_grnd(fighter: &mut L2CFighterCommon) {
             KineticModule::add_speed(module_accessor, &speed_vector);
         }
     });
-}
+}*/
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_KEN, 
-    animation = "attack_s4_s",
-    animcmd = "game_attacks4s")]
-pub fn ken_fsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attacks4s"], category = ACMD_GAME)]
+fn ken_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=6)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -736,8 +697,9 @@ pub fn ken_fsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[installer]
 pub fn install() {
-    acmd::add_hooks!(
+    install_acmd_scripts!(
         ken_uair,
         ken_bair,
         ken_fair,

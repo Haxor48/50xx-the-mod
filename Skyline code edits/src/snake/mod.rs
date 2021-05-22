@@ -301,8 +301,9 @@ fn snake_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[installer]
 pub fn install() {
-    acmd::add_hooks!(
+    install_acmd_scripts!(
         snake_fair,
         snake_ftilt1,
         snake_nair,

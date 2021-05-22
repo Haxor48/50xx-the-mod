@@ -4,17 +4,14 @@ use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::*;
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_JACK, 
-    animation = "attack_air_b",
-    animcmd = "game_attackairb")]
-pub fn joker_bair(fighter: &mut L2CFighterCommon) { 
-    acmd!({
+#[acmd_script(agent = "ken", scripts = ["game_attackairb"], category = ACMD_GAME)]
+fn ken_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         rust
         {
             if WorkModule::is_flag(module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE){
-            acmd!({
+            acmd!(lua_state, {
                 if(is_excute)
                 {
                     FT_MOTION_RATE(FSM=1.4)
@@ -35,7 +32,7 @@ pub fn joker_bair(fighter: &mut L2CFighterCommon) {
         rust
         {
             if WorkModule::is_flag(module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE){
-            acmd!({
+            acmd!(lua_state, {
                 if(is_excute)
                 {
                     FT_MOTION_RATE(FSM=1)
@@ -57,7 +54,7 @@ pub fn joker_bair(fighter: &mut L2CFighterCommon) {
         rust
         {
             if WorkModule::is_flag(module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE){
-            acmd!({
+            acmd!(lua_state, {
                 if(is_excute)
                 {
                     FT_MOTION_RATE(FSM=1)
@@ -78,12 +75,12 @@ pub fn joker_bair(fighter: &mut L2CFighterCommon) {
         if(is_excute){
         WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         }
-              
     });
 }
 
+#[installer]
 pub fn install() {
-    acmd::add_hooks!(
+    install_acmd_scripts!(
         joker_bair
     );
 }

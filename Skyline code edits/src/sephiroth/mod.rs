@@ -303,8 +303,9 @@ fn sephiroth_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[installer]
 pub fn install() {
-    acmd::add_hooks!(
+    install_acmd_scripts!(
         sephiroth_fair,
         sephiroth_bair,
         sephiroth_uair,
