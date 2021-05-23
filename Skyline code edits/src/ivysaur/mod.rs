@@ -4,7 +4,7 @@ use smash::app::lua_bind::*;
 
 use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 use smash::app::sv_battle_object;
 use crate::custom::AMOUNTSOLAR;
 use crate::custom::CANPROJECTILE;

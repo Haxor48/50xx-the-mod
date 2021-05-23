@@ -2,16 +2,13 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 use smash::phx::*;
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn incin_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn incin_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=4)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -35,13 +32,10 @@ pub fn incin_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn incin_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn incin_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=7)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -67,13 +61,10 @@ pub fn incin_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_air_lw",
-    animcmd = "game_attackairlw")]
-pub fn incin_dair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attackairlw"], category = ACMD_GAME)]
+fn incin_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=2)
         if(is_excute){
             JostleModule::set_status(false)
@@ -104,13 +95,10 @@ pub fn incin_dair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn incin_utilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attackhi3"], category = ACMD_GAME)]
+fn incin_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             FighterAreaModuleImpl::enable_fix_jostle_area(5.1, 1.5)
@@ -144,13 +132,10 @@ pub fn incin_utilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "special_n",
-    animcmd = "game_specialn")]
-pub fn incin_neutralb_grnd(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_specialn"], category = ACMD_GAME)]
+fn incin_neutralb_grnd(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
             HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_INVINCIBLE), 0)
@@ -185,7 +170,7 @@ pub fn incin_neutralb_grnd(fighter: &mut L2CFighterCommon) {
         ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=10.0, Angle=45, KBG=40, FKB=0, BKB=80, Size=4.2, X=0.0, Y=8.0, Z=2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=15, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
         }
         wait(Frames=1)
-        if (is_excute) {
+        if(is_excute) {
             HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
         wait(Frames=1)
@@ -305,44 +290,10 @@ pub fn incin_neutralb_grnd(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_hi4",
-    animcmd = "game_attackhi4")]
-pub fn incin_usmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=6)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
-        }
-        frame(Frame=13)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("armr"), Damage=17.0, Angle=88, KBG=76, FKB=0, BKB=89, Size=4.4, X=4.4, Y=-0.4, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("shoulderr"), Damage=17.0, Angle=88, KBG=76, FKB=0, BKB=89, Size=3.6, X=3.4, Y=0.0, Z=-0.8, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            HIT_NODE(hash40("armr"), HIT_STATUS_XLU)
-            HIT_NODE(hash40("arml"), HIT_STATUS_XLU)
-        }
-        frame(Frame=19)
-        if(is_excute){
-            AttackModule::clear_all()
-            HIT_NODE(hash40("armr"), HIT_STATUS_NORMAL)
-            HIT_NODE(hash40("arml"), HIT_STATUS_NORMAL)
-        }
-        frame(Frame=24)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_GAOGAEN_INSTANCE_WORK_ID_FLAG_IS_FOLLOW_THROUGH)
-        }
-    });
-}
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_s4_s",
-    animcmd = "game_attacks4s")]
-pub fn incin_fsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attacks4s"], category = ACMD_GAME)]
+fn incin_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=2)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -363,13 +314,10 @@ pub fn incin_fsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_lw4",
-    animcmd = "game_attacklw4")]
-pub fn incin_dsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attacklw4"], category = ACMD_GAME)]
+fn incin_dsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             JostleModule::set_status(false)
@@ -406,34 +354,10 @@ pub fn incin_dsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_s3_lw",
-    animcmd = "game_attacks3lw")]
-pub fn incin_ftilt_lw(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=12)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("handl"), Damage=13.0, Angle=31, KBG=96, FKB=0, BKB=54, Size=3.4, X=3.4, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=13.0, Angle=31, KBG=96, FKB=0, BKB=54, Size=3.4, X=0.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=2, Part=0, Bone=hash40("shoulderl"), Damage=13.0, Angle=31, KBG=96, FKB=0, BKB=54, Size=3.6, X=0.0, Y=-1.8, Z=1.4, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
-        }
-        wait(Frames=3)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-    });
-}
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_s3_s",
-    animcmd = "game_attacks3s")]
-pub fn incin_ftilt_mid(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attacks3s", "game_attacks3lw", "game_attacks3hi"], category = ACMD_GAME)]
+fn incin_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=12)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("handl"), Damage=13.0, Angle=31, KBG=96, FKB=0, BKB=54, Size=3.4, X=3.4, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
@@ -447,33 +371,10 @@ pub fn incin_ftilt_mid(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_s3_hi",
-    animcmd = "game_attacks3hi")]
-pub fn incin_ftilt_hi(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=12)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("handl"), Damage=13.0, Angle=31, KBG=96, FKB=0, BKB=54, Size=3.4, X=3.4, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=13.0, Angle=31, KBG=96, FKB=0, BKB=54, Size=3.4, X=0.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=2, Part=0, Bone=hash40("shoulderl"), Damage=13.0, Angle=31, KBG=96, FKB=0, BKB=54, Size=3.6, X=0.0, Y=-1.8, Z=1.4, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-        }
-        wait(Frames=3)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-    });
-}
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GAOGAEN, 
-    animation = "attack_dash",
-    animcmd = "game_attackdash")]
-pub fn incin_da(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "gaogaen", scripts = ["game_attackdash"], category = ACMD_GAME)]
+fn incin_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=8)
         if(is_excute){
             JostleModule::set_status(false)
@@ -498,8 +399,9 @@ pub fn incin_da(fighter: &mut L2CFighterCommon) {
     });
 }
 
+#[installer]
 pub fn install() {
-    acmd::add_hooks!(
+    install_acmd_scripts!(
         incin_nair,
         incin_fair,
         incin_dair,
@@ -508,9 +410,7 @@ pub fn install() {
         incin_usmash,
         incin_fsmash,
         incin_dsmash,
-        incin_ftilt_lw,
-        incin_ftilt_mid,
-        incin_ftilt_hi,
+        incin_ftilt,
         incin_da
     );
 }

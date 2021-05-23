@@ -1,19 +1,16 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 use crate::FIGHTER_CUTIN_MANAGER_ADDR;
 use skyline::nn::ro::LookupSymbol;
 use smash::app::lua_bind::*;
 use smash::app;
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn ike_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn ike_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=3)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -41,13 +38,10 @@ pub fn ike_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn ike_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn ike_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=2)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -69,13 +63,10 @@ pub fn ike_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_air_hi",
-    animcmd = "game_attackairhi")]
-pub fn ike_uair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attackairhi"], category = ACMD_GAME)]
+fn ike_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=6)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -98,13 +89,10 @@ pub fn ike_uair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn ike_utilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attackhi3"], category = ACMD_GAME)]
+fn ike_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=11)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("sword"), Damage=12.0, Angle=95, KBG=90, FKB=0, BKB=57, Size=5.0, X=0.5, Y=13.5, Z=-1.0, X2=0.5, Y2=2.8, Z2=-1.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
@@ -120,13 +108,10 @@ pub fn ike_utilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_hi4",
-    animcmd = "game_attackhi4")]
-pub fn ike_usmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attackhi4"], category = ACMD_GAME)]
+fn ike_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=12)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -152,13 +137,10 @@ pub fn ike_usmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_s4_s",
-    animcmd = "game_attacks4")]
-pub fn ike_fsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attacks4s"], category = ACMD_GAME)]
+fn ike_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=25)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -183,13 +165,10 @@ pub fn ike_fsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_lw3",
-    animcmd = "game_attacklw3")]
-pub fn ike_dtilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attacklw3"], category = ACMD_GAME)]
+fn ike_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=7)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("sword"), Damage=8.0, Angle=72, KBG=60, FKB=0, BKB=75, Size=3.4, X=-1.0, Y=1.0, Z=-4.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.35, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
@@ -205,13 +184,10 @@ pub fn ike_dtilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_lw4",
-    animcmd = "game_attacklw4")]
-pub fn ike_dsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attacklw4"], category = ACMD_GAME)]
+fn ike_dsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=6)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -251,13 +227,10 @@ pub fn ike_dsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_s3_hi",
-    animcmd = "game_attacks3hi")]
-pub fn ike_ftilt_hi(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attacks3hi"], category = ACMD_GAME)]
+fn ike_ftilt_hi(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.77)
         frame(Frame=13)
         FT_MOTION_RATE(FSM=1)
@@ -271,13 +244,10 @@ pub fn ike_ftilt_hi(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_s3_s",
-    animcmd = "game_attacks3s")]
-pub fn ike_ftilt_mid(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attacks3s"], category = ACMD_GAME)]
+fn ike_ftilt_mid(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.77)
         frame(Frame=13)
         FT_MOTION_RATE(FSM=0.8)
@@ -293,13 +263,10 @@ pub fn ike_ftilt_mid(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "attack_s3_lw",
-    animcmd = "game_attacks3lw")]
-pub fn ike_ftilt_lw(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_attacks3lw"], category = ACMD_GAME)]
+fn ike_ftilt_lw(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.77)
         frame(Frame=13)
         FT_MOTION_RATE(FSM=1)
@@ -313,13 +280,10 @@ pub fn ike_ftilt_lw(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "special_s_attack",
-    animcmd = "game_specialsattack")]
-pub fn ike_sideb_attack_grnd(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_specialsattack"], category = ACMD_GAME)]
+fn ike_sideb_attack_grnd(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.0, Angle=85, KBG=88, FKB=0, BKB=70, Size=6.5, X=0.0, Y=8.4, Z=14.8, X2=0.0, Y2=8.4, Z2=10.7, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
@@ -336,13 +300,10 @@ pub fn ike_sideb_attack_grnd(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "throw_f",
-    animcmd = "game_throwf")]
-pub fn ike_fthrow(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_throwf"], category = ACMD_GAME)]
+fn ike_fthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=55, KBG=105, FKB=0, BKB=55, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
@@ -366,13 +327,10 @@ pub fn ike_fthrow(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "throw_b",
-    animcmd = "game_throwb")]
-pub fn ike_bthrow(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_throwb"], category = ACMD_GAME)]
+fn ike_bthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=48, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
@@ -398,13 +356,10 @@ pub fn ike_bthrow(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "special_air_n_end",
-    animcmd = "game_specialairnend")]
-pub fn ike_neutralb_weak_air(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_specialairnend"], category = ACMD_GAME)]
+fn ike_neutralb_weak_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
@@ -433,13 +388,10 @@ pub fn ike_neutralb_weak_air(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "special_air_n_end_mdl",
-    animcmd = "game_specialairnendmdl")]
-pub fn ike_neutralb_med_air(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_specialairnendmdl"], category = ACMD_GAME)]
+fn ike_neutralb_med_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
@@ -472,13 +424,10 @@ pub fn ike_neutralb_med_air(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_IKE, 
-    animation = "special_air_n_end_max",
-    animcmd = "game_specialairnendmax")]
-pub fn ike_neutralb_strong_air(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ike", scripts = ["game_specialairnendmax"], category = ACMD_GAME)]
+fn ike_neutralb_strong_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }

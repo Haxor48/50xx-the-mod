@@ -2,7 +2,7 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 use smash::app::lua_bind::*;
 use crate::FIGHTER_CUTIN_MANAGER_ADDR;
 use skyline::nn::ro::LookupSymbol;

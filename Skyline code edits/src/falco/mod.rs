@@ -1,53 +1,47 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_air_lw",
-    animcmd = "game_attackairlw")]
-pub fn falco_dair(fighter: &mut L2CFighterCommon) {
-    acmd!({
-    if(is_excute){
-    FT_MOTION_RATE(FSM=0.4)
-    }
-        frame(Frame=4)
-    if(is_excute){
-    WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-    }
-    frame(Frame=9)
-    if(is_excute){
-    FT_MOTION_RATE(FSM=1)
-    ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=13.0, Angle=290, KBG=100, FKB=0, BKB=10, Size=4.2, X=4.2, Y=0.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-    }
-    frame(Frame=15)
-    if(is_excute){
-    ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=8.0, Angle=285, KBG=80, FKB=0, BKB=0, Size=5.3, X=3.5, Y=0.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-    }
-    frame(Frame=27)
-    if(is_excute){
-    AttackModule::clear_all()
-    }
-    frame(Frame=30)
-    if(is_excute){
-    WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-    }
-    frame(Frame=32)
-    FT_MOTION_RATE(FSM=0.6)
-    frame(Frame=52)
-    FT_MOTION_RATE(FSM=1)
+#[acmd_script(agent = "falco", scripts = ["game_attackairlw"], category = ACMD_GAME)]
+fn falco_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            FT_MOTION_RATE(FSM=0.4)
+            }
+                frame(Frame=4)
+            if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+            }
+            frame(Frame=9)
+            if(is_excute){
+            FT_MOTION_RATE(FSM=1)
+            ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=13.0, Angle=290, KBG=100, FKB=0, BKB=10, Size=4.2, X=4.2, Y=0.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            }
+            frame(Frame=15)
+            if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=8.0, Angle=285, KBG=80, FKB=0, BKB=0, Size=5.3, X=3.5, Y=0.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            }
+            frame(Frame=27)
+            if(is_excute){
+            AttackModule::clear_all()
+            }
+            frame(Frame=30)
+            if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+            }
+            frame(Frame=32)
+            FT_MOTION_RATE(FSM=0.6)
+            frame(Frame=52)
+            FT_MOTION_RATE(FSM=1)
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn falco_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn falco_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=4)
         if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -67,17 +61,13 @@ pub fn falco_nair(fighter: &mut L2CFighterCommon) {
         if(is_excute){
         WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         }
-        
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_air_hi",
-    animcmd = "game_attackairhi")]
-pub fn falco_uair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["game_attackairhi"], category = ACMD_GAME)]
+fn falco_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.67)
         frame(Frame=4)
@@ -101,46 +91,41 @@ pub fn falco_uair(fighter: &mut L2CFighterCommon) {
         }
     });
 }
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_air_b",
-    animcmd = "game_attackairb")]
-pub fn falco_bair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+
+#[acmd_script(agent = "falco", scripts = ["game_attackairb"], category = ACMD_GAME)]
+fn falco_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
-        FT_MOTION_RATE(FSM=0.7)    
-        }        
-        frame(Frame=9)
-        FT_MOTION_RATE(FSM=1.0)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-            ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=13.0, Angle=361, KBG=130, FKB=0, BKB=0, Size=4.8, X=4.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-            ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=13.0, Angle=361, KBG=130, FKB=0, BKB=0, Size=3.2, X=-3.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        }
-        wait(Frames=2)
-        if(is_excute){
-        ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=3.8, X=4.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=2.8, X=-2.6, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        }
-        frame(Frame=17)
-        if(is_excute){
-        AttackModule::clear_all()
-        }
-        wait(Frames=3)
-        if(is_excute){
-        WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-        } 
+            FT_MOTION_RATE(FSM=0.7)    
+            }        
+            frame(Frame=9)
+            FT_MOTION_RATE(FSM=1.0)
+            if(is_excute){
+                WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+                ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=13.0, Angle=361, KBG=130, FKB=0, BKB=0, Size=4.8, X=4.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+                ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=13.0, Angle=361, KBG=130, FKB=0, BKB=0, Size=3.2, X=-3.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            }
+            wait(Frames=2)
+            if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=3.8, X=4.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=2.8, X=-2.6, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            }
+            frame(Frame=17)
+            if(is_excute){
+            AttackModule::clear_all()
+            }
+            wait(Frames=3)
+            if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+            } 
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn falco_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn falco_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.75)
         frame(Frame=6)
@@ -165,18 +150,15 @@ pub fn falco_fair(fighter: &mut L2CFighterCommon) {
         frame(Frame=51)
         if(is_excute){
             WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-        }       
+        }   
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_lw3",
-    animcmd = "game_attacklw3")]
-pub fn falco_dtilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
-    frame(Frame=1)
+#[acmd_script(agent = "falco", scripts = ["game_attacklw3"], category = ACMD_GAME)]
+fn falco_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
     FT_MOTION_RATE(FSM=0.6)
     frame(Frame=10)
     if(is_excute){
@@ -194,14 +176,10 @@ pub fn falco_dtilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-//bruh
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_hi4",
-    animcmd = "game_attackhi4")]
-pub fn falco_upsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["game_attackhi4"], category = ACMD_GAME)]
+fn falco_upsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=4)
         if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -213,7 +191,7 @@ pub fn falco_upsmash(fighter: &mut L2CFighterCommon) {
         ATTACK(ID=2, Part=0, Bone=hash40("kneer"), Damage=4.0, Angle=130, KBG=18, FKB=0, BKB=70, Size=4.0, X=7.7, Y=-1.3, Z=-1.3, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         }
         wait(Frames=2)
-        if (is_excute) {
+        if(is_excute) {
             ATTACK(ID=2, Part=0, Bone=hash40("kneer"), Damage=4.0, Angle=220, KBG=100, FKB=15, BKB=0, Size=4.0, X=7.7, Y=-1.3, Z=-1.3, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         }
         wait(Frames=4)
@@ -226,16 +204,14 @@ pub fn falco_upsmash(fighter: &mut L2CFighterCommon) {
         wait(Frames=7)
         if(is_excute){
         AttackModule::clear_all()
-        }      
+        }
     });
 }
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn falco_utilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+
+#[acmd_script(agent = "falco", scripts = ["game_attackhi3"], category = ACMD_GAME)]
+fn falco_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=1.5)
         frame(Frame=5)
@@ -252,7 +228,7 @@ pub fn falco_utilt(fighter: &mut L2CFighterCommon) {
             ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=3.5, Angle=100, KBG=100, FKB=50, BKB=0, Size=5.0, X=5.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
         }
         frame(Frame=8)
-        if (is_execute) {
+        if(is_execute) {
             ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=2.7, Angle=270, KBG=100, FKB=15, BKB=0, Size=5.0, X=5.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
         }
         frame(Frame=10)
@@ -271,27 +247,22 @@ pub fn falco_utilt(fighter: &mut L2CFighterCommon) {
         //FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
             AttackModule::clear_all()
-        }   
+        }
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "landing_air_f",
-    animcmd = "game_landingairf")]
-pub fn falco_fairland(fighter: &mut L2CFighterCommon) {
-    acmd!({
-     
+#[acmd_script(agent = "falco", scripts = ["game_landingairlw"], category = ACMD_GAME)]
+fn falco_fairland(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+
     });
 }
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "special_lw",
-    animcmd = "game_speciallw")]
-pub fn falco_shineg(fighter: &mut L2CFighterCommon) {
-    acmd!({
+
+#[acmd_script(agent = "falco", scripts = ["game_speciallw", "game_specialairlw", "game_speciallwr", "game_specialairlwr"], category = ACMD_GAME)]
+fn falco_shine(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=3)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
@@ -303,69 +274,11 @@ pub fn falco_shineg(fighter: &mut L2CFighterCommon) {
         } 
     });
 }
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "special_air_lw",
-    animcmd = "game_specialairlw")]
-pub fn falco_shinea(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=3)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
-            AttackModule::enable_safe_pos()
-        }
-        frame(Frame=4)
-        if(is_excute){
-        AttackModule::clear_all()
-        }  
-    });
-}
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "special_lw_r",
-    animcmd = "game_speciallwr")]
-pub fn falco_shinegr(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=3)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
-            AttackModule::enable_safe_pos()
-        }
-        frame(Frame=4)
-        if(is_excute){
-            AttackModule::clear_all()
-        } 
-    });
-}
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "special_air_lw_r",
-    animcmd = "game_specialairlwr")]
-pub fn falco_shinear(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=3)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=8.0, Angle=84, KBG=110, FKB=0, BKB=50, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
-            AttackModule::enable_safe_pos()
-        }
-        frame(Frame=4)
-        if(is_excute){
-        AttackModule::clear_all()
-        }  
-    });
-}
-
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_s4_s",
-    animcmd = "game_attacks4s")]
-pub fn falco_fsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["game_attacks4s"], category = ACMD_GAME)]
+fn falco_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("reflector"), Damage=11.0, Angle=361, KBG=30, FKB=0, BKB=35, Size=8.0, X=1.5, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.25, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_paralyze"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
@@ -378,28 +291,25 @@ pub fn falco_fsmash(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_s4_s",
-    animcmd = "effect_attacks4s")]
-pub fn falco_effect_fsmash(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["effect_attacks4s"], category = ACMD_EFFECT)]
+fn falco_effect_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
-            LANDING_EFFECT(0x0d0679b24d as u64, hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
-            EFFECT_FLW_POS(0x0ecca63d69 as u64, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+            LANDING_EFFECT(hash40("sys_atk_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            EFFECT_FLW_POS(0x0ecca63d69 as u64, hash40("reflector"), 1.4, -0.6, 0, 0, 0, 0, 1, true)
             EffectModule::preset_limit_num(2)
-            EFFECT_FOLLOW(0x0fdc7fb0a0 as u64, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
-            FLASH(1, 1, 1, 0.626999974)
+            EFFECT_FOLLOW(0x0fdc7fb0a0 as u64, hash40("reflector"), 1.4, -0.6, 0, 0, 0, 0, 1, true)
+            FLASH(1, 1, 1, 0.627)
         }
         frame(Frame=3)
         if(is_excute){
-            FLASH(0, 1, 1, 0.430999994)
-            FLASH_FRM(20, 0, 0.70599997, 0.39199999, 0)
+            FLASH(0, 1, 1, 0.431)
+            FLASH_FRM(20, 0, 0.706, 0.392, 0)
         }
         frame(Frame=4)
         if(is_excute){
-            EFFECT_FLW_POS(0x0fecc8ba2c as u64, hash40("reflector"), 1.39999998, -0.600000024, 0, 0, 0, 0, 1, true)
+            EFFECT_FLW_POS(0x0fecc8ba2c as u64, hash40("reflector"), 1.4, -0.6, 0, 0, 0, 0, 1, true)
         }
         frame(Frame=23)
         if(is_excute){
@@ -410,18 +320,15 @@ pub fn falco_effect_fsmash(fighter: &mut L2CFighterCommon) {
             EFFECT_OFF_KIND(0x0ecca63d69 as u64, false, false)
             EFFECT_OFF_KIND(0x0d30ab52b6 as u64, false, false)
             EFFECT_OFF_KIND(0x0fdc7fb0a0 as u64, true, false)
-            EFFECT_FLW_POS(0x09d58cb98f as u64, hash40("reflector"), 1.39999998, -0.600000024, -0.5, 0, 0, 0, 0.5, true)
+            EFFECT_FLW_POS(hash40("sys_flash"), hash40("reflector"), 1.4, -0.6, -0.5, 0, 0, 0, 0.5, true)
         }
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "attack_air_n",
-    animcmd = "effect_attackairn")]
-pub fn falco_effect_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["effect_attackairn"], category = ACMD_EFFECT)]
+fn falco_effect_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(3)
         if(is_excute){
             EFFECT(0x1441eaf0b3_u64, hash40("top"), 0, 5.5, -4, 0, 0, 0, 0.899999976, 0, 0, 0, 0, 0, 0, true)
@@ -440,13 +347,10 @@ pub fn falco_effect_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "catch_attack",
-    animcmd = "effect_catchattack")]
-pub fn falco_effect_pummel(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["effect_catchattack"], category = ACMD_EFFECT)]
+fn falco_effect_pummel(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             LANDING_EFFECT(0x0d0679b24d_u64, hash40("top"), 0.0, 0.0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
             EFFECT_FLW_POS(0x0ecca63d69_u64, hash40("reflector"), 1.4, -0.6, 0.0, 0, 0, 0, 1.0, true)
@@ -468,13 +372,10 @@ pub fn falco_effect_pummel(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd::acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_FALCO, 
-    animation = "catch_attack",
-    animcmd = "game_catchattack")]
-pub fn falco_pummel(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "falco", scripts = ["game_catchattack"], category = ACMD_GAME)]
+fn falco_pummel(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.3, Angle=361, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=7.5, Z=7.5, X2=0.0, Y2=7.5, Z2=10.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)

@@ -1,7 +1,7 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 
 //Actual changes
 
@@ -312,9 +312,4 @@ pub fn install() {
     install_acmd_scripts!(
         roy_bair, roy_dair, roy_dashattack, roy_dtilt, roy_effect_dair, roy_fair, roy_fsmash, roy_ftilt, roy_jab, roy_nair, roy_uair, roy_utilt, roy_warioware
     );
-}
-
-#[skyline::main(name = "smashline-template")]
-pub fn main() {
-    install();
 }

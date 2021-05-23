@@ -2,20 +2,17 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 use smash::app::lua_bind::*;
 use crate::FIGHTER_CUTIN_MANAGER_ADDR;
 use skyline::nn::ro::LookupSymbol;
 use smash::phx::Vector3f;
 use smash::app;
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn ganon_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn ganon_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0)
@@ -55,13 +52,10 @@ pub fn ganon_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_hi",
-    animcmd = "game_attackairhi")]
-pub fn ganon_uair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attackairhi"], category = ACMD_GAME)]
+fn ganon_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0)
@@ -87,13 +81,10 @@ pub fn ganon_uair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_b",
-    animcmd = "game_attackairb")]
-pub fn ganon_bair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attackairb"], category = ACMD_GAME)]
+fn ganon_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         FT_MOTION_RATE(FSM=1.2)
         if(is_excute){
             ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
@@ -121,13 +112,10 @@ pub fn ganon_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_lw3",
-    animcmd = "game_attacklw3")]
-pub fn ganon_dtilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attacklw3"], category = ACMD_GAME)]
+fn ganon_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0)
@@ -146,13 +134,10 @@ pub fn ganon_dtilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn ganon_utilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attackhi3"], category = ACMD_GAME)]
+fn ganon_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=21)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=18.0, Angle=85, KBG=71, FKB=0, BKB=35, Size=4.8, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_KICK)
@@ -166,13 +151,10 @@ pub fn ganon_utilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "special_air_lw",
-    animcmd = "game_specialairlw")]
-pub fn ganon_downb_air(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_specialairlw"], category = ACMD_GAME)]
+fn ganon_downb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=16)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_GANON_STATUS_WORK_ID_FLAG_GANON_KICK_WALL_CHECK)
@@ -188,13 +170,10 @@ pub fn ganon_downb_air(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_11",
-    animcmd = "game_attack11")]
-pub fn ganon_jab(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attack11"], category = ACMD_GAME)]
+fn ganon_jab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=3)
         FT_MOTION_RATE(FSM=0.8)
         frame(Frame=8)
@@ -212,13 +191,10 @@ pub fn ganon_jab(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_f",
-    animcmd = "effect_attackairf")]
-pub fn ganon_effect_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_attackairf"], category = ACMD_EFFECT)]
+fn ganon_effect_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=10)
         if(is_excute){
             EFFECT(hash40("sys_smash_flash"), hash40("haver"), 0, 10, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
@@ -238,13 +214,10 @@ pub fn ganon_effect_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_b",
-    animcmd = "effect_attackairb")]
-pub fn ganon_effect_bair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_attackairb"], category = ACMD_EFFECT)]
+fn ganon_effect_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=10)
         if(is_excute){
             EFFECT_FOLLOW_WORK(hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
@@ -261,32 +234,23 @@ pub fn ganon_effect_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_hi3",
-    animcmd = "effect_attackhi3")]
-pub fn ganon_effect_utilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_attackhi3"], category = ACMD_EFFECT)]
+fn ganon_effect_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=10)
         if(is_excute){
-            EFFECT(hash40("sys_attack_line"), hash40("top"), -1, 9.5, 0, 0, 10, 0, 1.39999998, 0, 0, 0, 0, 0, 0, true)
-        }
-        frame(Frame=19)
-        if(is_excute){
-            EFFECT_ALPHA(0x1156ac182a_u64, hash40("top"), 0, 4.69999981, 15, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, 0.800000012)
-            FOOT_EFFECT(0x0d0da6e3c0_u64, hash40("top"), 0, 0, 0, 0, 0, 0, 1.20000005, 0, 0, 0, 0, 0, 0, false)
+            EFFECT_FOLLOW(hash40("sys_attack_arc_b"), hash40("top"), 0, 15, 0, 0, -8, 90, 1.15, true)
+            LAST_EFFECT_SET_RATE(0.9)
+            FOOT_EFFECT(hash40("sys_turn_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.15, 0, 0, 0, 0, 0, 0, true)
         }
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_lw3",
-    animcmd = "effect_attacklw3")]
-pub fn ganon_effect_dtilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_attacklw3"], category = ACMD_EFFECT)]
+fn ganon_effect_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=4)
         if(is_excute){
             EFFECT_FOLLOW(0x1150d2f689_u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
@@ -304,13 +268,10 @@ pub fn ganon_effect_dtilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_s3_s",
-    animcmd = "game_attacks3s")]
-pub fn ganon_ftilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attacks3s"], category = ACMD_GAME)]
+fn ganon_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0)
@@ -332,13 +293,10 @@ pub fn ganon_ftilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_s3_s",
-    animcmd = "effect_attacks3s")]
-pub fn ganon_effect_ftilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_attacks3s"], category = ACMD_EFFECT)]
+fn ganon_effect_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(12)
         if(is_excute){
             EFFECT_FOLLOW(0x1150d2f689_u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
@@ -356,13 +314,10 @@ pub fn ganon_effect_ftilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_hi",
-    animcmd = "effect_attackairhi")]
-pub fn ganon_effect_uair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_attackairhi"], category = ACMD_EFFECT)]
+fn ganon_effect_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=12)
         if(is_excute){
             EFFECT_FOLLOW(0x1150d2f689_u64, hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
@@ -378,13 +333,10 @@ pub fn ganon_effect_uair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "special_hi",
-    animcmd = "game_specialhi")]
-pub fn ganon_upb_grnd(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_specialhi", "game_specialairhi"], category = ACMD_GAME)]
+fn ganon_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=12)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS)
@@ -427,62 +379,10 @@ pub fn ganon_upb_grnd(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "special_air_hi",
-    animcmd = "game_specialairhi")]
-pub fn ganon_upb_air(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        frame(Frame=12)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS)
-        }
-        frame(Frame=14)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=110, BKB=0, Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=110, BKB=0, Size=6.5, X=0.0, Y=8.8, Z=13.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
-            /*CATCH(ID=0, Bone=hash40("top"), Size=4.4, X=0.0, Y=16.0, Z=6.5, Status=FIGHTER_STATUS_KIND_CLUNG_GANON, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
-            CATCH(ID=1, Bone=hash40("top"), Size=6.5, X=0.0, Y=8.8, Z=13.7, Status=FIGHTER_STATUS_KIND_CLUNG_GANON, Ground_or_Air=COLLISION_SITUATION_MASK_GA)*/
-        }
-        wait(Frames=1)
-        if(is_excute){
-            AttackModule::clear_all()
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=110, BKB=0, Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=0.0, Y2=18.0, Z2=3.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
-            //CATCH(ID=0, Bone=hash40("top"), Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=0.0, Y2=18.0, Z2=3.0, Status=FIGHTER_STATUS_KIND_CLUNG_GANON, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
-        }
-        frame(Frame=18)
-        if(is_excute){
-            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
-        }
-        frame(Frame=29)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-        frame(Frame=34)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("armr"), Damage=8.0, Angle=80, KBG=110, FKB=0, BKB=60, Size=9.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=8.0, Angle=80, KBG=110, FKB=0, BKB=60, Size=6.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
-        }
-        wait(Frames=3)
-        if(is_excute){
-            AttackModule::clear_all()
-            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
-        }
-        frame(Frame=46)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_GANON_STATUS_SPECIAL_HI_FLAG_IS_CHECK_DIVE)
-        }
-    });
-}
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "throw_b",
-    animcmd = "game_throwb")]
-pub fn ganon_bthrow(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_throwb"], category = ACMD_GAME)]
+fn ganon_bthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=3.5, Angle=58, KBG=105, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_B, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_B, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
@@ -506,39 +406,33 @@ pub fn ganon_bthrow(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "throw_b",
-    animcmd = "effect_throwb")]
-pub fn ganon_effect_bthrow(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_throwb"], category = ACMD_EFFECT)]
+fn ganon_effect_bthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
-            EFFECT(0x14ef2dbaa1 as u64, hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT(hash40("edge_throwb_teleport"), hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=4)
         if(is_excute){
-            EFFECT_FOLLOW(0x138df487e3 as u64, hash40("handr"), 1, 0, 0, 0, 0, 0, 1, true)
-            EFFECT(0x109407613d as u64, hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT_FOLLOW(hash40("edge_catch_handaura"), hash40("handr"), 1, 0, 0, 0, 0, 0, 1, true)
+            EFFECT(hash40("edge_throwb_bom2"), hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=18)
         if(is_excute){
-            EFFECT(0x0f6c30c99d as u64, hash40("top"), 0, 11, -13, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT(hash40("edge_throwb_bom"), hash40("top"), 0, 11, -13, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=30)
         if(is_excute){
-            EFFECT_OFF_KIND(0x138df487e3 as u64, false, true)
+            EFFECT_OFF_KIND(hash40("edge_catch_handaura"), false, true)
         }
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn ganon_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn ganon_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.5)
         frame(Frame=3)
@@ -562,38 +456,36 @@ pub fn ganon_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_GANON, 
-    animation = "attack_air_n",
-    animcmd = "effect_attackairn")]
-pub fn ganon_effect_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "ganon", scripts = ["effect_attackairn"], category = ACMD_EFFECT)]
+fn ganon_effect_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
-            EFFECT_FOLLOW(0x16714f8181 as u64, hash40("handr"), 2.5, 1, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW(hash40("edge_light_finger_aura"), hash40("handr"), 2.5, 1, 0, 0, 0, 0, 1, true)
             EffectModule::enable_sync_init_pos_last()
         }
         frame(Frame=15)
         if(is_excute){
-            EFFECT_OFF_KIND(0x16714f8181 as u64, false, true)
-            EFFECT_FOLLOW_NO_STOP(0x1202649b6a as u64, hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
-            EFFECT_FLW_POS(0x11066210d7 as u64, hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
-            EFFECT_FOLLOW_NO_STOP(0x1a43a1bf11 as u64, hash40("handr"), 3.5, 1, 0, 0, 0, 0, 1, true)
+            EFFECT_OFF_KIND(hash40("edge_light_finger_aura"), false, true)
+            EFFECT_FOLLOW_NO_STOP(hash40("edge_light_impact2"), hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
+            EFFECT_FLW_POS(hash40("edge_light_impact"), hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW_NO_STOP(hash40("edge_light_finger_snapping"), hash40("handr"), 3.5, 1, 0, 0, 0, 0, 1, true)
             EffectModule::enable_sync_init_pos_last()
         }
         frame(Frame=16)
         if(is_excute){
-            EFFECT_DETACH_KIND(0x1a43a1bf11 as u64, -1)
+            EFFECT_DETACH_KIND(hash40("edge_light_finger_snapping"), -1)
         }
         frame(Frame=17)
         if(is_excute){
-            EFFECT_OFF_KIND(0x1202649b6a as u64, false, false)
+            EFFECT_OFF_KIND(hash40("edge_light_impact2"), false, false)
         }
     });
 }
 
+#[installer]
 pub fn install() {
-    acmd::add_hooks!(
+    install_acmd_scripts!(
         ganon_fair,
         ganon_bair,
         ganon_dtilt,
@@ -606,8 +498,7 @@ pub fn install() {
         ganon_effect_dtilt,
         ganon_ftilt,
         ganon_effect_ftilt,
-        ganon_upb_grnd,
-        ganon_upb_air,
+        ganon_upb
         ganon_uair,
         ganon_effect_uair,
         ganon_bthrow,

@@ -1,7 +1,7 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 
 #[acmd_script(agent = "wolf", scripts = ["game_attack13"], category = ACMD_GAME)]
 fn wolf_jab3(fighter: &mut smash::lua2cpp::L2CAgentBase) {
@@ -464,7 +464,6 @@ fn wolf_pummel(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 #[installer]
 pub fn install() {
     install_acmd_scripts!(
-        wolf_da,
         wolf_jab3,
         wolf_utilt,
         wolf_ftilt_hi,

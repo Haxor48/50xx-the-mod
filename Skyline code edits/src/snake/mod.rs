@@ -1,7 +1,7 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 use smash::app::lua_bind::*;
 
 #[acmd_script(agent = "snake", scripts = ["game_attackairf"], category = ACMD_GAME)]

@@ -1,5 +1,7 @@
 #![feature(concat_idents)]
 #![feature(proc_macro_hygiene)]
+#![feature(asm)]
+#![feature(str_strip)]
 
 pub static mut FIGHTER_CUTIN_MANAGER_ADDR: usize = 0;
 use smash::app::utility::get_kind;

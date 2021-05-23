@@ -4,7 +4,7 @@ use smash::app::lua_bind::*;
 use smash::phx::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 
 #[acmd_script(agent = "shizue", scripts = ["game_attackairlw"], category = ACMD_GAME)]
 fn isabelle_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
