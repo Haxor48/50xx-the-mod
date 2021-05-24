@@ -831,7 +831,6 @@ pub fn doc_pill(fighter: &mut L2CFighterBase) {
     });
 } */
 
-#[installer]
 pub fn installMario() {
     install_acmd_scripts!(
         mario_fair,
