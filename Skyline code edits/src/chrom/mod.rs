@@ -562,7 +562,6 @@ fn chrom_sideb2_lw_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installChrom() {
     install_acmd_scripts!(
         chrom_dair,
