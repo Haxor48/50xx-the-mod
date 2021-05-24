@@ -2653,7 +2653,6 @@ fn nro_main(nro: &NroInfo) {
     }
 }
 
-#[smashline::installer]
 pub fn installCustom() {
     smashline::install_agent_frame_callbacks!(
         global_fighter_frame,
