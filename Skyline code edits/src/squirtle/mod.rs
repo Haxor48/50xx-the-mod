@@ -351,7 +351,6 @@ fn squirtle_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installSquirtle() {
     install_acmd_scripts!(
         squirtle_fair,
