@@ -479,7 +479,6 @@ fn marth_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installMarth() {
     install_acmd_scripts!(
         marth_bair, marth_dair, marth_dashattack, marth_fair, marth_fsmash, marth_ftilt, marth_utilt, marth_jab, marth_uair, marth_dtilt, marth_jab2, marth_sideb3, marth_fthrow,
