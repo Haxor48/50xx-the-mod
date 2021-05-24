@@ -182,7 +182,6 @@ pub fn ness_effect_pkflash(fighter: &mut L2CFighterBase) {
     });
 }*/
 
-#[installer]
 pub fn installNess() {
     install_acmd_scripts!(
         ness_ftilt,
