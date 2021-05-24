@@ -461,7 +461,6 @@ fn wolf_pummel(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installWolf() {
     install_acmd_scripts!(
         wolf_jab3,
