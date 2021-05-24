@@ -581,7 +581,6 @@ unsafe fn ivy_seed_horny(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     }
 }
 
-#[installer]
 pub fn installIvysaur() {
     install_acmd_scripts!(
         ivy_bair,
