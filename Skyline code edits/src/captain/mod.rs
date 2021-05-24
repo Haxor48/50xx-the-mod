@@ -732,7 +732,7 @@ pub fn falcon_upb_air(fighter: &mut L2CFighterCommon) {
 
 
 #[installer]
-pub fn install() {
+pub fn installCaptain() {
     install_acmd_scripts!(
         falcon_dair,
         falcon_uair,
@@ -742,9 +742,7 @@ pub fn install() {
         falcon_da,
         falcon_usmash,
         falcon_utilt,
-        falcon_fsmash_hi,
-        falcon_fsmash_mid,
-        falcon_fsmash_lw,
+        falcon_fsmash,
         falcon_sideb_hit,
         falcon_sideb_air_hit,
         falcon_punch,

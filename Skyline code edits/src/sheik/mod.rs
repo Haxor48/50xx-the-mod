@@ -43,14 +43,15 @@ fn sheik_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         frame(Frame=5)
         if(is_excute){
-        ATTACK(ID=0, Part=0, Bone=hash40("legr"), Damage=3.0, Angle=84, KBG=110, FKB=0, BKB=60, Size=3.8, X=0.7, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=3.0, Angle=78, KBG=110, FKB=0, BKB=60, Size=3.0, X=0.4, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        ATTACK(ID=2, Part=0, Bone=hash40("kneer"), Damage=3.0, Angle=74, KBG=110, FKB=0, BKB=60, Size=4.0, X=4.3, Y=-0.2, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        ATTACK(ID=0, Part=0, Bone=hash40("legr"), Damage=6.0, Angle=78, KBG=100, FKB=0, BKB=40, Size=3.8, X=0.7, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=6.0, Angle=76, KBG=100, FKB=0, BKB=40, Size=3.0, X=0.4, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        ATTACK(ID=2, Part=0, Bone=hash40("kneer"), Damage=6.0, Angle=74, KBG=100, FKB=0, BKB=40, Size=4.0, X=4.3, Y=-0.2, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         }
         wait(Frames=4)
         if(is_excute){
         AttackModule::clear_all()
         FighterAreaModuleImpl::enable_fix_jostle_area(5.0, 3.0)
+        }
     });
 }
 
@@ -135,8 +136,9 @@ fn sheik_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "sheik", scripts = ["game_attackairhi"], category = ACMD_GAME)]
-fn sheik_upair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn sheik_upair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if alt(module_accessor, 6) || alt(module_accessor, 7) {
         acmd!(lua_state, {
             frame(Frame=4)
@@ -192,8 +194,9 @@ fn sheik_upair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "sheik", scripts = ["game_attackairf"], category = ACMD_GAME)]
-fn sheik_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn sheik_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
@@ -459,9 +462,9 @@ pub fn impa_bair(fighter: &mut L2CFighterCommon) {
 }*/
 
 #[installer]
-pub fn install() {
+pub fn installSheik() {
     install_acmd_scripts!(
-sheik_bair, sheik_dair, sheik_dashattack, sheik_dsmash, sheik_dtilt, sheik_fair, sheik_ftilt, sheik_landingdair, sheik_upair, sheik_utilt, sheik_dthrow,
+sheik_bair, sheik_dair, sheik_dashattack, sheik_dsmash, sheik_dtilt, sheik_fair, sheik_ftilt, sheik_landing_dair, sheik_upair, sheik_utilt, sheik_dthrow,
 sheik_bthrow, sheik_uthrow, sheik_nair, sheik_usmash//, impa_bair, impa_dair
     );
 }

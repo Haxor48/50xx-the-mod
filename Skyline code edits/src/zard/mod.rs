@@ -111,7 +111,7 @@ fn zard_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "plizardon", scripts = ["game_attack11"], category = ACMD_GAME)]
-fn zard_jab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+fn zard_jab1(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=4)
@@ -554,7 +554,7 @@ fn zard_flamethrower(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installZard() {
     install_acmd_scripts!(
         zard_fair,
         zard_dair,

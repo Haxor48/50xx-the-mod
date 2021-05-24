@@ -294,7 +294,7 @@ pub fn pichu_electroball (fighter: &mut L2CFighterBase) {
 }*/
 
 #[installer]
-pub fn install() {
+pub fn installPichu() {
     install_acmd_scripts!(
         pichu_ftilt,
         pichu_da,

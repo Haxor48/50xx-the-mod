@@ -129,7 +129,7 @@ fn squirtle_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[acmd_script(agent = "pzenigame", scripts = ["game_specialhi"], category = ACMD_GAME)]
+#[acmd_script(agent = "pzenigame", scripts = ["game_specialhi", "game_specialairhi"], category = ACMD_GAME)]
 fn squirtle_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -159,7 +159,7 @@ fn squirtle_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         frame(Frame=43)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=55, KBG=137, FKB=0, BKB=70, Size=10.0, X=0.0, Y=1.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_water"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_WATER)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=55, KBG=127, FKB=0, BKB=65, Size=10.0, X=0.0, Y=1.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_water"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_WATER)
         }
         wait(Frames=2)
         if(is_excute){
@@ -352,15 +352,14 @@ fn squirtle_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installSquirtle() {
     install_acmd_scripts!(
         squirtle_fair,
         squirtle_dair,
         squirtle_uair,
         squirtle_utilt,
         squirtle_dtilt,
-        squirtle_upb_grnd,
-        squirtle_upb_air,
+        squirtle_upb,
         squirtle_usmash,
         squirtle_dsmash,
         squirtle_fsmash,

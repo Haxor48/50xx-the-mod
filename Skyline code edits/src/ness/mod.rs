@@ -5,41 +5,8 @@ use smash::lua2cpp::L2CFighterBase;
 use smashline::*;
 use smash::app::lua_bind::*;
 
-#[acmd_script(agent = "ness", scripts = ["game_attacks3s"], category = ACMD_GAME)]
-fn ness_ftilt_med(fighter: &mut smash::lua2cpp::L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=7)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("legl"), Damage=8.3, Angle=31, KBG=80, FKB=0, BKB=35, Size=3.6, X=0.6, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-            ATTACK(ID=1, Part=0, Bone=hash40("kneel"), Damage=8.3, Angle=31, KBG=80, FKB=0, BKB=35, Size=4.8, X=2.7, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-        }
-        wait(Frames=4)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-    });
-}
-
-#[acmd_script(agent = "ness", scripts = ["game_attacks3lw"], category = ACMD_GAME)]
-fn ness_ftilt_lw(fighter: &mut smash::lua2cpp::L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=7)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("legl"), Damage=8.3, Angle=31, KBG=80, FKB=0, BKB=35, Size=3.6, X=0.6, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-            ATTACK(ID=1, Part=0, Bone=hash40("kneel"), Damage=8.3, Angle=31, KBG=80, FKB=0, BKB=35, Size=4.8, X=2.7, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-            AttackModule::set_attack_height_all(smash::cpp::root::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
-        }
-        wait(Frames=4)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-    });
-}
-
-#[acmd_script(agent = "ness", scripts = ["game_attacks3hi"], category = ACMD_GAME)]
-fn ness_ftilt_hi(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+#[acmd_script(agent = "ness", scripts = ["game_attacks3s", "game_attacks3lw", "game_attacks3hi"], category = ACMD_GAME)]
+fn ness_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=7)
@@ -216,13 +183,10 @@ pub fn ness_effect_pkflash(fighter: &mut L2CFighterBase) {
 }*/
 
 #[installer]
-pub fn install() {
+pub fn installNess() {
     install_acmd_scripts!(
-        ness_ftilt_med,
-        ness_ftilt_hi,
-        ness_ftilt_lw,
-        ness_pkfire_air,
-        ness_pkfire_grnd,
+        ness_ftilt,
+        ness_pkfire,
         ness_pkflash,
         ness_dsmash_hit,
         ness_upsmash_hit,

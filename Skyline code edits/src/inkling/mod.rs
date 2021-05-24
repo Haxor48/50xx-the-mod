@@ -268,7 +268,7 @@ fn inkling_roller_run(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installInkling() {
     install_acmd_scripts!(
 inkling_bair, inkling_dair, inkling_roller_walk, inkling_roller_run, inkling_fair, inkling_splash, inkling_uair, inkling_uspecial_landing, inkling_utilt, inkling_nair, inkling_ftilt     
     );

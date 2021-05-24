@@ -4,9 +4,10 @@ use smash::lua2cpp::L2CFighterCommon;
 use smashline::*;
 use smash::app::lua_bind::*;
 
-#[acmd_script(agent = "ken", scripts = ["game_attackairb"], category = ACMD_GAME)]
-fn ken_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+#[acmd_script(agent = "jack", scripts = ["game_attackairb"], category = ACMD_GAME)]
+unsafe fn joker_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         rust
         {
@@ -79,7 +80,7 @@ fn ken_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installJoker() {
     install_acmd_scripts!(
         joker_bair
     );

@@ -250,7 +250,7 @@ fn snake_grenade(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, false, 0)
             ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false, 0)
-            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false)
+            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             CORRECT(GROUND_CORRECT_KIND_GROUND_CLIFF_STOP)
         }
         frame(Frame=3)
@@ -259,10 +259,66 @@ fn snake_grenade(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         frame(Frame=9)
         if(is_excute){
-            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, true)
+            ArticleModule::set_visibility_whole(FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE_PIN, true, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
         frame(Frame=16)
         FT_MOTION_RATE(FSM=0.5)
+    });
+}
+
+#[acmd_script(agent = "snake", scripts = ["game_speciallwblast", "game_specialairlwblast"], category = ACMD_GAME)]
+unsafe fn snake_c4_explode(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
+    acmd!(lua_state, {
+        frame(Frame=2)
+        if(is_excute){
+        ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_C4_SWITCH, false, 0)
+        }
+        frame(Frame=8)
+        FT_MOTION_RATE(FSM=0.5)
+        frame(Frame=22)
+        FT_MOTION_RATE(FSM=1)
+        frame(Frame=27)
+        if(is_excute){
+            rust {
+                if ControlModule::check_button_off(module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    WorkModule::on_flag(module_accessor, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP);
+                }
+            }
+        }
+        frame(Frame=29)
+    });
+}
+
+#[acmd_script(agent = "snake", scripts = ["game_speciallwsquatblast"], category = ACMD_GAME)]
+unsafe fn snake_c4_explode_squat(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
+    acmd!(lua_state, {
+        if(is_excute){
+            CORRECT(GROUND_CORRECT_KIND_GROUND_CLIFF_STOP)
+        }
+        frame(Frame=1)
+        if(is_excute){
+            CORRECT(GROUND_CORRECT_KIND_GROUND_CLIFF_STOP_ATTACK)
+        }
+        frame(Frame=4)
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_SNAKE_GENERATE_ARTICLE_C4_SWITCH, false, 0)
+        }
+        frame(Frame=16)
+        FT_MOTION_RATE(FSM=0.5)
+        frame(Frame=24)
+        FT_MOTION_RATE(FSM=1)
+        if(is_excute){
+            rust {
+                if ControlModule::check_button_off(module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    WorkModule::on_flag(module_accessor, *FIGHTER_SNAKE_STATUS_SPECIAL_LW_EXPLODING_FLAG_C4_STARTUP);
+                }
+            }
+        }
+        frame(Frame=29)
     });
 }
 
@@ -302,7 +358,7 @@ fn snake_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installSnake() {
     install_acmd_scripts!(
         snake_fair,
         snake_ftilt1,
@@ -311,6 +367,8 @@ pub fn install() {
         snake_uair,
         snake_dtilt,
         snake_da,
-        snake_grenade
+        snake_grenade,
+        snake_c4_explode,
+        snake_c4_explode_squat
     );
 }

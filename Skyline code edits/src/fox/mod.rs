@@ -44,6 +44,14 @@ fn fox_landing_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "fox", scripts = ["game_landingairf"], category = ACMD_GAME)]
+fn fox_landing_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+
+    });
+}
+
 #[acmd_script(agent = "fox", scripts = ["game_speciallw", "game_specialairlw"], category = ACMD_GAME)]
 fn fox_shine(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -101,7 +109,7 @@ fn fox_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "fox", scripts = ["game_attacks3s", "game_specials3hi", "game_specials3lw"], category = ACMD_GAME)]
-fn fox_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+fn fox_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=6)
@@ -365,12 +373,11 @@ fn fox_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installFox() {
     install_acmd_scripts!(
        fox_bair,
        fox_landing_dair,
-       fox_shine_air,
-       fox_shine_grnd,
+       fox_shine,
        fox_dtilt,
        fox_da,
        fox_ftilt,

@@ -253,8 +253,9 @@ fn zss_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "szerosuit", scripts = ["game_attackairlw"], category = ACMD_GAME)]
-fn zss_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn zss_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if ZSSDAIR[get_player_number(module_accessor)] {
         acmd!(lua_state, {
             frame(Frame=5)
@@ -294,8 +295,9 @@ fn zss_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "szerosuit", scripts = ["effect_attackairlw"], category = ACMD_EFFECT)]
-fn zss_effect_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn zss_effect_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if !ZSSDAIR[get_player_number(module_accessor)] {
         original!(fighter);
     }
@@ -366,10 +368,11 @@ fn zss_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "szerosuit", scripts = ["game_landingairlw"], category = ACMD_GAME)]
-fn zss_landing_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn zss_landing_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if !ZSSDAIR[get_player_number(module_accessor)] {
-        acmd!({
+        acmd!(lua_state, {
             if(is_excute){
                 SET_SPEED_EX(0, 0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
             }
@@ -386,7 +389,7 @@ fn zss_landing_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installZss() {
     install_acmd_scripts!(
         zss_flip,
         zss_flipkick,

@@ -2,15 +2,12 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_air_n",
-    animcmd = "game_attackairn")]
-pub fn bayo_nair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attackairn"], category = ACMD_GAME)]
+fn bayo_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_R_ARM, false, false, true, 20, 0, 15, 0, false)
@@ -55,13 +52,10 @@ pub fn bayo_nair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn bayo_fair1(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn bayo_fair1(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_L_ARM, true, false, true, 10, 3, 10, 0, true)
@@ -97,13 +91,10 @@ pub fn bayo_fair1(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_air_f2",
-    animcmd = "game_attackairf2")]
-pub fn bayo_fair2(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attackairf2"], category = ACMD_GAME)]
+fn bayo_fair2(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_L_ARM, true, false, true, 10, 3, 10, 0, true)
@@ -139,13 +130,10 @@ pub fn bayo_fair2(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_air_f3",
-    animcmd = "game_attackairf3")]
-pub fn bayo_fair3(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attackairf3"], category = ACMD_GAME)]
+fn bayo_fair3(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_L_ARM, false, false, true, 10, 3, 10, 5, true)
@@ -180,13 +168,10 @@ pub fn bayo_fair3(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_air_b",
-    animcmd = "game_attackairb")]
-pub fn bayo_bair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attackairb"], category = ACMD_GAME)]
+fn bayo_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_L_LEG, false, false, true, 10, 3, 10, 5, true)
@@ -220,13 +205,10 @@ pub fn bayo_bair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_air_hi",
-    animcmd = "game_attackairhi")]
-pub fn bayo_uair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attackairhi"], category = ACMD_GAME)]
+fn bayo_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_L_ARM, false, false, true, 20, 3, 15, 0, false)
@@ -268,7 +250,7 @@ pub fn bayo_uair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_BAYONETTA, 
     animation = "attack_air_hi_hold",
@@ -281,15 +263,12 @@ pub fn bayo_uair_hold(fighter: &mut L2CFighterCommon) {
             ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=4.0, Angle=48, KBG=80, FKB=0, BKB=75, Size=3.8, X=4.5, Y=1.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         }
     });
-}
+}*/
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "landing_air_lw",
-    animcmd = "game_landingairlw")]
-pub fn bayo_dair_landing(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_landingairlw"], category = ACMD_GAME)]
+fn bayo_dair_landing(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             SET_SPEED_EX(0, 0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
@@ -316,13 +295,10 @@ pub fn bayo_dair_landing(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "special_air_s_u",
-    animcmd = "game_specialairsu")]
-pub fn bayo_sideb_air_up(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_specialairsu"], category = ACMD_GAME)]
+fn bayo_sideb_air_up(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             JostleModule::set_status(false)
         }
@@ -374,13 +350,10 @@ pub fn bayo_sideb_air_up(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "special_s_hold_end",
-    animcmd = "game_specialsholdend")]
-pub fn bayo_sideb_hold(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_specialsholdend"], category = ACMD_GAME)]
+fn bayo_sideb_hold(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.5)
         if(is_excute){
@@ -409,13 +382,10 @@ pub fn bayo_sideb_hold(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_hi3",
-    animcmd = "game_attackhi3")]
-pub fn bayo_utilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attackhi3"], category = ACMD_GAME)]
+fn bayo_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_R_ARM, true, true, false, 10, 3, 10, 5, true)
@@ -425,14 +395,14 @@ pub fn bayo_utilt(fighter: &mut L2CFighterCommon) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=110, KBG=40, FKB=0, BKB=80, Size=5.0, X=0.0, Y=7.0, Z=9.5, X2=0.0, Y2=10.0, Z2=9.5, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=110, KBG=40, FKB=0, BKB=80, Size=5.0, X=0.0, Y=7.0, Z=9.5, X2=0.0, Y2=10.0, Z2=9.5, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            AttackModule::set_add_reaction_frame(0, 5.0, false)
-            AttackModule::set_add_reaction_frame(1, 5.0, false)
+            AttackModule::set_add_reaction_frame(0, 9.0, false)
+            AttackModule::set_add_reaction_frame(1, 9.0, false)
         }
         frame(Frame=9)
         if(is_excute){
             AttackModule::clear(ID=0, false)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=2.0, Angle=128, KBG=27, FKB=0, BKB=65, Size=4.5, X=0.0, Y=18.0, Z=7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            AttackModule::set_add_reaction_frame(1, 5.0, false)
+            AttackModule::set_add_reaction_frame(1, 9.0, false)
         }
         frame(Frame=11)
         if(is_excute){
@@ -456,13 +426,10 @@ pub fn bayo_utilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "attack_lw3",
-    animcmd = "game_attacklw3")]
-pub fn bayo_dtilt(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_attacklw3"], category = ACMD_GAME)]
+fn bayo_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
             sv_battle_object::notify_event_msc_cmd(0x2d51fcdb09, FIGHTER_BAYONETTA_SHOOTING_SLOT_L_LEG, false, false, false, 10, 3, 15, 5, true)
@@ -493,7 +460,7 @@ pub fn bayo_dtilt(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_BAYONETTA, 
     animation = "attack_s3",
@@ -567,15 +534,12 @@ pub fn bayo_ftilt2(fighter: &mut L2CFighterCommon) {
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO)
         }
     });
-}
+}*/
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_BAYONETTA_WICKEDWEAVEARM, 
-    animation = "attack_hi4",
-    animcmd = "game_attackhi4")]
-pub fn bayo_usmash(fighter: &mut L2CFighterBase) {
-    acmd!({
+#[acmd_script(agent = "bayonetta_wickedweavearm", scripts = ["game_attackhi4"], category = ACMD_GAME)]
+fn bayo_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             VisibilityModule::set_int64(hash40("body") as i64, hash40("body_hide") as i64)
         }
@@ -611,13 +575,10 @@ pub fn bayo_usmash(fighter: &mut L2CFighterBase) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_BAYONETTA_WICKEDWEAVEARM, 
-    animation = "attack_s4_hi",
-    animcmd = "game_attacks4hi")]
-pub fn bayo_fsmash_hi(fighter: &mut L2CFighterBase) {
-    acmd!({
+#[acmd_script(agent = "bayonetta_wickedweavearm", scripts = ["game_attacks4s", "game_attacks4hi", "game_attacks4lw"], category = ACMD_GAME)]
+fn bayo_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             VisibilityModule::set_int64(hash40("body") as i64, hash40("body_hide") as i64)
         }
@@ -631,10 +592,10 @@ pub fn bayo_fsmash_hi(fighter: &mut L2CFighterBase) {
         }
         frame(Frame=13)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.5, Z=7.0, X2=0.0, Y2=14.5, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.5, Z=7.0, X2=0.0, Y2=14.5, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=15.0, Z=29.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=15.0, Z=29.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.5, Z=7.0, X2=0.0, Y2=14.5, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.5, Z=7.0, X2=0.0, Y2=14.5, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=15.0, Z=29.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=15.0, Z=29.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             WorkModule::on_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_DISABLE_LINK_STOP)
         }
         wait(Frames=5)
@@ -648,87 +609,10 @@ pub fn bayo_fsmash_hi(fighter: &mut L2CFighterBase) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_BAYONETTA_WICKEDWEAVEARM, 
-    animation = "attack_s4_s",
-    animcmd = "game_attacks4s")]
-pub fn bayo_fsmash_mid(fighter: &mut L2CFighterBase) {
-    acmd!({
-        if(is_excute){
-            VisibilityModule::set_int64(hash40("body") as i64, hash40("body_hide") as i64)
-        }
-        frame(Frame=8)
-        if(is_excute){
-            VisibilityModule::set_int64(hash40("body") as i64, hash40("body_show") as i64)
-        }
-        frame(Frame=9)
-        if(is_excute){
-            WorkModule::on_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_CANCEL_EFFECT)
-        }
-        frame(Frame=13)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=16.0, Z=7.0, X2=0.0, Y2=12.0, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=16.0, Z=7.0, X2=0.0, Y2=12.0, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=10.0, Z=29.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=10.0, Z=29.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            WorkModule::on_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_DISABLE_LINK_STOP)
-        }
-        wait(Frames=5)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-        wait(Frames=40)
-        if(is_excute){
-            WorkModule::off_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_CANCEL_EFFECT)
-        }
-    });
-}
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_BAYONETTA_WICKEDWEAVEARM, 
-    animation = "attack_s4_lw",
-    animcmd = "game_attacks4lw")]
-pub fn bayo_fsmash_lw(fighter: &mut L2CFighterBase) {
-    acmd!({
-        if(is_excute){
-            VisibilityModule::set_int64(hash40("body") as i64, hash40("body_hide") as i64)
-        }
-        frame(Frame=8)
-        if(is_excute){
-            VisibilityModule::set_int64(hash40("body") as i64, hash40("body_show") as i64)
-        }
-        frame(Frame=9)
-        if(is_excute){
-            WorkModule::on_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_CANCEL_EFFECT)
-        }
-        frame(Frame=13)
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.0, Z=7.0, X2=0.0, Y2=10.0, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.0, Z=7.0, X2=0.0, Y2=10.0, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=7.0, Z=29.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=16.0, Angle=361, KBG=112, FKB=0, BKB=35, Size=8.0, X=0.0, Y=7.0, Z=29.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            WorkModule::on_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_DISABLE_LINK_STOP)
-        }
-        wait(Frames=5)
-        if(is_excute){
-            AttackModule::clear_all()
-        }
-        wait(Frames=40)
-        if(is_excute){
-            WorkModule::off_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_CANCEL_EFFECT)
-        }
-    });
-}
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "catch",
-    animcmd = "game_catch")]
-pub fn bayo_grab(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_catch"], category = ACMD_GAME)]
+fn bayo_grab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=6)
         if(is_excute){
             GrabModule::set_rebound(CanCatchRebound=true)
@@ -748,13 +632,10 @@ pub fn bayo_grab(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "catch_dash",
-    animcmd = "game_catchdash")]
-pub fn bayo_dashgrab(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_catchdash"], category = ACMD_GAME)]
+fn bayo_dashgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=9)
         if(is_excute){
             GrabModule::set_rebound(CanCatchRebound=true)
@@ -774,13 +655,10 @@ pub fn bayo_dashgrab(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_BAYONETTA, 
-    animation = "catch_turn",
-    animcmd = "game_catchturn")]
-pub fn bayo_pivotgrab(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "bayonetta", scripts = ["game_catchturn"], category = ACMD_GAME)]
+fn bayo_pivotgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         frame(Frame=10)
         if(is_excute){
             GrabModule::set_rebound(CanCatchRebound=true)
@@ -800,15 +678,16 @@ pub fn bayo_pivotgrab(fighter: &mut L2CFighterCommon) {
     });
 }
 
-pub fn install() {
-    acmd::add_hooks!(
+#[installer]
+pub fn installBayo() {
+    install_acmd_scripts!(
         bayo_nair,
         bayo_fair1,
         bayo_fair2,
         bayo_fair3,
         bayo_bair,
         bayo_uair,
-        bayo_uair_hold,
+        //bayo_uair_hold,
         bayo_dair_landing,
         bayo_sideb_air_up,
         bayo_sideb_hold,
@@ -817,9 +696,7 @@ pub fn install() {
         //bayo_ftilt1,
         //bayo_ftilt2,
         bayo_usmash,
-        bayo_fsmash_hi,
-        bayo_fsmash_mid,
-        bayo_fsmash_lw,
+        bayo_fsmash,
         bayo_grab,
         bayo_dashgrab,
         bayo_pivotgrab

@@ -2,7 +2,7 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
-use acmd::{acmd, acmd_func};
+use smashline::*;
 use smash::phx::*;
 use crate::custom::GLOBALFRAMECOUNT;
 use crate::custom::LASTBARREL;
@@ -60,8 +60,9 @@ fn dk_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "donkey", scripts = ["game_specials"], category = ACMD_GAME)]
-fn dk_sideb_grnd(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn dk_sideb_grnd(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if CANBARREL[get_player_number(module_accessor)] && CANPROJECTILE[get_player_number(module_accessor)] {
         LASTBARREL[get_player_number(module_accessor)] = GLOBALFRAMECOUNT;
         CANBARREL[get_player_number(module_accessor)] = false;
@@ -441,7 +442,7 @@ fn dk_upb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             }
         }
         if(is_excute){
-            HitModule::set_status_all(HIT_STATUS_NORMAL)
+            HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
         frame(Frame=60)
         if(is_excute){
@@ -481,13 +482,13 @@ fn dk_dtilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=8)
         if(is_excute){
             AttackModule::clear_all()
-            HitModule::set_status_all(HIT_STATUS_NORMAL)
+            HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
     });
 }
 
 #[installer]
-pub fn install() {
+pub fn installDk() {
     install_acmd_scripts!(
         dk_nair,
         dk_da,

@@ -407,7 +407,7 @@ fn diddy_pivotgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installDiddy() {
     install_acmd_scripts!(
         diddy_uair,
         diddy_fair,

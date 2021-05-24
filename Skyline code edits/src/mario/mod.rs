@@ -13,8 +13,9 @@ use crate::custom::CANPROJECTILE;
 use crate::custom::get_player_number;
 
 #[acmd_script(agent = "mario", scripts = ["game_attackairf"], category = ACMD_GAME)]
-fn mario_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+ unsafe fn mario_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=3)
         if(is_excute){
@@ -170,8 +171,9 @@ pub fn mario_effect_dair(fighter: &mut L2CFighterCommon) {
 } */
 
 #[acmd_script(agent = "mario", scripts = ["game_attackdash"], category = ACMD_GAME)]
-fn mario_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn mario_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=6)
         if(is_excute){
@@ -222,8 +224,9 @@ fn mario_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "mario", scripts = ["game_attackhi3"], category = ACMD_GAME)]
-fn mario_up_tilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn mario_up_tilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=5)
         rust {
@@ -263,8 +266,9 @@ fn mario_up_tilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "mario", scripts = ["game_attacklw3"], category = ACMD_GAME)]
-fn mario_down_tilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn mario_down_tilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=5)
         if(is_excute){
@@ -438,7 +442,7 @@ fn mario_dsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[acmd_script(agent = "mario", scripts = ["game_attacks4s". "game_attacks4hi", "game_attacks4lw"], category = ACMD_GAME)]
+#[acmd_script(agent = "mario", scripts = ["game_attacks4s", "game_attacks4hi", "game_attacks4lw"], category = ACMD_GAME)]
 fn mario_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -449,7 +453,7 @@ fn mario_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=15)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("arml"), Damage=14.7, Angle=361, KBG=110, FKB=0, BKB=33, Size=2.0, X=-1.0, Y=0.7, Z=0.0, X2=-3.0, Y2=1.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=17.799999, Angle=361, KBG=107, FKB=0, BKB=33, Size=5.0, X=5.4, Y=0.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=17.8, Angle=361, KBG=107, FKB=0, BKB=33, Size=5.0, X=5.4, Y=0.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
         }
         wait(Frames=3)
         if(is_excute){
@@ -459,8 +463,9 @@ fn mario_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "mario", scripts = ["game_attackairhi"], category = ACMD_GAME)]
-fn mario_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn mario_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.75)
@@ -509,8 +514,9 @@ fn mario_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "mario", scripts = ["game_specialhi", "game_specialairhi"], category = ACMD_GAME)]
-fn mario_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn mario_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if alt(module_accessor, 4) || alt(module_accessor, 5) {
         acmd!(lua_state, {
             frame(Frame=3)
@@ -646,8 +652,9 @@ fn mario_dthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "mario", scripts = ["game_landingairlw"], category = ACMD_GAME)]
-fn mario_landing_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn mario_landing_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if !alt(module_accessor, 4) && !alt(module_accessor, 5) {
         acmd!(lua_state, {
             if(is_excute){
@@ -825,7 +832,7 @@ pub fn doc_pill(fighter: &mut L2CFighterBase) {
 } */
 
 #[installer]
-pub fn install() {
+pub fn installMario() {
     install_acmd_scripts!(
         mario_fair,
         mario_dair,
@@ -841,7 +848,6 @@ pub fn install() {
         mario_dthrow,
         mario_landing_dair,
         mario_effect_fair,
-        doc_pill,
         //doc_downb_air,
         //doc_downb_grnd,
         doc_dair,

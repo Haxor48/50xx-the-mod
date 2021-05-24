@@ -475,7 +475,7 @@ fn greninja_pivotgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "gekkouga", scripts = ["game_specialnmaxshot", "game_specialairnmaxshot"], category = ACMD_GAME)]
-fn greninja_shuriken_shot_max(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn greninja_shuriken_shot_max(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if (is_execute) {
@@ -497,13 +497,13 @@ fn greninja_shuriken_shot_max(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installGreninja() {
     install_acmd_scripts!(
         greninja_uair,
         greninja_fair,
-        greninja_dtaunt
+        greninja_dtaunt,
         greninja_nair,
-        greninja_water
+        greninja_water,
         greninja_utilt,
         greninja_dtilt,
         greninja_dair,
@@ -511,8 +511,6 @@ pub fn install() {
         greninja_usmash,
         greninja_dsmash,
         greninja_fsmash,
-        shuriken_charge,
-        shuriken_air_charge,
         greninja_dthrow,
         greninja_bthrow,
         greninja_pivotgrab,

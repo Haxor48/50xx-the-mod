@@ -375,7 +375,7 @@ fn corrin_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installCorrin() {
     install_acmd_scripts!(
         corrin_fair,
         corrin_uair,
@@ -391,7 +391,7 @@ pub fn install() {
         corrin_landing_dair,
         corrin_fsmash,
         corrin_effect_dair,
-        corrin_sideb
+        corrin_sideb,
         corrin_effect_landing_dair
     );
 }

@@ -388,8 +388,9 @@ fn falco_pummel(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-pub fn install() {
-    acmd::add_hooks!(
-        falco_dair, falco_bair, falco_dtilt, falco_uair, /*falco_utilt, */falco_upsmash, falco_fairland, falco_shinea, falco_shineg, falco_nair, falco_shinegr, 
-        falco_shinear, falco_effect_nair, falco_effect_pummel, falco_pummel, falco_fsmash, falco_effect_fsmash);
+#[installer]
+pub fn installFalco() {
+    install_acmd_scripts!(
+        falco_dair, falco_bair, falco_dtilt, falco_uair, /*falco_utilt, */falco_upsmash, falco_fairland, falco_shine, falco_nair, 
+        falco_effect_nair, falco_effect_pummel, falco_pummel, falco_fsmash, falco_effect_fsmash);
 }

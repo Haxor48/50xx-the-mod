@@ -278,8 +278,9 @@ fn ivy_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "pfushigisou", scripts = ["game_specialhi"], category = ACMD_GAME)]
-fn ivy_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn ivy_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=15)
         rust {
@@ -331,8 +332,9 @@ fn ivy_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "pfushigisou", scripts = ["game_specialairhi"], category = ACMD_GAME)]
-fn ivy_upb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn ivy_upb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_VINE, false, 0)
@@ -479,8 +481,9 @@ fn ivy_dthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "pfushigisou", scripts = ["game_specials", "game_sepcialairs"], category = ACMD_GAME)]
-fn ivy_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn ivy_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=1.25)
@@ -515,8 +518,9 @@ fn ivy_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "pfushigisou_seed", scripts = ["game_move"], category = ACMD_GAME)]
-fn ivy_seed(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn ivy_seed(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     let owner_boma = &mut *smash::app::sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     if AMOUNTSOLAR[get_player_number(owner_boma)] >= 200 {
         println!("seed bomb");
@@ -555,8 +559,9 @@ fn ivy_seed(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[acmd_script(agent = "pfushigisou_seed", scripts = ["game_movehard"], category = ACMD_GAME)]
-fn ivy_seed_horny(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn ivy_seed_horny(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     let owner_boma = &mut *smash::app::sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     if AMOUNTSOLAR[get_player_number(owner_boma)] >= 200 {
         AMOUNTSOLAR[get_player_number(owner_boma)] = 70;
@@ -577,7 +582,7 @@ fn ivy_seed_horny(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 }
 
 #[installer]
-pub fn install() {
+pub fn installIvysaur() {
     install_acmd_scripts!(
         ivy_bair,
         ivy_dair,
@@ -587,16 +592,13 @@ pub fn install() {
         ivy_jab2,
         ivy_usmash,
         ivy_dsmash,
-        ivy_fsmash_hi,
-        ivy_fsmash_lw,
-        ivy_fsmash_mid,
+        ivy_fsmash,
         ivy_upb,
         ivy_upb_air,
         ivy_fair,
         ivy_grab,
         ivy_dthrow,
         ivy_sideb,
-        ivy_sideb_air,
         //ivy_neutralb,
         //ivy_neutralb_air,
         ivy_seed,
