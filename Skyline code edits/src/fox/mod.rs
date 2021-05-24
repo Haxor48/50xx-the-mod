@@ -372,7 +372,6 @@ fn fox_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installFox() {
     install_acmd_scripts!(
        fox_bair,
