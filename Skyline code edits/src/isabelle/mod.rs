@@ -511,7 +511,6 @@ fn isabelle_pivotgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installIsabelle() {
     install_acmd_scripts!(
         isabelle_dair,
