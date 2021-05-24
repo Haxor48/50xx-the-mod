@@ -697,7 +697,6 @@ fn ken_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installKen() {
     install_acmd_scripts!(
         ken_uair,
