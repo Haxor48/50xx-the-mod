@@ -307,7 +307,6 @@ fn roy_effect_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installRoy() {
     install_acmd_scripts!(
         roy_bair, roy_dair, roy_dashattack, roy_dtilt, roy_effect_dair, roy_fair, roy_fsmash, roy_ftilt, roy_jab, roy_nair, roy_uair, roy_utilt, roy_warioware
