@@ -521,7 +521,6 @@ fn mk_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installMk() {
     install_acmd_scripts!(
         mk_da,
