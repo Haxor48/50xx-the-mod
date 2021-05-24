@@ -79,7 +79,6 @@ unsafe fn joker_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installJoker() {
     install_acmd_scripts!(
         joker_bair
