@@ -730,8 +730,6 @@ pub fn falcon_upb_air(fighter: &mut L2CFighterCommon) {
     });
 }*/
 
-
-#[installer]
 pub fn installCaptain() {
     install_acmd_scripts!(
         falcon_dair,
