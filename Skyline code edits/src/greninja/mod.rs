@@ -496,7 +496,6 @@ unsafe fn greninja_shuriken_shot_max(fighter: &mut smash::lua2cpp::L2CAgentBase)
     });
 }
 
-#[installer]
 pub fn installGreninja() {
     install_acmd_scripts!(
         greninja_uair,
