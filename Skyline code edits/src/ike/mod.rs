@@ -470,7 +470,6 @@ fn ike_neutralb_strong_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installIke() {
     install_acmd_scripts!(
         ike_nair,
