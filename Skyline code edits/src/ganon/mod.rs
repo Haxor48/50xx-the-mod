@@ -483,7 +483,6 @@ fn ganon_effect_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installGanon() {
     install_acmd_scripts!(
         ganon_fair,
