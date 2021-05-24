@@ -344,7 +344,6 @@ fn sephiroth_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installSephiroth() {
     install_acmd_scripts!(
         sephiroth_fair,
