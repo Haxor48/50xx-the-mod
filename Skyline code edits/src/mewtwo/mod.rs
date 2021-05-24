@@ -264,7 +264,6 @@ fn mewtwo_disable(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installMewtwo() {
     install_acmd_scripts!(
         mewtwo_fair,
