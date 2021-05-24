@@ -678,7 +678,6 @@ fn bayo_pivotgrab(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installBayo() {
     install_acmd_scripts!(
         bayo_nair,
