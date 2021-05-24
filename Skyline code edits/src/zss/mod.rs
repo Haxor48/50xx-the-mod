@@ -388,7 +388,6 @@ unsafe fn zss_landing_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     }
 }
 
-#[installer]
 pub fn installZss() {
     install_acmd_scripts!(
         zss_flip,
