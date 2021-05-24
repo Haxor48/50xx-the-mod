@@ -399,7 +399,6 @@ fn incin_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[installer]
 pub fn installIncin() {
     install_acmd_scripts!(
         incin_nair,
