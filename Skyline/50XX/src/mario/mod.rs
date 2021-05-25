@@ -831,6 +831,31 @@ pub fn doc_pill(fighter: &mut L2CFighterBase) {
     });
 } */
 
+#[acmd_script(agent = "mario_fireball", scripts = ["game_regular"], category = ACMD_GAME)]
+fn mario_fireball(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
+    if alt(module_accessor, 4) || alt(module_accessor, 5) {
+        acmd!(lua_state, {
+            if(is_excute){
+                ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=65, KBG=40, FKB=0, BKB=60, Size=1.7, X=0.0, Y=1.7, Z=0.0, X2=0.0, Y2=-1.7, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-2.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MARIOD_CAPSULE, Type=ATTACK_REGION_NONE)
+                AttackModule::enable_safe_pos()
+            }
+            frame(Frame=5)
+            if(is_excute){
+                ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=65, KBG=40, FKB=0, BKB=55, Size=1.7, X=0.0, Y=1.7, Z=0.0, X2=0.0, Y2=-1.7, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-2.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MARIOD_CAPSULE, Type=ATTACK_REGION_NONE)
+            }
+            frame(Frame=30)
+            if(is_excute){
+                ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=65, KBG=40, FKB=0, BKB=50, Size=1.7, X=0.0, Y=1.7, Z=0.0, X2=0.0, Y2=-1.7, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MARIOD_CAPSULE, Type=ATTACK_REGION_NONE)
+            }
+        });
+    }
+    else {
+        original!();
+    }
+}
+
 pub fn installMario() {
     install_acmd_scripts!(
         mario_fair,
@@ -850,7 +875,8 @@ pub fn installMario() {
         //doc_downb_air,
         //doc_downb_grnd,
         doc_dair,
-        doc_bair
+        doc_bair,
+        mario_fireball
         //doc_effect_downb_air,
         //doc_effect_downb_grnd,
         //mario_effect_bair,
