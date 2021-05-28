@@ -372,6 +372,45 @@ fn fox_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "fox", scripts = ["game_specialhihold", "game_specialhiholdair"], category = ACMD_GAME)]
+fn fox_upb_charge(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        }
+        frame(Frame=16)
+        for(9 Iterations){
+            if(is_excute){
+                ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.4, Angle=366, KBG=20, FKB=0, BKB=20, Size=8.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            }
+            wait(Frames=1)
+            if(is_excute){
+                AttackModule::clear_all()
+            }
+            wait(Frames=1)
+        }
+    });
+}
+
+#[acmd_script(agent = "fox", scripts = ["game_specialhi"], category = ACMD_GAME)]
+fn fox_upb_hit(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            JostleModule::set_status(false)
+        }
+        frame(Frame=1)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=16.0, Angle=367, KBG=60, FKB=0, BKB=70, Size=7.2, X=2.5, Y=-1.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_REVERSE, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_BODY)
+        }
+        wait(Frames=4)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=10.0, Angle=367, KBG=50, FKB=0, BKB=85, Size=5.0, X=2.5, Y=-1.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_REVERSE, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_BODY)
+        }
+    });
+}
+
 pub fn installFox() {
     install_acmd_scripts!(
        fox_bair,
@@ -388,6 +427,7 @@ pub fn installFox() {
        fox_effect_pummel,
        fox_pummel,
        fox_dair,
-       fox_fair
+       fox_fair,
+       fox_upb_charge
     );
 }

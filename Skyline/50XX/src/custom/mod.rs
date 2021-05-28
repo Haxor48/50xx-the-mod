@@ -800,6 +800,15 @@ pub unsafe fn jumpCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
             }
         }
     }
+    if fighter_kind == *FIGHTER_KIND_CLOUD {
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || (ControlModule::is_enable_flick_jump(boma) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP)) {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);   
+                }
+            }
+        }
+    }
 }
 
 pub unsafe fn landCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32) { //Land Cancels
@@ -990,6 +999,13 @@ pub unsafe fn jabCancels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
                 if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
                     CancelModule::enable_cancel(boma);
                 }
+            }
+        }
+    }
+    if fighter_kind == *FIGHTER_KIND_CLOUD {
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+                CancelModule::enable_cancel(boma);
             }
         }
     }
@@ -1841,9 +1857,9 @@ pub unsafe fn quickAttackCancels (boma: &mut smash::app::BattleObjectModuleAcces
 
 pub unsafe fn moonwalking (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, stick_value_x: f32) {
     if status_kind == *FIGHTER_STATUS_KIND_DASH {
-        if stick_value_x * PostureModule::lr(boma) < 0.0 {
-            let reverse_mul = Vector3f{x: 1.5 * stick_value_x * PostureModule::lr(boma), y: 0.0, z: 0.0};
-            KineticModule::mul_speed(boma, &reverse_mul, *FIGHTER_KINETIC_ENERGY_ID_NONE);
+        if stick_value_x * PostureModule::lr(boma) < -0.3 {
+            let reverse_speed = Vector3f{x: 2.0 * stick_value_x * PostureModule::lr(boma), y: 0.0, z: 0.0};
+            KineticModule::add_speed(boma, &reverse_speed);
         }
     }
 }
@@ -2569,7 +2585,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         fastfallShit(boma, status_kind, situation_kind, fighter_kind);
         pkFlashCancels(boma, status_kind, fighter_kind, cat1);
         quickAttackCancels(boma, status_kind, situation_kind, fighter_kind, stick_value_y);
-        //moonwalking(boma, status_kind, stick_value_x);
+        moonwalking(boma, status_kind, stick_value_x);
         upbCancels(lua_state, &mut l2c_agent, boma, status_kind, fighter_kind, cat1);
         //ptSwaps(boma, fighter_kind, cat1, cat2);
         driftDi(boma, status_kind, stick_value_x);
