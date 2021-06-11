@@ -557,8 +557,7 @@ pub unsafe fn change_status_request_from_script_hook(boma: &mut smash::app::Batt
     if [*FIGHTER_KIND_FOX, *FIGHTER_KIND_FALCO, *FIGHTER_KIND_WOLF].contains(&fighter_kind) {
         if [*FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR].contains(&status_kind) {
             if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status) {
-                if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > 0.0 || KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < -1.0 * WorkModule::get_param_float(boma, hash40("dive_speed_y"), 0) ||
-                abs(KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)) > WorkModule::get_param_float(boma, hash40("air_speed_x_stable"), 0) {
+                if MotionModule::frame(boma) < 20.0 {
                     return 0;
                 }
             }
@@ -1005,7 +1004,9 @@ pub unsafe fn jabCancels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
     if fighter_kind == *FIGHTER_KIND_CLOUD {
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
-                CancelModule::enable_cancel(boma);
+                if (stick_value_x * PostureModule::lr(boma) < 0.5 || ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL)) && (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) == 0 {
+                    CancelModule::enable_cancel(boma);
+                }
             }
         }
     }
@@ -1087,7 +1088,7 @@ pub unsafe fn djcs (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::
             }
         }
     }
-    if [*FIGHTER_KIND_PEACH, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_SAMUSD].contains(&fighter_kind) {
+    if [*FIGHTER_KIND_PEACH, *FIGHTER_KIND_YOSHI, *FIGHTER_KIND_SAMUSD, *FIGHTER_KIND_KOOPAJR].contains(&fighter_kind) {
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
             if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
                 if MotionModule::frame(boma) < (7.0) {
@@ -1858,7 +1859,8 @@ pub unsafe fn quickAttackCancels (boma: &mut smash::app::BattleObjectModuleAcces
 pub unsafe fn moonwalking (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, stick_value_x: f32) {
     if status_kind == *FIGHTER_STATUS_KIND_DASH {
         if stick_value_x * PostureModule::lr(boma) < -0.3 {
-            let reverse_speed = Vector3f{x: 2.0 * stick_value_x * PostureModule::lr(boma), y: 0.0, z: 0.0};
+            //WorkModule::get_param_float(boma, 0, hash40("dash_speed"))
+            let reverse_speed = Vector3f{x: 0.55 * stick_value_x * PostureModule::lr(boma), y: 0.0, z: 0.0};
             KineticModule::add_speed(boma, &reverse_speed);
         }
     }
@@ -1951,7 +1953,7 @@ pub unsafe fn grenShurikenFix (boma: &mut smash::app::BattleObjectModuleAccessor
     }
 }
 
-pub unsafe fn animPortFix (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::app::BattleObjectModuleAccessor, fighter_kind: i32, motion_kind: u64, stick_value_y: f32) {
+pub unsafe fn animPortFix (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, fighter_kind: i32, motion_kind: u64, stick_value_y: f32) {
     if fighter_kind == *FIGHTER_KIND_MARIO {
         if motion_kind == hash40("attack_hi3") {
             if MotionModule::frame(boma) == MotionModule::end_frame(boma) - 1.0 {
@@ -1981,6 +1983,28 @@ pub unsafe fn animPortFix (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut 
         if [hash40("attack_hi4"), hash40("escape_n")].contains(&motion_kind) {
             if MotionModule::frame(boma) == MotionModule::end_frame(boma) - 2.0 {
                 MotionModule::change_motion(boma, Hash40{hash: hash40("wait")}, 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if [hash40("speciallw"), hash40("speciallwr"), hash40("specialairlw"), hash40("specialairlwr")].contains(&motion_kind) {
+            if MotionModule::frame(boma) > 1.0 {
+                if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    if situation_kind == *SITUATION_KIND_GROUND {
+                        if PostureModule::lr(boma) < 0.0 {
+                            MotionModule::change_motion(boma, Hash40{hash: hash40("laddercatchl")}, 0.0, 1.0, false, 0.0, false, false);
+                        }
+                        else {
+                            MotionModule::change_motion(boma, Hash40{hash: hash40("laddercatchr")}, 0.0, 1.0, false, 0.0, false, false);
+                        }
+                    }
+                    else {
+                        if PostureModule::lr(boma) < 0.0 {
+                            MotionModule::change_motion(boma, Hash40{hash: hash40("laddercatchairl")}, 0.0, 1.0, false, 0.0, false, false);
+                        }
+                        else {
+                            MotionModule::change_motion(boma, Hash40{hash: hash40("laddercatchairr")}, 0.0, 1.0, false, 0.0, false, false);
+                        }
+                    }
+                }
             }
         }
     }
@@ -2471,6 +2495,46 @@ pub unsafe fn snakeC4Thing(boma: &mut smash::app::BattleObjectModuleAccessor, st
     }
 }
 
+unsafe fn bjrShit(lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, stick_value_y: f32, cat1: i32) {
+    if fighter_kind == *FIGHTER_KIND_KOOPAJR {
+        if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_S_JUMP].contains(&status_kind) {
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 {
+                if CANAIRDODGE[get_player_number(boma)] {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
+                }
+            }
+        }
+        if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_HI_SHOOT].contains(&status_kind) {
+            if stick_value_y < -0.5 {
+                l2c_agent.clear_lua_stack();
+                l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
+                l2c_agent.push_lua_stack(&mut L2CValue::new_num(0.0));
+                smash::app::sv_kinetic_energy::set_speed(lua_state);
+            }
+        }
+        if status_kind == *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_S_JUMP {
+            if stick_value_y < -0.5 {
+                l2c_agent.clear_lua_stack();
+                l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
+                l2c_agent.push_lua_stack(&mut L2CValue::new_num(0.0));
+                smash::app::sv_kinetic_energy::set_speed(lua_state);
+            }
+        }
+        if stick_value_y < -0.5 {
+            if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
+                if MotionModule::frame(boma) < (7.0) {
+                    if !(ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP)) {
+                        l2c_agent.clear_lua_stack();
+                        l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
+                        l2c_agent.push_lua_stack(&mut L2CValue::new_num(0.0));
+                        smash::app::sv_kinetic_energy::set_speed(lua_state);
+                    }
+                }
+            }
+        }
+    }
+}
+
 // Use this for general per-frame fighter-level hooks
 #[smashline::fighter_frame_callback]
 pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
@@ -2519,7 +2583,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         }
 
         if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
-            println!("Wall touch line: {}, Is touch: {}", GroundModule::is_wall_touch_line(boma, get_player_number(boma)), GroundModule::is_touch(boma, get_player_number(boma)));
+            println!("Wall touch line: {}, Is touch: {}", GroundModule::is_wall_touch_line(boma, get_player_number(boma) as u32), GroundModule::is_touch(boma, get_player_number(boma) as u32));
         }
 
         if get_player_number(boma) == 0 {
@@ -2590,7 +2654,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         //ptSwaps(boma, fighter_kind, cat1, cat2);
         driftDi(boma, status_kind, stick_value_x);
         grenShurikenFix(boma, status_kind, situation_kind, fighter_kind);
-        animPortFix(lua_state, &mut l2c_agent,boma, fighter_kind, motion_kind, stick_value_y);
+        animPortFix(lua_state, &mut l2c_agent, boma, situation_kind, fighter_kind, motion_kind, stick_value_y);
         bReverses(boma, motion_kind, fighter_kind);
         fixProjectiles(boma, status_kind, fighter_kind);
         magicSeries(boma, status_kind, situation_kind, motion_kind, fighter_kind, stick_value_x, cat1);
@@ -2611,6 +2675,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         docFixes(boma, fighter_kind, motion_kind);
         fireFox(boma, status_kind, fighter_kind);
         snakeC4Thing(boma, status_kind, fighter_kind, motion_kind);
+        bjrShit(lua_state, &mut l2c_agent, boma, status_kind, fighter_kind, stick_value_y, cat1);
         //nessEffects(boma);
         //editParams(boma, status_kind, fighter_kind);
         //dashgrabSlide(boma, status_kind);

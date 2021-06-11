@@ -832,7 +832,7 @@ pub fn doc_pill(fighter: &mut L2CFighterBase) {
 } */
 
 #[acmd_script(agent = "mario_fireball", scripts = ["game_regular"], category = ACMD_GAME)]
-fn mario_fireball(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+unsafe fn mario_fireball(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     if alt(module_accessor, 4) || alt(module_accessor, 5) {
@@ -852,7 +852,7 @@ fn mario_fireball(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         });
     }
     else {
-        original!();
+        original!(fighter);
     }
 }
 

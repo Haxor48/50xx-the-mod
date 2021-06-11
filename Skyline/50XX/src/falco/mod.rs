@@ -275,8 +275,18 @@ fn falco_shine(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[acmd_script(agent = "falco", scripts = ["game_attacks4s"], category = ACMD_GAME)]
-fn falco_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+#[acmd_script(agent = "falco", scripts = ["sound_speciallw", "sound_specialairlw", "sound_speciallwr", "sound_specialairlwr"], category = ACMD_SOUND)]
+fn falco_sound_shine(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            PLAY_SE(hash40("vc_falco_heavyget"))
+        }
+    });
+}
+
+#[acmd_script(agent = "falco", scripts = ["game_laddercatchr", "game_laddercatchl", "game_laddercatchairr", "game_laddercatchairl"], category = ACMD_GAME)]
+fn falco_shine_2(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=5)
@@ -291,8 +301,8 @@ fn falco_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[acmd_script(agent = "falco", scripts = ["effect_attacks4s"], category = ACMD_EFFECT)]
-fn falco_effect_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+#[acmd_script(agent = "falco", scripts = ["effect_laddercatchr", "effect_laddercatchl", "effect_laddercatchairr", "effect_laddercatchairl"], category = ACMD_EFFECT)]
+fn falco_effect_shine_2(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -321,6 +331,25 @@ fn falco_effect_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             EFFECT_OFF_KIND(0x0d30ab52b6 as u64, false, false)
             EFFECT_OFF_KIND(0x0fdc7fb0a0 as u64, true, false)
             EFFECT_FLW_POS(hash40("sys_flash"), hash40("reflector"), 1.4, -0.6, -0.5, 0, 0, 0, 0.5, true)
+        }
+    });
+}
+
+#[acmd_script(agent = "falco", scripts = ["sound_laddercatchr", "sound_laddercatchl", "sound_laddercatchairr", "sound_laddercatchairl"], category = ACMD_SOUND)]
+fn falco_sound_shine_2(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        if(is_excute){
+            PLAY_SE(hash40("se_falco_special_l01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("vc_falco_special_l01"))
+        }
+        wait(Frames=26)
+        if(is_excute){
+            PLAY_SE(hash40("se_falco_special_l03"))
         }
     });
 }
@@ -432,7 +461,7 @@ fn falco_upb_attack(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         if(is_excute){
             AttackModule::clear_all()
-            ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=2.0, Angle=367, KBG=90, FKB=0, BKB=70, Size=10.0, X=4.2, Y=-3.1, Z=-1.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.7, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_REVERSE, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=2.0, Angle=366, KBG=90, FKB=0, BKB=70, Size=10.0, X=4.2, Y=-3.1, Z=-1.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.7, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_REVERSE, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
         }
         wait(Frames=1)
         if(is_excute){

@@ -41,6 +41,7 @@ mod ganon;
 mod corrin;
 mod zss;
 mod snake;
+mod bjr;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -59,7 +60,7 @@ pub fn main() {
     zard::installZard();
     diddy::installDiddy();
     isabelle::installIsabelle();
-    joker::installJoker();
+    //joker::installJoker();
     marth::installMarth();
     sheik::installSheik();
     ness::installNess();
@@ -77,4 +78,5 @@ pub fn main() {
     corrin::installCorrin();
     zss::installZss();
     snake::installSnake();
+    bjr::installBjr();
 }
