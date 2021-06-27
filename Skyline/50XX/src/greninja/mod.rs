@@ -496,6 +496,16 @@ unsafe fn greninja_shuriken_shot_max(fighter: &mut smash::lua2cpp::L2CAgentBase)
     });
 }
 
+#[acmd_script(agent = "gekkouga_shuriken", scripts = ["game_charge"], category = ACMD_GAME)]
+fn greninja_shuriken_charge(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=83, KBG=93, FKB=0, BKB=10, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.78, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-1.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_NONE)
+        }
+    });
+}
+
 pub fn installGreninja() {
     install_acmd_scripts!(
         greninja_uair,
@@ -513,6 +523,7 @@ pub fn installGreninja() {
         greninja_dthrow,
         greninja_bthrow,
         greninja_pivotgrab,
-        greninja_shuriken_shot_max
+        greninja_shuriken_shot_max,
+        greninja_shuriken_charge
     );
 }

@@ -93,8 +93,8 @@ fn zss_zair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, 0)
-            ArticleModule::set_visibility_whole(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+            ArticleModule::generate_article(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, false, 0)
+            ArticleModule::set_visibility_whole(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             WorkModule::on_flag(Flag=FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK)
         }
         wait(Frames=5)

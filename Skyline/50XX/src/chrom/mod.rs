@@ -577,7 +577,7 @@ pub fn installChrom() {
         chrom_jab,
         chrom_da,
         chrom_utilt,
-        chrom_usmash,
+        //chrom_usmash,
         //chrom_effect_usmash,
         chrom_ftilt,
         chrom_effect_ftilt,

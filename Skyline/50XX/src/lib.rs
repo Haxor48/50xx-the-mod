@@ -42,6 +42,8 @@ mod corrin;
 mod zss;
 mod snake;
 mod bjr;
+mod pika;
+//mod wiifit;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -79,4 +81,6 @@ pub fn main() {
     zss::installZss();
     snake::installSnake();
     bjr::installBjr();
+    pika::installPika();
+    //wiifit::installWiifit();
 }
