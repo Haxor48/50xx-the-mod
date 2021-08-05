@@ -4,6 +4,8 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smashline::*;
 use smash::phx::Vector3f;
+use smash::app::lua_bind::*;
+use crate::custom::abs;
 
 #[acmd_script(agent = "fox", scripts = ["game_attackairb"], category = ACMD_GAME)]
 fn fox_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
@@ -396,6 +398,7 @@ fn fox_upb_charge(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 #[acmd_script(agent = "fox", scripts = ["game_specialhi"], category = ACMD_GAME)]
 fn fox_upb_hit(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    let mut angle = 0 as i32;
     acmd!(lua_state, {
         if(is_excute){
             JostleModule::set_status(false)
@@ -406,7 +409,27 @@ fn fox_upb_hit(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         wait(Frames=4)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=10.0, Angle=366, KBG=50, FKB=0, BKB=85, Size=5.0, X=2.5, Y=-1.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_REVERSE, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_BODY)
+            rust {
+                if KineticModule::get_sum_speed_x(module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) == 0.0 {
+                    if KineticModule::get_sum_speed_y(module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) >= 0.0 {
+                        angle = 90 as i32;
+                    }
+                    else {
+                        angle = 270 as i32;
+                    }
+                }
+                else {
+                    let mut tan = 0.0;
+                    if KineticModule::get_sum_speed_y(module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) >= 0.0 {
+                        tan = KineticModule::get_sum_speed_y(module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) / abs(KineticModule::get_sum_speed_x(module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN));
+                    }
+                    else {
+                        tan = KineticModule::get_sum_speed_x(module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) / abs(KineticModule::get_sum_speed_y(module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN));
+                    }
+                    angle = ((180.0 * tan.atan()) / std::f32::consts::PI) as i32;
+                }
+            }
+            ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=10.0, Angle=angle, KBG=50, FKB=0, BKB=85, Size=5.0, X=2.5, Y=-1.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_REVERSE, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_BODY)
         }
     });
 }
@@ -428,6 +451,7 @@ pub fn installFox() {
        fox_pummel,
        fox_dair,
        fox_fair,
-       fox_upb_charge
+       fox_upb_charge,
+       fox_upb_hit
     );
 }

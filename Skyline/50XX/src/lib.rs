@@ -43,6 +43,10 @@ mod zss;
 mod snake;
 mod bjr;
 mod pika;
+mod pit;
+mod mac;
+mod krool;
+mod palutena;
 //mod wiifit;
 
 #[skyline::main(name = "50xx_mod")]
@@ -62,7 +66,7 @@ pub fn main() {
     zard::installZard();
     diddy::installDiddy();
     isabelle::installIsabelle();
-    //joker::installJoker();
+    joker::installJoker();
     marth::installMarth();
     sheik::installSheik();
     ness::installNess();
@@ -82,5 +86,9 @@ pub fn main() {
     snake::installSnake();
     bjr::installBjr();
     pika::installPika();
+    pit::installPit();
+    mac::installMac();
+    krool::installKRool();
+    palutena::installPalutena();
     //wiifit::installWiifit();
 }

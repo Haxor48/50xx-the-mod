@@ -322,7 +322,15 @@ unsafe fn ivy_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     acmd!(lua_state, {
         frame(Frame=15)
-        rust {
+        if(is_excute) {
+            WorkModule::on_flag(FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_HI_FLAG_SET_ANGLE)
+            ATTACK(ID=0, Part=0, Bone=hash40("viner2"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=4.5, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("viner3"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=4.2, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=2, Part=0, Bone=hash40("viner4"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=3.8, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=3, Part=0, Bone=hash40("viner5"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=3.5, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=4, Part=0, Bone=hash40("viner5"), Damage=13.0, Angle=50, KBG=90, FKB=0, BKB=80, Size=4.5, X=8.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_OBJECT)
+        }
+        /*rust {
             WorkModule::on_flag(module_accessor, *FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_HI_FLAG_SET_ANGLE);
             if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
                 println!("power whip (and maybe nae nae?)");
@@ -353,7 +361,7 @@ unsafe fn ivy_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             }
             else {
                 acmd!(lua_state, {
-                    if (is_excute) {
+                    if(is_excute) {
                         ATTACK(ID=0, Part=0, Bone=hash40("viner2"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=4.5, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
                         ATTACK(ID=1, Part=0, Bone=hash40("viner3"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=4.2, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
                         ATTACK(ID=2, Part=0, Bone=hash40("viner4"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=3.8, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
@@ -362,7 +370,7 @@ unsafe fn ivy_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
                     }
                 });
             }
-        }
+        }*/
         frame(Frame=18)
         if(is_excute){
             AttackModule::clear_all()
@@ -389,7 +397,15 @@ unsafe fn ivy_upb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             WorkModule::off_flag(Flag=FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK)
         }
         frame(Frame=15)
-        rust {
+        if(is_excute) {
+            WorkModule::on_flag(FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_HI_FLAG_SET_ANGLE)
+            ATTACK(ID=0, Part=0, Bone=hash40("viner2"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=4.5, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("viner3"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=4.2, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=2, Part=0, Bone=hash40("viner4"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=3.8, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=3, Part=0, Bone=hash40("viner5"), Damage=11.0, Angle=50, KBG=90, FKB=0, BKB=50, Size=3.5, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=4, Part=0, Bone=hash40("viner5"), Damage=13.0, Angle=50, KBG=90, FKB=0, BKB=80, Size=4.5, X=8.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_OBJECT)
+        }
+        /*rust {
             WorkModule::on_flag(module_accessor, *FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_HI_FLAG_SET_ANGLE);
             if AMOUNTSOLAR[get_player_number(module_accessor)] >= 200 {
                 println!("power whip (and maybe nae nae?)");
@@ -431,7 +447,7 @@ unsafe fn ivy_upb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
                     }
                 });
             }
-        }
+        }*/
         frame(Frame=18)
         if(is_excute){
             AttackModule::clear_all()
@@ -519,7 +535,7 @@ fn ivy_dthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-#[acmd_script(agent = "pfushigisou", scripts = ["game_specials", "game_sepcialairs"], category = ACMD_GAME)]
+/*#[acmd_script(agent = "pfushigisou", scripts = ["game_specials", "game_sepcialairs"], category = ACMD_GAME)]
 unsafe fn ivy_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
@@ -554,9 +570,9 @@ unsafe fn ivy_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=49)
         FT_MOTION_RATE(FSM=1)
     });
-}
+}*/
 
-#[acmd_script(agent = "pfushigisou_seed", scripts = ["game_move"], category = ACMD_GAME)]
+/*#[acmd_script(agent = "pfushigisou_seed", scripts = ["game_move"], category = ACMD_GAME)]
 unsafe fn ivy_seed(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
@@ -595,9 +611,9 @@ unsafe fn ivy_seed(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             }
         });
     }
-}
+}*/
 
-#[acmd_script(agent = "pfushigisou_seed", scripts = ["game_movehard"], category = ACMD_GAME)]
+/*#[acmd_script(agent = "pfushigisou_seed", scripts = ["game_movehard"], category = ACMD_GAME)]
 unsafe fn ivy_seed_horny(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
@@ -618,7 +634,7 @@ unsafe fn ivy_seed_horny(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             }
         });
     }
-}
+}*/
 
 pub fn installIvysaur() {
     install_acmd_scripts!(
@@ -636,11 +652,11 @@ pub fn installIvysaur() {
         ivy_fair,
         ivy_grab,
         ivy_dthrow,
-        ivy_sideb,
+        //ivy_sideb,
         //ivy_neutralb,
         //ivy_neutralb_air,
-        ivy_seed,
-        ivy_seed_horny,
-        ivy_nair
+        //ivy_seed,
+        //ivy_seed_horny,
+        //ivy_nair
     );
 }

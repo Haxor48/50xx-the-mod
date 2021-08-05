@@ -280,6 +280,12 @@ fn pichu_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 #[acmd_script(agent = "pichu_dengekidama", scripts = ["game_regular"], category = ACMD_GAME)]
 unsafe fn pichu_electroball(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    /*let dmg = (1.89/OPPDASHSPEED) * 10.0;
+    acmd!(lua_state, {
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=dmg, Angle=361, KBG=100, FKB=0, BKB=50, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-4.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
+        }
+    });*/
     if OPPDASHSPEED >= 3.75 {
         acmd!(lua_state, {
             if(is_excute){

@@ -292,15 +292,15 @@ fn ganon_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         frame(Frame=14)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=160, BKB=0, Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=160, BKB=0, Size=6.5, X=0.0, Y=8.8, Z=13.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=100, BKB=0, Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=100, BKB=0, Size=6.5, X=0.0, Y=8.8, Z=13.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
             /*CATCH(ID=0, Bone=hash40("top"), Size=4.4, X=0.0, Y=16.0, Z=6.5, Status=FIGHTER_STATUS_KIND_CLUNG_GANON, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
             CATCH(ID=1, Bone=hash40("top"), Size=6.5, X=0.0, Y=8.8, Z=13.7, Status=FIGHTER_STATUS_KIND_CLUNG_GANON, Ground_or_Air=COLLISION_SITUATION_MASK_GA)*/
         }
         wait(Frames=1)
         if(is_excute){
             AttackModule::clear_all()
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=160, BKB=0, Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=0.0, Y2=18.0, Z2=3.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=100, BKB=0, Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=0.0, Y2=18.0, Z2=3.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
             //CATCH(ID=0, Bone=hash40("top"), Size=4.4, X=0.0, Y=16.0, Z=6.5, X2=0.0, Y2=18.0, Z2=3.0, Status=FIGHTER_STATUS_KIND_CLUNG_GANON, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
         }
         frame(Frame=18)
@@ -315,6 +315,7 @@ fn ganon_upb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("armr"), Damage=8.0, Angle=80, KBG=110, FKB=0, BKB=60, Size=9.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=8.0, Angle=80, KBG=110, FKB=0, BKB=60, Size=6.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=8.0, Angle=80, KBG=110, FKB=0, BKB=60, Size=9.0, X=-6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
         }
         wait(Frames=3)
         if(is_excute){
@@ -360,20 +361,20 @@ fn ganon_effect_bthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            EFFECT(hash40("edge_throwb_teleport"), hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT(hash40("ganon_majinken"), hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=4)
         if(is_excute){
-            EFFECT_FOLLOW(hash40("edge_catch_handaura"), hash40("handr"), 1, 0, 0, 0, 0, 0, 1, true)
-            EFFECT(hash40("edge_throwb_bom2"), hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT_FOLLOW(hash40("ganon_majinken"), hash40("handr"), 1, 0, 0, 0, 0, 0, 1, true)
+            EFFECT(hash40("ganon_majinken"), hash40("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=18)
         if(is_excute){
-            EFFECT(hash40("edge_throwb_bom"), hash40("top"), 0, 11, -13, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+            EFFECT(hash40("ganon_majinken"), hash40("top"), 0, 11, -13, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
         }
         frame(Frame=30)
         if(is_excute){
-            EFFECT_OFF_KIND(hash40("edge_catch_handaura"), false, true)
+            EFFECT_OFF_KIND(hash40("ganon_majinken"), false, true)
         }
     });
 }
@@ -410,24 +411,24 @@ fn ganon_effect_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            EFFECT_FOLLOW(hash40("edge_light_finger_aura"), hash40("handr"), 2.5, 1, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW(hash40("ganon_majinken_flash"), hash40("handr"), 2.5, 1, 0, 0, 0, 0, 1, true)
             EffectModule::enable_sync_init_pos_last()
         }
         frame(Frame=15)
         if(is_excute){
-            EFFECT_OFF_KIND(hash40("edge_light_finger_aura"), false, true)
-            EFFECT_FOLLOW_NO_STOP(hash40("edge_light_impact2"), hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
-            EFFECT_FLW_POS(hash40("edge_light_impact"), hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
-            EFFECT_FOLLOW_NO_STOP(hash40("edge_light_finger_snapping"), hash40("handr"), 3.5, 1, 0, 0, 0, 0, 1, true)
+            EFFECT_OFF_KIND(hash40("ganon_majinken_start"), false, true)
+            EFFECT_FOLLOW_NO_STOP(hash40("ganon_majinken_start"), hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
+            EFFECT_FLW_POS(hash40("ganon_majinken_start"), hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
+            EFFECT_FOLLOW_NO_STOP(hash40("ganon_majinken_start"), hash40("handr"), 3.5, 1, 0, 0, 0, 0, 1, true)
             EffectModule::enable_sync_init_pos_last()
         }
         frame(Frame=16)
         if(is_excute){
-            EFFECT_DETACH_KIND(hash40("edge_light_finger_snapping"), -1)
+            EFFECT_DETACH_KIND(hash40("ganon_majinken_hold"), -1)
         }
         frame(Frame=17)
         if(is_excute){
-            EFFECT_OFF_KIND(hash40("edge_light_impact2"), false, false)
+            EFFECT_OFF_KIND(hash40("ganon_majinken_hold"), false, false)
         }
     });
 }
