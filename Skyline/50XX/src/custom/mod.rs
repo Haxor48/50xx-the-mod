@@ -2747,6 +2747,13 @@ pub unsafe fn otherCancels(boma: &mut smash::app::BattleObjectModuleAccessor, st
             StatusModule::change_status_request_from_script(boma, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_S_ATTACK, true);
         }
     }
+    if fighter_kind == *FIGHTER_KIND_LUCARIO {
+        if isAttacking(status_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+            if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
+                CancelModule::enable_cancel(boma);
+            }
+        }
+    }
 }
 
 pub unsafe fn incinSpeed(lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32, cat1: i32, stick_value_x: f32) {

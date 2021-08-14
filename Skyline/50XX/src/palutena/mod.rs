@@ -158,9 +158,9 @@ fn palu_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         frame(Frame=24)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=88, KBG=102, FKB=0, BKB=60, Size=6.0, X=0.0, Y=23.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=88, KBG=102, FKB=0, BKB=60, Size=4.0, X=0.0, Y=18.0, Z=4.0, X2=0.0, Y2=23.0, Z2=12.0, Hitlag=1.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=5.0, Angle=88, KBG=102, FKB=0, BKB=60, Size=4.0, X=0.0, Y=18.0, Z=-4.0, X2=0.0, Y2=23.0, Z2=-12.0, Hitlag=1.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=88, KBG=112, FKB=0, BKB=60, Size=6.0, X=0.0, Y=23.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=88, KBG=112, FKB=0, BKB=60, Size=4.0, X=0.0, Y=18.0, Z=4.0, X2=0.0, Y2=23.0, Z2=12.0, Hitlag=1.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
+            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=5.0, Angle=88, KBG=112, FKB=0, BKB=60, Size=4.0, X=0.0, Y=18.0, Z=-4.0, X2=0.0, Y2=23.0, Z2=-12.0, Hitlag=1.5, SDI=0.7, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
         }
         frame(Frame=26)
         if(is_excute){
@@ -456,6 +456,17 @@ fn palu_downb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "palutena_autoaimbullet", scripts = ["game_shot"], category = ACMD_GAME)]
+fn palu_autobullet(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.5, Angle=67, KBG=41, FKB=0, BKB=60, Size=2.3, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-1.7, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_palutena_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_ENERGY)
+            ControlModule::set_rumble(Hash40{hash: hash40("rbkind_beamss")}, 0, false, 0 as u32)
+        }
+    });
+}
+
 pub fn installPalutena() {
     install_acmd_scripts!(
         palu_nair,
@@ -470,6 +481,7 @@ pub fn installPalutena() {
         palu_dsmash,
         palu_ftilt,
         palu_board,
-        palu_downb
+        palu_downb,
+        palu_autobullet
     );
 }

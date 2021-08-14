@@ -300,6 +300,26 @@ fn ike_sideb_attack_grnd(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "ike", scripts = ["game_specialairsattack"], category = ACMD_GAME)]
+fn ike_sideb_attack_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=13.0, Angle=60, KBG=100, FKB=0, BKB=50, Size=6.5, X=0.0, Y=8.4, Z=14.8, X2=0.0, Y2=8.4, Z2=10.7, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
+            WorkModule::on_flag(Flag=FIGHTER_IKE_STATUS_SPECIAL_S_FLAG_ATTACK_END)
+        }
+        frame(Frame=4)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=12)
+        if(is_excute){
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        }
+    });
+}
+
 #[acmd_script(agent = "ike", scripts = ["game_throwf"], category = ACMD_GAME)]
 fn ike_fthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -323,6 +343,69 @@ fn ike_fthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
             AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_script(agent = "ike", scripts = ["game_throwhi"], category = ACMD_GAME)]
+fn ike_uthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=93, KBG=130, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=18)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.5, Angle=361, KBG=150, FKB=0, BKB=30, Size=4.5, X=0.0, Y=9.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=3.5, Angle=361, KBG=150, FKB=0, BKB=30, Size=3.0, X=0.0, Y=14.0, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            AttackModule::set_catch_only_all(true, false)
+            CHECK_FINISH_CAMERA(12, 17)
+            rust {
+                let fighter_cutin_manager = *(FIGHTER_CUTIN_MANAGER_ADDR as *mut *mut app::FighterCutInManager);
+                FighterCutInManager::set_throw_finish_zoom_rate(fighter_cutin_manager, 1.2);
+            }
+        }
+        frame(Frame=20)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+            AttackModule::clear_all()
+        }
+        frame(Frame=35)
+        if(is_excute){
+            CancelModule::enable_cancel()
+        }
+    });
+}
+
+#[acmd_script(agent = "ike", scripts = ["game_throwlw"], category = ACMD_GAME)]
+fn ike_dthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        if(is_excute){
+            FT_LEAVE_NEAR_OTTOTTO(-2.5, 2.5)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=4.0, Angle=85, KBG=120, FKB=0, BKB=75, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+        }
+        frame(Frame=35)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=361, KBG=150, FKB=0, BKB=30, Size=4.5, X=-5.0, Y=3.0, Z=-2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            AttackModule::set_catch_only_all(true, false)
+            CHECK_FINISH_CAMERA(0, 0)
+            rust {
+                let fighter_cutin_manager = *(FIGHTER_CUTIN_MANAGER_ADDR as *mut *mut app::FighterCutInManager);
+                FighterCutInManager::set_throw_finish_zoom_rate(fighter_cutin_manager, 1.2);
+            }
+        }
+        frame(Frame=40)
+        if(is_excute){
+            ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+            AttackModule::clear_all()
+        }
+        frame(Frame=51)
+        if(is_excute){
+            CancelModule::enable_cancel()
         }
     });
 }
@@ -488,6 +571,9 @@ pub fn installIke() {
         ike_bthrow,
         ike_neutralb_weak_air,
         ike_neutralb_med_air,
-        ike_neutralb_strong_air
+        ike_neutralb_strong_air,
+        ike_uthrow,
+        ike_dthrow,
+        ike_sideb_attack_air
     );
 }

@@ -343,6 +343,10 @@ fn marth_uthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
         }
+        frame(Frame=40)
+        if(is_excute){
+            CancelModule::enable_cancel()
+        }
     });
 }
 

@@ -229,6 +229,10 @@ fn krool_uthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             SA_SET(State=SITUATION_KIND_GROUND)
             CORRECT(GROUND_CORRECT_KIND_GROUND)
         }
+        frame(Frame=72)
+        if(is_excute){
+            CancelModule::enable_cancel()
+        }
     });
 }
 

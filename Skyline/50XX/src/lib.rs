@@ -47,6 +47,7 @@ mod pit;
 mod mac;
 mod krool;
 mod palutena;
+mod lucario;
 //mod wiifit;
 
 #[skyline::main(name = "50xx_mod")]
@@ -90,5 +91,6 @@ pub fn main() {
     mac::installMac();
     krool::installKRool();
     palutena::installPalutena();
+    lucario::installLucario();
     //wiifit::installWiifit();
 }
