@@ -2404,7 +2404,11 @@ pub unsafe fn teleportCancels(boma: &mut smash::app::BattleObjectModuleAccessor,
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
             }
         }
-        if situation_kind == *SITUATION_KIND_GROUND {
+        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {}
+            if USEDUPB[get_player_number(boma)] {
+                USEDUPB[get_player_number(boma)] = false;
+            }
+        if situation_kind != *SITUATION_KIND_AIR {
             USEDUPB[get_player_number(boma)] = false;
         }
     }
