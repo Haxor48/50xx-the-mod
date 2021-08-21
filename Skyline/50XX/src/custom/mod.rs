@@ -1889,6 +1889,13 @@ pub unsafe fn airDodgeCancels (boma: &mut smash::app::BattleObjectModuleAccessor
                 }
             }
         }
+        if fighter_kind == *FIGHTER_KIND_DIDDY {
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) != 0 {
+                if [*FIGHTER_DIDDY_STATUS_KIND_SPECIAL_N_CHARGE].contains(&status_kind) {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+                }
+            }
+        }
     }
 }
 
@@ -2575,7 +2582,7 @@ pub unsafe fn nessEffects (boma: &mut smash::app::BattleObjectModuleAccessor) {
     }
 }
 
-pub unsafe fn zssDair(lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::app::BattleObjectModuleAccessor, motion_kind: u64, fighter_kind: i32, cat1: i32) {
+pub unsafe fn zssDair(lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, motion_kind: u64, fighter_kind: i32, cat1: i32) {
     if fighter_kind == *FIGHTER_KIND_SZEROSUIT {
         if motion_kind == hash40("attack_air_lw") {
             if MotionModule::frame(boma) < 5.0 && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK) {
@@ -2596,22 +2603,17 @@ pub unsafe fn zssDair(lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut smash
                 if MotionModule::frame(boma) > 34.0 {
                     CancelModule::enable_cancel(boma);
                 }
-                if WorkModule::is_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
-                    l2c_agent.clear_lua_stack();
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_num(-1.0 * WorkModule::get_param_float(boma, 0, hash40("dive_speed_y"))));
-                    smash::app::sv_kinetic_energy::set_speed(lua_state);
-                }
-                else {
-                    l2c_agent.clear_lua_stack();
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_num(-1.0 * WorkModule::get_param_float(boma, 0, hash40("air_speed_y_stable"))));
-                    smash::app::sv_kinetic_energy::set_speed(lua_state);
-                }
             }
         }
         else {
             ZSSDAIR[get_player_number(boma)] = false;
+        }
+        if situation_kind == *SITUATION_KIND_AIR {
+            if CancelModule::is_enable_cancel(boma) {
+                if stick_y_flick_check(boma, -0.3) && KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) <= 0.0 {
+                    WorkModule::on_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+                }
+            }
         }
     }
 }
