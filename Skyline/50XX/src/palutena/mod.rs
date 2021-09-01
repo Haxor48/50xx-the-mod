@@ -467,6 +467,25 @@ fn palu_autobullet(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "palutena", scripts = ["game_specialn", "game_specialairn"], category = ACMD_GAME)]
+fn palu_neutralb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=7)
+        if(is_excute){
+            SEARCH(0, 0, hash40("bust"), 120.0, 0.0, 0.0, 0.0, COLLISION_KIND_MASK_HIT, HIT_STATUS_MASK_NORMAL, 1, COLLISION_SITUATION_MASK_GA, COLLISION_CATEGORY_MASK_FIEB, COLLISION_PART_MASK_BODY_HEAD, false)
+        }
+        frame(Frame=15)
+        if(is_excute){
+            sv_module_access::search(MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL)
+        }
+        frame(Frame=20)
+        if(is_excute){
+            CancelModule::enable_cancel()
+        }
+    });
+}
+
 pub fn installPalutena() {
     install_acmd_scripts!(
         palu_nair,

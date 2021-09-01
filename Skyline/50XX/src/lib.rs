@@ -48,7 +48,10 @@ mod mac;
 mod krool;
 mod palutena;
 mod lucario;
-//mod wiifit;
+mod wiifit;
+mod pyra;
+mod mythra;
+mod plant;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -92,5 +95,8 @@ pub fn main() {
     krool::installKRool();
     palutena::installPalutena();
     lucario::installLucario();
-    //wiifit::installWiifit();
+    wiifit::installWiifit();
+    pyra::installPyra();
+    mythra::installMythra();
+    plant::installPlant();
 }

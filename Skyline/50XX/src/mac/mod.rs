@@ -435,6 +435,70 @@ fn mac_dthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "littlemac", scripts = ["game_specialn2"], category = ACMD_GAME)]
+fn mac_ko_punch(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=8)
+        if(is_excute){
+            sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_ALWAYS, 0)
+        }
+        frame(Frame=9)
+        if(is_excute){
+            AttackModule::set_damage_shake_scale(0.67)
+            ATTACK(ID=0, Part=0, Bone=hash40("armr"), Damage=35.0, Angle=80, KBG=100, FKB=0, BKB=25, Size=4.5, X=3.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=35.0, Angle=80, KBG=100, FKB=0, BKB=25, Size=4.5, X=0.0, Y=9.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            AttackModule::clear(ID=1, false)
+            sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_NORMAL, 0)
+        }
+        frame(Frame=10)
+        if(is_excute){
+            SA_SET(State=SITUATION_KIND_AIR)
+        }
+        frame(Frame=12)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=30)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_LITTLEMAC_STATUS_SPECIAL_N_FLAG_RESET_KO_GAUGE)
+        }
+        frame(Frame=39)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_LITTLEMAC_STATUS_SPECIAL_N_FLAG_KO_GRAVITY)
+        }
+    });
+}
+
+#[acmd_script(agent = "littlemac", scripts = ["game_specialairn2"], category = ACMD_GAME)]
+fn mac_ko_punch_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=9)
+        if(is_excute){
+            AttackModule::set_damage_shake_scale(0.67)
+            ATTACK(ID=0, Part=0, Bone=hash40("armr"), Damage=30.0, Angle=80, KBG=95, FKB=0, BKB=25, Size=5.0, X=3.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=30.0, Angle=80, KBG=95, FKB=0, BKB=25, Size=3.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=2, Part=0, Bone=hash40("shoulderr"), Damage=30.0, Angle=80, KBG=95, FKB=0, BKB=25, Size=3.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=30)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_LITTLEMAC_STATUS_SPECIAL_N_FLAG_RESET_KO_GAUGE)
+        }
+        frame(Frame=39)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_LITTLEMAC_STATUS_SPECIAL_N_FLAG_KO_GRAVITY)
+        }
+    });
+}
+
 pub fn installMac() {
     install_acmd_scripts!(
         mac_dtilt,
@@ -452,6 +516,8 @@ pub fn installMac() {
         mac_usmash,
         mac_dsmash,
         mac_uthrow,
-        mac_dthrow
+        mac_dthrow,
+        mac_ko_punch,
+        mac_ko_punch_air
     );
 }

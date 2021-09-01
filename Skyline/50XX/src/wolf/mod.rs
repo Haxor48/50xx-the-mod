@@ -1,7 +1,11 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
+use smash::lua2cpp::L2CFighterBase;
 use smashline::*;
+use smash::phx::*;
+use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
 
 #[acmd_script(agent = "wolf", scripts = ["game_attack13"], category = ACMD_GAME)]
 fn wolf_jab3(fighter: &mut smash::lua2cpp::L2CAgentBase) {
@@ -466,7 +470,49 @@ fn wolf_flash_article(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=361, KBG=95, FKB=0, BKB=30, Size=3.0, X=0.0, Y=5.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=361, KBG=115, FKB=0, BKB=35, Size=3.0, X=0.0, Y=5.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+        }
+    });
+}
+
+#[acmd_script(agent = "wolf", scripts = ["game_specialn", "game_sepcialairn"], category = ACMD_GAME)]
+fn wolf_laser(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=2)
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, false, 0)
+            rust {
+                if ArticleModule::is_exist(module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER) {
+                    ArticleModule::change_motion(module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, Hash40{hash: hash40("open")}, false, 0.0);
+                }
+            }
+        }
+        frame(Frame=15)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=7.0, Angle=76, KBG=37, FKB=0, BKB=80, Size=2.5, X=0.0, Y=0.0, Z=-3.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=7.0, Angle=76, KBG=37, FKB=0, BKB=80, Size=2.5, X=0.0, Y=0.0, Z=1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=7.0, Angle=76, KBG=37, FKB=0, BKB=80, Size=2.5, X=0.0, Y=0.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_OBJECT)
+        }
+        frame(Frame=16)
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER_BULLET, false, 0)
+        }
+        frame(Frame=20)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=38)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER) {
+                    ArticleModule::change_motion(module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, Hash40{hash: hash40("close")}, false, 0.0);
+                }
+            }
+        }
+        frame(Frame=45)
+        if(is_excute){
+            ArticleModule::set_visibility_whole(FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, false, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -492,6 +538,7 @@ pub fn installWolf() {
         wolf_pivotgrab,
         wolf_effect_pummel,
         wolf_pummel,
-        wolf_flash_article
+        wolf_flash_article,
+        wolf_laser
     );
 }

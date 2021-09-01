@@ -19,14 +19,14 @@ fn pyra_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=2)
         FT_MOTION_RATE(FSM=2)
         frame(Frame=3)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=4)
@@ -47,14 +47,14 @@ fn pyra_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=23)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=36)
@@ -78,14 +78,14 @@ fn pyra_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         FT_MOTION_RATE(FSM=2)
         frame(Frame=4)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=6)
@@ -122,14 +122,14 @@ fn pyra_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=19)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=43)
@@ -155,14 +155,14 @@ fn pyra_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=8)
         FT_MOTION_RATE(FSM=1)
         frame(Frame=9)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=14)
@@ -191,14 +191,14 @@ fn pyra_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=24)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=36)
@@ -225,14 +225,14 @@ fn pyra_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=6)
         FT_MOTION_RATE(FSM=1)
         frame(Frame=6)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=11)
@@ -256,14 +256,14 @@ fn pyra_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=23)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         if(is_excute){
@@ -285,14 +285,14 @@ fn pyra_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=3)
         FT_MOTION_RATE(FSM=1)
         frame(Frame=5)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=10)
@@ -316,14 +316,14 @@ fn pyra_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=26)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
     });
@@ -336,14 +336,14 @@ fn pyra_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.7)
         frame(Frame=5)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=12)
@@ -359,14 +359,14 @@ fn pyra_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=24)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
     });
@@ -396,14 +396,14 @@ fn pyra_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=3)
         FT_MOTION_RATE(FSM=1)
         frame(Frame=7)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
         frame(Frame=9)
@@ -452,21 +452,21 @@ fn pyra_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.5, Angle=96, KBG=118, FKB=0, BKB=66, Size=2.4, X=0.0, Y=5.0, Z=11.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.25, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=11.5, Angle=96, KBG=118, FKB=0, BKB=66, Size=2.0, X=0.0, Y=5.0, Z=14.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.25, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=11.5, Angle=96, KBG=118, FKB=0, BKB=66, Size=1.5, X=0.0, Y=5.0, Z=17.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.25, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-            ATTACK(ID=4, Part=0, Bone=hash40("top"), Damage=11.5, Angle=96, KBG=11S8, FKB=0, BKB=66, Size=2.2, X=0.0, Y=5.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.25, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=4, Part=0, Bone=hash40("top"), Damage=11.5, Angle=96, KBG=118, FKB=0, BKB=66, Size=2.2, X=0.0, Y=5.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.25, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
         }
         frame(Frame=15)
         if(is_excute){
             AttackModule::clear_all()
         }
         frame(Frame=37)
-        if IS_EXIST_ARTICLE(17628) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61328)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17628) {
+                    ArticleModule::add_motion_partial(module_accessor, 17628, 61324, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61328);
+                }
             }
         }
     });

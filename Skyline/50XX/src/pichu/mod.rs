@@ -379,7 +379,7 @@ fn pichu_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         wait(Frames=7)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("neck"), Damage=5.0, Angle=361, KBG=112, FKB=0, BKB=0, Size=4.0, X=5.0, Y=0.0, Z=0.0, X2=-1.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
-            HitModule::set_status_all(HIT_STATUS_NORMAL)
+            HitModule::set_status_all(smash::cpp::root::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
         wait(Frames=18)
         if(is_excute){
@@ -389,6 +389,14 @@ fn pichu_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         }
+    });
+}
+
+#[acmd_script(agent = "pichu_dengeki", scripts = ["game_regular"], category = ACMD_GAME)]
+unsafe fn pichu_electroball_bounce(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+
     });
 }
 
@@ -404,6 +412,7 @@ pub fn installPichu() {
         pichu_fsmash,
         pichu_usmash,
         pichu_electroball,
-        pichu_nair
+        pichu_nair,
+        pichu_electroball_bounce
     );
 }

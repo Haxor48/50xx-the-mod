@@ -495,6 +495,6 @@ fn falco_upb_attack(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 
 pub fn installFalco() {
     install_acmd_scripts!(
-        falco_dair, falco_bair, falco_dtilt, falco_uair, falco_utilt, falco_upsmash, falco_fairland, falco_shine, falco_nair, falco_fair 
+        falco_dair, falco_bair, falco_dtilt, falco_uair, falco_utilt, falco_upsmash, falco_fairland, falco_shine, falco_nair, falco_fair, 
         falco_effect_nair, falco_effect_pummel, falco_pummel, /*falco_fsmash, falco_effect_fsmash,*/ falco_upb_attack, falco_upb_charge);
 }

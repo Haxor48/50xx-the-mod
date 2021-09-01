@@ -48,31 +48,13 @@ fn ness_pkflash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
-/*#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_NESS_YOYO_HEAD, 
-    animation = "attack_hi4_charge",
-    animcmd = "game_attackhi4charge")]
-pub fn ness_upsmash_charge(fighter: &mut L2CFighterBase) {
-    acmd!({
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("attach"), Damage=1.0, Angle=30, KBG=100, FKB=0, BKB=20, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-        }
+#[acmd_script(agent = "ness_yoyohead", scripts = ["game_attackhi4charge"], category = ACMD_GAME)]
+fn ness_upsmash_charge(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+
     });
 }
-
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON, 
-    battle_object_kind = WEAPON_KIND_NESS_YOYO_HEAD, 
-    animation = "attack_lw4_charge",
-    animcmd = "game_attacklw4charge")]
-pub fn ness_dsmash_charge(fighter: &mut L2CFighterBase) {
-    acmd!({
-        if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("attach"), Damage=1.0, Angle=150, KBG=100, FKB=0, BKB=20, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-        }
-    });
-} */
 
 #[acmd_script(agent = "ness_yoyohead", scripts = ["game_attackhi4"], category = ACMD_GAME)]
 fn ness_upsmash_hit(fighter: &mut smash::lua2cpp::L2CAgentBase) {
@@ -138,6 +120,14 @@ fn ness_dsmash_hit(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "ness_yoyohead", scripts = ["game_attacklw4charge"], category = ACMD_GAME)]
+fn ness_dsmash_charge(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+
+    });
+}
+
 #[acmd_script(agent = "ness", scripts = ["game_attackhi3"], category = ACMD_GAME)]
 fn ness_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -190,6 +180,8 @@ pub fn installNess() {
         ness_dsmash_hit,
         ness_upsmash_hit,
         ness_utilt,
+        ness_upsmash_charge,
+        ness_dsmash_charge
         //ness_effect_pkflash
     );
 }

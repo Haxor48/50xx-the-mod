@@ -19,14 +19,14 @@ fn mythra_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=9)
         FT_MOTION_RATE(FSM=1)
         frame(Frame=10)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(0, 12)
@@ -42,14 +42,14 @@ fn mythra_da(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=29)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         FT_MOTION_RATE(FSM=0.75)
@@ -69,14 +69,14 @@ fn mythra_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=10)
         FT_MOTION_RATE(FSM=1)
         frame(Frame=12)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(Frame=15)
@@ -112,14 +112,14 @@ fn mythra_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=21)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         FT_MOTION_RATE(FSM=0.8)
@@ -141,21 +141,21 @@ fn mythra_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=1)
-        FT_MOTION_RATE(FSM=4)
+        FT_MOTION_RATE(FSM=4.0)
         frame(Frame=2)
         FT_MOTION_RATE(FSM=0.5)
         frame(Frame=3)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
-            }
-        }
-        FT_MOTION_RATE(0, 1)
+        FT_MOTION_RATE(FSM=1.0)
         frame(Frame=6)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -178,14 +178,14 @@ fn mythra_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=24)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(Frame=36)
@@ -211,14 +211,14 @@ fn mythra_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         frame(Frame=10)
         FT_MOTION_RATE(FSM=1)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(Frame=14)
@@ -245,14 +245,14 @@ fn mythra_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=18)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         FT_MOTION_RATE(fSM=0.75)
@@ -276,14 +276,14 @@ fn mythra_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
         }
         frame(Frame=5)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(Frame=8)
@@ -316,14 +316,14 @@ fn mythra_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             AttackModule::clear_all()
         }
         frame(Frame=13)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         FT_MOTION_RATE(FSM=0.75)
@@ -347,14 +347,14 @@ fn mythra_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=8)
         FT_MOTION_RATE(FSM=1)
         frame(Frame=9)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(Frame=11)
@@ -378,14 +378,14 @@ fn mythra_uair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=17)
         FT_MOTION_RATE(FSM=0.5)
         frame(Frame=19)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         if(is_excute){
@@ -415,14 +415,14 @@ fn mythra_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=1)
         FT_MOTION_RATE(FSM=0.5)
         frame(Frame=5)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         FT_MOTION_RATE(FSM=0.6)
@@ -447,14 +447,14 @@ fn mythra_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         FT_MOTION_RATE(FSM=0.5)
         frame(Frame=22)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(Frame=30)
@@ -467,20 +467,20 @@ fn mythra_dsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=1)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
         frame(Frame=3)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
-            WorkModule::set_int64(hash40("attack_lw4_hold"), 61304)
+            WorkModule::set_int64(hash40("attack_lw4_hold") as i64, 61304)
         }
         frame(Frame=4)
         FT_MOTION_RATE(FSM=0.5)
@@ -506,14 +506,14 @@ fn mythra_dsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         }
         FT_MOTION_RATE(FSM=0.75)
         frame(Frame=42)
-        if IS_EXIST_ARTICLE(17632) {
-            if(is_excute){
-                ArticleModule::add_motion_partial(17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false)
-            }
-        }
-        if MotionModule::is_changing() {
-            if(is_excute){
-                WorkModule::on_flag(Flag=61376)
+        if(is_excute){
+            rust {
+                if ArticleModule::is_exist(module_accessor, 17632) {
+                    ArticleModule::add_motion_partial(module_accessor, 17632, 61372, Hash40{hash: 0x07439e926b}, 5.0, 5.0, false, false, 0.0, false, true, false);
+                }
+                if StatusModule::is_changing(module_accessor) {
+                    WorkModule::on_flag(module_accessor, 61376);
+                }
             }
         }
     });
