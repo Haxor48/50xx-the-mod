@@ -479,7 +479,7 @@ fn palu_neutralb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             sv_module_access::search(MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL)
         }
-        frame(Frame=20)
+        frame(Frame=33)
         if(is_excute){
             CancelModule::enable_cancel()
         }

@@ -52,6 +52,8 @@ mod wiifit;
 mod pyra;
 mod mythra;
 mod plant;
+mod puff;
+mod banjo;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -99,4 +101,6 @@ pub fn main() {
     pyra::installPyra();
     mythra::installMythra();
     plant::installPlant();
+    puff::installPuff();
+    banjo::installBanjo();
 }

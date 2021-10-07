@@ -152,7 +152,25 @@ unsafe fn mario_effect_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         });
     }
     else {
-        original!(fighter);
+        acmd!(lua_state, {
+            frame(Frame=2)
+            if(is_excute){
+                EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 8.5, 0, 0, 0, 0, 0.9, true, EF_FLIP_YZ)
+            }
+            frame(Frame=3)
+            if(is_excute){
+                EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 3.5, 0, 0, 0, 0, 0.6, true, EF_FLIP_YZ)
+            }
+            frame(Frame=5)
+            if(is_excute){
+                EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 7, 0, 0, 0, 0, 0.95, true, EF_FLIP_YZ)
+            }
+            frame(Frame=22)
+            if(is_excute){
+                EFFECT_FOLLOW(hash40("sys_attack_impact"), hash40("top"), 0, 7.5, 0, 0, 0, 0, 2, true)
+                LAST_EFFECT_SET_ALPHA(0.7)
+            }
+        });
     }
 }
 
@@ -363,7 +381,18 @@ unsafe fn mario_effect_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         });
     }
     else {
-        original!(fighter);
+        acmd!(lua_state, {
+            frame(Frame=6)
+            if(is_excute){
+                EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 3, 5.4, 5, 180, 0, 0, 0.9, true)
+                LAST_PARTICLE_SET_COLOR(0.8, 0.6, 0.3)
+            }
+            frame(Frame=7)
+            if(is_excute){
+                EFFECT(hash40("sys_attack_impact"), hash40("top"), -10, 7, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 360, false)
+                LAST_EFFECT_SET_ALPHA(0.7)
+            }
+        });
     }
 }
 

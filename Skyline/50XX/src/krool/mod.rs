@@ -102,7 +102,7 @@ fn krool_utilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             AttackModule::clear_all()
         }
-        frame(Frame=24)
+        frame(Frame=30)
         if(is_excute){
             CancelModule::enable_cancel()
         }
@@ -208,7 +208,7 @@ fn krool_uthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=16.0, Angle=90, KBG=20, FKB=0, BKB=80, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=16.0, Angle=70, KBG=1, FKB=0, BKB=100, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_THROW)
         }
         frame(Frame=11)
@@ -229,7 +229,7 @@ fn krool_uthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             SA_SET(State=SITUATION_KIND_GROUND)
             CORRECT(GROUND_CORRECT_KIND_GROUND)
         }
-        frame(Frame=72)
+        frame(Frame=78)
         if(is_excute){
             CancelModule::enable_cancel()
         }
