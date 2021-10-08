@@ -1158,21 +1158,12 @@ pub unsafe fn jabCancels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
 }
 
 pub unsafe fn pteStuff(boma: &mut smash::app::BattleObjectModuleAccessor, fighter_kind: i32, status_kind: i32, situation_kind: i32, motion_kind: u64, cat1: i32, stick_value_x: f32) { //Pte stuff
-    if fighter_kind == *FIGHTER_KIND_SHIZUE {
-        if [*FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL, *FIGHTER_STATUS_KIND_FALL].contains(&status_kind) { // Midair dash dance
+    if fighter_kind == *FIGHTER_KIND_SHIZUE || fighter_kind == *FIGHTER_KIND_MURABITO {
+        if CancelModule::is_enable_cancel(boma) { // Midair dash dance
             if situation_kind == *SITUATION_KIND_AIR {
                 if ((cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN) != 0) && stick_value_x * PostureModule::lr(boma) < 0.0 {
                     PostureModule::reverse_lr(boma);
                     PostureModule::update_rot_y_lr(boma);
-                }
-            }
-        }
-        if situation_kind == *SITUATION_KIND_AIR { //Boost side b
-            if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
-                let speed_vector = smash::phx::Vector3f { x: 0.0, y: 1.2, z: 0.0 };
-                if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
-                    KineticModule::add_speed(boma, &speed_vector);
                 }
             }
         }
@@ -1181,15 +1172,15 @@ pub unsafe fn pteStuff(boma: &mut smash::app::BattleObjectModuleAccessor, fighte
             PostureModule::update_rot_y_lr(boma);
             MotionModule::change_motion(boma, Hash40{hash: hash40("attack_air_f")}, 0.0, 1.0, false, 0.0, false, false);
         }
-        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_RUN].contains(&status_kind) { //Get direction during dash
+    }
+    if fighter_kind == *FIGHTER_KIND_SHIZUE {
+        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_RUN].contains(&status_kind) || ![*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START].contains(&status_kind) { //Get direction during dash
             DASHDIR[get_player_number(boma)] = PostureModule::lr(boma);
         }
         if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START].contains(&status_kind) { //F smash flip check
-            if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_RUN].contains(&StatusModule::prev_status_kind(boma, 0)) {
-                if (DASHDIR[get_player_number(boma)] * stick_value_x) < 0.0 {
-                    PostureModule::reverse_lr(boma);
-                    ISREVERSE[get_player_number(boma)] = true;
-                }
+            if (DASHDIR[get_player_number(boma)] * stick_value_x) < 0.0 {
+                PostureModule::reverse_lr(boma);
+                ISREVERSE[get_player_number(boma)] = true;
             }
         }
         else {
@@ -1207,6 +1198,15 @@ pub unsafe fn pteStuff(boma: &mut smash::app::BattleObjectModuleAccessor, fighte
         if motion_kind == hash40("appeal_s_l") || motion_kind == hash40("appeal_s_r") { //Set funny thing
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
                 ISFUNNY[get_player_number(boma)] = !ISFUNNY[get_player_number(boma)];
+            }
+        }
+        if situation_kind == *SITUATION_KIND_AIR { //Boost side b
+            if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
+                let speed_vector = smash::phx::Vector3f { x: 0.0, y: 1.2, z: 0.0 };
+                if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
+                    KineticModule::add_speed(boma, &speed_vector);
+                }
             }
         }
         if ISFUNNY[get_player_number(boma)] { //Do the funny
@@ -3228,6 +3228,22 @@ pub unsafe fn puffLevels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
     }
 }
 
+pub unsafe fn villagerShit(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32) {
+    if fighter_kind == *FIGHTER_KIND_MURABITO {
+        if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_TURN, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_FLAP, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_WAIT].contains(&status_kind) {
+            if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 ||
+            (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 || (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_N) != 0 {
+                CancelModule::enable_cancel(boma);
+            }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_DASH {
+            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+                CancelModule::enable_cancel(boma);
+            }
+        }
+    }
+}
+
 // Use this for general per-frame fighter-level hooks
 #[smashline::fighter_frame_callback]
 pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
@@ -3411,6 +3427,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         toggelStuff(boma, status_kind, cat2);
         comboCounter(boma, status_kind);
         puffLevels(boma, status_kind, fighter_kind);
+        villagerShit(boma, status_kind, fighter_kind, cat1);
         //nessEffects(boma);
         //editParams(boma, status_kind, fighter_kind);
         //dashgrabSlide(boma, status_kind);

@@ -7,7 +7,6 @@ pub static mut FIGHTER_CUTIN_MANAGER_ADDR: usize = 0;
 use smash::app::utility::get_kind;
 use smash::lib::lua_const::*;
 
-
 mod ike;
 mod ivysaur;
 mod ken;
@@ -54,6 +53,7 @@ mod mythra;
 mod plant;
 mod puff;
 mod banjo;
+mod villager;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -103,4 +103,5 @@ pub fn main() {
     plant::installPlant();
     puff::installPuff();
     banjo::installBanjo();
+    villager::installVillager();
 }
