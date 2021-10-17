@@ -79,6 +79,7 @@ static mut ISSTUNNED: [bool; 9] = [false; 9];
 pub static mut PUFFLEVELS: [[i32; 9]; 2] = [[0; 9]; 2];
 static mut ROBINCANCEL: [bool; 9] = [false; 9];
 static mut KBSTART: [i32; 9] = [0; 9];
+static mut HORIZDJSTART: [i32; 9] = [0; 9];
 //static mut BOMA: 0 as &mut BattleObjectModuleAccessor;
 //pub static mut COMMON_PARAMS: *mut CommonParams = 0 as *mut _;
 
@@ -3288,14 +3289,26 @@ pub unsafe fn horizDjs (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut sma
             if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_APPEAL_S_L) || ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_APPEAL_S_R) ||
             ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) || ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) {
                 if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) {
-                    WorkModule::set_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT, (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) + 1));
-                    l2c_agent.clear_lua_stack();
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
-                    l2c_agent.push_lua_stack(&mut L2CValue::new_num(0.0));
-                    smash::app::sv_kinetic_energy::set_speed(lua_state);
-                    let reverse_speed = Vector3f{x: 1.0, y: 0.0, z: 0.0};
-                    KineticModule::add_speed(boma, &reverse_speed);
+                    if HORIZDJSTART[get_player_number(boma)] == 0 {
+                        HORIZDJSTART[get_player_number(boma)] = GLOBALFRAMECOUNT;
+                        WorkModule::set_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT, (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) + 1));
+                    }
                 }
+            }
+            if GLOBALFRAMECOUNT - HORIZDJSTART[get_player_number(boma)] < 4 {
+                l2c_agent.clear_lua_stack();
+                l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_GRAVITY as u64));
+                l2c_agent.push_lua_stack(&mut L2CValue::new_num(0.0));
+                smash::app::sv_kinetic_energy::set_speed(lua_state);
+                /*let reverse_speed = Vector3f{x: 1.0, y: 0.0, z: 0.0};
+                KineticModule::add_speed(boma, &reverse_speed); */
+                l2c_agent.clear_lua_stack();
+                l2c_agent.push_lua_stack(&mut L2CValue::new_int(*FIGHTER_KINETIC_ENERGY_ID_CONTROL as u64));
+                l2c_agent.push_lua_stack(&mut L2CValue::new_num(2.2 * PostureModule::lr(boma)));
+                smash::app::sv_kinetic_energy::set_speed(lua_state);
+            }
+            else {
+                HORIZDJSTART[get_player_number(boma)] = 0;
             }
         }
     }
@@ -3351,7 +3364,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR,
         *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_START, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_START,
         *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE].contains(&status_kind) {
-            if GLOBALFRAMECOUNT - KBSTART[get_player_number(boma)] == 45 {
+            if GLOBALFRAMECOUNT - KBSTART[get_player_number(boma)] == 30 {
                 KBSTART[get_player_number(boma)] = -1;
             }
             if KBSTART[get_player_number(boma)] == 0 {
