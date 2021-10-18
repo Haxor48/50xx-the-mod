@@ -3314,6 +3314,34 @@ pub unsafe fn horizDjs (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut sma
     }
 }
 
+pub unsafe fn terryCancels (boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, fighter_kind: i32, cat1: i32, cat4: i32) {
+    if fighter_kind == *FIGHTER_KIND_DOLLY {
+        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_DASH || status_kind == *FIGHTER_STATUS_KIND_ATTACK_100 {
+            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+                CancelModule::enable_cancel(boma);
+            }
+        }
+        if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_HI3].contains(&status_kind) {
+            if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 {
+                if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+                    CancelModule::enable_cancel(boma);
+                }
+            }
+        }
+        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
+            if (cat4 & *FIGHTER_FLAG_CMD_CAT4_FLAG_SUPER_SPECIAL_COMMAND) != 0 || (cat4 & *FIGHTER_FLAG_CMD_CAT4_FLAG_SUPER_SPECIAL2_COMMAND) != 0 ||
+            (cat4 & *FIGHTER_FLAG_CMD_CAT4_FLAG_SUPER_SPECIAL_R_COMMAND) != 0 || (cat4 & *FIGHTER_FLAG_CMD_CAT4_FLAG_SUPER_SPECIAL2_R_COMMAND) != 0 {
+                CancelModule::enable_cancel(boma);
+            }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
+            if MotionModule::frame(boma) > 21.0 {
+                CancelModule::enable_cancel(boma);
+            }
+        }
+    }
+}
+
 // Use this for general per-frame fighter-level hooks
 #[smashline::fighter_frame_callback]
 pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
@@ -3329,6 +3357,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         let cat1 = ControlModule::get_command_flag_cat(boma, 0);
         let cat2 = ControlModule::get_command_flag_cat(boma, 1);
         let cat3 = ControlModule::get_command_flag_cat(boma, 2);
+        let cat4 = ControlModule::get_command_flag_cat(boma, 3);
         let stick_value_y = ControlModule::get_stick_y(boma);
         let stick_value_x = ControlModule::get_stick_x(boma);
         let motion_kind = MotionModule::motion_kind(boma);
@@ -3505,6 +3534,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         villagerShit(boma, status_kind, fighter_kind, cat1);
         robinCancels(boma, status_kind, situation_kind, fighter_kind);
         horizDjs(lua_state, &mut l2c_agent, boma, status_kind, situation_kind);
+        terryCancels(boma, status_kind, fighter_kind, cat1, cat4);
         //nessEffects(boma);
         //editParams(boma, status_kind, fighter_kind);
         //dashgrabSlide(boma, status_kind);

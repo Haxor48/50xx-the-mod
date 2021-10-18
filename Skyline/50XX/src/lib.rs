@@ -54,6 +54,7 @@ mod plant;
 mod puff;
 mod banjo;
 mod villager;
+mod terry;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -104,4 +105,5 @@ pub fn main() {
     puff::installPuff();
     banjo::installBanjo();
     villager::installVillager();
+    terry::installTerry();
 }
