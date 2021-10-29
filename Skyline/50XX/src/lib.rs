@@ -55,6 +55,7 @@ mod puff;
 mod banjo;
 mod villager;
 mod terry;
+mod miibrawler;
 
 #[skyline::main(name = "50xx_mod")]
 pub fn main() {
@@ -106,4 +107,5 @@ pub fn main() {
     banjo::installBanjo();
     villager::installVillager();
     terry::installTerry();
+    miibrawler::installMiiBrawler();
 }

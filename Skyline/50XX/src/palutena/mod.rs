@@ -445,10 +445,6 @@ fn palu_downb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         if(is_excute){
             ArticleModule::generate_article(FIGHTER_PALUTENA_GENERATE_ARTICLE_REFLECTIONBOARD, false, 0)
         }
-        frame(Frame=2)
-        if(is_excute){
-            CancelModule::enable_cancel()
-        }
         frame(Frame=10)
         FT_MOTION_RATE(FSM=0.6)
         frame(Frame=35)
