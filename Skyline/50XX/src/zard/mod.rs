@@ -6,6 +6,7 @@ use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
 use smashline::*;
 
+
 #[acmd_script(agent = "plizardon", scripts = ["game_attackairf"], category = ACMD_GAME)]
 fn zard_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;

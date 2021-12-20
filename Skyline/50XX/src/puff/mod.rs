@@ -216,7 +216,7 @@ fn puff_sideb_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 unsafe fn puff_rollout(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
-    let mut dmg = 7.0 + 5.0 * PUFFLEVELS[1][get_player_number(module_accessor)] as f32;
+    let mut dmg = 7.0 + 5.0 * (PUFFLEVELS[1][get_player_number(module_accessor)] as f32);
     acmd!(lua_state, {
         if(is_excute){
             JostleModule::set_status(false)

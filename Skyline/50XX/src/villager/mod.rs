@@ -6,6 +6,7 @@ use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
 use smashline::*;
 
+
 #[acmd_script(agent = "murabito", scripts = ["game_attackairn"], category = ACMD_GAME)]
 fn villager_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;

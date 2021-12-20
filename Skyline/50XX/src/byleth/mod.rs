@@ -5,16 +5,14 @@ use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 use smash::phx::*;
 use crate::custom::get_player_number;
+use smashline::*;
 
 pub static mut WEAPONMODE: [i32; 9] = [0; 9];
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_MASTER, 
-    animation = "attack_air_f",
-    animcmd = "game_attackairf")]
-pub fn byleth_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "master", scripts = ["game_attackairf"], category = ACMD_GAME)]
+fn byleth_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         rust {
             if WEAPONMODE[get_player_number(module_accessor)] == 2 {
                 acmd! ({
@@ -128,18 +126,15 @@ pub fn byleth_fair(fighter: &mut L2CFighterCommon) {
     });
 }
 
-#[acmd_func(
-    battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
-    battle_object_kind = FIGHTER_KIND_MASTER, 
-    animation = "attack_air_f",
-    animcmd = "effect_attackairf")]
-pub fn byleth_effect_fair(fighter: &mut L2CFighterCommon) {
-    acmd!({
+#[acmd_script(agent = "master", scripts = ["effect_attackairf"], category = ACMD_EFFECT)]
+fn byleth_effect_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
 
     });
 }
 
-#[acmd_func(
+/*#[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
     battle_object_kind = FIGHTER_KIND_MASTER, 
     animation = "landing_air_f",
@@ -152,12 +147,11 @@ pub fn byleth_landing_fair(fighter: &mut L2CFighterCommon) {
             ArticleModule::remove_exist(FIGHTER_MASTER_GENERATE_ARTICLE_AXE, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
-}
+}*/
 
-pub fn install() {
-    acmd::add_hooks!(
+pub fn installByleth() {
+    install_acmd_scripts!(
         byleth_fair,
-        byleth_effect_fair,
-        //byleth_landing_fair
+        byleth_effect_fair
     );
 }

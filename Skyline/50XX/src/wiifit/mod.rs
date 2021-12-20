@@ -10,6 +10,7 @@ use skyline::nn::ro::LookupSymbol;
 use smash::phx::Vector3f;
 use smash::app;
 
+
 #[acmd_script(agent = "wiifit", scripts = ["game_attacks3s"], category = ACMD_GAME)]
 fn wiifit_ftilt(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;

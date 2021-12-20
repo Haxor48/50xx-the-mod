@@ -753,6 +753,156 @@ fn miibrawler_downb1_loop(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "miifighter", scripts = ["game_specialn3"], category = ACMD_GAME)]
+fn miibrawler_falconpunch(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        FT_MOTION_RATE(FSM=0.4)
+        frame(Frame=9)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_BAKURETU_KICK_TURN)
+        }
+        frame(Frame=31)
+        if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_BAKURETU_KICK_TURN)
+        }
+        frame(Frame=40)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
+        }
+        frame(Frame=50)
+        FT_MOTION_RATE(FSM=1.0)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("legl"), Damage=25.0, Angle=361, KBG=80, FKB=0, BKB=40, Size=4.0, X=6.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            ATTACK(ID=1, Part=0, Bone=hash40("legl"), Damage=23.0, Angle=361, KBG=80, FKB=0, BKB=40, Size=3.0, X=-4.7, Y=0.0, Z=0.0, X2=2.2, Y2=0.0, Z2=0.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_NORMAL, DamageThreshold=0)
+            AttackModule::clear_all()
+        }
+        frame(Frame=55)
+        FT_MOTION_RATE(FSM=0.714)
+        frame(Frame=90)
+        FT_MOTION_RATE(FSM=1)
+    });
+}
+
+#[acmd_script(agent = "miifighter", scripts = ["game_specialn3turn"], category = ACMD_GAME)]
+fn miibrawler_falconpunch_turn(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        FT_MOTION_RATE(FSM=0.4)
+        frame(Frame=21)
+        if(is_excute){
+            REVERSE_LR()
+        }
+        frame(Frame=40)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
+        }
+        frame(Frame=50)
+        FT_MOTION_RATE(FSM=1.0)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("legl"), Damage=28.0, Angle=361, KBG=77, FKB=0, BKB=40, Size=4.0, X=6.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            ATTACK(ID=1, Part=0, Bone=hash40("legl"), Damage=26.0, Angle=361, KBG=77, FKB=0, BKB=40, Size=3.0, X=-4.7, Y=0.0, Z=0.0, X2=2.2, Y2=0.0, Z2=0.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_NORMAL, DamageThreshold=0)
+            AttackModule::clear_all()
+        }
+        frame(Frame=55)
+        FT_MOTION_RATE(FSM=0.714)
+        frame(Frame=90)
+        FT_MOTION_RATE(FSM=1)
+    });
+}
+
+#[acmd_script(agent = "miifighter", scripts = ["game_specialairn3"], category = ACMD_GAME)]
+fn miibrawler_falconpunch_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        FT_MOTION_RATE(FSM=0.4)
+        frame(Frame=9)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_BAKURETU_KICK_TURN)
+        }
+        frame(Frame=31)
+        if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_BAKURETU_KICK_TURN)
+        }
+        frame(Frame=40)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
+        }
+        frame(Frame=49)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_BAKURETU_KICK_DIR_DECIDE)
+            WorkModule::set_int(1, FIGHTER_MIIFIGHTER_STATUS_WORK_ID_INT_BAKURETU_KICK_AIR_PHASE)
+        }
+        frame(Frame=50)
+        FT_MOTION_RATE(FSM=1.0)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("legl"), Damage=21.25, Angle=361, KBG=80, FKB=0, BKB=40, Size=4.0, X=6.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            ATTACK(ID=1, Part=0, Bone=hash40("legl"), Damage=19.55, Angle=361, KBG=80, FKB=0, BKB=40, Size=3.0, X=-4.7, Y=0.0, Z=0.0, X2=2.2, Y2=0.0, Z2=0.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_NORMAL, DamageThreshold=0)
+            AttackModule::clear_all()
+        }
+        frame(Frame=55)
+        FT_MOTION_RATE(FSM=0.714)
+        frame(Frame=62)
+        if(is_excute){
+            WorkModule::set_int(2, FIGHTER_MIIFIGHTER_STATUS_WORK_ID_INT_BAKURETU_KICK_AIR_PHASE)
+        }
+        frame(Frame=90)
+        FT_MOTION_RATE(FSM=1)
+    });
+}
+
+#[acmd_script(agent = "miifighter", scripts = ["game_specialairn3turn"], category = ACMD_GAME)]
+fn miibrawler_falconpunch_turn_air(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        FT_MOTION_RATE(FSM=0.4)
+        frame(Frame=21)
+        if(is_excute){
+            REVERSE_LR()
+        }
+        frame(Frame=40)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
+        }
+        frame(Frame=48)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_BAKURETU_KICK_DIR_DECIDE)
+            WorkModule::set_int(1, FIGHTER_MIIFIGHTER_STATUS_WORK_ID_INT_BAKURETU_KICK_AIR_PHASE)
+        }
+        frame(Frame=50)
+        FT_MOTION_RATE(FSM=1.0)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("legl"), Damage=23.8, Angle=361, KBG=77, FKB=0, BKB=40, Size=4.0, X=6.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            ATTACK(ID=1, Part=0, Bone=hash40("legl"), Damage=22.1, Angle=361, KBG=77, FKB=0, BKB=40, Size=3.0, X=-4.7, Y=0.0, Z=0.0, X2=2.2, Y2=0.0, Z2=0.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        }
+        wait(Frames=3)
+        if(is_excute){
+            sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_NORMAL, DamageThreshold=0)
+            AttackModule::clear_all()
+        }
+        frame(Frame=55)
+        FT_MOTION_RATE(FSM=0.714)
+        frame(Frame=62)
+        if(is_excute){
+            WorkModule::set_int(2, FIGHTER_MIIFIGHTER_STATUS_WORK_ID_INT_BAKURETU_KICK_AIR_PHASE)
+        }
+        frame(Frame=90)
+        FT_MOTION_RATE(FSM=1)
+    });
+}
+
 pub fn installMiiBrawler() {
     install_acmd_scripts!(
         miibrawler_fair,
@@ -766,6 +916,10 @@ pub fn installMiiBrawler() {
         miibrawler_neutralb2_finish,
         miibrawler_upb2,
         miibrawler_upb2_air,
-        miibrawler_upb3
+        miibrawler_upb3,
+        miibrawler_falconpunch,
+        miibrawler_falconpunch_air,
+        miibrawler_falconpunch_turn,
+        miibrawler_falconpunch_turn_air
     );
 }

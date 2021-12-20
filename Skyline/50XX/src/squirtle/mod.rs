@@ -390,7 +390,7 @@ pub fn installSquirtle() {
         squirtle_dtilt,
         squirtle_upb,
         squirtle_usmash,
-        squirtle_dsmash,
+        //squirtle_dsmash,
         squirtle_fsmash,
         squirtle_fthrow,
         squirtle_grab,

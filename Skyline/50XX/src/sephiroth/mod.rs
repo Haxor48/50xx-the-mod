@@ -7,6 +7,7 @@ use smash::app::lua_bind::*;
 use crate::custom::CANPROJECTILE;
 use crate::custom::get_player_number;
 
+
 #[acmd_script(agent = "edge", scripts = ["game_attackairf"], category = ACMD_GAME)]
 fn sephiroth_fair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
