@@ -1006,6 +1006,20 @@ pub unsafe fn jumpCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
             }
         }
     }
+    if fighter_kind == *FIGHTER_KIND_MARIO {
+        if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_MARIO_STATUS_KIND_SPECIAL_LW_SHOOT].contains(&status_kind) {
+            if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_JUMP) || (ControlModule::is_enable_flick_jump(boma) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP)) {
+                if situation_kind == *SITUATION_KIND_AIR{
+                    if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX){
+                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+                    }
+                }
+                else if situation_kind == *SITUATION_KIND_GROUND{
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
+                }
+            }
+        }
+    }
 }
 
 pub unsafe fn landCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32) { //Land Cancels
@@ -1241,19 +1255,17 @@ pub unsafe fn pteStuff(boma: &mut smash::app::BattleObjectModuleAccessor, fighte
         }
     }
     if fighter_kind == *FIGHTER_KIND_SHIZUE {
-        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_RUN].contains(&status_kind) || ![*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START].contains(&status_kind) { //Get direction during dash
+        if ![*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START].contains(&status_kind) { //Get direction during dash
             DASHDIR[get_player_number(boma)] = PostureModule::lr(boma);
+            ISREVERSE[get_player_number(boma)] = false;
         }
-        if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START].contains(&status_kind) { //F smash flip check
+        else {
             if (DASHDIR[get_player_number(boma)] * stick_value_x) < 0.0 {
                 ISREVERSE[get_player_number(boma)] = true;
             }
         }
-        else {
-            ISREVERSE[get_player_number(boma)] = false;
-        }
         if ISREVERSE[get_player_number(boma)] {
-            if [*FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) { //F smash flip
+            if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S4 { //F smash flip
                 if MotionModule::frame(boma) > 15.0 {
                     PostureModule::reverse_lr(boma);
                     PostureModule::update_rot_y_lr(boma);
@@ -2559,7 +2571,7 @@ pub unsafe fn mewtwoTail (boma: &mut smash::app::BattleObjectModuleAccessor, fig
     }
 }
 
-pub unsafe fn teleportCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32) {
+pub unsafe fn teleportCancels(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, fighter_kind: i32, motion_kind: u64) {
     if fighter_kind == *FIGHTER_KIND_MEWTWO {
         if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) {
             if status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_3 {
@@ -2571,6 +2583,11 @@ pub unsafe fn teleportCancels(boma: &mut smash::app::BattleObjectModuleAccessor,
         }
         if situation_kind != *SITUATION_KIND_AIR {
             UPBCANCEL[get_player_number(boma)] = false;
+        }
+        if motion_kind == hash40("special_s") {
+            if MotionModule::frame(boma) > 39.0 {
+                CancelModule::enable_cancel(boma);
+            }
         }
     }
     if fighter_kind == *FIGHTER_KIND_PALUTENA {
@@ -2722,6 +2739,11 @@ pub unsafe fn ganonFix (lua_state: u64, l2c_agent: &mut L2CAgent, boma: &mut sma
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
                 if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
+                }
+                if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_JUMP) || (ControlModule::is_enable_flick_jump(boma) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP)) {
+                    if MotionModule::frame(boma) > 22.0 {
+                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+                    }
                 }
             }
         }
@@ -3300,10 +3322,14 @@ pub unsafe fn puffLevels(boma: &mut smash::app::BattleObjectModuleAccessor, stat
         }
         if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_END, *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_ROLL, *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_TURN, 
         *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_HIT_END, *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_HOLD_MAX, *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_ROLL_AIR].contains(&status_kind) {
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && !HITMOVE[get_player_number(boma)] {
                 PUFFLEVELS[1][get_player_number(boma)] += 1;
+                HITMOVE[get_player_number(boma)] = true;
                 println!("Puff rollout level is now: {}", PUFFLEVELS[1][get_player_number(boma)]);
             }
+        }
+        else {
+            HITMOVE[get_player_number(boma)] = false;
         }
     }
 }

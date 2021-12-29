@@ -359,7 +359,7 @@ fn corrin_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            AttackModule::set_attack_reference_joint_id(Hash40{hash: hash40("drag1")}, smash::app::AttackDirectionAxis(*ATTACK_DIRECTION_X as i32), smash::app::AttackDirectionAxis(*ATTACK_DIRECTION_Z as i32), smash::app::AttackDirectionAxis(*ATTACK_DIRECTION_Y as i32))
+            AttackModule::set_attack_reference_joint_id(Hash40{hash: hash40("drag1")}, smash::app::AttackDirectionAxis(*ATTACK_DIRECTION_X as i32), smash::app::AttackDirectionAxis(*ATTACK_DIRECTION_Y as i32), smash::app::AttackDirectionAxis(*ATTACK_DIRECTION_Z as i32))
         }
         frame(Frame=3)
         if(is_excute){

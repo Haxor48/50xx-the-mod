@@ -459,6 +459,40 @@ fn ganon_dthrow(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "ganon", scripts = ["game_speciallw"], category = ACMD_GAME)]
+fn ganon_downb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=10)
+        if(is_excute){
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(3.0, 6.0, 8.5, 9.5)
+        }
+        frame(Frame=13)
+        if(is_excute){
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(2.0, 6.0, 8.5, 10.0)
+        }
+        frame(Frame=16)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=14.0, Angle=45, KBG=65, FKB=0, BKB=65, Size=4.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=16.0, Angle=45, KBG=65, FKB=0, BKB=65, Size=5.3, X=7.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            JostleModule::set_status(false)
+        }
+        wait(Frames=1)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_GANON_STATUS_WORK_ID_FLAG_GANON_KICK_WALL_CHECK)
+        }
+        frame(Frame=35)
+        if(is_excute){
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(8.0, 8.0, 8.0, 4.0)
+        }
+        frame(Frame=36)
+        if(is_excute){
+            AttackModule::clear_all()
+            JostleModule::set_status(true)
+        }
+    });
+}
+
 pub fn installGanon() {
     install_acmd_scripts!(
         ganon_fair,
@@ -479,5 +513,6 @@ pub fn installGanon() {
         ganon_nair,
         ganon_effect_nair,
         ganon_dthrow
+        ganon_downb
     );
 }

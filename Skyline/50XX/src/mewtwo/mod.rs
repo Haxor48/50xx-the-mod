@@ -256,10 +256,79 @@ fn mewtwo_disable(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=361, KBG=140, FKB=0, BKB=0, Size=6.0, X=0.0, Y=-4.7, Z=2.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G_d, Hitbits=COLLISION_CATEGORY_MASK_FEB, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bind_extra"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.0, Angle=361, KBG=180, FKB=0, BKB=20, Size=6.0, X=0.0, Y=-4.7, Z=2.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_FEB, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bind_extra"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=63, KBG=140, FKB=0, BKB=70, Size=6.0, X=0.0, Y=-4.7, Z=2.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G_d, Hitbits=COLLISION_CATEGORY_MASK_FEB, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bind_extra"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.0, Angle=63, KBG=140, FKB=0, BKB=70, Size=6.0, X=0.0, Y=-4.7, Z=2.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_FEB, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bind_extra"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
             AttackModule::set_lr_check_front_lr(0)
             AttackModule::set_no_finish_camera(0, true, false)
+        }
+    });
+}
+
+#[acmd_script(agent = "mewtwo", scripts = ["game_specials"], category = ACMD_GAME)]
+fn mewtwo_sideb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        FT_MOTION_RATE(FSM=0.667)
+        frame(Frame=6)
+        FT_MOTION_RATE(FSM=1)
+        frame(Frame=12)
+        if(is_excute){
+            CATCH(ID=0, Bone=hash40("top"), Size=7.4, X=0.0, Y=8.4, Z=17.0, Status=FIGHTER_STATUS_KIND_MEWTWO_THROWN, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+            CATCH(ID=1, Bone=hash40("top"), Size=10.2, X=0.0, Y=8.4, Z=17.0, Status=FIGHTER_STATUS_KIND_MEWTWO_THROWN, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+            sv_module_access::shield(MSC=MA_MSC_CMD_SHIELD_ON, Type=COLLISION_KIND_REFLECTOR, ID=FIGHTER_MEWTWO_REFLECTOR_KIND_REFLECTOR, Group=FIGHTER_REFLECTOR_GROUP_EXTEND)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=1.0, Angle=280, KBG=16, FKB=0, BKB=50, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=5.0, Angle=361, KBG=100, FKB=0, BKB=0, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, ID=0, Damage=1.15, Angle=280, KBG=16, FKB=0, BKB=50, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+            AttackModule::set_catch_only(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, true, true)
+        }
+        wait(Frames=4)
+        if(is_excute){
+            sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+        }
+        frame(Frame=20)
+        for(7 Iterations){
+            wait(Frames=2)
+            if(is_excute){
+                ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, hash40("throw"), WorkModule::get_int64(module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_TARGET_OBJECT_ID), WorkModule::get_int64(module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_THROWN_HIT_GROUP), WorkModule::get_int64(module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_THROWN_HIT_NO))
+            }
+        }
+        frame(Frame=36)
+        if(is_excute){
+            sv_module_access::shield(MSC=MA_MSC_CMD_SHIELD_OFF, Type=COLLISION_KIND_REFLECTOR, ID=FIGHTER_MEWTWO_REFLECTOR_KIND_REFLECTOR, Group=FIGHTER_REFLECTOR_GROUP_EXTEND)
+            WorkModule::on_flag(Flag=FIGHTER_MEWTWO_STATUS_SPECIAL_S_FLAG_GRAVITY_NORMAL)
+        }
+        frame(Frame=38)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_MEWTWO_STATUS_SPECIAL_S_FLAG_HIT)
+            CancelModule::enable_cancel()
+        }
+    });
+}
+
+#[acmd_script(agent = "mewtwo", scripts = ["game_speciallw", "game_specialairlw"], category = ACMD_GAME)]
+fn mewtwo_downb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        FT_MOTION_RATE(FSM=0.82)
+        frame(Frame=16)
+        FT_MOTION_RATE(FSM=1.0)
+        if(is_excute){
+            ArticleModule::generate_article(FIGHTER_MEWTWO_GENERATE_ARTICLE_BINDBALL, 0, false)
+        }
+        frame(Frame=45)
+        if(is_excute){
+            CancelModule::enable_cancel()
+        }
+    });
+}
+
+#[acmd_script(agent = "mewtwo_shadowball", scripts = ["game_shootthrowf"], category = ACMD_GAME)]
+fn mewtwo_fthrow_balls(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.4, Angle=38, KBG=90, FKB=0, BKB=40, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=16, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
         }
     });
 }
@@ -275,6 +344,9 @@ pub fn installMewtwo() {
         mewtwo_da,
         mewtwo_dsmash,
         mewtwo_fsmash,
-        mewtwo_disable
+        mewtwo_disable,
+        mewtwo_sideb,
+        mewtwo_downb,
+        mewtwo_fthrow_balls
     );
 }

@@ -540,6 +540,7 @@ pub fn bayo_ftilt2(fighter: &mut L2CFighterCommon) {
 fn bayo_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
+        FT_MOTION_RATE(FSM=0.82)
         if(is_excute){
             VisibilityModule::set_int64(hash40("body") as i64, hash40("body_hide") as i64)
         }
@@ -548,6 +549,7 @@ fn bayo_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             VisibilityModule::set_int64(hash40("body") as i64, hash40("body_show") as i64)
         }
         frame(Frame=11)
+        FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=17.0, Angle=86, KBG=100, FKB=0, BKB=42, Size=10.5, X=0.0, Y=10.0, Z=14.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=17.0, Angle=86, KBG=100, FKB=0, BKB=42, Size=10.5, X=0.0, Y=10.0, Z=14.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
@@ -579,6 +581,7 @@ fn bayo_usmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 fn bayo_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
+        FT_MOTION_RATE(FSM=0.85)
         if(is_excute){
             VisibilityModule::set_int64(hash40("body") as i64, hash40("body_hide") as i64)
         }
@@ -591,6 +594,7 @@ fn bayo_fsmash(fighter: &mut smash::lua2cpp::L2CAgentBase) {
             WorkModule::on_flag(Flag=WEAPON_BAYONETTA_WICKEDWEAVEARM_INSTANCE_WORK_ID_FLAG_CANCEL_EFFECT)
         }
         frame(Frame=13)
+        FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.5, Z=7.0, X2=0.0, Y2=14.5, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=112, FKB=0, BKB=34, Size=5.5, X=0.0, Y=14.5, Z=7.0, X2=0.0, Y2=14.5, Z2=19.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)

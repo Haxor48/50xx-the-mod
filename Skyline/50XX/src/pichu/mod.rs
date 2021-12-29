@@ -396,7 +396,7 @@ fn pichu_nair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
 unsafe fn pichu_electroball_bounce(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-
+        ArticleModule::remove_exist(FIGHTER_PICHU_GENERATE_ARTICLE_DENGEKI, smash::cpp::root::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
     });
 }
 
