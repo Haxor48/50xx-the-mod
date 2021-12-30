@@ -5,6 +5,7 @@ use smashline::*;
 use smash::app::lua_bind::*;
 use std::f32::*;
 use crate::custom::abs;
+use smash::phx::*;
 
 #[acmd_script(agent = "falco", scripts = ["game_attackairlw"], category = ACMD_GAME)]
 fn falco_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
@@ -560,9 +561,11 @@ fn falco_laser_air_loop(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=4)
         FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER_BULLET, 0, false)
-            if ArticleModule::is_exist(FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
-                ArticleModule::change_motion(FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, Hash40{hash: hash40("open")}, false, 0.0)
+            ArticleModule::generate_article(FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER_BULLET, false, 0)
+            rust {
+                if ArticleModule::is_exist(module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
+                    ArticleModule::change_motion(module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, Hash40{hash: hash40("open")}, false, 0.0);
+                }
             }
         }
         frame(Frame=7)

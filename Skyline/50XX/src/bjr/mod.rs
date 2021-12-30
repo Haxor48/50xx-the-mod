@@ -371,6 +371,15 @@ fn bjr_bair(fighter: &mut smash::lua2cpp::L2CAgentBase) {
     });
 }
 
+#[acmd_script(agent = "koopajr", scripts = ["game_specialnstart", "game_specialairnstart"], category = ACMD_GAME)]
+fn bjr_neutralb_start(fighter: &mut smash::lua2cpp::L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        FT_MOTION_RATE(FSM=0.47)
+    });
+}
+
 pub fn installBjr() {
     install_acmd_scripts!(
         bjr_dtilt,
@@ -382,6 +391,7 @@ pub fn installBjr() {
         bjr_dair,
         bjr_upb_attack,
         bjr_dthrow,
-        bjr_bair
+        bjr_bair,
+        bjr_neutralb_start
     );
 }

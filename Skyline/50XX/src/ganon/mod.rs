@@ -512,7 +512,7 @@ pub fn installGanon() {
         ganon_effect_bthrow,
         ganon_nair,
         ganon_effect_nair,
-        ganon_dthrow
+        ganon_dthrow,
         ganon_downb
     );
 }

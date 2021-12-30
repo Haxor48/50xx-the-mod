@@ -387,7 +387,7 @@ pub fn installPika() {
         pika_sideb,
         pika_effect_sideb,
         pika_landing_bair,
-        pike_fthrow,
+        pika_fthrow,
         pika_bair
     );
 }

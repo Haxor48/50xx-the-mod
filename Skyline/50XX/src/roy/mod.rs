@@ -2,6 +2,7 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smashline::*;
+use smash::app::lua_bind::*;
 
 //Actual changes
 

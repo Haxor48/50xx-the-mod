@@ -2,6 +2,7 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smashline::*;
+use smash::app::lua_bind::*;
 
 #[acmd_script(agent = "chrom", scripts = ["game_attackairlw"], category = ACMD_GAME)]
 fn chrom_dair(fighter: &mut smash::lua2cpp::L2CAgentBase) {

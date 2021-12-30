@@ -1044,13 +1044,6 @@ pub unsafe fn landCancels(boma: &mut smash::app::BattleObjectModuleAccessor, sta
             }
         }
     }
-    if fighter_kind == *FIGHTER_KIND_KOOPAJR {
-        if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_N_SHOOT, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_N_HOLD].contains(&status_kind) {
-            if StatusModule::prev_situation_kind(boma) == *SITUATION_KIND_AIR && situation_kind == *SITUATION_KIND_GROUND {
-                CancelModule::enable_cancel(boma);
-            }
-        }
-    }
 }
 
 pub unsafe fn dacus(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, cat1: i32, stick_value_y: f32) { //Dacus
@@ -1252,6 +1245,11 @@ pub unsafe fn pteStuff(boma: &mut smash::app::BattleObjectModuleAccessor, fighte
             PostureModule::reverse_lr(boma);
             PostureModule::update_rot_y_lr(boma);
             MotionModule::change_motion(boma, Hash40{hash: hash40("attack_air_f")}, 0.0, 1.0, false, 0.0, false, false);
+        }
+    }
+    if fighter_kind == *FIGHTER_KIND_MURABITO {
+        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_100 {
+            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
         }
     }
     if fighter_kind == *FIGHTER_KIND_SHIZUE {
@@ -2401,7 +2399,7 @@ pub unsafe fn bReverses (boma: &mut smash::app::BattleObjectModuleAccessor, moti
         if motion_kind == hash40("special_air_lw") {
             if MotionModule::frame(boma) < 6.0 {
                 if ControlModule::get_stick_x(boma) * PostureModule::lr(boma) <= -0.50 {
-                    BREVERSE[get_player_number(boma)] = true;;
+                    BREVERSE[get_player_number(boma)] = true;
                 }
             }
             else if MotionModule::frame(boma) >= 6.0 && MotionModule::frame(boma) < 7.0 {
@@ -2427,7 +2425,7 @@ pub unsafe fn bReverses (boma: &mut smash::app::BattleObjectModuleAccessor, moti
         if motion_kind == hash40("special_air_n") {
             if MotionModule::frame(boma) < 6.0 {
                 if ControlModule::get_stick_x(boma) * PostureModule::lr(boma) <= -0.50 {
-                    BREVERSE[get_player_number(boma)] = true;;
+                    BREVERSE[get_player_number(boma)] = true;
                 }
             }
             else if MotionModule::frame(boma) < 7.0 {
@@ -2953,6 +2951,13 @@ pub unsafe fn otherCancels(boma: &mut smash::app::BattleObjectModuleAccessor, st
     if fighter_kind == *FIGHTER_KIND_SNAKE {
         if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_SNAKE_STATUS_KIND_SPECIAL_HI_HANG].contains(&status_kind) {
             CancelModule::enable_cancel(boma);
+        }
+    }
+    if fighter_kind == *FIGHTER_KIND_KOOPAJR {
+        if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_N_SHOOT, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_N_HOLD].contains(&status_kind) {
+            if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                CancelModule::enable_cancel(boma);
+            }
         }
     }
     if [*FIGHTER_KIND_PICHU, *FIGHTER_KIND_PIKACHU].contains(&fighter_kind) {
@@ -3700,7 +3705,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         //noImpactLandingLag(boma, status_kind);
         shineStalls(lua_state, &mut l2c_agent, boma, status_kind, situation_kind, fighter_kind);
         mewtwoTail(boma, fighter_kind);
-        teleportCancels(boma, status_kind, situation_kind, fighter_kind);
+        teleportCancels(boma, status_kind, situation_kind, fighter_kind, motion_kind);
         canDkBarrel(boma, fighter_kind);
         superJumps(boma, status_kind, fighter_kind, cat1);
         bayoCancels(boma, status_kind, situation_kind, fighter_kind, cat1);

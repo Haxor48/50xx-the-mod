@@ -314,7 +314,7 @@ fn mewtwo_downb(fighter: &mut smash::lua2cpp::L2CAgentBase) {
         frame(Frame=16)
         FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_MEWTWO_GENERATE_ARTICLE_BINDBALL, 0, false)
+            ArticleModule::generate_article(FIGHTER_MEWTWO_GENERATE_ARTICLE_BINDBALL, false, 0)
         }
         frame(Frame=45)
         if(is_excute){
